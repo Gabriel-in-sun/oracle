@@ -115,7 +115,7 @@
                     정통 명리학 기반<br><span class="text-gold-gradient">사주팔자 & 대운·연운·월운</span>
                 </h1>
                 <p class="text-purple-200/80 text-sm md:text-base leading-relaxed">
-                    생년월일시에 따른 맞춤 대운수(大運數) 산출, 사주원국표, 10년 대운과 연운(세운)·월운(12절기)까지 단계별로 정밀하게 리딩합니다.
+                    생년월일시와 절기 계산에 따른 맞춤 대운수(大運數) 산출, 사주원국표, 10년 대운과 연운(세운)·월운(12절기)까지 단계별로 정밀하게 리딩합니다.
                 </p>
             </div>
 
@@ -177,27 +177,27 @@
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-amber-200 mb-1.5">이름 또는 호칭</label>
-                        <input type="text" id="saju-name" placeholder="예: 홍길동" value="방문자" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        <input type="text" id="saju-name" placeholder="예: 홍길동" value="" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-amber-200 mb-1.5">생년월일 (8자리)</label>
-                        <input type="text" id="saju-birth" placeholder="예: 19931102" value="19931102" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        <input type="text" id="saju-birth" placeholder="예: 19931102" value="" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">양력 / 음력</label>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">양력 / 음력 구분</label>
                         <select id="saju-calendar" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                            <option value="solar">양력 (Solar)</option>
+                            <option value="solar" selected>양력 (Solar)</option>
+                            <option value="lunar">음력 (Lunar)</option>
+                            <option value="lunar-leap">음력 윤달 (Leap Month)</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-purple-200 mb-1.5">태어난 시간 (한국시 기준)</label>
                         <select id="saju-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                            <option value="10" selected>술시 (19:30 ~ 21:29)</option>
-                            <option value="11">해시 (21:30 ~ 23:29)</option>
-                            <option value="0">자시 (23:30 ~ 01:29)</option>
+                            <option value="0" selected>자시 (23:30 ~ 01:29)</option>
                             <option value="1">축시 (01:30 ~ 03:29)</option>
                             <option value="2">인시 (03:30 ~ 05:29)</option>
                             <option value="3">묘시 (05:30 ~ 07:29)</option>
@@ -207,6 +207,8 @@
                             <option value="7">미시 (13:30 ~ 15:29)</option>
                             <option value="8">신시 (15:30 ~ 17:29)</option>
                             <option value="9">유시 (17:30 ~ 19:29)</option>
+                            <option value="10">술시 (19:30 ~ 21:29)</option>
+                            <option value="11">해시 (21:30 ~ 23:29)</option>
                         </select>
                     </div>
                 </div>
@@ -374,9 +376,7 @@
                             </h3>
                             <span class="px-2.5 py-0.5 rounded bg-amber-400 text-slate-950 font-bold text-xs" id="seun-badge-title">병오년(丙午年)</span>
                         </div>
-                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/30 space-y-3 text-xs md:text-sm text-slate-200 leading-relaxed font-light" id="seun-reading-content">
-                            <!-- Injected by JS -->
-                        </div>
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/30 space-y-3 text-xs md:text-sm text-slate-200 leading-relaxed font-light" id="seun-reading-content"></div>
                     </div>
 
                     <!-- (3) Monthly (월운) Reading -->
@@ -387,9 +387,7 @@
                             </h3>
                             <p class="text-xs text-purple-200/70 mt-1">해당 월의 주요 십신 기운과 집중해야 할 행동 요령입니다.</p>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs" id="wolun-reading-grid">
-                            <!-- Injected by JS -->
-                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs" id="wolun-reading-grid"></div>
                     </div>
 
                 </div>
@@ -609,6 +607,71 @@
         }
 
         /* -------------------------------------------------------------
+           LUNAR TO SOLAR CALCULATION DATA TABLE (1940-2040)
+        ------------------------------------------------------------- */
+        const LUNAR_INFO = [
+            0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
+            0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
+            0x04970,0x0a4b0,0x0b4b5,0x06a50,0x06d40,0x1ab54,0x02b60,0x09570,0x052f2,0x04970,
+            0x06566,0x0d4a0,0x0ea50,0x06e95,0x05ad0,0x02b60,0x186e3,0x092e0,0x1c8d7,0x0c950,
+            0x0d4a0,0x1d8a6,0x0b550,0x056a0,0x1a5b4,0x025d0,0x092d0,0x0d2b2,0x0a950,0x0b557,
+            0x06ca0,0x0b550,0x15355,0x04da0,0x0a5d0,0x14573,0x052d0,0x0a9a8,0x0e950,0x06aa0,
+            0x0aea6,0x0ab50,0x04b60,0x0aae4,0x0a570,0x05260,0x0f263,0x0d950,0x05b57,0x056a0,
+            0x096d0,0x04dd5,0x04ad0,0x0a4d0,0x0d4d4,0x0d250,0x0d558,0x0b540,0x0b5a0,0x195a6,
+            0x095b0,0x049b0,0x0a974,0x0a4b0,0x0b27a,0x06a50,0x06d40,0x0af46,0x0ab60,0x09570,
+            0x04af5,0x04970,0x064b0,0x074a3,0x0ea50,0x06b58,0x055c0,0x0ab60,0x096d5,0x092e0,
+            0x0c960,0x0d954,0x0d4a0,0x0da50,0x07552,0x056a0,0x0abb7,0x025d0,0x092d0,0x0cab5
+        ];
+
+        function convertLunarToSolar(lunarYear, lunarMonth, lunarDay, isLeap) {
+            const baseIndex = lunarYear - 1940;
+            if (baseIndex < 0 || baseIndex >= LUNAR_INFO.length) {
+                return { year: lunarYear, month: lunarMonth, day: lunarDay };
+            }
+            
+            let offsetDays = 0;
+            const baseDate = new Date(1940, 1, 8); // 1940-02-08 is 1940-01-01 Lunar
+
+            for (let y = 1940; y < lunarYear; y++) {
+                const info = LUNAR_INFO[y - 1940];
+                let daysInYear = 0;
+                for (let m = 0x8000; m > 0x8; m >>= 1) {
+                    daysInYear += (info & m) ? 30 : 29;
+                }
+                const leapMonth = info & 0xf;
+                if (leapMonth > 0) {
+                    daysInYear += (info & 0x10000) ? 30 : 29;
+                }
+                offsetDays += daysInYear;
+            }
+
+            const currentInfo = LUNAR_INFO[baseIndex];
+            const currentLeapMonth = currentInfo & 0xf;
+
+            for (let m = 1; m < lunarMonth; m++) {
+                const mask = 0x8000 >> (m - 1);
+                offsetDays += (currentInfo & mask) ? 30 : 29;
+                if (m === currentLeapMonth) {
+                    offsetDays += (currentInfo & 0x10000) ? 30 : 29;
+                }
+            }
+
+            if (isLeap && currentLeapMonth === lunarMonth) {
+                const mask = 0x8000 >> (lunarMonth - 1);
+                offsetDays += (currentInfo & mask) ? 30 : 29;
+            }
+
+            offsetDays += (lunarDay - 1);
+
+            const resultDate = new Date(baseDate.getTime() + offsetDays * 86400000);
+            return {
+                year: resultDate.getFullYear(),
+                month: resultDate.getMonth() + 1,
+                day: resultDate.getDate()
+            };
+        }
+
+        /* -------------------------------------------------------------
            WONKWANG MANSE-RYEOK ACCURATE ENGINE
         ------------------------------------------------------------- */
         const CHEONGAN = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
@@ -639,23 +702,37 @@
             return "";
         }
 
-        // 12 절기 기준일 (입춘, 경칩, 청명, 입하, 망종, 소서, 입추, 백로, 한로, 입동, 대설, 소한)
         const JEOLGI_DAY = [0, 6, 4, 6, 5, 6, 6, 7, 8, 8, 8, 7, 7];
 
         function calculateWonkwangSajuFull() {
-            const birth = document.getElementById('saju-birth').value.trim();
-            const name = document.getElementById('saju-name').value.trim() || '방문자';
+            const birthInput = document.getElementById('saju-birth').value.trim();
+            const nameInput = document.getElementById('saju-name').value.trim();
             const gender = document.getElementById('saju-gender').value;
+            const calendarType = document.getElementById('saju-calendar').value;
             const hourIdx = parseInt(document.getElementById('saju-time').value);
 
-            if (!birth || birth.length < 8) {
-                alert('생년월일 8자리(예: 19931102)를 올바르게 입력해주세요.');
+            if (!birthInput || birthInput.length < 8) {
+                alert('생년월일 8자리(예: 19931102)를 입력해주세요.');
                 return;
             }
 
-            const y = parseInt(birth.substring(0, 4));
-            const m = parseInt(birth.substring(4, 6));
-            const d = parseInt(birth.substring(6, 8));
+            const name = nameInput || '방문자';
+            let inYear = parseInt(birthInput.substring(0, 4));
+            let inMonth = parseInt(birthInput.substring(4, 6));
+            let inDay = parseInt(birthInput.substring(6, 8));
+
+            let y = inYear, m = inMonth, d = inDay;
+            let displayDatePrefix = `(양) ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일`;
+
+            // Automatic Solar/Lunar Conversion
+            if (calendarType === 'lunar' || calendarType === 'lunar-leap') {
+                const isLeap = calendarType === 'lunar-leap';
+                const converted = convertLunarToSolar(inYear, inMonth, inDay, isLeap);
+                y = converted.year;
+                m = converted.month;
+                d = converted.day;
+                displayDatePrefix = `(음) ${inYear}년 ${inMonth}월 ${inDay}일 ${isLeap ? '(윤달)' : ''} ➔ (양) ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일`;
+            }
 
             // 1. Year Pillar (Ipchun check)
             let sYear = y;
@@ -693,7 +770,7 @@
             const currentYear = 2026;
             const age = currentYear - y + 1;
             document.getElementById('res-person-title').textContent = `${name} (${age}세)`;
-            document.getElementById('res-meta-date').textContent = `(양) ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일 · 대한민국 (-30분 보정)`;
+            document.getElementById('res-meta-date').textContent = `${displayDatePrefix} · 대한민국 (-30분 보정)`;
 
             // 6. Fill Main 4 Pillars Table
             document.getElementById('char-hour-gan').textContent = CHEONGAN[hourCgIdx];
@@ -739,22 +816,18 @@
             }).join('');
             document.getElementById('ohaeng-badges').innerHTML = oBadgeHtml;
 
-            // 7. Dynamic Accurate Daewoon Number (생년월일 기반 정확한 대운수 및 순역 산출)
+            // 7. Dynamic Accurate Daewoon Number
             const isYearYang = CG_YINYANG[yearCgIdx] === 1;
             const isForward = (gender === 'male' && isYearYang) || (gender === 'female' && !isYearYang);
             
-            // Calculate days to next or previous Jeolgi
             const currentJeolgiDay = JEOLGI_DAY[m];
             let daysDifference = 0;
             if (isForward) {
-                // Next Jeolgi
                 daysDifference = (d <= currentJeolgiDay) ? (currentJeolgiDay - d) : (30 - d + JEOLGI_DAY[(m % 12) + 1]);
             } else {
-                // Previous Jeolgi
                 daysDifference = (d >= currentJeolgiDay) ? (d - currentJeolgiDay) : (d + 30 - JEOLGI_DAY[m === 1 ? 12 : m - 1]);
             }
             
-            // Formula: days / 3
             let rawDaewoonNum = Math.max(1, Math.round(daysDifference / 3));
             if (rawDaewoonNum === 0) rawDaewoonNum = 1;
             if (rawDaewoonNum > 10) rawDaewoonNum = 10;
@@ -781,7 +854,7 @@
                 });
             }
 
-            // Render Daewoon Matrix Table (Descending order from right to left)
+            // Render Daewoon Matrix Table
             const numsRow = document.getElementById('daewoon-nums-row');
             const cgRow = document.getElementById('daewoon-cg-row');
             const jjRow = document.getElementById('daewoon-jj-row');
@@ -886,16 +959,16 @@
                 seunJjRow.innerHTML += `<td class="py-2 ${cellBg}">${s.jj}</td>`;
             });
 
-            // 9. 2026 Year Reading (세운 해석)
-            const seun2026Cg = (2026 - 4) % 10; // 丙 (2)
-            const seun2026Jj = (2026 - 4) % 12; // 午 (6)
+            // 9. 2026 Year Reading
+            const seun2026Cg = (2026 - 4) % 10;
+            const seun2026Jj = (2026 - 4) % 12;
             const seunTenGodCg = getTenGod(dayCgIdx, seun2026Cg);
             const seunTenGodJj = getTenGod(dayCgIdx, JJ_MAIN_CG[seun2026Jj]);
             
             document.getElementById('seun-badge-title').textContent = `2026년 丙午年 (${seunTenGodCg}·${seunTenGodJj})`;
             document.getElementById('seun-reading-content').innerHTML = `
                 <div class="flex items-center gap-2 text-amber-300 font-semibold text-sm">
-                    <i class="fa-solid fa-fire"></i> 2026년 병오(丙午)년의 총평: ${seunTenGodCg}과 ${seunTenGodJj}의 강력한 불꽃 에너지
+                    <i class="fa-solid fa-fire"></i> 2026년 병오(丙午)년의 총평: ${seunTenGodCg}과 ${seunTenGodJj}의 강력한 에너지
                 </div>
                 <p>
                     올해 2026년은 하늘과 땅이 모두 강렬한 화(火)의 기운으로 가득 찬 <strong>병오(丙午)년</strong>입니다. 일간(日干) <strong>${CHEONGAN[dayCgIdx]}</strong>을 기준으로 <strong>${seunTenGodCg}</strong>의 천간과 <strong>${seunTenGodJj}</strong>의 지지가 작동하여, 그동안 준비해 온 계획들이 세상 밖으로 밝고 선명하게 드러나는 역동적인 해입니다.
@@ -912,7 +985,7 @@
                 </div>
             `;
 
-            // 10. Monthly Matrix (월운 표 & 해석: 1월~12월)
+            // 10. Monthly Matrix
             const wolunMonthsRow = document.getElementById('wolun-months-row');
             const wolunCgRow = document.getElementById('wolun-cg-row');
             const wolunJjRow = document.getElementById('wolun-jj-row');
@@ -922,7 +995,6 @@
             wolunJjRow.innerHTML = '';
             wolunGrid.innerHTML = '';
 
-            // 2026 is 丙 year -> 丙寅(1), 丁卯(2), 戊辰(3), 己巳(4), 庚午(5), 辛未(6), 壬申(7), 癸酉(8), 甲戌(9), 乙亥(10), 丙子(11), 丁丑(12)
             const monthNames = ["1월(입춘)", "2월(경칩)", "3월(청명)", "4월(입하)", "5월(망종)", "6월(소서)", "7월(입추)", "8월(백로)", "9월(한로)", "10월(입동)", "11월(대설)", "12월(소한)"];
             const wolunData = [];
 
@@ -946,7 +1018,6 @@
                 wolunJjRow.innerHTML += `<td class="py-1.5 border-r border-slate-200">${w.jj}</td>`;
             });
 
-            // Monthly reading cards
             wolunData.forEach(w => {
                 const mCard = document.createElement('div');
                 mCard.className = "p-3 rounded-xl bg-[#140c28] border border-purple-900/40 space-y-1.5";
