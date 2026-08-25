@@ -112,20 +112,27 @@
     <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-grow">
 
         <!-- ==================== HOME TAB ==================== -->
-        <section id="tab-home" class="space-y-12 animate-fade-in">
-            <div class="text-center space-y-4 max-w-2xl mx-auto pt-4">
-                <span class="px-3.5 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/25 rounded-full inline-block font-semibold">
+        <section id="tab-home" class="space-y-10 animate-fade-in">
+            
+            <!-- Hero Artwork Banner -->
+            <div class="flex flex-col items-center justify-center text-center pt-2">
+                <div class="relative mb-6 group">
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-amber-400 via-purple-500 to-amber-300 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500"></div>
+                    <img src="gabriel_hero.png" alt="Gabriel's Message" class="relative w-36 h-36 md:w-44 md:h-44 object-cover object-top rounded-full border-2 border-amber-300 shadow-2xl">
+                </div>
+                <span class="px-3.5 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/25 rounded-full inline-block font-semibold mb-3">
                     Destiny & Wisdom Platform
                 </span>
                 <h1 class="text-3xl md:text-5xl font-bold serif leading-tight">
                     당신의 길을 밝히는<br><span class="text-gold-gradient">Gabriel's Message</span>
                 </h1>
-                <p class="text-purple-200/80 text-sm md:text-base leading-relaxed">
-                    원광만세력 사주팔자, 81수리·발음오행 성명학 이름풀이, 심층 3카드 타로, 5인 그룹 궁합 및 별자리 운세를 한곳에서 경험해 보세요.
+                <p class="text-purple-200/80 text-sm md:text-base leading-relaxed max-w-2xl mx-auto mt-3">
+                    원광만세력 사주팔자, 81수리·발음오행 성명학 이름풀이, 심층 3카드 타로, 5인 그룹 궁합 및 별자리 운세를 한곳에서 만나보세요.
                 </p>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-4">
+            <!-- Quick Access 5 Pillars -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
                 <div onclick="switchTab('saju')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-amber-950/40 flex items-center justify-center mb-3 border border-amber-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-yin-yang text-amber-300 text-lg"></i>
@@ -200,7 +207,7 @@
                 <div>
                     <label class="block text-xs font-medium text-amber-200 mb-1.5">한글 성명 입력</label>
                     <div class="flex gap-2">
-                        <input type="text" id="name-kor-input" placeholder="예: 홍길동 / 김민준" value="" class="flex-grow bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" oninput="onHangulNameChange()">
+                        <input type="text" id="name-kor-input" placeholder="예: 홍길동 / 김민준 / 이서연" value="홍길동" class="flex-grow bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" oninput="onHangulNameChange()">
                         <button type="button" onclick="onHangulNameChange()" class="px-4 py-2.5 rounded-xl bg-purple-900/60 border border-purple-400/40 text-xs font-semibold text-amber-300 hover:bg-purple-800 transition whitespace-nowrap">
                             <i class="fa-solid fa-language"></i> 한자 자동 변환
                         </button>
@@ -210,11 +217,7 @@
                 <!-- Dynamic Hanja Selector Columns -->
                 <div id="hanja-selector-area" class="space-y-3 pt-2">
                     <span class="text-xs text-purple-300 font-semibold block">각 글자별 한자 선택 (원획수 및 자원오행 매핑)</span>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="hanja-cols-container">
-                        <div class="text-xs text-purple-300/50 col-span-3 text-center py-4 bg-[#120a24]/50 rounded-xl border border-purple-900/40">
-                            한글 이름을 입력하시면 한자 선택 목록이 여기에 나타납니다.
-                        </div>
-                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="hanja-cols-container"></div>
                 </div>
 
                 <button onclick="analyzeNameSeongmyeong()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 hover:from-emerald-400 hover:to-amber-300 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2">
@@ -224,7 +227,6 @@
 
             <!-- Name Reading Results Area -->
             <div id="name-results-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
-                
                 <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 bg-[#0c081c] space-y-6">
                     <div class="border-b border-purple-900/60 pb-4 text-center">
                         <span class="text-xs text-amber-300 font-semibold uppercase tracking-widest">Name Fortune Analysis Certificate</span>
@@ -250,7 +252,6 @@
                     <div class="space-y-2 pt-2">
                         <span class="text-xs font-semibold text-purple-200 block">수리성명학 4격(四格) 인생 단계별 길흉</span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                            
                             <div class="p-3.5 rounded-xl bg-[#140b28] border border-purple-900/40 space-y-1">
                                 <div class="flex items-center justify-between">
                                     <strong class="text-amber-300 font-semibold">초년운 (원격 元格: 1~20세)</strong>
@@ -286,7 +287,6 @@
                                 <div class="text-[11px] text-purple-300/80 font-serif" id="res-jeong-math">총합: -획</div>
                                 <p class="text-slate-300 font-light leading-relaxed pt-1" id="res-jeong-desc">-</p>
                             </div>
-
                         </div>
                     </div>
 
@@ -295,7 +295,6 @@
                         <p id="res-total-verdict">-</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -361,9 +360,7 @@
 
             <!-- Manse-ryeok Result Workspace -->
             <div id="manse-result-area" class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in">
-                
                 <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-5">
-                    
                     <div class="bg-[#1b1233] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/50 text-xs md:text-sm">
                         <div class="flex items-center gap-2.5">
                             <span class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-bold" id="res-gender-badge">남자 (乾命)</span>
@@ -480,7 +477,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="space-y-6">
@@ -602,10 +598,9 @@
                 <p class="text-sm text-purple-200/70">주인공의 사주를 기준으로 최대 5명까지 대상을 추가하여 1:1 심층 궁합과 집단 전체의 오행 조화를 분석합니다.</p>
             </div>
 
-            <!-- Setup Form -->
             <div class="glass-card max-w-3xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-6">
                 
-                <!-- Main Subject (주인공) -->
+                <!-- Main Subject -->
                 <div class="p-4 rounded-xl bg-[#140b2a] border border-amber-400/40 space-y-3">
                     <div class="flex items-center justify-between border-b border-purple-900/60 pb-2">
                         <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
@@ -831,6 +826,7 @@
         <p>© 2026 Gabriel's Message · Wonkwang Manse-ryeok & Seongmyeong-hak Compliant</p>
     </footer>
 
+    
     <!-- ==================== JAVASCRIPT ENGINE ==================== -->
     <script>
         function switchTab(tabId) {
@@ -854,71 +850,540 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* -------------------------------------------------------------
-           HANJA DICTIONARY FOR SEONGMYEONG-HAK (자원오행 & 원획수 DB)
-        ------------------------------------------------------------- */
+
         const HANJA_DB = {
-            "김": [{ h: "金", s: 8, m: "쇠/성 김", o: "金" }],
-            "이": [{ h: "李", s: 7, m: "오얏 리", o: "木" }],
-            "박": [{ h: "朴", s: 6, m: "순박할 박", o: "木" }],
-            "최": [{ h: "崔", s: 11, m: "높을 최", o: "土" }],
-            "정": [
-                { h: "鄭", s: 19, m: "나라 정", o: "火" },
-                { h: "丁", s: 2, m: "넷째천간 정", o: "火" },
-                { h: "正", s: 5, m: "바를 정", o: "金" },
-                { h: "廷", s: 7, m: "조정 정", o: "土" },
-                { h: "庭", s: 10, m: "뜰 정", o: "土" },
-                { h: "貞", s: 9, m: "곧을 정", o: "金" }
+            "가": [
+                { h: "佳", s: 8, m: "아름다울 가", o: "木" },
+                { h: "嘉", s: 14, m: "아름다울 가", o: "木" },
+                { h: "賈", s: 13, m: "성씨 가", o: "木" },
+                { h: "加", s: 5, m: "더할 가", o: "木" },
+                { h: "家", s: 10, m: "집 가", o: "木" },
+                { h: "可", s: 5, m: "옳을 가", o: "木" }
             ],
             "강": [
                 { h: "姜", s: 9, m: "성씨 강", o: "木" },
                 { h: "康", s: 11, m: "편안할 강", o: "木" },
                 { h: "剛", s: 10, m: "굳셀 강", o: "金" },
-                { h: "江", s: 7, m: "강 강", o: "水" }
+                { h: "江", s: 7, m: "강 강", o: "水" },
+                { h: "强", s: 12, m: "강할 강", o: "木" },
+                { h: "綱", s: 14, m: "벼리 강", o: "木" }
             ],
-            "조": [
-                { h: "趙", s: 14, m: "나라 조", o: "火" },
-                { h: "曺", s: 10, m: "마을 조", o: "火" },
-                { h: "照", s: 13, m: "비칠 조", o: "火" },
-                { h: "祚", s: 10, m: "복 조", o: "木" }
+            "건": [
+                { h: "健", s: 11, m: "건강할 건", o: "木" },
+                { h: "建", s: 9, m: "세울 건", o: "木" },
+                { h: "乾", s: 11, m: "하늘 건", o: "金" }
             ],
-            "윤": [
-                { h: "尹", s: 4, m: "다스릴 윤", o: "土" },
-                { h: "潤", s: 16, m: "윤택할 윤", o: "水" },
-                { h: "胤", s: 11, m: "자손 윤", o: "木" }
+            "경": [
+                { h: "慶", s: 15, m: "경사 경", o: "木" },
+                { h: "敬", s: 13, m: "공경할 경", o: "木" },
+                { h: "景", s: 12, m: "경치 경", o: "火" },
+                { h: "庚", s: 8, m: "일곱째천간 경", o: "金" },
+                { h: "卿", s: 12, m: "벼슬 경", o: "木" },
+                { h: "鏡", s: 19, m: "거울 경", o: "金" },
+                { h: "暻", s: 16, m: "밝을 경", o: "火" }
             ],
-            "장": [
-                { h: "張", s: 11, m: "베풀 장", o: "火" },
-                { h: "章", s: 11, m: "글월 장", o: "火" },
-                { h: "壯", s: 7, m: "장할 장", o: "金" }
+            "고": [
+                { h: "高", s: 10, m: "높을 고", o: "木" },
+                { h: "固", s: 8, m: "굳을 고", o: "木" }
             ],
-            "임": [
-                { h: "林", s: 8, m: "수풀 림", o: "木" },
-                { h: "任", s: 6, m: "맡길 임", o: "木" },
-                { h: "壬", s: 4, m: "아홉째천간 임", o: "水" }
+            "광": [
+                { h: "光", s: 6, m: "빛 광", o: "火" },
+                { h: "廣", s: 15, m: "넓을 광", o: "木" }
             ],
-            "한": [
-                { h: "韓", s: 17, m: "나라 한", o: "木" },
-                { h: "漢", s: 15, m: "한수 한", o: "水" },
-                { h: "翰", s: 16, m: "붓 한", o: "木" }
+            "구": [
+                { h: "具", s: 8, m: "갖출 구", o: "木" },
+                { h: "九", s: 2, m: "아홉 구", o: "金" },
+                { h: "求", s: 7, m: "구할 구", o: "水" }
             ],
-            "오": [
-                { h: "吳", s: 7, m: "나라 오", o: "木" },
-                { h: "悟", s: 11, m: "깨달을 오", o: "木" }
+            "국": [
+                { h: "國", s: 11, m: "나라 국", o: "木" },
+                { h: "菊", s: 14, m: "국화 국", o: "木" }
             ],
-            "신": [
-                { h: "申", s: 5, m: "펼 신", o: "金" },
-                { h: "辛", s: 7, m: "매울 신", o: "金" },
-                { h: "愼", s: 14, m: "삼갈 신", o: "金" },
-                { h: "信", s: 9, m: "믿을 신", o: "金" },
-                { h: "晨", s: 11, m: "새벽 신", o: "火" }
+            "권": [
+                { h: "權", s: 22, m: "권세 권", o: "木" },
+                { h: "勸", s: 20, m: "권할 권", o: "木" }
+            ],
+            "규": [
+                { h: "奎", s: 9, m: "별 규", o: "土" },
+                { h: "圭", s: 6, m: "홀 규", o: "土" },
+                { h: "珪", s: 11, m: "옥홀 규", o: "土" },
+                { h: "揆", s: 13, m: "헤아릴 규", o: "木" }
+            ],
+            "근": [
+                { h: "根", s: 10, m: "뿌리 근", o: "木" },
+                { h: "槿", s: 15, m: "무궁화 근", o: "木" },
+                { h: "勤", s: 13, m: "부지런할 근", o: "木" },
+                { h: "斤", s: 4, m: "근 근", o: "金" }
+            ],
+            "기": [
+                { h: "基", s: 11, m: "터 기", o: "土" },
+                { h: "起", s: 10, m: "일어날 기", o: "木" },
+                { h: "己", s: 3, m: "몸 기", o: "土" },
+                { h: "箕", s: 14, m: "키 기", o: "木" },
+                { h: "祈", s: 9, m: "빌 기", o: "木" },
+                { h: "琦", s: 13, m: "옥이름 기", o: "金" }
+            ],
+            "길": [
+                { h: "吉", s: 6, m: "길할 길", o: "木" },
+                { h: "佶", s: 8, m: "바르고건장할 길", o: "木" }
+            ],
+            "김": [
+                { h: "金", s: 8, m: "쇠/성 김", o: "金" }
+            ],
+            "나": [
+                { h: "羅", s: 19, m: "비단 라/나", o: "火" },
+                { h: "娜", s: 10, m: "아리따울 나", o: "火" }
+            ],
+            "남": [
+                { h: "南", s: 9, m: "남녘 남", o: "火" },
+                { h: "男", s: 7, m: "사내 남", o: "火" },
+                { h: "楠", s: 13, m: "남우 남", o: "木" }
+            ],
+            "노": [
+                { h: "盧", s: 16, m: "성씨 로/노", o: "火" },
+                { h: "魯", s: 15, m: "노둔할 로/노", o: "火" }
+            ],
+            "다": [
+                { h: "多", s: 6, m: "많을 다", o: "火" },
+                { h: "茶", s: 12, m: "차 다", o: "木" }
+            ],
+            "대": [
+                { h: "大", s: 3, m: "큰 대", o: "火" },
+                { h: "代", s: 5, m: "대신할 대", o: "火" },
+                { h: "臺", s: 14, m: "대 대", o: "土" }
+            ],
+            "덕": [
+                { h: "德", s: 15, m: "큰덕 덕", o: "火" }
+            ],
+            "도": [
+                { h: "道", s: 16, m: "길 도", o: "火" },
+                { h: "度", s: 9, m: "법도 도", o: "土" },
+                { h: "都", s: 16, m: "도읍 도", o: "土" },
+                { h: "導", s: 16, m: "이끌 도", o: "火" },
+                { h: "挑", s: 10, m: "돋울 도", o: "火" }
+            ],
+            "동": [
+                { h: "東", s: 8, m: "동녘 동", o: "木" },
+                { h: "棟", s: 12, m: "용마루 동", o: "木" },
+                { h: "洞", s: 10, m: "골 동", o: "水" },
+                { h: "童", s: 12, m: "아이 동", o: "水" },
+                { h: "董", s: 15, m: "감독할 동", o: "木" }
+            ],
+            "두": [
+                { h: "斗", s: 4, m: "말 두", o: "火" },
+                { h: "杜", s: 7, m: "막을 두", o: "木" }
+            ],
+            "라": [
+                { h: "羅", s: 19, m: "비단 라", o: "火" }
+            ],
+            "류": [
+                { h: "柳", s: 9, m: "버들 류", o: "木" },
+                { h: "劉", s: 15, m: "죽일 류", o: "金" }
+            ],
+            "리": [
+                { h: "李", s: 7, m: "오얏 리", o: "木" },
+                { h: "利", s: 7, m: "이로울 리", o: "金" }
+            ],
+            "명": [
+                { h: "明", s: 8, m: "밝을 명", o: "水" },
+                { h: "銘", s: 14, m: "새길 명", o: "金" },
+                { h: "命", s: 8, m: "목숨 명", o: "水" }
+            ],
+            "문": [
+                { h: "文", s: 4, m: "글월 문", o: "水" },
+                { h: "汶", s: 8, m: "내이름 문", o: "水" },
+                { h: "門", s: 8, m: "문 문", o: "水" }
+            ],
+            "미": [
+                { h: "美", s: 9, m: "아름다울 미", o: "水" },
+                { h: "薇", s: 19, m: "장미/고비 미", o: "木" },
+                { h: "米", s: 6, m: "쌀 미", o: "木" }
+            ],
+            "민": [
+                { h: "旼", s: 8, m: "화할 민", o: "火" },
+                { h: "玟", s: 9, m: "옥돌 민", o: "金" },
+                { h: "敏", s: 11, m: "민첩할 민", o: "金" },
+                { h: "旻", s: 8, m: "하늘 민", o: "火" },
+                { h: "民", s: 5, m: "백성 민", o: "水" },
+                { h: "珉", s: 10, m: "옥돌 민", o: "金" }
+            ],
+            "박": [
+                { h: "朴", s: 6, m: "순박할 박", o: "木" },
+                { h: "博", s: 12, m: "넓을 박", o: "水" }
+            ],
+            "배": [
+                { h: "裵", s: 14, m: "성씨 배", o: "水" },
+                { h: "培", s: 11, m: "북돋울 배", o: "土" }
+            ],
+            "백": [
+                { h: "白", s: 5, m: "흰 백", o: "金" },
+                { h: "伯", s: 7, m: "맏 백", o: "水" }
+            ],
+            "범": [
+                { h: "凡", s: 3, m: "무릇 범", o: "水" },
+                { h: "範", s: 15, m: "법 범", o: "木" }
+            ],
+            "변": [
+                { h: "卞", s: 4, m: "조급할 변", o: "水" },
+                { h: "邊", s: 22, m: "가 변", o: "水" }
+            ],
+            "보": [
+                { h: "寶", s: 20, m: "보배 보", o: "金" },
+                { h: "普", s: 12, m: "넓을 보", o: "火" },
+                { h: "甫", s: 7, m: "클 보", o: "水" },
+                { h: "保", s: 9, m: "보호할 보", o: "水" }
+            ],
+            "봉": [
+                { h: "奉", s: 8, m: "받들 봉", o: "水" },
+                { h: "鳳", s: 14, m: "봉황 봉", o: "水" }
+            ],
+            "사": [
+                { h: "思", s: 9, m: "생각할 사", o: "金" },
+                { h: "史", s: 5, m: "역사 사", o: "金" }
+            ],
+            "상": [
+                { h: "相", s: 9, m: "서로 상", o: "木" },
+                { h: "尙", s: 8, m: "오히려 상", o: "金" },
+                { h: "祥", s: 11, m: "상서로울 상", o: "金" },
+                { h: "常", s: 11, m: "항상 상", o: "金" },
+                { h: "翔", s: 12, m: "날 상", o: "土" }
             ],
             "서": [
                 { h: "徐", s: 10, m: "천천히할 서", o: "金" },
                 { h: "瑞", s: 14, m: "상서로울 서", o: "金" },
                 { h: "書", s: 10, m: "글 서", o: "木" },
                 { h: "序", s: 7, m: "차례 서", o: "金" },
-                { h: "舒", s: 12, m: "펼 서", o: "金" }
+                { h: "舒", s: 12, m: "펼 서", o: "金" },
+                { h: "西", s: 6, m: "서녘 서", o: "金" }
+            ],
+            "석": [
+                { h: "錫", s: 16, m: "주석 석", o: "金" },
+                { h: "碩", s: 14, m: "클 석", o: "土" },
+                { h: "石", s: 5, m: "돌 석", o: "金" }
+            ],
+            "선": [
+                { h: "善", s: 12, m: "착할 선", o: "金" },
+                { h: "宣", s: 9, m: "베풀 선", o: "金" },
+                { h: "仙", s: 5, m: "신선 선", o: "金" },
+                { h: "鮮", s: 17, m: "고울 선", o: "水" }
+            ],
+            "성": [
+                { h: "成", s: 6, m: "이룰 성", o: "金" },
+                { h: "聖", s: 13, m: "성스러울 성", o: "土" },
+                { h: "星", s: 9, m: "별 성", o: "火" },
+                { h: "盛", s: 12, m: "성할 성", o: "金" },
+                { h: "誠", s: 14, m: "정성 성", o: "金" }
+            ],
+            "세": [
+                { h: "世", s: 5, m: "인간/세상 세", o: "金" },
+                { h: "洗", s: 10, m: "씻을 세", o: "水" }
+            ],
+            "소": [
+                { h: "昭", s: 9, m: "밝을 소", o: "火" },
+                { h: "素", s: 10, m: "본디 소", o: "金" },
+                { h: "蘇", s: 22, m: "되살아날 소", o: "木" }
+            ],
+            "손": [
+                { h: "孫", s: 10, m: "손자 손", o: "金" }
+            ],
+            "송": [
+                { h: "宋", s: 7, m: "나라 송", o: "木" },
+                { h: "松", s: 8, m: "소나무 송", o: "木" }
+            ],
+            "수": [
+                { h: "秀", s: 7, m: "빼어날 수", o: "木" },
+                { h: "洙", s: 10, m: "물가 수", o: "水" },
+                { h: "壽", s: 14, m: "목숨 수", o: "土" },
+                { h: "守", s: 6, m: "지킬 수", o: "金" },
+                { h: "洙", s: 10, m: "물가 수", o: "水" },
+                { h: "水", s: 4, m: "물 수", o: "水" },
+                { h: "樹", s: 16, m: "나무 수", o: "木" }
+            ],
+            "숙": [
+                { h: "淑", s: 12, m: "맑을 숙", o: "水" },
+                { h: "肅", s: 13, m: "엄숙할 숙", o: "金" }
+            ],
+            "순": [
+                { h: "順", s: 12, m: "순할 순", o: "金" },
+                { h: "純", s: 10, m: "순수할 순", o: "金" },
+                { h: "旬", s: 6, m: "열흘 순", o: "火" }
+            ],
+            "승": [
+                { h: "勝", s: 12, m: "이길 승", o: "金" },
+                { h: "承", s: 8, m: "이을 승", o: "水" },
+                { h: "昇", s: 8, m: "오를 승", o: "火" }
+            ],
+            "시": [
+                { h: "時", s: 10, m: "때 시", o: "火" },
+                { h: "始", s: 8, m: "비로소 시", o: "金" },
+                { h: "施", s: 9, m: "베풀 시", o: "金" }
+            ],
+            "신": [
+                { h: "申", s: 5, m: "펼 신", o: "金" },
+                { h: "辛", s: 7, m: "매울 신", o: "金" },
+                { h: "愼", s: 14, m: "삼갈 신", o: "金" },
+                { h: "信", s: 9, m: "믿을 신", o: "金" },
+                { h: "晨", s: 11, m: "새벽 신", o: "火" },
+                { h: "新", s: 13, m: "새 신", o: "金" }
+            ],
+            "심": [
+                { h: "沈", s: 8, m: "성씨 심", o: "水" },
+                { h: "心", s: 4, m: "마음 심", o: "火" }
+            ],
+            "안": [
+                { h: "安", s: 6, m: "편안할 안", o: "土" },
+                { h: "顔", s: 18, m: "얼굴 안", o: "木" }
+            ],
+            "양": [
+                { h: "梁", s: 11, m: "들보 량/양", o: "木" },
+                { h: "楊", s: 13, m: "버들 양", o: "木" },
+                { h: "陽", s: 17, m: "볕 양", o: "火" }
+            ],
+            "엄": [
+                { h: "嚴", s: 20, m: "엄할 엄", o: "土" }
+            ],
+            "여": [
+                { h: "呂", s: 7, m: "성씨 려/여", o: "火" },
+                { h: "汝", s: 7, m: "너 여", o: "水" }
+            ],
+            "연": [
+                { h: "然", s: 12, m: "그럴 연", o: "火" },
+                { h: "延", s: 7, m: "끌 연", o: "土" },
+                { h: "娟", s: 10, m: "예쁠 연", o: "木" },
+                { h: "淵", s: 12, m: "못 연", o: "水" },
+                { h: "演", s: 15, m: "펼 연", o: "水" },
+                { h: "蓮", s: 17, m: "연꽃 연", o: "木" }
+            ],
+            "영": [
+                { h: "永", s: 5, m: "길 영", o: "水" },
+                { h: "英", s: 11, m: "꽃부리 영", o: "木" },
+                { h: "榮", s: 14, m: "영화 영", o: "木" },
+                { h: "泳", s: 9, m: "헤엄칠 영", o: "水" },
+                { h: "煐", s: 13, m: "빛날 영", o: "火" }
+            ],
+            "예": [
+                { h: "睿", s: 14, m: "지혜로울 예", o: "土" },
+                { h: "藝", s: 21, m: "재주 예", o: "木" },
+                { h: "禮", s: 18, m: "예도 예", o: "火" }
+            ],
+            "오": [
+                { h: "吳", s: 7, m: "나라 오", o: "木" },
+                { h: "悟", s: 11, m: "깨달을 오", o: "木" }
+            ],
+            "옥": [
+                { h: "玉", s: 5, m: "구슬 옥", o: "金" }
+            ],
+            "용": [
+                { h: "龍", s: 16, m: "용 룡/용", o: "水" },
+                { h: "容", s: 10, m: "얼굴 용", o: "土" },
+                { h: "勇", s: 9, m: "날랠 용", o: "土" }
+            ],
+            "우": [
+                { h: "宇", s: 6, m: "집 우", o: "土" },
+                { h: "佑", s: 7, m: "도울 우", o: "土" },
+                { h: "雨", s: 8, m: "비 우", o: "水" },
+                { h: "友", s: 4, m: "벗 우", o: "土" },
+                { h: "優", s: 17, m: "넉넉할 우", o: "土" },
+                { h: "禹", s: 9, m: "하우씨 우", o: "土" }
+            ],
+            "욱": [
+                { h: "旭", s: 6, m: "아침해 욱", o: "火" },
+                { h: "昱", s: 9, m: "햇빛 욱", o: "火" }
+            ],
+            "운": [
+                { h: "雲", s: 12, m: "구름 운", o: "水" },
+                { h: "運", s: 16, m: "돌 운", o: "土" }
+            ],
+            "원": [
+                { h: "元", s: 4, m: "으뜸 원", o: "木" },
+                { h: "源", s: 14, m: "근원 원", o: "水" },
+                { h: "遠", s: 17, m: "멀 원", o: "土" },
+                { h: "垣", s: 9, m: "담 원", o: "土" }
+            ],
+            "유": [
+                { h: "兪", s: 9, m: "성씨 유", o: "金" },
+                { h: "劉", s: 15, m: "성씨 유", o: "金" },
+                { h: "幼", s: 5, m: "어릴 유", o: "土" },
+                { h: "柔", s: 9, m: "부드러울 유", o: "木" },
+                { h: "裕", s: 13, m: "넉넉할 유", o: "土" }
+            ],
+            "윤": [
+                { h: "尹", s: 4, m: "다스릴 윤", o: "土" },
+                { h: "潤", s: 16, m: "윤택할 윤", o: "水" },
+                { h: "胤", s: 11, m: "자손 윤", o: "木" }
+            ],
+            "은": [
+                { h: "恩", s: 10, m: "은혜 은", o: "土" },
+                { h: "銀", s: 14, m: "은 은", o: "金" },
+                { h: "慇", s: 14, m: "괴로워할 은", o: "土" }
+            ],
+            "이": [
+                { h: "李", s: 7, m: "오얏 리/이", o: "木" },
+                { h: "伊", s: 6, m: "저 이", o: "土" },
+                { h: "異", s: 11, m: "다를 이", o: "土" }
+            ],
+            "익": [
+                { h: "益", s: 10, m: "더할 익", o: "水" },
+                { h: "翊", s: 11, m: "도울 익", o: "土" }
+            ],
+            "인": [
+                { h: "仁", s: 4, m: "어질 인", o: "木" },
+                { h: "寅", s: 11, m: "동방 인", o: "木" },
+                { h: "印", s: 6, m: "도장 인", o: "金" }
+            ],
+            "일": [
+                { h: "一", s: 1, m: "한 일", o: "水" },
+                { h: "日", s: 4, m: "날 일", o: "火" },
+                { h: "鎰", s: 18, m: "중량 일", o: "金" }
+            ],
+            "임": [
+                { h: "林", s: 8, m: "수풀 림/임", o: "木" },
+                { h: "任", s: 6, m: "맡길 임", o: "木" },
+                { h: "壬", s: 4, m: "천간 임", o: "水" }
+            ],
+            "자": [
+                { h: "子", s: 3, m: "아들 자", o: "水" },
+                { h: "慈", s: 14, m: "사랑할 자", o: "火" }
+            ],
+            "재": [
+                { h: "在", s: 6, m: "있을 재", o: "土" },
+                { h: "載", s: 13, m: "실을 재", o: "金" },
+                { h: "宰", s: 10, m: "재상 재", o: "金" },
+                { h: "栽", s: 10, m: "심을 재", o: "木" }
+            ],
+            "전": [
+                { h: "全", s: 6, m: "온전할 전", o: "金" },
+                { h: "田", s: 5, m: "밭 전", o: "土" }
+            ],
+            "정": [
+                { h: "鄭", s: 19, m: "나라 정", o: "火" },
+                { h: "丁", s: 2, m: "천간 정", o: "火" },
+                { h: "正", s: 5, m: "바를 정", o: "金" },
+                { h: "廷", s: 7, m: "조정 정", o: "土" },
+                { h: "庭", s: 10, m: "뜰 정", o: "土" },
+                { h: "貞", s: 9, m: "곧을 정", o: "金" },
+                { h: "靜", s: 16, m: "고요할 정", o: "金" }
+            ],
+            "제": [
+                { h: "諸", s: 16, m: "모든 제", o: "金" },
+                { h: "濟", s: 18, m: "건널 제", o: "水" }
+            ],
+            "조": [
+                { h: "趙", s: 14, m: "나라 조", o: "火" },
+                { h: "曺", s: 10, m: "성씨 조", o: "火" },
+                { h: "照", s: 13, m: "비칠 조", o: "火" }
+            ],
+            "종": [
+                { h: "宗", s: 8, m: "마루 종", o: "金" },
+                { h: "鐘", s: 20, m: "쇠북 종", o: "金" },
+                { h: "鍾", s: 17, m: "술잔 종", o: "金" }
+            ],
+            "주": [
+                { h: "朱", s: 6, m: "붉을 주", o: "火" },
+                { h: "周", s: 8, m: "두루 주", o: "金" },
+                { h: "柱", s: 9, m: "기둥 주", o: "木" },
+                { h: "珠", s: 11, m: "구슬 주", o: "金" },
+                { h: "宙", s: 8, m: "집 주", o: "土" }
+            ],
+            "준": [
+                { h: "俊", s: 9, m: "준걸 준", o: "火" },
+                { h: "準", s: 14, m: "기준 준", o: "水" },
+                { h: "浚", s: 11, m: "깊을 준", o: "水" },
+                { h: "畯", s: 12, m: "농부 준", o: "土" },
+                { h: "晙", s: 11, m: "밝을 준", o: "火" },
+                { h: "儁", s: 15, m: "준걸 준", o: "火" }
+            ],
+            "지": [
+                { h: "池", s: 7, m: "못 지", o: "水" },
+                { h: "智", s: 12, m: "지혜 지", o: "火" },
+                { h: "志", s: 7, m: "뜻 지", o: "土" },
+                { h: "芝", s: 10, m: "지초 지", o: "木" }
+            ],
+            "진": [
+                { h: "陳", s: 16, m: "베풀 진", o: "土" },
+                { h: "眞", s: 10, m: "참 진", o: "金" },
+                { h: "鎭", s: 18, m: "진정할 진", o: "金" },
+                { h: "珍", s: 10, m: "보배 진", o: "金" },
+                { h: "振", s: 11, m: "떨칠 진", o: "木" },
+                { h: "辰", s: 7, m: "별 진", o: "土" }
+            ],
+            "찬": [
+                { h: "燦", s: 17, m: "빛날 찬", o: "火" },
+                { h: "讚", s: 26, m: "칭찬할 찬", o: "金" },
+                { h: "贊", s: 19, m: "도울 찬", o: "金" }
+            ],
+            "창": [
+                { h: "昌", s: 8, m: "창성할 창", o: "火" },
+                { h: "彰", s: 14, m: "밝을 창", o: "火" },
+                { h: "創", s: 12, m: "비롯할 창", o: "金" }
+            ],
+            "채": [
+                { h: "蔡", s: 17, m: "성씨 채", o: "木" },
+                { h: "彩", s: 11, m: "채색 채", o: "火" }
+            ],
+            "천": [
+                { h: "千", s: 3, m: "일천 천", o: "金" },
+                { h: "天", s: 4, m: "하늘 천", o: "金" }
+            ],
+            "철": [
+                { h: "哲", s: 10, m: "밝을 철", o: "火" },
+                { h: "澈", s: 16, m: "맑을 철", o: "水" },
+                { h: "鐵", s: 21, m: "쇠 철", o: "金" }
+            ],
+            "최": [
+                { h: "崔", s: 11, m: "높을 최", o: "土" }
+            ],
+            "태": [
+                { h: "太", s: 4, m: "클 태", o: "火" },
+                { h: "泰", s: 9, m: "클 태", o: "水" }
+            ],
+            "택": [
+                { h: "澤", s: 17, m: "못 택", o: "水" },
+                { h: "擇", s: 17, m: "가릴 택", o: "火" }
+            ],
+            "하": [
+                { h: "河", s: 9, m: "물 하", o: "水" },
+                { h: "夏", s: 10, m: "여름 하", o: "火" },
+                { h: "荷", s: 13, m: "연꽃 하", o: "木" },
+                { h: "賀", s: 12, m: "하례할 하", o: "木" }
+            ],
+            "학": [
+                { h: "學", s: 16, m: "배울 학", o: "水" },
+                { h: "鶴", s: 21, m: "학 학", o: "水" }
+            ],
+            "한": [
+                { h: "韓", s: 17, m: "나라 한", o: "木" },
+                { h: "漢", s: 15, m: "한수 한", o: "水" },
+                { h: "翰", s: 16, m: "붓 한", o: "木" }
+            ],
+            "해": [
+                { h: "海", s: 11, m: "바다 해", o: "水" },
+                { h: "楷", s: 13, m: "본보기 해", o: "木" }
+            ],
+            "허": [
+                { h: "許", s: 11, m: "허락할 허", o: "木" }
+            ],
+            "현": [
+                { h: "炫", s: 9, m: "빛날 현", o: "火" },
+                { h: "賢", s: 15, m: "어질 현", o: "木" },
+                { h: "絃", s: 11, m: "악기줄 현", o: "木" },
+                { h: "顯", s: 23, m: "나타날 현", o: "火" },
+                { h: "鉉", s: 13, m: "솥귀 현", o: "金" }
+            ],
+            "형": [
+                { h: "亨", s: 7, m: "형통할 형", o: "水" },
+                { h: "炯", s: 9, m: "빛날 형", o: "火" },
+                { h: "瑩", s: 15, m: "밝을 형", o: "木" }
+            ],
+            "혜": [
+                { h: "惠", s: 12, m: "은혜 혜", o: "水" },
+                { h: "慧", s: 15, m: "지혜 혜", o: "水" }
+            ],
+            "호": [
+                { h: "浩", s: 11, m: "넓을 호", o: "水" },
+                { h: "鎬", s: 18, m: "냄비/빛날 호", o: "金" },
+                { h: "湖", s: 13, m: "호수 호", o: "水" },
+                { h: "虎", s: 8, m: "범 호", o: "木" }
             ],
             "홍": [
                 { h: "洪", s: 10, m: "넓을 홍", o: "水" },
@@ -926,65 +1391,35 @@
                 { h: "鴻", s: 17, m: "큰기러기 홍", o: "水" },
                 { h: "紅", s: 9, m: "붉을 홍", o: "火" }
             ],
-            "길": [
-                { h: "吉", s: 6, m: "길할 길", o: "木" },
-                { h: "佶", s: 8, m: "바르고건장할 길", o: "木" }
+            "화": [
+                { h: "華", s: 14, m: "빛날 화", o: "木" },
+                { h: "和", s: 8, m: "화할 화", o: "木" },
+                { h: "花", s: 10, m: "꽃 화", o: "木" }
             ],
-            "동": [
-                { h: "東", s: 8, m: "동녘 동", o: "木" },
-                { h: "棟", s: 12, m: "용마루 동", o: "木" },
-                { h: "洞", s: 10, m: "골 동", o: "水" },
-                { h: "童", s: 12, m: "아이 동", o: "水" }
+            "환": [
+                { h: "煥", s: 13, m: "빛날 환", o: "火" },
+                { h: "桓", s: 10, m: "굳셀 환", o: "木" }
             ],
-            "민": [
-                { h: "旼", s: 8, m: "화할 민", o: "火" },
-                { h: "玟", s: 9, m: "옥돌 민", o: "金" },
-                { h: "敏", s: 11, m: "민첩할 민", o: "金" },
-                { h: "旻", s: 8, m: "하늘 민", o: "火" },
-                { h: "民", s: 5, m: "백성 민", o: "水" }
+            "황": [
+                { h: "黃", s: 12, m: "누를 황", o: "土" },
+                { h: "皇", s: 9, m: "임금 황", o: "土" }
             ],
-            "준": [
-                { h: "俊", s: 9, m: "준걸 준", o: "火" },
-                { h: "準", s: 14, m: "기준 준", o: "水" },
-                { h: "浚", s: 11, m: "깊을 준", o: "水" },
-                { h: "畯", s: 12, m: "농부 준", o: "土" }
+            "효": [
+                { h: "孝", s: 7, m: "효도 효", o: "土" },
+                { h: "曉", s: 16, m: "새벽 효", o: "火" }
             ],
-            "연": [
-                { h: "然", s: 12, m: "그럴 연", o: "火" },
-                { h: "延", s: 7, m: "끌 연", o: "土" },
-                { h: "娟", s: 10, m: "예쁠 연", o: "木" },
-                { h: "淵", s: 12, m: "못 연", o: "水" }
+            "훈": [
+                { h: "勳", s: 16, m: "공 훈", o: "火" },
+                { h: "訓", s: 10, m: "가르칠 훈", o: "水" }
             ],
-            "우": [
-                { h: "宇", s: 6, m: "집 우", o: "土" },
-                { h: "佑", s: 7, m: "도울 우", o: "土" },
-                { h: "雨", s: 8, m: "비 우", o: "水" },
-                { h: "友", s: 4, m: "벗 우", o: "土" },
-                { h: "優", s: 17, m: "넉넉할 우", o: "土" }
-            ],
-            "진": [
-                { h: "眞", s: 10, m: "참 진", o: "金" },
-                { h: "鎭", s: 18, m: "진정할 진", o: "金" },
-                { h: "珍", s: 10, m: "보배 진", o: "金" },
-                { h: "振", s: 11, m: "떨칠 진", o: "木" }
-            ],
-            "현": [
-                { h: "炫", s: 9, m: "빛날 현", o: "火" },
-                { h: "賢", s: 15, m: "어질 현", o: "木" },
-                { h: "絃", s: 11, m: "악기줄 현", o: "木" },
-                { h: "顯", s: 23, m: "나타날 현", o: "火" }
-            ],
-            "하": [
-                { h: "夏", s: 10, m: "여름 하", o: "火" },
-                { h: "河", s: 9, m: "물 하", o: "水" },
-                { h: "荷", s: 13, m: "연꽃 하", o: "木" }
-            ],
-            "은": [
-                { h: "恩", s: 10, m: "은혜 은", o: "土" },
-                { h: "銀", s: 14, m: "은 은", o: "金" },
-                { h: "慇", s: 14, m: "괴로워할 은", o: "土" }
+            "희": [
+                { h: "熙", s: 13, m: "빛날 희", o: "火" },
+                { h: "喜", s: 12, m: "기쁠 희", o: "木" },
+                { h: "姬", s: 9, m: "아가씨 희", o: "土" },
+                { h: "希", s: 7, m: "바랄 희", o: "水" }
             ]
         };
+
 
         const SURI_81 = {
             1: { luck: "대길", title: "태초격(太初格)", desc: "천지가 개벽하고 만물이 소생하는 길수. 부귀영화와 건강을 누립니다." },
@@ -1157,9 +1592,6 @@
             document.getElementById('name-results-area').scrollIntoView({ behavior: 'smooth' });
         }
 
-        /* -------------------------------------------------------------
-           LUNAR TO SOLAR CALCULATION DATA TABLE (1940-2040)
-        ------------------------------------------------------------- */
         const LUNAR_INFO = [
             0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
             0x04ae0,0x0a5b6,0x0a4d0,0x0d250,0x1d255,0x0b540,0x0d6a0,0x0ada2,0x095b0,0x14977,
@@ -1222,9 +1654,6 @@
             };
         }
 
-        /* -------------------------------------------------------------
-           WONKWANG MANSE-RYEOK ENGINE CORE
-        ------------------------------------------------------------- */
         const CHEONGAN = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
         const JIJI = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
 
@@ -1465,7 +1894,6 @@
                 detailsContainer.appendChild(itemDiv);
             });
 
-            // Seun
             const seunYearsRow = document.getElementById('seun-years-row');
             const seunCgRow = document.getElementById('seun-cg-row');
             const seunJjRow = document.getElementById('seun-jj-row');
@@ -1486,7 +1914,6 @@
                 seunJjRow.innerHTML += `<td class="py-2 ${cellBg}">${sv.jj}</td>`;
             });
 
-            // 2026 Year Reading
             const seun2026Cg = (2026 - 4) % 10;
             const seun2026Jj = (2026 - 4) % 12;
             const seunTenGodCg = getTenGod(s.dayCg, seun2026Cg);
@@ -1512,7 +1939,6 @@
                 </div>
             `;
 
-            // Wolun
             const wolunMonthsRow = document.getElementById('wolun-months-row');
             const wolunCgRow = document.getElementById('wolun-cg-row');
             const wolunJjRow = document.getElementById('wolun-jj-row');
@@ -1562,9 +1988,6 @@
             document.getElementById('manse-result-area').scrollIntoView({ behavior: 'smooth' });
         }
 
-        /* -------------------------------------------------------------
-           GUNGHAP & GROUP ANALYSIS ENGINE
-        ------------------------------------------------------------- */
         let memberCount = 0;
 
         function addGunghapMember(nameVal = "", birthVal = "", calVal = "solar", timeVal = "0") {
@@ -1644,6 +2067,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             addGunghapMember("", "", "solar", "0");
+            onHangulNameChange();
         });
 
         function isCgHap(cg1, cg2) {
@@ -1881,9 +2305,6 @@
             document.getElementById('gunghap-results-area').scrollIntoView({ behavior: 'smooth' });
         }
 
-        /* -------------------------------------------------------------
-           TAROT INTERACTIVE ENGINE
-        ------------------------------------------------------------- */
         const tarotDatabase = [
             {
                 name: "0. 바보 (The Fool)", arcana: "Major Arcana 0", icon: "fa-solid fa-feather", keyword: "새로운 시작 · 순수 · 자유",
@@ -2098,9 +2519,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* -------------------------------------------------------------
-           ZODIAC LOGIC
-        ------------------------------------------------------------- */
         const zodiacData = [
             { name: "양자리 (Aries)", symbol: "♈", score: "★★★★☆ (88점)", desc: "자신감과 추진력이 최고조에 이르는 날입니다. 미뤄왔던 일을 시원하게 해결할 수 있습니다.", love: "설레는 호감 증가", money: "안정적 흐름", color: "크림슨 레드", num: "7, 19" },
             { name: "황소자리 (Taurus)", symbol: "♉", score: "★★★★★ (95점)", desc: "풍요와 안정이 깃드는 하루입니다. 정성 들인 일에서 기분 좋은 성과나 이득을 얻습니다.", love: "깊은 유대감", money: "뜻밖의 수익", color: "에메랄드 그린", num: "6, 24" },
