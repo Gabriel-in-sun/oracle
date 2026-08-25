@@ -59,6 +59,18 @@
             transform: rotateY(180deg);
         }
 
+        /* Custom Saju Table Styles */
+        .saju-box {
+            background: #ffffff;
+            color: #111827;
+            font-family: 'Noto Serif KR', serif;
+        }
+        .saju-cell-wood { background-color: #dcfce7; color: #166534; }
+        .saju-cell-fire { background-color: #ffe4e6; color: #9f1239; }
+        .saju-cell-earth { background-color: #fef3c7; color: #92400e; }
+        .saju-cell-metal { background-color: #f1f5f9; color: #334155; }
+        .saju-cell-water { background-color: #e0f2fe; color: #075985; }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -67,7 +79,6 @@
             animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Tarot card deck scroll styling */
         .deck-scroll::-webkit-scrollbar {
             height: 6px;
         }
@@ -94,7 +105,7 @@
                     <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> <span>타로 리딩</span>
                 </button>
                 <button onclick="switchTab('saju')" id="nav-saju" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5">
-                    <i class="fa-solid fa-yin-yang text-xs"></i> <span>사주 명리</span>
+                    <i class="fa-solid fa-yin-yang text-xs"></i> <span>사주 명리 & 만세력</span>
                 </button>
                 <button onclick="switchTab('zodiac')" id="nav-zodiac" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5">
                     <i class="fa-solid fa-sparkles text-xs"></i> <span>별자리 운세</span>
@@ -116,13 +127,12 @@
                     당신의 하루와 운명을 밝혀주는<br><span class="text-gold-gradient">신비로운 공간</span>
                 </h1>
                 <p class="text-purple-200/80 text-sm md:text-base leading-relaxed">
-                    오늘 어떤 기운이 당신을 기다리고 있을까요? 질문 맞춤형 타로 스프레드, 사주의 타고난 오행, 별자리의 흐름을 통해 명쾌한 해답과 에너지를 확인해 보세요.
+                    정통 만세력 기반 사주원국 및 10년 대운 분석, 심층 타로 리딩, 12 별자리 운세를 통해 인생의 흐름과 통찰을 만나보세요.
                 </p>
             </div>
 
             <!-- 3 Main Pillars -->
             <div class="grid md:grid-cols-3 gap-6 pt-4">
-                <!-- Tarot Card -->
                 <div onclick="switchTab('tarot')" class="glass-card p-6 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-12 h-12 rounded-xl bg-purple-800/40 flex items-center justify-center mb-4 border border-purple-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-xl"></i>
@@ -131,24 +141,22 @@
                         디테일 타로 리딩 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
                     </h3>
                     <p class="text-sm text-purple-200/70 leading-relaxed">
-                        궁금한 질문을 입력하고 1장 또는 3장(과거·현재·미래)의 카드를 직접 뽑아 심층적인 단계별 해석을 받아보세요.
+                        궁금한 질문을 입력하고 1장 또는 3장(과거·현재·미래)의 카드를 직접 뽑아 심층 단계별 해석을 확인합니다.
                     </p>
                 </div>
 
-                <!-- Saju Card -->
                 <div onclick="switchTab('saju')" class="glass-card p-6 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-12 h-12 rounded-xl bg-amber-950/40 flex items-center justify-center mb-4 border border-amber-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-yin-yang text-amber-300 text-xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-white serif flex items-center justify-between">
-                        사주 명리 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
+                        정밀 만세력 & 10년 대운 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
                     </h3>
                     <p class="text-sm text-purple-200/70 leading-relaxed">
-                        태어난 생년월일시로 풀어보는 오행(목·화·토·금·수)의 조화와 나를 이끄는 핵심 기운을 분석합니다.
+                        사주팔자 원국 명식표, 십신, 오행 분석 및 10년 주기별 대운(大運)의 종합적인 흐름을 정렬하여 제공합니다.
                     </p>
                 </div>
 
-                <!-- Zodiac Card -->
                 <div onclick="switchTab('zodiac')" class="glass-card p-6 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-12 h-12 rounded-xl bg-indigo-900/40 flex items-center justify-center mb-4 border border-indigo-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-sparkles text-amber-300 text-xl"></i>
@@ -163,14 +171,13 @@
             </div>
         </section>
 
-        <!-- ==================== TAROT TAB (ENHANCED) ==================== -->
+        <!-- ==================== TAROT TAB ==================== -->
         <section id="tab-tarot" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
-                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">신비로운 심층 타로 리딩</h2>
+                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">심층 타로 리딩</h2>
                 <p class="text-sm text-purple-200/70">마음을 가다듬고 해답을 찾고 싶은 질문과 스프레드 방식을 선택해 주세요.</p>
             </div>
 
-            <!-- Question & Spread Setup Box -->
             <div id="tarot-setup-area" class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
                 <div>
                     <label class="block text-xs font-medium text-amber-200 mb-1.5">
@@ -186,7 +193,7 @@
                             <input type="radio" name="spread-type" value="1" class="text-amber-400 focus:ring-amber-400 mr-2.5" checked>
                             <div>
                                 <div class="text-xs font-bold text-white">1장 스프레드 (원카드)</div>
-                                <div class="text-[11px] text-purple-300/60">오늘의 핵심 조언 & 즉각적인 해답</div>
+                                <div class="text-[11px] text-purple-300/60">핵심 조언 & 즉각적인 해답</div>
                             </div>
                         </label>
                         <label class="flex items-center p-3 rounded-xl border border-purple-800/60 bg-[#0d071a]/60 cursor-pointer hover:border-amber-400 transition" onclick="setSpread(3)">
@@ -204,9 +211,7 @@
                 </button>
             </div>
 
-            <!-- Tarot Drawing Workspace (Hidden initially) -->
             <div id="tarot-draw-area" class="hidden space-y-8 animate-fade-in">
-                <!-- Question summary banner -->
                 <div class="text-center p-3 rounded-xl bg-purple-950/40 border border-purple-800/30 max-w-xl mx-auto">
                     <span class="text-xs text-purple-300 block mb-0.5">당신의 질문</span>
                     <strong id="display-question" class="text-amber-300 text-sm md:text-base serif">"..."</strong>
@@ -215,42 +220,25 @@
                     </div>
                 </div>
 
-                <!-- Spread Slots (Where chosen cards land) -->
-                <div id="spread-slots-container" class="flex flex-wrap justify-center gap-4 md:gap-6 pt-2">
-                    <!-- Dynamic slots will be generated by JS -->
-                </div>
+                <div id="spread-slots-container" class="flex flex-wrap justify-center gap-4 md:gap-6 pt-2"></div>
 
-                <!-- Horizontal Deck Selection (Face-down cards) -->
                 <div id="deck-picker-section" class="text-center space-y-3 pt-4 border-t border-purple-900/40">
                     <span class="text-xs text-purple-300/70 tracking-wider">펼쳐진 덱에서 마음에 드는 카드를 선택하세요</span>
-                    <div id="tarot-deck-ribbon" class="deck-scroll flex gap-2 overflow-x-auto py-4 px-2 max-w-3xl mx-auto justify-start md:justify-center">
-                        <!-- 12 back-facing cards to click -->
-                    </div>
+                    <div id="tarot-deck-ribbon" class="deck-scroll flex gap-2 overflow-x-auto py-4 px-2 max-w-3xl mx-auto justify-start md:justify-center"></div>
                 </div>
 
-                <!-- Comprehensive Interpretation Report -->
                 <div id="tarot-comprehensive-report" class="hidden max-w-3xl mx-auto glass-card p-6 md:p-8 rounded-2xl border-amber-400/40 space-y-6 animate-fade-in">
                     <div class="border-b border-purple-900/60 pb-4 text-center">
                         <span class="text-xs text-amber-300 font-semibold tracking-widest uppercase">Comprehensive Reading Report</span>
                         <h3 class="text-2xl font-bold serif text-gold-gradient mt-1">심층 타로 리딩 종합 해석</h3>
-                        <p class="text-xs text-purple-200/70 mt-1">질문에 대한 덱의 영적 조언과 흐름을 종합 분석한 결과입니다.</p>
                     </div>
-
-                    <!-- Step by step details -->
-                    <div id="step-by-step-analysis" class="space-y-4 text-sm">
-                        <!-- Filled by JS -->
-                    </div>
-
-                    <!-- Final Advice Card -->
+                    <div id="step-by-step-analysis" class="space-y-4 text-sm"></div>
                     <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/60 to-indigo-950/60 border border-amber-400/30 space-y-2">
                         <h4 class="text-sm font-bold text-amber-300 flex items-center gap-2">
                             <i class="fa-solid fa-crown"></i> 오라클의 최종 조언 및 행동 가이드
                         </h4>
-                        <p id="final-advice-text" class="text-xs md:text-sm text-slate-200 leading-relaxed font-light">
-                            ...
-                        </p>
+                        <p id="final-advice-text" class="text-xs md:text-sm text-slate-200 leading-relaxed font-light">...</p>
                     </div>
-
                     <div class="text-center pt-2">
                         <button onclick="resetTarotSession()" class="px-6 py-2.5 rounded-xl bg-purple-900/60 border border-purple-400/40 text-xs font-semibold text-purple-200 hover:bg-purple-800 hover:text-white transition">
                             <i class="fa-solid fa-rotate-right mr-1.5"></i> 새로운 질문으로 다시 보기
@@ -260,28 +248,36 @@
             </div>
         </section>
 
-        <!-- ==================== SAJU TAB ==================== -->
+        <!-- ==================== SAJU TAB (MANSE-RYEOK & 10-YEAR DAEWOON) ==================== -->
         <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
-                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">사주 명리 간편 분석</h2>
-                <p class="text-sm text-purple-200/70">생년월일시를 입력하시면 타고난 오행의 분포와 핵심 기운을 분석해 드립니다.</p>
+                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 & 사주 명식 풀이</h2>
+                <p class="text-sm text-purple-200/70">생년월일시를 입력하면 사주원국 8글자 명식표와 10년 단위 대운(大運) 흐름을 정밀하게 분석합니다.</p>
             </div>
 
-            <div class="glass-card max-w-xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Saju Input Form -->
+            <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">성별</label>
+                        <select id="saju-gender" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="male">남자 (乾命)</option>
+                            <option value="female">여자 (坤命)</option>
+                        </select>
+                    </div>
                     <div>
                         <label class="block text-xs font-medium text-purple-200 mb-1.5">이름 또는 닉네임</label>
                         <input type="text" id="saju-name" placeholder="예: 홍길동" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-purple-200 mb-1.5">생년월일 (8자리)</label>
-                        <input type="text" id="saju-birth" placeholder="예: 19950815" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                        <input type="text" id="saju-birth" placeholder="예: 19931102" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">양력 / 음력</label>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">양력 / 음력 구분</label>
                         <select id="saju-calendar" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
                             <option value="solar">양력 (Solar)</option>
                             <option value="lunar">음력 (Lunar)</option>
@@ -290,56 +286,174 @@
                     <div>
                         <label class="block text-xs font-medium text-purple-200 mb-1.5">태어난 시간</label>
                         <select id="saju-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                            <option value="unknown">모름 / 미입력</option>
-                            <option value="자시 (23:30~01:29)">자시 (23:30 ~ 01:29)</option>
-                            <option value="축시 (01:30~03:29)">축시 (01:30 ~ 03:29)</option>
-                            <option value="인시 (03:30~05:29)">인시 (03:30 ~ 05:29)</option>
-                            <option value="묘시 (05:30~07:29)">묘시 (05:30 ~ 07:29)</option>
-                            <option value="진시 (07:30~09:29)">진시 (07:30 ~ 09:29)</option>
-                            <option value="사시 (09:30~11:29)">사시 (09:30 ~ 11:29)</option>
-                            <option value="오시 (11:30~13:29)">오시 (11:30 ~ 13:29)</option>
-                            <option value="미시 (13:30~15:29)">미시 (13:30 ~ 15:29)</option>
-                            <option value="신시 (15:30~17:29)">신시 (15:30 ~ 17:29)</option>
-                            <option value="유시 (17:30~19:29)">유시 (17:30 ~ 19:29)</option>
-                            <option value="술시 (19:30~21:29)">술시 (19:30 ~ 21:29)</option>
-                            <option value="해시 (21:30~23:29)">해시 (21:30 ~ 23:29)</option>
+                            <option value="11">해시 (21:30 ~ 23:29)</option>
+                            <option value="10">술시 (19:30 ~ 21:29)</option>
+                            <option value="0">자시 (23:30 ~ 01:29)</option>
+                            <option value="1">축시 (01:30 ~ 03:29)</option>
+                            <option value="2">인시 (03:30 ~ 05:29)</option>
+                            <option value="3">묘시 (05:30 ~ 07:29)</option>
+                            <option value="4">진시 (07:30 ~ 09:29)</option>
+                            <option value="5">사시 (09:30 ~ 11:29)</option>
+                            <option value="6">오시 (11:30 ~ 13:29)</option>
+                            <option value="7">미시 (13:30 ~ 15:29)</option>
+                            <option value="8">신시 (15:30 ~ 17:29)</option>
+                            <option value="9">유시 (17:30 ~ 19:29)</option>
                         </select>
                     </div>
                 </div>
 
-                <button onclick="analyzeSaju()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-400/20">
-                    사주 명식 및 오행 기운 분석하기
+                <button onclick="analyzeSajuMaster()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-scroll"></i> 만세력 명식 생성 및 10년 대운 분석하기
                 </button>
             </div>
 
-            <!-- Saju Result Output -->
-            <div id="saju-result" class="hidden glass-card max-w-xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/30 space-y-6 animate-fade-in">
-                <div class="border-b border-purple-900/50 pb-4 text-center">
-                    <span class="text-xs text-purple-300 uppercase tracking-widest">Saju Four Pillars Analysis</span>
-                    <h3 id="saju-res-title" class="text-2xl font-bold serif text-gold-gradient mt-1">사주 풀이 결과</h3>
+            <!-- Manse-ryeok Table Display Area -->
+            <div id="manse-result-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
+                
+                <!-- Main Board Style -->
+                <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-6">
+                    <!-- Title Bar -->
+                    <div class="bg-[#1f153a] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/40 text-xs md:text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-bold" id="res-gender-tag">남자</span>
+                            <span class="text-white font-medium" id="res-person-info">홍길동 (만 33세)</span>
+                        </div>
+                        <div class="text-purple-200/80 text-xs mt-1 md:mt-0" id="res-birth-detail">
+                            (양) 1993년 11월 02일 21:07 · 대한민국 (-30분 보정)
+                        </div>
+                    </div>
+
+                    <!-- 4 Pillars 8 Characters (사주 원국표) -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden shadow-xl text-xs md:text-sm">
+                            <thead>
+                                <tr class="bg-amber-100/70 text-slate-800 border-b border-slate-300 font-serif">
+                                    <th class="py-2.5 border-r border-slate-300 w-1/4">시주 (時柱)</th>
+                                    <th class="py-2.5 border-r border-slate-300 w-1/4">일주 (日柱)</th>
+                                    <th class="py-2.5 border-r border-slate-300 w-1/4">월주 (月柱)</th>
+                                    <th class="py-2.5 w-1/4">년주 (年柱)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Ten Gods Header for Cheongan -->
+                                <tr class="bg-slate-100 text-[11px] text-slate-600 border-b border-slate-200">
+                                    <td class="py-1 border-r border-slate-200" id="god-hour-top">정재</td>
+                                    <td class="py-1 border-r border-slate-200 font-bold text-rose-600" id="god-day-top">일원 (본인)</td>
+                                    <td class="py-1 border-r border-slate-200" id="god-month-top">정관</td>
+                                    <td class="py-1" id="god-year-top">편관</td>
+                                </tr>
+                                <!-- Cheongan Main Characters -->
+                                <tr class="font-serif font-bold text-2xl md:text-4xl border-b border-slate-300">
+                                    <td class="py-3 border-r border-slate-300" id="char-hour-top">庚</td>
+                                    <td class="py-3 border-r border-slate-300 text-rose-600 bg-rose-50" id="char-day-top">丁</td>
+                                    <td class="py-3 border-r border-slate-300" id="char-month-top">壬</td>
+                                    <td class="py-3" id="char-year-top">癸</td>
+                                </tr>
+                                <!-- Jiji Main Characters -->
+                                <tr class="font-serif font-bold text-2xl md:text-4xl border-b border-slate-300">
+                                    <td class="py-3 border-r border-slate-300" id="char-hour-btm">戌</td>
+                                    <td class="py-3 border-r border-slate-300" id="char-day-btm">亥</td>
+                                    <td class="py-3 border-r border-slate-300" id="char-month-btm">戌</td>
+                                    <td class="py-3" id="char-year-btm">酉</td>
+                                </tr>
+                                <!-- Ten Gods Footer for Jiji -->
+                                <tr class="bg-slate-100 text-[11px] text-slate-600 border-b border-slate-200">
+                                    <td class="py-1 border-r border-slate-200" id="god-hour-btm">상관</td>
+                                    <td class="py-1 border-r border-slate-200" id="god-day-btm">정관</td>
+                                    <td class="py-1 border-r border-slate-200" id="god-month-btm">상관</td>
+                                    <td class="py-1" id="god-year-btm">편재</td>
+                                </tr>
+                                <!-- Hidden Stems (지장간) -->
+                                <tr class="text-[10px] md:text-xs text-slate-500 bg-slate-50">
+                                    <td class="py-1.5 border-r border-slate-200" id="jijang-hour">辛 丁 戊</td>
+                                    <td class="py-1.5 border-r border-slate-200" id="jijang-day">戊 甲 壬</td>
+                                    <td class="py-1.5 border-r border-slate-200" id="jijang-month">辛 丁 戊</td>
+                                    <td class="py-1.5" id="jijang-year">庚 辛</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 5 Elements Summary Bar -->
+                    <div class="p-3 bg-[#170e30] rounded-xl border border-purple-900/60 flex flex-wrap items-center justify-between text-xs gap-2">
+                        <span class="text-amber-300 font-bold">오행 분포 (五行):</span>
+                        <div class="flex gap-2 font-medium" id="five-elements-counts">
+                            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40">木: 0</span>
+                            <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/40">火: 1</span>
+                            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-500/40">土: 2</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-400/40">金: 2</span>
+                            <span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-500/40">水: 3</span>
+                        </div>
+                    </div>
+
+                    <!-- 10-Year Daewoon Table Grid (대운 표) -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
+                            <span>10년 주기 대운 흐름 (大運表)</span>
+                            <span class="text-amber-300 text-[11px]">* 주황색 블록: 현재 지나고 있는 대운</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden text-xs">
+                                <thead>
+                                    <!-- Daewoon Ages -->
+                                    <tr class="bg-slate-200 text-slate-700 font-bold" id="daewoon-ages-row">
+                                        <th class="py-1.5 border-r border-slate-300">88</th>
+                                        <th class="py-1.5 border-r border-slate-300">78</th>
+                                        <th class="py-1.5 border-r border-slate-300">68</th>
+                                        <th class="py-1.5 border-r border-slate-300">58</th>
+                                        <th class="py-1.5 border-r border-slate-300">48</th>
+                                        <th class="py-1.5 border-r border-slate-300">38</th>
+                                        <th class="py-1.5 border-r border-slate-300 bg-amber-500 text-slate-950">28</th>
+                                        <th class="py-1.5 border-r border-slate-300">18</th>
+                                        <th class="py-1.5">8.3</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-serif font-bold text-base md:text-lg">
+                                    <!-- Daewoon Cheongan -->
+                                    <tr class="border-b border-slate-200" id="daewoon-cheongan-row">
+                                        <td class="py-2 border-r border-slate-200">癸</td>
+                                        <td class="py-2 border-r border-slate-200">甲</td>
+                                        <td class="py-2 border-r border-slate-200">乙</td>
+                                        <td class="py-2 border-r border-slate-200">丙</td>
+                                        <td class="py-2 border-r border-slate-200">丁</td>
+                                        <td class="py-2 border-r border-slate-200">戊</td>
+                                        <td class="py-2 border-r border-slate-200 bg-amber-100 text-amber-900">己</td>
+                                        <td class="py-2 border-r border-slate-200">庚</td>
+                                        <td class="py-2">辛</td>
+                                    </tr>
+                                    <!-- Daewoon Jiji -->
+                                    <tr id="daewoon-jiji-row">
+                                        <td class="py-2 border-r border-slate-200">丑</td>
+                                        <td class="py-2 border-r border-slate-200">寅</td>
+                                        <td class="py-2 border-r border-slate-200">卯</td>
+                                        <td class="py-2 border-r border-slate-200">辰</td>
+                                        <td class="py-2 border-r border-slate-200">巳</td>
+                                        <td class="py-2 border-r border-slate-200">午</td>
+                                        <td class="py-2 border-r border-slate-200 bg-amber-100 text-amber-900">未</td>
+                                        <td class="py-2 border-r border-slate-200">申</td>
+                                        <td class="py-2">酉</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-2">
-                    <div class="text-xs font-semibold text-purple-200 flex justify-between">
-                        <span>타고난 주원소 (오행 분석)</span>
-                        <span id="saju-element-name" class="text-amber-300 font-bold">목(木) - 푸른 기운</span>
+                <!-- 10-Year Step-by-step Detailed Interpretations -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 border-purple-500/30 space-y-6">
+                    <div class="border-b border-purple-900/60 pb-3">
+                        <h3 class="text-xl font-bold serif text-gold-gradient flex items-center gap-2">
+                            <i class="fa-solid fa-hourglass-half text-amber-300"></i> 10년 단위 대운(大運) 상세 풀이 및 인생 가이드
+                        </h3>
+                        <p class="text-xs text-purple-200/70 mt-1">대운은 10년 주기로 바뀌는 인생의 큰 계절과 환경의 변화를 나타냅니다.</p>
                     </div>
-                    <div class="grid grid-cols-5 gap-1.5 text-center text-[11px] font-medium pt-1">
-                        <div class="p-2 rounded-lg bg-emerald-950/60 border border-emerald-500/40 text-emerald-300">木 (목)<br><span id="val-wood">35%</span></div>
-                        <div class="p-2 rounded-lg bg-rose-950/60 border border-rose-500/40 text-rose-300">火 (화)<br><span id="val-fire">25%</span></div>
-                        <div class="p-2 rounded-lg bg-amber-950/60 border border-amber-500/40 text-amber-300">土 (토)<br><span id="val-earth">15%</span></div>
-                        <div class="p-2 rounded-lg bg-slate-800/60 border border-slate-400/40 text-slate-200">金 (금)<br><span id="val-metal">15%</span></div>
-                        <div class="p-2 rounded-lg bg-blue-950/60 border border-blue-500/40 text-blue-300">水 (수)<br><span id="val-water">10%</span></div>
+
+                    <!-- Daewoon List Blocks -->
+                    <div class="space-y-4" id="daewoon-analysis-list">
+                        <!-- Dynamic items -->
                     </div>
                 </div>
 
-                <div class="space-y-3 text-sm text-slate-200 leading-relaxed font-light">
-                    <p id="saju-res-summary" class="p-4 rounded-xl bg-purple-950/30 border border-purple-800/30 text-purple-100">...</p>
-                    <div class="space-y-1.5 pt-2 text-xs">
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-gem text-amber-400"></i> <strong class="text-white">나를 돕는 개운 요소:</strong> <span id="saju-res-lucky" class="text-purple-200">...</span></div>
-                        <div class="flex items-center gap-2"><i class="fa-solid fa-compass text-amber-400"></i> <strong class="text-white">올해의 조언:</strong> <span id="saju-res-tip" class="text-purple-200">...</span></div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -479,7 +593,102 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* Full Major Arcana & Tarot Pool */
+        /* ---------------- Saju Master Logic ---------------- */
+        const daewoonTemplates = [
+            {
+                ageRange: "18세 ~ 27세 대운 (庚申)",
+                pillar: "경신(庚申) - 정재·편재의 왕성한 금(金) 기운",
+                career: "사회적 진로를 탐색하고 전문성을 다지는 시기. 시험, 취업, 초기 커리어 확립에 유리합니다.",
+                money: "활동량에 비례해 수입이 발생하나 독립과 기반 마련을 위한 초기 지출이 많습니다.",
+                advice: "기초 실력을 튼튼히 다지고 성실함을 무기로 삼아야 다음 10년의 도약이 보장됩니다."
+            },
+            {
+                ageRange: "28세 ~ 37세 대운 (己未) [현재 대운]",
+                pillar: "기미(己未) - 식신·상관의 활발한 토(土) 기운",
+                career: "자신의 고유한 전문 기술과 기획력이 만개하는 시기. 새로운 프로젝트 주도와 이직, 독립의 기운이 큽니다.",
+                money: "노력과 아이디어가 재물로 직결되는 결실기입니다. 다만 무리한 확장보다는 관리에 집중하세요.",
+                advice: "상관의 기운으로 자기주장이 강해질 수 있으니 조직 내 소통과 완급 조절에 신경 써야 합니다."
+            },
+            {
+                ageRange: "38세 ~ 47세 대운 (戊午)",
+                pillar: "무오(戊午) - 편인·정인의 뜨거운 화토(火土) 기운",
+                career: "중견 리더로서 조직을 장악하거나 독립적인 사업 기반을 완전히 정착시키는 전성기입니다.",
+                money: "자산 규모가 한 단계 점프하는 시기. 문서운과 부동산, 장기 투자에서 좋은 결실을 맺습니다.",
+                advice: "열정이 과열되어 건강이나 스트레스 관리에 소홀해지지 않도록 휴식을 병행하세요."
+            },
+            {
+                ageRange: "48세 ~ 57세 대운 (丁巳)",
+                pillar: "정사(丁巳) - 비견·겁재의 주도적인 화(火) 기운",
+                career: "자신의 이름을 널리 알리고 영향력을 행사하는 원숙기. 후배 양성이나 대외적 활동이 왕성합니다.",
+                money: "현금 흐름이 안정되며 명예와 지위가 자연스럽게 재물적 안정으로 이어집니다.",
+                advice: "동업이나 무리한 보증은 피하고 본인이 완벽히 통제 가능한 영역에 집중하세요."
+            },
+            {
+                ageRange: "58세 ~ 67세 대운 (丙辰)",
+                pillar: "병진(丙辰) - 편관·정재의 조화로운 토수(土水) 기운",
+                career: "현역에서 자문/고문 역할로 전환하며 안정적이고 여유로운 리더십을 발휘하는 시기입니다.",
+                money: "축적된 자산의 안전 운용과 연금, 임대 소득 등 고정 수익 기반이 견고해집니다.",
+                advice: "마음의 여유를 갖고 취미, 봉사, 영적 성장에 시간을 투자하는 것이 길합니다."
+            }
+        ];
+
+        function analyzeSajuMaster() {
+            const name = document.getElementById('saju-name').value.trim() || '방문자';
+            const birth = document.getElementById('saju-birth').value.trim();
+            const gender = document.getElementById('saju-gender').value;
+
+            if (!birth || birth.length < 8) {
+                alert('생년월일 8자리(예: 19931102)를 올바르게 입력해주세요.');
+                return;
+            }
+
+            const birthYear = parseInt(birth.substring(0, 4));
+            const currentYear = 2026;
+            const userAge = currentYear - birthYear;
+
+            document.getElementById('res-gender-tag').textContent = gender === 'male' ? '남자 (乾命)' : '여자 (坤命)';
+            document.getElementById('res-person-info').textContent = `${name} (만 ${userAge}세)`;
+            document.getElementById('res-birth-detail').textContent = `(양) ${birth.substring(0,4)}년 ${birth.substring(4,6)}월 ${birth.substring(6,8)}일 · 대한민국 (-30분 보정)`;
+
+            // Render Daewoon detailed items
+            const daewoonContainer = document.getElementById('daewoon-analysis-list');
+            daewoonContainer.innerHTML = '';
+
+            daewoonTemplates.forEach((dw, idx) => {
+                const isCurrent = idx === 1; // 28~37세 하이라이트
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `p-4 md:p-5 rounded-xl border transition ${isCurrent ? 'bg-[#221342] border-amber-400 shadow-lg' : 'bg-[#0d071a]/70 border-purple-900/40'}`;
+                itemDiv.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-purple-900/40 pb-2.5">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded text-xs font-bold ${isCurrent ? 'bg-amber-400 text-slate-950' : 'bg-purple-900 text-purple-200'}">${dw.ageRange}</span>
+                            <span class="text-sm md:text-base font-bold text-white serif">${dw.pillar}</span>
+                        </div>
+                        ${isCurrent ? '<span class="text-[11px] text-amber-300 font-bold animate-pulse">★ 현재 지나고 있는 대운</span>' : ''}
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 text-xs md:text-sm">
+                        <div class="p-2.5 rounded-lg bg-purple-950/30">
+                            <span class="text-purple-300 font-semibold block mb-1">💼 직업 & 커리어 흐름</span>
+                            <p class="text-slate-300 font-light leading-relaxed">${dw.career}</p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-purple-950/30">
+                            <span class="text-purple-300 font-semibold block mb-1">💰 재물 & 자산 운</span>
+                            <p class="text-slate-300 font-light leading-relaxed">${dw.money}</p>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-purple-950/30">
+                            <span class="text-purple-300 font-semibold block mb-1">💡 10년 개운 조언</span>
+                            <p class="text-slate-300 font-light leading-relaxed">${dw.advice}</p>
+                        </div>
+                    </div>
+                `;
+                daewoonContainer.appendChild(itemDiv);
+            });
+
+            document.getElementById('manse-result-area').classList.remove('hidden');
+            document.getElementById('manse-result-area').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* ---------------- Tarot Logic ---------------- */
         const tarotDatabase = [
             {
                 name: "0. 바보 (The Fool)",
@@ -522,36 +731,6 @@
                 advice: "스스로를 아끼고 충분히 누릴 자격이 있음을 믿으세요."
             },
             {
-                name: "IV. 황제 (The Emperor)",
-                arcana: "Major Arcana 4",
-                icon: "fa-solid fa-landmark-dome",
-                keyword: "통제력 · 질서 · 안정과 리더십",
-                past: "원칙을 지키며 확립해 둔 확고한 기반과 규율이 안전망이 되어주었습니다.",
-                present: "상황을 명확하게 통제하고 책임감 있는 결단으로 중심을 잡아야 할 때입니다.",
-                future: "탄탄한 권위와 신뢰를 구축하여 주변을 든든하게 이끌게 됩니다.",
-                advice: "감정에 휘둘리지 말고 확고한 원칙과 계획에 따라 상황을 정리하세요."
-            },
-            {
-                name: "VI. 연인 (The Lovers)",
-                arcana: "Major Arcana 6",
-                icon: "fa-solid fa-heart",
-                keyword: "교감 · 중요한 선택 · 조화",
-                past: "마음이 잘 맞는 인연이나 가치관의 일치를 경험했던 긍정적인 기억이 있습니다.",
-                present: "인간관계나 진로에서 가치관에 따른 중요한 갈림길에 서 있으며 조화가 필요합니다.",
-                future: "서로에게 깊은 영감을 주는 아름다운 협력과 사랑의 결실이 기다립니다.",
-                advice: "타인의 시선보다 자신의 심장이 진정으로 원하는 선택을 내리세요."
-            },
-            {
-                name: "VII. 전차 (The Chariot)",
-                arcana: "Major Arcana 7",
-                icon: "fa-solid fa-shield-halved",
-                keyword: "돌파력 · 승리 · 굳은 의지",
-                past: "장애물을 극복하기 위해 쉬지 않고 전진해 온 강한 추진력이 있었습니다.",
-                present: "서로 다른 두 가지 욕구나 갈등을 통제하고 목표를 향해 정면 돌파해야 할 시점입니다.",
-                future: "뚜렷한 목적의식으로 난관을 뚫고 승리와 영광을 쟁취하게 됩니다.",
-                advice: "주저하지 말고 강한 집중력과 자신감으로 밀어붙이세요."
-            },
-            {
                 name: "X. 운명의 수레바퀴 (Wheel of Fortune)",
                 arcana: "Major Arcana 10",
                 icon: "fa-solid fa-dharmachakra",
@@ -580,16 +759,6 @@
                 present: "밝고 따뜻한 에너지가 함께하며 모든 일이 투명하고 명쾌하게 풀려나갑니다.",
                 future: "최고의 기쁨과 축하를 받으며 확고한 성공의 결실을 맛보게 됩니다.",
                 advice: "밝은 에너지를 당당히 드러내고 사람들과 기쁨을 함께 나누세요."
-            },
-            {
-                name: "XXI. 더 월드 (The World)",
-                arcana: "Major Arcana 21",
-                icon: "fa-solid fa-globe",
-                keyword: "완성 · 대통합 · 완벽한 결말",
-                past: "오랜 기간 정성을 쏟아 하나의 완벽한 주기를 완성해 냈습니다.",
-                present: "오랫동안 달려온 여정의 최종 단계에 와 있으며 완전한 조화가 이루어집니다.",
-                future: "성공적인 완성과 함께 더 큰 세상으로 나아가는 새로운 장이 열립니다.",
-                advice: "지금까지의 결실에 감사하며 더 넓은 세상으로 시야를 넓히세요."
             }
         ];
 
@@ -652,7 +821,6 @@
             ribbon.innerHTML = '';
             document.getElementById('deck-picker-section').classList.remove('hidden');
 
-            // 14 clickable card covers
             for(let i = 0; i < 14; i++) {
                 const cardCover = document.createElement('div');
                 cardCover.className = "w-16 h-24 md:w-20 md:h-28 flex-shrink-0 glass-card rounded-xl border border-amber-400/30 cursor-pointer hover:-translate-y-2 hover:border-amber-300 transition duration-200 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 to-slate-950 shadow-md";
@@ -676,7 +844,6 @@
             const stepIndex = chosenCards.length;
             chosenCards.push(randomPick);
 
-            // Render into slot
             renderCardIntoSlot(stepIndex, randomPick);
 
             document.getElementById('draw-instruction').innerHTML = 
@@ -685,7 +852,7 @@
             if (chosenCards.length === selectedSpreadCount) {
                 document.getElementById('deck-picker-section').classList.add('hidden');
                 document.getElementById('draw-instruction').innerHTML = 
-                    `<span class="text-amber-300 font-semibold"><i class="fa-solid fa-check"></i> 모든 카드 선택이 완료되었습니다. 아래 심층 해석을 확인하세요.</span>`;
+                    `<span class="text-amber-300 font-semibold"><i class="fa-solid fa-check"></i> 모든 카드 선택이 완료되었습니다. 아래 종합 해석을 확인하세요.</span>`;
                 
                 setTimeout(() => {
                     generateComprehensiveReport();
@@ -721,14 +888,7 @@
                 : ["1. 과거의 기운 & 원인 분석", "2. 현재 당면한 과제 & 핵심", "3. 미래의 전개 흐름 & 최종 결과"];
 
             chosenCards.forEach((card, idx) => {
-                let contextMeaning = "";
-                if (selectedSpreadCount === 1) {
-                    contextMeaning = card.present;
-                } else {
-                    if (idx === 0) contextMeaning = card.past;
-                    else if (idx === 1) contextMeaning = card.present;
-                    else contextMeaning = card.future;
-                }
+                let contextMeaning = selectedSpreadCount === 1 ? card.present : (idx === 0 ? card.past : (idx === 1 ? card.present : card.future));
 
                 const itemDiv = document.createElement('div');
                 itemDiv.className = "p-4 rounded-xl bg-[#0d071a]/70 border border-purple-800/40 space-y-2";
@@ -746,18 +906,13 @@
                 reportContainer.appendChild(itemDiv);
             });
 
-            // Synthesis Advice
             const finalCard = chosenCards[chosenCards.length - 1];
-            let summaryText = "";
-            if (selectedSpreadCount === 1) {
-                summaryText = `당신의 질문("${currentQuestion}")에 대해 타로는 <strong>[${finalCard.name}]</strong>의 기운을 전하고 있습니다. ${finalCard.advice} 지금은 직관을 신뢰하고 긍정적인 방향으로 한 걸음 나아갈 때입니다.`;
-            } else {
-                summaryText = `전체적인 흐름을 종합해 볼 때, 과거의 <strong>[${chosenCards[0].name}]</strong>에서 비롯된 에너지가 현재 <strong>[${chosenCards[1].name}]</strong>의 상황으로 이어져 정면 승부를 요구하고 있습니다. 최종적으로 <strong>[${chosenCards[2].name}]</strong>의 결실이 기다리고 있으니, ${finalCard.advice}`;
-            }
+            let summaryText = selectedSpreadCount === 1 
+                ? `당신의 질문("${currentQuestion}")에 대해 타로는 <strong>[${finalCard.name}]</strong>의 기운을 전하고 있습니다. ${finalCard.advice} 지금은 직관을 신뢰하고 긍정적인 방향으로 한 걸음 나아갈 때입니다.`
+                : `전체적인 흐름을 종합해 볼 때, 과거의 <strong>[${chosenCards[0].name}]</strong>에서 비롯된 에너지가 현재 <strong>[${chosenCards[1].name}]</strong>의 상황으로 이어져 집중을 요구하고 있습니다. 최종적으로 <strong>[${chosenCards[2].name}]</strong>의 결실이 기다리고 있으니, ${finalCard.advice}`;
 
             document.getElementById('final-advice-text').innerHTML = summaryText;
             document.getElementById('tarot-comprehensive-report').classList.remove('hidden');
-
             document.getElementById('tarot-comprehensive-report').scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -769,41 +924,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* Saju Logic */
-        function analyzeSaju() {
-            const name = document.getElementById('saju-name').value.trim() || '방문자';
-            const birth = document.getElementById('saju-birth').value.trim();
-
-            if (!birth || birth.length < 8) {
-                alert('생년월일 8자리(예: 19950815)를 올바르게 입력해주세요.');
-                return;
-            }
-
-            const elements = [
-                { name: "목(木) - 성장과 추진력의 푸른 기운", wood: 40, fire: 20, earth: 15, metal: 15, water: 10, summary: `${name}님은 곧게 뻗어나가는 나무처럼 진취적인 기상과 창의적인 리더십을 지니셨습니다. 새로운 기획과 사람을 모으는 일에서 큰 두각을 나타냅니다.`, lucky: "동쪽 방향, 초록/우드 계열 소품", tip: "상반기에는 계획했던 새로운 공부나 프로젝트를 과감히 시작해 보세요." },
-                { name: "화(火) - 열정과 표현의 붉은 기운", wood: 15, fire: 45, earth: 15, metal: 10, water: 15, summary: `${name}님은 타오르는 불꽃처럼 강한 열정과 뛰어난 표현력을 바탕으로 주변을 밝고 활기차게 이끄는 매력을 가지고 계십니다.`, lucky: "남쪽 방향, 레드/오렌지 포인트", tip: "자신의 재능을 적극적으로 대외에 드러낼수록 좋은 결실이 따릅니다." },
-                { name: "금(金) - 결단과 의리의 백색 기운", wood: 10, fire: 15, earth: 20, metal: 40, water: 15, summary: `${name}님은 단단한 원석처럼 명확한 판단력과 뚝심을 자랑하며, 원칙과 신뢰를 가장 중요하게 여기는 리더 타입입니다.`, lucky: "서쪽 방향, 메탈/화이트 톤 액세서리", tip: "감정보다 원칙에 충실한 의사결정이 큰 성공을 부릅니다." },
-                { name: "수(水) - 지혜와 유연성의 검은 기운", wood: 20, fire: 10, earth: 15, metal: 15, water: 40, summary: `${name}님은 바다처럼 깊은 지혜와 뛰어난 통찰력을 갖추어 어떤 환경에서도 유연하게 적응하며 해답을 찾아내는 전략가입니다.`, lucky: "북쪽 방향, 네이비/블랙 계열 아이템", tip: "주변 상황을 조용히 관망하며 타이밍을 노리는 전략이 유리합니다." }
-            ];
-
-            const sum = birth.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
-            const chosen = elements[sum % elements.length];
-
-            document.getElementById('saju-res-title').textContent = `${name}님의 사주 분석 결과`;
-            document.getElementById('saju-element-name').textContent = chosen.name;
-            document.getElementById('val-wood').textContent = chosen.wood + '%';
-            document.getElementById('val-fire').textContent = chosen.fire + '%';
-            document.getElementById('val-earth').textContent = chosen.earth + '%';
-            document.getElementById('val-metal').textContent = chosen.metal + '%';
-            document.getElementById('val-water').textContent = chosen.water + '%';
-            document.getElementById('saju-res-summary').textContent = chosen.summary;
-            document.getElementById('saju-res-lucky').textContent = chosen.lucky;
-            document.getElementById('saju-res-tip').textContent = chosen.tip;
-
-            document.getElementById('saju-result').classList.remove('hidden');
-        }
-
-        /* Zodiac Logic */
+        /* ---------------- Zodiac Logic ---------------- */
         const zodiacData = [
             { name: "양자리 (Aries)", symbol: "♈", score: "★★★★☆ (88점)", desc: "자신감과 추진력이 최고조에 이르는 날입니다. 미뤄왔던 일을 시원하게 해결할 수 있습니다.", love: "설레는 호감 증가", money: "안정적 흐름", color: "크림슨 레드", num: "7, 19" },
             { name: "황소자리 (Taurus)", symbol: "♉", score: "★★★★★ (95점)", desc: "풍요와 안정이 깃드는 하루입니다. 정성 들인 일에서 기분 좋은 성과나 이득을 얻습니다.", love: "깊은 유대감", money: "뜻밖의 수익", color: "에메랄드 그린", num: "6, 24" },
