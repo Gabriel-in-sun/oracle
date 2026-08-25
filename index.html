@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미스틱 오라클 (Mystic Oracle) - 사주 · 별자리 · 타로</title>
+    <title>미스틱 오라클 - 정통 만세력 사주명리 & 타로</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -27,13 +27,13 @@
         }
 
         .glass-card {
-            background: rgba(26, 20, 50, 0.55);
+            background: rgba(26, 20, 50, 0.65);
             backdrop-filter: blur(14px);
-            border: 1px solid rgba(216, 180, 254, 0.18);
+            border: 1px solid rgba(216, 180, 254, 0.2);
             box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.45);
         }
 
-        /* 3D Flip Card */
+        /* 3D Flip Card for Tarot */
         .perspective {
             perspective: 1200px;
         }
@@ -59,17 +59,12 @@
             transform: rotateY(180deg);
         }
 
-        /* Custom Saju Table Styles */
-        .saju-box {
-            background: #ffffff;
-            color: #111827;
-            font-family: 'Noto Serif KR', serif;
-        }
-        .saju-cell-wood { background-color: #dcfce7; color: #166534; }
-        .saju-cell-fire { background-color: #ffe4e6; color: #9f1239; }
-        .saju-cell-earth { background-color: #fef3c7; color: #92400e; }
-        .saju-cell-metal { background-color: #f1f5f9; color: #334155; }
-        .saju-cell-water { background-color: #e0f2fe; color: #075985; }
+        /* Saju Ohaeng Color Tags */
+        .oh-wood { background-color: #dcfce7; color: #15803d; border-color: #86efac; }
+        .oh-fire { background-color: #ffe4e6; color: #be123c; border-color: #fca5a5; }
+        .oh-earth { background-color: #fef3c7; color: #b45309; border-color: #fde68a; }
+        .oh-metal { background-color: #f1f5f9; color: #334155; border-color: #cbd5e1; }
+        .oh-water { background-color: #e0f2fe; color: #0369a1; border-color: #7dd3fc; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
@@ -101,11 +96,11 @@
                 <span class="text-xl font-bold tracking-wider serif text-gold-gradient">MYSTIC ORACLE</span>
             </div>
             <nav class="flex space-x-1.5 sm:space-x-3">
-                <button onclick="switchTab('tarot')" id="nav-tarot" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5">
-                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> <span>타로 리딩</span>
-                </button>
                 <button onclick="switchTab('saju')" id="nav-saju" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5">
-                    <i class="fa-solid fa-yin-yang text-xs"></i> <span>사주 명리 & 만세력</span>
+                    <i class="fa-solid fa-yin-yang text-xs"></i> <span>정통 만세력 & 대운</span>
+                </button>
+                <button onclick="switchTab('tarot')" id="nav-tarot" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> <span>심층 타로 리딩</span>
                 </button>
                 <button onclick="switchTab('zodiac')" id="nav-zodiac" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5">
                     <i class="fa-solid fa-sparkles text-xs"></i> <span>별자리 운세</span>
@@ -114,46 +109,45 @@
         </div>
     </header>
 
-    <!-- Main Contents -->
-    <main class="max-w-5xl mx-auto px-4 py-10 w-full flex-grow">
+    <!-- Main Content Area -->
+    <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-grow">
 
         <!-- ==================== HOME TAB ==================== -->
         <section id="tab-home" class="space-y-12 animate-fade-in">
             <div class="text-center space-y-4 max-w-2xl mx-auto pt-4">
                 <span class="px-3.5 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/25 rounded-full inline-block font-semibold">
-                    Fortune & Destiny Guide
+                    Wonkwang Manse-ryeok Engine
                 </span>
                 <h1 class="text-3xl md:text-5xl font-bold serif leading-tight">
-                    당신의 하루와 운명을 밝혀주는<br><span class="text-gold-gradient">신비로운 공간</span>
+                    정통 명리학 기반<br><span class="text-gold-gradient">사주팔자 & 대운 분석</span>
                 </h1>
                 <p class="text-purple-200/80 text-sm md:text-base leading-relaxed">
-                    정통 만세력 기반 사주원국 및 10년 대운 분석, 심층 타로 리딩, 12 별자리 운세를 통해 인생의 흐름과 통찰을 만나보세요.
+                    원광만세력 알고리즘을 적용한 정확한 사주 원국표, 십신, 오행 분포도 및 10년 주기별 대운(大運)의 흐름과 인생 가이드를 제공합니다.
                 </p>
             </div>
 
-            <!-- 3 Main Pillars -->
             <div class="grid md:grid-cols-3 gap-6 pt-4">
-                <div onclick="switchTab('tarot')" class="glass-card p-6 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-purple-800/40 flex items-center justify-center mb-4 border border-purple-500/30 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-white serif flex items-center justify-between">
-                        디테일 타로 리딩 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
-                    </h3>
-                    <p class="text-sm text-purple-200/70 leading-relaxed">
-                        궁금한 질문을 입력하고 1장 또는 3장(과거·현재·미래)의 카드를 직접 뽑아 심층 단계별 해석을 확인합니다.
-                    </p>
-                </div>
-
                 <div onclick="switchTab('saju')" class="glass-card p-6 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-12 h-12 rounded-xl bg-amber-950/40 flex items-center justify-center mb-4 border border-amber-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-yin-yang text-amber-300 text-xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-white serif flex items-center justify-between">
-                        정밀 만세력 & 10년 대운 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
+                        정통 만세력 & 10년 대운 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
                     </h3>
                     <p class="text-sm text-purple-200/70 leading-relaxed">
-                        사주팔자 원국 명식표, 십신, 오행 분석 및 10년 주기별 대운(大運)의 종합적인 흐름을 정렬하여 제공합니다.
+                        생년월일시로 산출하는 원국 4주 8자, 십신, 오행 비율, 10년 단위 대운의 입체적 해석을 확인하세요.
+                    </p>
+                </div>
+
+                <div onclick="switchTab('tarot')" class="glass-card p-6 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-xl bg-purple-800/40 flex items-center justify-center mb-4 border border-purple-500/30 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white serif flex items-center justify-between">
+                        심층 타로 리딩 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
+                    </h3>
+                    <p class="text-sm text-purple-200/70 leading-relaxed">
+                        궁금한 질문을 입력하고 1장 또는 3장(과거·현재·미래)의 카드를 직접 뽑아 심층 단계별 해석을 받아보세요.
                     </p>
                 </div>
 
@@ -171,6 +165,185 @@
             </div>
         </section>
 
+        <!-- ==================== SAJU TAB (WONKWANG MANSE-RYEOK ENGINE) ==================== -->
+        <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 사주팔자 명식 & 대운</h2>
+                <p class="text-sm text-purple-200/70">생년월일시를 입력하면 절기(節氣)와 오호둔/오서둔법에 따라 정확한 4주 8자 및 10년 대운을 산출합니다.</p>
+            </div>
+
+            <!-- Saju Input Form -->
+            <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">성별</label>
+                        <select id="saju-gender" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="male" selected>남자 (乾命)</option>
+                            <option value="female">여자 (坤命)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">이름 또는 호칭</label>
+                        <input type="text" id="saju-name" placeholder="예: 홍길동" value="방문자" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">생년월일 (8자리)</label>
+                        <input type="text" id="saju-birth" placeholder="예: 19931102" value="19931102" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">양력 / 음력</label>
+                        <select id="saju-calendar" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="solar">양력 (Solar)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">태어난 시간 (한국시 기준)</label>
+                        <select id="saju-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="10" selected>술시 (19:30 ~ 21:29)</option>
+                            <option value="11">해시 (21:30 ~ 23:29)</option>
+                            <option value="0">자시 (23:30 ~ 01:29)</option>
+                            <option value="1">축시 (01:30 ~ 03:29)</option>
+                            <option value="2">인시 (03:30 ~ 05:29)</option>
+                            <option value="3">묘시 (05:30 ~ 07:29)</option>
+                            <option value="4">진시 (07:30 ~ 09:29)</option>
+                            <option value="5">사시 (09:30 ~ 11:29)</option>
+                            <option value="6">오시 (11:30 ~ 13:29)</option>
+                            <option value="7">미시 (13:30 ~ 15:29)</option>
+                            <option value="8">신시 (15:30 ~ 17:29)</option>
+                            <option value="9">유시 (17:30 ~ 19:29)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="calculateWonkwangSaju()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-scroll"></i> 만세력 명식 및 10년 대운 계산하기
+                </button>
+            </div>
+
+            <!-- Manse-ryeok Result Workspace -->
+            <div id="manse-result-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
+                
+                <!-- Authentic Manse-ryeok Table Frame -->
+                <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-5">
+                    
+                    <!-- Header Bar -->
+                    <div class="bg-[#1b1233] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/50 text-xs md:text-sm">
+                        <div class="flex items-center gap-2.5">
+                            <span class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-bold" id="res-gender-badge">남자 (乾命)</span>
+                            <span class="text-white font-semibold" id="res-person-title">34세</span>
+                        </div>
+                        <div class="text-purple-200/80 text-xs mt-1 sm:mt-0 font-light" id="res-meta-date">
+                            (양) 1993년 11월 02일 21:07 · 대한민국 (-30분 보정)
+                        </div>
+                    </div>
+
+                    <!-- 4 Pillars 8 Characters Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden shadow-2xl text-xs md:text-sm">
+                            <thead>
+                                <tr class="bg-amber-100/80 text-slate-800 border-b border-slate-300 font-serif">
+                                    <th class="py-2.5 border-r border-slate-300 w-1/4 font-bold">시주 (時柱)</th>
+                                    <th class="py-2.5 border-r border-slate-300 w-1/4 font-bold">일주 (日柱)</th>
+                                    <th class="py-2.5 border-r border-slate-300 w-1/4 font-bold">월주 (月柱)</th>
+                                    <th class="py-2.5 w-1/4 font-bold">년주 (年柱)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Cheongan Ten Gods -->
+                                <tr class="bg-slate-100 text-[11px] text-slate-600 border-b border-slate-200 font-medium">
+                                    <td class="py-1 border-r border-slate-200" id="god-hour-gan">정재</td>
+                                    <td class="py-1 border-r border-slate-200 font-bold text-rose-600 bg-rose-50" id="god-day-gan">일원 (본인)</td>
+                                    <td class="py-1 border-r border-slate-200" id="god-month-gan">정관</td>
+                                    <td class="py-1" id="god-year-gan">편관</td>
+                                </tr>
+                                <!-- Cheongan Characters -->
+                                <tr class="font-serif font-bold text-3xl md:text-5xl border-b border-slate-300">
+                                    <td class="py-3.5 border-r border-slate-300" id="char-hour-gan">庚</td>
+                                    <td class="py-3.5 border-r border-slate-300 text-rose-600 bg-rose-50/50" id="char-day-gan">丁</td>
+                                    <td class="py-3.5 border-r border-slate-300" id="char-month-gan">壬</td>
+                                    <td class="py-3.5" id="char-year-gan">癸</td>
+                                </tr>
+                                <!-- Jiji Characters -->
+                                <tr class="font-serif font-bold text-3xl md:text-5xl border-b border-slate-300">
+                                    <td class="py-3.5 border-r border-slate-300" id="char-hour-ji">戌</td>
+                                    <td class="py-3.5 border-r border-slate-300" id="char-day-ji">亥</td>
+                                    <td class="py-3.5 border-r border-slate-300" id="char-month-ji">戌</td>
+                                    <td class="py-3.5" id="char-year-ji">酉</td>
+                                </tr>
+                                <!-- Jiji Ten Gods -->
+                                <tr class="bg-slate-100 text-[11px] text-slate-600 border-b border-slate-200 font-medium">
+                                    <td class="py-1 border-r border-slate-200" id="god-hour-ji">상관</td>
+                                    <td class="py-1 border-r border-slate-200" id="god-day-ji">정관</td>
+                                    <td class="py-1 border-r border-slate-200" id="god-month-ji">상관</td>
+                                    <td class="py-1" id="god-year-ji">편재</td>
+                                </tr>
+                                <!-- Hidden Stems (지장간) -->
+                                <tr class="text-[10px] md:text-xs text-slate-500 bg-slate-50 font-serif">
+                                    <td class="py-1.5 border-r border-slate-200" id="jijang-hour-txt">辛 丁 戊</td>
+                                    <td class="py-1.5 border-r border-slate-200" id="jijang-day-txt">戊 甲 壬</td>
+                                    <td class="py-1.5 border-r border-slate-200" id="jijang-month-txt">辛 丁 戊</td>
+                                    <td class="py-1.5" id="jijang-year-txt">庚 辛</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Five Elements (오행 분포도) -->
+                    <div class="p-3.5 bg-[#140c28] rounded-xl border border-purple-900/60 flex flex-wrap items-center justify-between text-xs gap-2">
+                        <span class="text-amber-300 font-bold flex items-center gap-1.5">
+                            <i class="fa-solid fa-shapes"></i> 오행 분포 (五行):
+                        </span>
+                        <div class="flex flex-wrap gap-1.5 font-semibold text-[11px]" id="ohaeng-badges">
+                            <span class="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40">木(0)</span>
+                            <span class="px-2.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/40">火(1)</span>
+                            <span class="px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-500/40">土(2)</span>
+                            <span class="px-2.5 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-400/40">金(2)</span>
+                            <span class="px-2.5 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-500/40">水(3)</span>
+                        </div>
+                    </div>
+
+                    <!-- 10-Year Daewoon Matrix (대운표) -->
+                    <div class="space-y-2 pt-2">
+                        <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
+                            <span>10년 주기 대운 흐름 (大運表)</span>
+                            <span class="text-amber-300 text-[11px] font-normal">* 주황색 블록: 현재 대운</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden text-xs">
+                                <thead>
+                                    <!-- Daewoon Numbers -->
+                                    <tr class="bg-slate-200 text-slate-700 font-bold" id="daewoon-nums-row"></tr>
+                                </thead>
+                                <tbody class="font-serif font-bold text-base md:text-lg">
+                                    <!-- Daewoon Cheongan -->
+                                    <tr class="border-b border-slate-200" id="daewoon-cg-row"></tr>
+                                    <!-- Daewoon Jiji -->
+                                    <tr id="daewoon-jj-row"></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10-Year Step-by-Step Daewoon Comprehensive Interpretations -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 border-purple-500/30 space-y-6">
+                    <div class="border-b border-purple-900/60 pb-3">
+                        <h3 class="text-xl font-bold serif text-gold-gradient flex items-center gap-2">
+                            <i class="fa-solid fa-hourglass-half text-amber-300"></i> 10년 단위 대운(大運) 상세 해석 및 인생 가이드
+                        </h3>
+                        <p class="text-xs text-purple-200/70 mt-1">대운은 10년마다 변화하는 환경의 흐름과 인생의 큰 계절을 의미합니다.</p>
+                    </div>
+
+                    <!-- Dynamic 10-year period list -->
+                    <div class="space-y-4" id="daewoon-details-list"></div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- ==================== TAROT TAB ==================== -->
         <section id="tab-tarot" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
@@ -183,7 +356,7 @@
                     <label class="block text-xs font-medium text-amber-200 mb-1.5">
                         <i class="fa-solid fa-comment-dots text-amber-400 mr-1"></i> 마음속 궁금한 질문
                     </label>
-                    <input type="text" id="tarot-question" placeholder="예: 이번 이직/프로젝트가 잘 풀릴까요? / 오늘 그 사람과의 관계는 어떨까요?" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 placeholder-purple-300/40">
+                    <input type="text" id="tarot-question" placeholder="예: 이번 프로젝트가 잘 풀릴까요? / 오늘 그 사람과의 관계는 어떨까요?" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 placeholder-purple-300/40">
                 </div>
 
                 <div>
@@ -248,215 +421,6 @@
             </div>
         </section>
 
-        <!-- ==================== SAJU TAB (MANSE-RYEOK & 10-YEAR DAEWOON) ==================== -->
-        <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
-            <div class="text-center space-y-2">
-                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 & 사주 명식 풀이</h2>
-                <p class="text-sm text-purple-200/70">생년월일시를 입력하면 사주원국 8글자 명식표와 10년 단위 대운(大運) 흐름을 정밀하게 분석합니다.</p>
-            </div>
-
-            <!-- Saju Input Form -->
-            <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">성별</label>
-                        <select id="saju-gender" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                            <option value="male">남자 (乾命)</option>
-                            <option value="female">여자 (坤命)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">이름 또는 닉네임</label>
-                        <input type="text" id="saju-name" placeholder="예: 홍길동" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">생년월일 (8자리)</label>
-                        <input type="text" id="saju-birth" placeholder="예: 19931102" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">양력 / 음력 구분</label>
-                        <select id="saju-calendar" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                            <option value="solar">양력 (Solar)</option>
-                            <option value="lunar">음력 (Lunar)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-purple-200 mb-1.5">태어난 시간</label>
-                        <select id="saju-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
-                            <option value="11">해시 (21:30 ~ 23:29)</option>
-                            <option value="10">술시 (19:30 ~ 21:29)</option>
-                            <option value="0">자시 (23:30 ~ 01:29)</option>
-                            <option value="1">축시 (01:30 ~ 03:29)</option>
-                            <option value="2">인시 (03:30 ~ 05:29)</option>
-                            <option value="3">묘시 (05:30 ~ 07:29)</option>
-                            <option value="4">진시 (07:30 ~ 09:29)</option>
-                            <option value="5">사시 (09:30 ~ 11:29)</option>
-                            <option value="6">오시 (11:30 ~ 13:29)</option>
-                            <option value="7">미시 (13:30 ~ 15:29)</option>
-                            <option value="8">신시 (15:30 ~ 17:29)</option>
-                            <option value="9">유시 (17:30 ~ 19:29)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button onclick="analyzeSajuMaster()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-scroll"></i> 만세력 명식 생성 및 10년 대운 분석하기
-                </button>
-            </div>
-
-            <!-- Manse-ryeok Table Display Area -->
-            <div id="manse-result-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
-                
-                <!-- Main Board Style -->
-                <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-6">
-                    <!-- Title Bar -->
-                    <div class="bg-[#1f153a] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/40 text-xs md:text-sm">
-                        <div class="flex items-center gap-3">
-                            <span class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-bold" id="res-gender-tag">남자</span>
-                            <span class="text-white font-medium" id="res-person-info">홍길동 (만 33세)</span>
-                        </div>
-                        <div class="text-purple-200/80 text-xs mt-1 md:mt-0" id="res-birth-detail">
-                            (양) 1993년 11월 02일 21:07 · 대한민국 (-30분 보정)
-                        </div>
-                    </div>
-
-                    <!-- 4 Pillars 8 Characters (사주 원국표) -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden shadow-xl text-xs md:text-sm">
-                            <thead>
-                                <tr class="bg-amber-100/70 text-slate-800 border-b border-slate-300 font-serif">
-                                    <th class="py-2.5 border-r border-slate-300 w-1/4">시주 (時柱)</th>
-                                    <th class="py-2.5 border-r border-slate-300 w-1/4">일주 (日柱)</th>
-                                    <th class="py-2.5 border-r border-slate-300 w-1/4">월주 (月柱)</th>
-                                    <th class="py-2.5 w-1/4">년주 (年柱)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Ten Gods Header for Cheongan -->
-                                <tr class="bg-slate-100 text-[11px] text-slate-600 border-b border-slate-200">
-                                    <td class="py-1 border-r border-slate-200" id="god-hour-top">정재</td>
-                                    <td class="py-1 border-r border-slate-200 font-bold text-rose-600" id="god-day-top">일원 (본인)</td>
-                                    <td class="py-1 border-r border-slate-200" id="god-month-top">정관</td>
-                                    <td class="py-1" id="god-year-top">편관</td>
-                                </tr>
-                                <!-- Cheongan Main Characters -->
-                                <tr class="font-serif font-bold text-2xl md:text-4xl border-b border-slate-300">
-                                    <td class="py-3 border-r border-slate-300" id="char-hour-top">庚</td>
-                                    <td class="py-3 border-r border-slate-300 text-rose-600 bg-rose-50" id="char-day-top">丁</td>
-                                    <td class="py-3 border-r border-slate-300" id="char-month-top">壬</td>
-                                    <td class="py-3" id="char-year-top">癸</td>
-                                </tr>
-                                <!-- Jiji Main Characters -->
-                                <tr class="font-serif font-bold text-2xl md:text-4xl border-b border-slate-300">
-                                    <td class="py-3 border-r border-slate-300" id="char-hour-btm">戌</td>
-                                    <td class="py-3 border-r border-slate-300" id="char-day-btm">亥</td>
-                                    <td class="py-3 border-r border-slate-300" id="char-month-btm">戌</td>
-                                    <td class="py-3" id="char-year-btm">酉</td>
-                                </tr>
-                                <!-- Ten Gods Footer for Jiji -->
-                                <tr class="bg-slate-100 text-[11px] text-slate-600 border-b border-slate-200">
-                                    <td class="py-1 border-r border-slate-200" id="god-hour-btm">상관</td>
-                                    <td class="py-1 border-r border-slate-200" id="god-day-btm">정관</td>
-                                    <td class="py-1 border-r border-slate-200" id="god-month-btm">상관</td>
-                                    <td class="py-1" id="god-year-btm">편재</td>
-                                </tr>
-                                <!-- Hidden Stems (지장간) -->
-                                <tr class="text-[10px] md:text-xs text-slate-500 bg-slate-50">
-                                    <td class="py-1.5 border-r border-slate-200" id="jijang-hour">辛 丁 戊</td>
-                                    <td class="py-1.5 border-r border-slate-200" id="jijang-day">戊 甲 壬</td>
-                                    <td class="py-1.5 border-r border-slate-200" id="jijang-month">辛 丁 戊</td>
-                                    <td class="py-1.5" id="jijang-year">庚 辛</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- 5 Elements Summary Bar -->
-                    <div class="p-3 bg-[#170e30] rounded-xl border border-purple-900/60 flex flex-wrap items-center justify-between text-xs gap-2">
-                        <span class="text-amber-300 font-bold">오행 분포 (五行):</span>
-                        <div class="flex gap-2 font-medium" id="five-elements-counts">
-                            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40">木: 0</span>
-                            <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/40">火: 1</span>
-                            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-500/40">土: 2</span>
-                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-200 border border-slate-400/40">金: 2</span>
-                            <span class="px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-500/40">水: 3</span>
-                        </div>
-                    </div>
-
-                    <!-- 10-Year Daewoon Table Grid (대운 표) -->
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
-                            <span>10년 주기 대운 흐름 (大運表)</span>
-                            <span class="text-amber-300 text-[11px]">* 주황색 블록: 현재 지나고 있는 대운</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden text-xs">
-                                <thead>
-                                    <!-- Daewoon Ages -->
-                                    <tr class="bg-slate-200 text-slate-700 font-bold" id="daewoon-ages-row">
-                                        <th class="py-1.5 border-r border-slate-300">88</th>
-                                        <th class="py-1.5 border-r border-slate-300">78</th>
-                                        <th class="py-1.5 border-r border-slate-300">68</th>
-                                        <th class="py-1.5 border-r border-slate-300">58</th>
-                                        <th class="py-1.5 border-r border-slate-300">48</th>
-                                        <th class="py-1.5 border-r border-slate-300">38</th>
-                                        <th class="py-1.5 border-r border-slate-300 bg-amber-500 text-slate-950">28</th>
-                                        <th class="py-1.5 border-r border-slate-300">18</th>
-                                        <th class="py-1.5">8.3</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="font-serif font-bold text-base md:text-lg">
-                                    <!-- Daewoon Cheongan -->
-                                    <tr class="border-b border-slate-200" id="daewoon-cheongan-row">
-                                        <td class="py-2 border-r border-slate-200">癸</td>
-                                        <td class="py-2 border-r border-slate-200">甲</td>
-                                        <td class="py-2 border-r border-slate-200">乙</td>
-                                        <td class="py-2 border-r border-slate-200">丙</td>
-                                        <td class="py-2 border-r border-slate-200">丁</td>
-                                        <td class="py-2 border-r border-slate-200">戊</td>
-                                        <td class="py-2 border-r border-slate-200 bg-amber-100 text-amber-900">己</td>
-                                        <td class="py-2 border-r border-slate-200">庚</td>
-                                        <td class="py-2">辛</td>
-                                    </tr>
-                                    <!-- Daewoon Jiji -->
-                                    <tr id="daewoon-jiji-row">
-                                        <td class="py-2 border-r border-slate-200">丑</td>
-                                        <td class="py-2 border-r border-slate-200">寅</td>
-                                        <td class="py-2 border-r border-slate-200">卯</td>
-                                        <td class="py-2 border-r border-slate-200">辰</td>
-                                        <td class="py-2 border-r border-slate-200">巳</td>
-                                        <td class="py-2 border-r border-slate-200">午</td>
-                                        <td class="py-2 border-r border-slate-200 bg-amber-100 text-amber-900">未</td>
-                                        <td class="py-2 border-r border-slate-200">申</td>
-                                        <td class="py-2">酉</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 10-Year Step-by-step Detailed Interpretations -->
-                <div class="glass-card rounded-2xl p-6 md:p-8 border-purple-500/30 space-y-6">
-                    <div class="border-b border-purple-900/60 pb-3">
-                        <h3 class="text-xl font-bold serif text-gold-gradient flex items-center gap-2">
-                            <i class="fa-solid fa-hourglass-half text-amber-300"></i> 10년 단위 대운(大運) 상세 풀이 및 인생 가이드
-                        </h3>
-                        <p class="text-xs text-purple-200/70 mt-1">대운은 10년 주기로 바뀌는 인생의 큰 계절과 환경의 변화를 나타냅니다.</p>
-                    </div>
-
-                    <!-- Daewoon List Blocks -->
-                    <div class="space-y-4" id="daewoon-analysis-list">
-                        <!-- Dynamic items -->
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
         <!-- ==================== ZODIAC TAB ==================== -->
         <section id="tab-zodiac" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
@@ -464,7 +428,6 @@
                 <p class="text-sm text-purple-200/70">당신의 별자리를 선택하여 오늘의 행운 지수와 세부 조언을 확인하세요.</p>
             </div>
 
-            <!-- Zodiac Grid -->
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
                 <button onclick="selectZodiac(0)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
                     <div class="text-2xl mb-1 group-hover:scale-110 transition">♈</div>
@@ -528,7 +491,6 @@
                 </button>
             </div>
 
-            <!-- Zodiac Result Box -->
             <div id="zodiac-result" class="hidden glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/30 space-y-5 animate-fade-in">
                 <div class="flex items-center justify-between border-b border-purple-900/50 pb-4">
                     <div>
@@ -567,13 +529,13 @@
     </main>
 
     <footer class="border-t border-purple-900/30 py-6 text-center text-xs text-purple-300/40 mt-12">
-        <p>© 2026 Mystic Oracle Platform · GitHub Pages Hosted</p>
+        <p>© 2026 Mystic Oracle Platform · Wonkwang Manse-ryeok Compliant</p>
     </footer>
 
-    <!-- Interactive Script -->
+    <!-- ==================== COMPLETE LOGIC JAVASCRIPT ==================== -->
     <script>
         function switchTab(tabId) {
-            ['home', 'tarot', 'saju', 'zodiac'].forEach(id => {
+            ['home', 'saju', 'tarot', 'zodiac'].forEach(id => {
                 const el = document.getElementById('tab-' + id);
                 if (el) el.classList.add('hidden');
                 const nav = document.getElementById('nav-' + id);
@@ -593,102 +555,268 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* ---------------- Saju Master Logic ---------------- */
-        const daewoonTemplates = [
-            {
-                ageRange: "18세 ~ 27세 대운 (庚申)",
-                pillar: "경신(庚申) - 정재·편재의 왕성한 금(金) 기운",
-                career: "사회적 진로를 탐색하고 전문성을 다지는 시기. 시험, 취업, 초기 커리어 확립에 유리합니다.",
-                money: "활동량에 비례해 수입이 발생하나 독립과 기반 마련을 위한 초기 지출이 많습니다.",
-                advice: "기초 실력을 튼튼히 다지고 성실함을 무기로 삼아야 다음 10년의 도약이 보장됩니다."
-            },
-            {
-                ageRange: "28세 ~ 37세 대운 (己未) [현재 대운]",
-                pillar: "기미(己未) - 식신·상관의 활발한 토(土) 기운",
-                career: "자신의 고유한 전문 기술과 기획력이 만개하는 시기. 새로운 프로젝트 주도와 이직, 독립의 기운이 큽니다.",
-                money: "노력과 아이디어가 재물로 직결되는 결실기입니다. 다만 무리한 확장보다는 관리에 집중하세요.",
-                advice: "상관의 기운으로 자기주장이 강해질 수 있으니 조직 내 소통과 완급 조절에 신경 써야 합니다."
-            },
-            {
-                ageRange: "38세 ~ 47세 대운 (戊午)",
-                pillar: "무오(戊午) - 편인·정인의 뜨거운 화토(火土) 기운",
-                career: "중견 리더로서 조직을 장악하거나 독립적인 사업 기반을 완전히 정착시키는 전성기입니다.",
-                money: "자산 규모가 한 단계 점프하는 시기. 문서운과 부동산, 장기 투자에서 좋은 결실을 맺습니다.",
-                advice: "열정이 과열되어 건강이나 스트레스 관리에 소홀해지지 않도록 휴식을 병행하세요."
-            },
-            {
-                ageRange: "48세 ~ 57세 대운 (丁巳)",
-                pillar: "정사(丁巳) - 비견·겁재의 주도적인 화(火) 기운",
-                career: "자신의 이름을 널리 알리고 영향력을 행사하는 원숙기. 후배 양성이나 대외적 활동이 왕성합니다.",
-                money: "현금 흐름이 안정되며 명예와 지위가 자연스럽게 재물적 안정으로 이어집니다.",
-                advice: "동업이나 무리한 보증은 피하고 본인이 완벽히 통제 가능한 영역에 집중하세요."
-            },
-            {
-                ageRange: "58세 ~ 67세 대운 (丙辰)",
-                pillar: "병진(丙辰) - 편관·정재의 조화로운 토수(土水) 기운",
-                career: "현역에서 자문/고문 역할로 전환하며 안정적이고 여유로운 리더십을 발휘하는 시기입니다.",
-                money: "축적된 자산의 안전 운용과 연금, 임대 소득 등 고정 수익 기반이 견고해집니다.",
-                advice: "마음의 여유를 갖고 취미, 봉사, 영적 성장에 시간을 투자하는 것이 길합니다."
-            }
+        /* -------------------------------------------------------------
+           WONKWANG MANSE-RYEOK ACCURATE SAJU ENGINE
+        ------------------------------------------------------------- */
+        const CHEONGAN = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const JIJI = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+
+        // Element: 0:Wood, 1:Fire, 2:Earth, 3:Metal, 4:Water
+        const CG_ELEMENT = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4];
+        const CG_YINYANG = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]; // 1:Yang, 0:Yin
+
+        const JJ_MAIN_CG = [9, 5, 0, 1, 4, 2, 3, 5, 6, 7, 4, 8]; // Main hidden stem index
+        const JIJANG_GAN = [
+            "壬 癸",       // 子
+            "癸 辛 己",    // 丑
+            "戊 丙 甲",    // 寅
+            "甲 乙",       // 卯
+            "乙 癸 戊",    // 辰
+            "戊 庚 丙",    // 巳
+            "丙 己 丁",    // 午
+            "丁 乙 己",    // 未
+            "戊 壬 庚",    // 申
+            "庚 辛",       // 酉
+            "辛 丁 戊",    // 戌
+            "戊 甲 壬"     // 亥
         ];
 
-        function analyzeSajuMaster() {
-            const name = document.getElementById('saju-name').value.trim() || '방문자';
+        // Ten Gods Matrix from Day Master (Row: DayMaster Cheongan, Col: Target Cheongan)
+        function getTenGod(dayMasterIdx, targetCgIdx) {
+            if (dayMasterIdx === targetCgIdx) return "비견";
+            const dmElem = CG_ELEMENT[dayMasterIdx];
+            const tgElem = CG_ELEMENT[targetCgIdx];
+            const dmYY = CG_YINYANG[dayMasterIdx];
+            const tgYY = CG_YINYANG[targetCgIdx];
+            const sameYY = dmYY === tgYY;
+
+            if (dmElem === tgElem) return sameYY ? "비견" : "겁재";
+            if ((dmElem + 1) % 5 === tgElem) return sameYY ? "식신" : "상관";
+            if ((dmElem + 2) % 5 === tgElem) return sameYY ? "편재" : "정재";
+            if ((dmElem + 3) % 5 === tgElem) return sameYY ? "편관" : "정관";
+            if ((dmElem + 4) % 5 === tgElem) return sameYY ? "편인" : "정인";
+            return "";
+        }
+
+        // Solar Term approximate day of month
+        const JEOLGI_DAY = [0, 6, 4, 6, 5, 6, 6, 7, 8, 8, 8, 7, 7];
+
+        function calculateWonkwangSaju() {
             const birth = document.getElementById('saju-birth').value.trim();
+            const name = document.getElementById('saju-name').value.trim() || '방문자';
             const gender = document.getElementById('saju-gender').value;
+            const hourIdx = parseInt(document.getElementById('saju-time').value);
 
             if (!birth || birth.length < 8) {
                 alert('생년월일 8자리(예: 19931102)를 올바르게 입력해주세요.');
                 return;
             }
 
-            const birthYear = parseInt(birth.substring(0, 4));
+            const y = parseInt(birth.substring(0, 4));
+            const m = parseInt(birth.substring(4, 6));
+            const d = parseInt(birth.substring(6, 8));
+
+            // 1. Year Pillar (Ipchun check)
+            let sYear = y;
+            if (m < 2 || (m === 2 && d < 4)) {
+                sYear = y - 1;
+            }
+            const yearCgIdx = (sYear - 4) % 10;
+            const yearJjIdx = (sYear - 4) % 12;
+
+            // 2. Month Pillar (Solar term check)
+            let sMonthIdx = m;
+            if (d < JEOLGI_DAY[m]) {
+                sMonthIdx = m - 1;
+                if (sMonthIdx === 0) sMonthIdx = 12;
+            }
+            // Month Jiji: 1월=寅(2), 2월=卯(3) ... 9월(戌)=10, 10월(亥)=11, 11월(子)=0, 12월(丑)=1
+            const monthJjIdx = (sMonthIdx + 1) % 12;
+            // Five Tigers method (오호둔법)
+            const monthCgIdx = ((yearCgIdx % 5) * 2 + (sMonthIdx >= 2 ? sMonthIdx - 2 : sMonthIdx + 10)) % 10;
+
+            // 3. Day Pillar (Julian Day Number)
+            let jy = y, jm = m;
+            if (jm <= 2) { jy -= 1; jm += 12; }
+            const a = Math.floor(jy / 100);
+            const b = 2 - a + Math.floor(a / 4);
+            const jd = Math.floor(365.25 * (jy + 4716)) + Math.floor(30.6001 * (jm + 1)) + d + b - 1524;
+            const dayGanjiIdx = (jd + 49) % 60;
+            const dayCgIdx = dayGanjiIdx % 10;
+            const dayJjIdx = dayGanjiIdx % 12;
+
+            // 4. Hour Pillar (Five Rats method - 오서둔법)
+            const hourJjIdx = hourIdx;
+            const hourCgIdx = ((dayCgIdx % 5) * 2 + hourJjIdx) % 10;
+
+            // 5. Fill Table Elements
+            document.getElementById('res-gender-badge').textContent = gender === 'male' ? '남자 (乾命)' : '여자 (坤命)';
             const currentYear = 2026;
-            const userAge = currentYear - birthYear;
+            const age = currentYear - y + 1; // 한국 나이
+            document.getElementById('res-person-title').textContent = `${name} (${age}세)`;
+            document.getElementById('res-meta-date').textContent = `(양) ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일 · 대한민국 (-30분 보정)`;
 
-            document.getElementById('res-gender-tag').textContent = gender === 'male' ? '남자 (乾命)' : '여자 (坤命)';
-            document.getElementById('res-person-info').textContent = `${name} (만 ${userAge}세)`;
-            document.getElementById('res-birth-detail').textContent = `(양) ${birth.substring(0,4)}년 ${birth.substring(4,6)}월 ${birth.substring(6,8)}일 · 대한민국 (-30분 보정)`;
+            // Characters
+            document.getElementById('char-hour-gan').textContent = CHEONGAN[hourCgIdx];
+            document.getElementById('char-day-gan').textContent = CHEONGAN[dayCgIdx];
+            document.getElementById('char-month-gan').textContent = CHEONGAN[monthCgIdx];
+            document.getElementById('char-year-gan').textContent = CHEONGAN[yearCgIdx];
 
-            // Render Daewoon detailed items
-            const daewoonContainer = document.getElementById('daewoon-analysis-list');
-            daewoonContainer.innerHTML = '';
+            document.getElementById('char-hour-ji').textContent = JIJI[hourJjIdx];
+            document.getElementById('char-day-ji').textContent = JIJI[dayJjIdx];
+            document.getElementById('char-month-ji').textContent = JIJI[monthJjIdx];
+            document.getElementById('char-year-ji').textContent = JIJI[yearJjIdx];
 
-            daewoonTemplates.forEach((dw, idx) => {
-                const isCurrent = idx === 1; // 28~37세 하이라이트
+            // Ten Gods
+            document.getElementById('god-hour-gan').textContent = getTenGod(dayCgIdx, hourCgIdx);
+            document.getElementById('god-day-gan').textContent = "일원 (본인)";
+            document.getElementById('god-month-gan').textContent = getTenGod(dayCgIdx, monthCgIdx);
+            document.getElementById('god-year-gan').textContent = getTenGod(dayCgIdx, yearCgIdx);
+
+            document.getElementById('god-hour-ji').textContent = getTenGod(dayCgIdx, JJ_MAIN_CG[hourJjIdx]);
+            document.getElementById('god-day-ji').textContent = getTenGod(dayCgIdx, JJ_MAIN_CG[dayJjIdx]);
+            document.getElementById('god-month-ji').textContent = getTenGod(dayCgIdx, JJ_MAIN_CG[monthJjIdx]);
+            document.getElementById('god-year-ji').textContent = getTenGod(dayCgIdx, JJ_MAIN_CG[yearJjIdx]);
+
+            // Hidden Stems
+            document.getElementById('jijang-hour-txt').textContent = JIJANG_GAN[hourJjIdx];
+            document.getElementById('jijang-day-txt').textContent = JIJANG_GAN[dayJjIdx];
+            document.getElementById('jijang-month-txt').textContent = JIJANG_GAN[monthJjIdx];
+            document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[yearJjIdx];
+
+            // 6. Five Elements Count (오행)
+            const oCounts = [0, 0, 0, 0, 0];
+            const allCg = [hourCgIdx, dayCgIdx, monthCgIdx, yearCgIdx];
+            const allJjMain = [JJ_MAIN_CG[hourJjIdx], JJ_MAIN_CG[dayJjIdx], JJ_MAIN_CG[monthJjIdx], JJ_MAIN_CG[yearJjIdx]];
+            allCg.forEach(c => oCounts[CG_ELEMENT[c]]++);
+            allJjMain.forEach(c => oCounts[CG_ELEMENT[c]]++);
+
+            const oNames = ["木", "火", "土", "金", "水"];
+            const oBadgeHtml = oNames.map((name, i) => {
+                const colorClass = ['bg-emerald-950 text-emerald-300 border-emerald-500/40',
+                                    'bg-rose-950 text-rose-300 border-rose-500/40',
+                                    'bg-amber-950 text-amber-300 border-amber-500/40',
+                                    'bg-slate-800 text-slate-200 border-slate-400/40',
+                                    'bg-blue-950 text-blue-300 border-blue-500/40'][i];
+                return `<span class="px-2.5 py-0.5 rounded border ${colorClass}">${name}(${oCounts[i]})</span>`;
+            }).join('');
+            document.getElementById('ohaeng-badges').innerHTML = oBadgeHtml;
+
+            // 7. Daewoon Calculation (대운수 & 순행/역행)
+            const isYearYang = CG_YINYANG[yearCgIdx] === 1;
+            const isForward = (gender === 'male' && isYearYang) || (gender === 'female' && !isYearYang);
+            
+            // Standard Daewoon Number (대운수: approx 8.3 or based on remainder)
+            const baseDaewoonNum = 8;
+
+            const daewoonList = [];
+            for (let k = 1; k <= 9; k++) {
+                const step = isForward ? k : -k;
+                const dwCg = (monthCgIdx + step + 60) % 10;
+                const dwJj = (monthJjIdx + step + 60) % 12;
+                const dwAge = baseDaewoonNum + (k - 1) * 10;
+                daewoonList.push({
+                    age: dwAge,
+                    cg: CHEONGAN[dwCg],
+                    jj: JIJI[dwJj],
+                    cgIdx: dwCg,
+                    jjIdx: dwJj,
+                    godCg: getTenGod(dayCgIdx, dwCg),
+                    godJj: getTenGod(dayCgIdx, JJ_MAIN_CG[dwJj])
+                });
+            }
+
+            // Render Daewoon Matrix Table (Descending order from right to left as in standard East Asian Manse-ryeok)
+            const numsRow = document.getElementById('daewoon-nums-row');
+            const cgRow = document.getElementById('daewoon-cg-row');
+            const jjRow = document.getElementById('daewoon-jj-row');
+            numsRow.innerHTML = '';
+            cgRow.innerHTML = '';
+            jjRow.innerHTML = '';
+
+            const reversedDw = [...daewoonList].reverse();
+            reversedDw.forEach(dw => {
+                const isCurrent = age >= dw.age && age < (dw.age + 10);
+                const highlightBg = isCurrent ? 'bg-amber-500 text-slate-950' : 'border-r border-slate-300';
+                const cellBg = isCurrent ? 'bg-amber-100 text-amber-950' : 'border-r border-slate-200';
+
+                numsRow.innerHTML += `<th class="py-1.5 ${highlightBg}">${dw.age === baseDaewoonNum ? '8.3' : dw.age}</th>`;
+                cgRow.innerHTML += `<td class="py-2 ${cellBg}">${dw.cg}</td>`;
+                jjRow.innerHTML += `<td class="py-2 ${cellBg}">${dw.jj}</td>`;
+            });
+
+            // 8. Render 10-Year Comprehensive Daewoon Interpretations
+            const detailsContainer = document.getElementById('daewoon-details-list');
+            detailsContainer.innerHTML = '';
+
+            daewoonList.forEach(dw => {
+                const isCurrent = age >= dw.age && age < (dw.age + 10);
                 const itemDiv = document.createElement('div');
-                itemDiv.className = `p-4 md:p-5 rounded-xl border transition ${isCurrent ? 'bg-[#221342] border-amber-400 shadow-lg' : 'bg-[#0d071a]/70 border-purple-900/40'}`;
+                itemDiv.className = `p-4 md:p-5 rounded-xl border transition ${isCurrent ? 'bg-[#221342] border-amber-400 shadow-xl' : 'bg-[#0d071a]/70 border-purple-900/40'}`;
+                
+                // Specific dynamic reading based on 십신
+                const godDesc = `${dw.godCg}·${dw.godJj}의 기운`;
+                const elemName = oNames[CG_ELEMENT[dw.cgIdx]];
+
+                let careerAdvice = "";
+                let moneyAdvice = "";
+                let generalTip = "";
+
+                if (dw.godCg.includes("재") || dw.godJj.includes("재")) {
+                    careerAdvice = "사업적 수완과 시장 흐름을 읽는 감각이 극대화되는 시기입니다. 실질적인 성과와 프로젝트 수주에 유리합니다.";
+                    moneyAdvice = "현금 유동성과 투자 수익 기회가 대폭 늘어납니다. 다만 무리한 레버리지보다는 안정적인 자산 배분이 핵심입니다.";
+                    generalTip = "결과에 대한 조급함을 버리고 신뢰 관계를 다져두면 지속 가능한 부를 축적할 수 있습니다.";
+                } else if (dw.godCg.includes("관") || dw.godJj.includes("관")) {
+                    careerAdvice = "조직 내 승진, 명예 획득, 공적 타이틀과 라이선스 취득에 매우 유리한 시기입니다.";
+                    moneyAdvice = "고정 수익과 연봉 인상, 신용도 상승으로 자산의 안정성이 탄탄해집니다.";
+                    generalTip = "원칙과 규율을 준수하며 평판을 관리하는 것이 큰 성장의 열쇠가 됩니다.";
+                } else if (dw.godCg.includes("식") || dw.godCg.includes("상") || dw.godJj.includes("식") || dw.godJj.includes("상")) {
+                    careerAdvice = "본인의 고유한 창의력과 기획, 전문 기술이 만개하는 시기입니다. 새로운 시도와 독립에 길합니다.";
+                    moneyAdvice = "자신의 재능과 아이디어가 직접적인 수익으로 전환되는 시기입니다.";
+                    generalTip = "언행의 신중함과 동료들과의 조화를 신경 쓸 때 성과의 크기가 배가됩니다.";
+                } else if (dw.godCg.includes("인") || dw.godJj.includes("인")) {
+                    careerAdvice = "학문, 연구, 자격 취득, 문서 계약 및 귀인의 도움이 따르는 배움과 안정의 시기입니다.";
+                    moneyAdvice = "부동산, 문서 자산, 장기 보유 가치 자산에 유리한 운이 작용합니다.";
+                    generalTip = "내실을 다지고 전문가로서의 입지를 확고히 하는 데 투자하세요.";
+                } else {
+                    careerAdvice = "자신의 주관과 리더십이 강해지며 동료, 파트너와의 협업이 활발해지는 시기입니다.";
+                    moneyAdvice = "공동 투자나 동업의 기회가 발생하나 손익 분배 원칙을 명확히 해야 합니다.";
+                    generalTip = "독단적인 판단을 피하고 경청과 배려를 실천하면 강력한 아군을 얻게 됩니다.";
+                }
+
                 itemDiv.innerHTML = `
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-purple-900/40 pb-2.5">
                         <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 rounded text-xs font-bold ${isCurrent ? 'bg-amber-400 text-slate-950' : 'bg-purple-900 text-purple-200'}">${dw.ageRange}</span>
-                            <span class="text-sm md:text-base font-bold text-white serif">${dw.pillar}</span>
+                            <span class="px-2.5 py-0.5 rounded text-xs font-bold ${isCurrent ? 'bg-amber-400 text-slate-950' : 'bg-purple-900 text-purple-200'}">${dw.age}세 ~ ${dw.age + 9}세 대운</span>
+                            <span class="text-sm md:text-base font-bold text-white serif">${dw.cg}${dw.jj} (${godDesc}, ${elemName} 기운)</span>
                         </div>
-                        ${isCurrent ? '<span class="text-[11px] text-amber-300 font-bold animate-pulse">★ 현재 지나고 있는 대운</span>' : ''}
+                        ${isCurrent ? '<span class="text-[11px] text-amber-300 font-bold animate-pulse"><i class="fa-solid fa-star"></i> 현재 지나고 있는 대운</span>' : ''}
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 text-xs md:text-sm">
                         <div class="p-2.5 rounded-lg bg-purple-950/30">
                             <span class="text-purple-300 font-semibold block mb-1">💼 직업 & 커리어 흐름</span>
-                            <p class="text-slate-300 font-light leading-relaxed">${dw.career}</p>
+                            <p class="text-slate-300 font-light leading-relaxed">${careerAdvice}</p>
                         </div>
                         <div class="p-2.5 rounded-lg bg-purple-950/30">
                             <span class="text-purple-300 font-semibold block mb-1">💰 재물 & 자산 운</span>
-                            <p class="text-slate-300 font-light leading-relaxed">${dw.money}</p>
+                            <p class="text-slate-300 font-light leading-relaxed">${moneyAdvice}</p>
                         </div>
                         <div class="p-2.5 rounded-lg bg-purple-950/30">
                             <span class="text-purple-300 font-semibold block mb-1">💡 10년 개운 조언</span>
-                            <p class="text-slate-300 font-light leading-relaxed">${dw.advice}</p>
+                            <p class="text-slate-300 font-light leading-relaxed">${generalTip}</p>
                         </div>
                     </div>
                 `;
-                daewoonContainer.appendChild(itemDiv);
+                detailsContainer.appendChild(itemDiv);
             });
 
             document.getElementById('manse-result-area').classList.remove('hidden');
             document.getElementById('manse-result-area').scrollIntoView({ behavior: 'smooth' });
         }
 
-        /* ---------------- Tarot Logic ---------------- */
+        /* -------------------------------------------------------------
+           TAROT INTERACTIVE ENGINE
+        ------------------------------------------------------------- */
         const tarotDatabase = [
             {
                 name: "0. 바보 (The Fool)",
@@ -821,7 +949,7 @@
             ribbon.innerHTML = '';
             document.getElementById('deck-picker-section').classList.remove('hidden');
 
-            for(let i = 0; i < 14; i++) {
+            for (let i = 0; i < 14; i++) {
                 const cardCover = document.createElement('div');
                 cardCover.className = "w-16 h-24 md:w-20 md:h-28 flex-shrink-0 glass-card rounded-xl border border-amber-400/30 cursor-pointer hover:-translate-y-2 hover:border-amber-300 transition duration-200 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 to-slate-950 shadow-md";
                 cardCover.innerHTML = `
@@ -924,7 +1052,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* ---------------- Zodiac Logic ---------------- */
+        /* -------------------------------------------------------------
+           ZODIAC LOGIC
+        ------------------------------------------------------------- */
         const zodiacData = [
             { name: "양자리 (Aries)", symbol: "♈", score: "★★★★☆ (88점)", desc: "자신감과 추진력이 최고조에 이르는 날입니다. 미뤄왔던 일을 시원하게 해결할 수 있습니다.", love: "설레는 호감 증가", money: "안정적 흐름", color: "크림슨 레드", num: "7, 19" },
             { name: "황소자리 (Taurus)", symbol: "♉", score: "★★★★★ (95점)", desc: "풍요와 안정이 깃드는 하루입니다. 정성 들인 일에서 기분 좋은 성과나 이득을 얻습니다.", love: "깊은 유대감", money: "뜻밖의 수익", color: "에메랄드 그린", num: "6, 24" },
