@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel's Message - 정통 만세력 사주 · 성명학 · 타로 · 궁합</title>
+    <title>미스틱 오라클 - 정통 만세력 사주명리 · 타로 · 궁합</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -85,24 +85,21 @@
     <header class="border-b border-purple-900/40 bg-[#0a0516]/85 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-                <i class="fa-solid fa-feather-pointed text-amber-300 text-2xl animate-pulse"></i>
-                <span class="text-xl font-bold tracking-wider serif text-gold-gradient">Gabriel's Message</span>
+                <i class="fa-solid fa-moon-stars text-amber-300 text-2xl animate-pulse"></i>
+                <span class="text-xl font-bold tracking-wider serif text-gold-gradient">MYSTIC ORACLE</span>
             </div>
-            <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto pb-1 sm:pb-0">
+            <nav class="flex space-x-1 sm:space-x-2.5 overflow-x-auto">
                 <button onclick="switchTab('saju')" id="nav-saju" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-yin-yang text-xs"></i> <span>만세력 & 대운</span>
-                </button>
-                <button onclick="switchTab('name')" id="nav-name" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-signature text-xs"></i> <span>성명학 이름풀이</span>
                 </button>
                 <button onclick="switchTab('tarot')" id="nav-tarot" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> <span>심층 타로</span>
                 </button>
-                <button onclick="switchTab('gunghap')" id="nav-gunghap" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-heart-pulse text-xs"></i> <span>궁합 & 그룹 분석</span>
-                </button>
                 <button onclick="switchTab('zodiac')" id="nav-zodiac" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-sparkles text-xs"></i> <span>별자리 운세</span>
+                </button>
+                <button onclick="switchTab('gunghap')" id="nav-gunghap" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-heart-pulse text-xs"></i> <span>궁합 & 그룹 분석</span>
                 </button>
             </nav>
         </div>
@@ -115,17 +112,17 @@
         <section id="tab-home" class="space-y-12 animate-fade-in">
             <div class="text-center space-y-4 max-w-2xl mx-auto pt-4">
                 <span class="px-3.5 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/25 rounded-full inline-block font-semibold">
-                    Destiny & Wisdom Platform
+                    Wonkwang Manse-ryeok & Group Compatibility Engine
                 </span>
                 <h1 class="text-3xl md:text-5xl font-bold serif leading-tight">
-                    당신의 길을 밝히는<br><span class="text-gold-gradient">Gabriel's Message</span>
+                    정통 명리학 기반<br><span class="text-gold-gradient">사주 · 타로 · 궁합 플랫폼</span>
                 </h1>
                 <p class="text-purple-200/80 text-sm md:text-base leading-relaxed">
-                    원광만세력 사주팔자, 81수리·발음오행 성명학 이름풀이, 심층 3카드 타로, 5인 그룹 궁합 및 별자리 운세를 한곳에서 경험해 보세요.
+                    생년월일시에 따른 정밀 만세력 사주원국 및 대운·연운·월운 풀이, 3카드 타로 리딩, 1:1 맞춤 및 최대 5명 그룹 궁합 시너지 분석을 제공합니다.
                 </p>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-4">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
                 <div onclick="switchTab('saju')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-amber-950/40 flex items-center justify-center mb-3 border border-amber-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-yin-yang text-amber-300 text-lg"></i>
@@ -134,31 +131,7 @@
                         만세력 & 대운 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
                     </h3>
                     <p class="text-xs text-purple-200/70 leading-relaxed">
-                        원광만세력 기준 4주 8자 명식, 십신, 오행, 절기 맞춤 대운수, 연운, 월운 완벽 분석
-                    </p>
-                </div>
-
-                <div onclick="switchTab('name')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
-                    <div class="w-11 h-11 rounded-xl bg-emerald-950/40 flex items-center justify-center mb-3 border border-emerald-500/30 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-signature text-emerald-300 text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-1.5 text-white serif flex items-center justify-between">
-                        성명학 이름풀이 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
-                    </h3>
-                    <p class="text-xs text-purple-200/70 leading-relaxed">
-                        한글 한자 자동변환 옥편 연동, 81수리 4격(초년·청년·중년·총운), 발음오행, 음양조화 감정
-                    </p>
-                </div>
-
-                <div onclick="switchTab('gunghap')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-rose-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
-                    <div class="w-11 h-11 rounded-xl bg-rose-950/40 flex items-center justify-center mb-3 border border-rose-500/30 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-heart-pulse text-rose-300 text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-1.5 text-white serif flex items-center justify-between">
-                        궁합 & 그룹 분석 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
-                    </h3>
-                    <p class="text-xs text-purple-200/70 leading-relaxed">
-                        주인공 vs 최대 5명 개별 궁합 및 팀/가족 집단 전체의 오행 케미스트리 종합 리딩
+                        원광만세력 기준 사주팔자 4주 8자, 십신, 오행, 대운수, 연운, 월운 완벽 분석
                     </p>
                 </div>
 
@@ -167,7 +140,7 @@
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-lg"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-1.5 text-white serif flex items-center justify-between">
-                        심층 타로 리딩 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
+                        심층 타로 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
                     </h3>
                     <p class="text-xs text-purple-200/70 leading-relaxed">
                         질문 입력 후 가로 덱에서 1장 또는 3장(과거·현재·미래) 카드를 직접 뽑는 실시간 해석
@@ -185,117 +158,18 @@
                         12개 황도대 별자리가 전하는 오늘의 총운 점수와 애정, 재물, 행운의 컬러 및 숫자
                     </p>
                 </div>
-            </div>
-        </section>
 
-        <!-- ==================== NAME (성명학 이름풀이) TAB ==================== -->
-        <section id="tab-name" class="hidden space-y-8 animate-fade-in">
-            <div class="text-center space-y-2">
-                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 수리 성명학 이름풀이</h2>
-                <p class="text-sm text-purple-200/70">한글 이름을 입력하면 한자가 자동 검색·변환되며, 81수리 4격(초년·청년·중년·말년), 발음오행, 음양조화를 정밀 감정합니다.</p>
-            </div>
-
-            <!-- Input & Hanja Converter Form -->
-            <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
-                <div>
-                    <label class="block text-xs font-medium text-amber-200 mb-1.5">한글 성명 입력</label>
-                    <div class="flex gap-2">
-                        <input type="text" id="name-kor-input" placeholder="예: 홍길동 / 김민준" value="" class="flex-grow bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" oninput="onHangulNameChange()">
-                        <button type="button" onclick="onHangulNameChange()" class="px-4 py-2.5 rounded-xl bg-purple-900/60 border border-purple-400/40 text-xs font-semibold text-amber-300 hover:bg-purple-800 transition whitespace-nowrap">
-                            <i class="fa-solid fa-language"></i> 한자 자동 변환
-                        </button>
+                <div onclick="switchTab('gunghap')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-rose-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
+                    <div class="w-11 h-11 rounded-xl bg-rose-950/40 flex items-center justify-center mb-3 border border-rose-500/30 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-heart-pulse text-rose-300 text-lg"></i>
                     </div>
+                    <h3 class="text-lg font-bold mb-1.5 text-white serif flex items-center justify-between">
+                        궁합 & 그룹 분석 <i class="fa-solid fa-arrow-right text-xs text-purple-400 group-hover:translate-x-1 transition"></i>
+                    </h3>
+                    <p class="text-xs text-purple-200/70 leading-relaxed">
+                        주인공 vs 최대 5명 개별 궁합 및 팀/가족 집단 전체의 오행 케미스트리 종합 리딩
+                    </p>
                 </div>
-
-                <!-- Dynamic Hanja Selector Columns -->
-                <div id="hanja-selector-area" class="space-y-3 pt-2">
-                    <span class="text-xs text-purple-300 font-semibold block">각 글자별 한자 선택 (원획수 및 자원오행 매핑)</span>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="hanja-cols-container">
-                        <div class="text-xs text-purple-300/50 col-span-3 text-center py-4 bg-[#120a24]/50 rounded-xl border border-purple-900/40">
-                            한글 이름을 입력하시면 한자 선택 목록이 여기에 나타납니다.
-                        </div>
-                    </div>
-                </div>
-
-                <button onclick="analyzeNameSeongmyeong()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 hover:from-emerald-400 hover:to-amber-300 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-award"></i> 성명학 정밀 감정 및 길흉 풀이 보기
-                </button>
-            </div>
-
-            <!-- Name Reading Results Area -->
-            <div id="name-results-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
-                
-                <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 bg-[#0c081c] space-y-6">
-                    <div class="border-b border-purple-900/60 pb-4 text-center">
-                        <span class="text-xs text-amber-300 font-semibold uppercase tracking-widest">Name Fortune Analysis Certificate</span>
-                        <h3 class="text-2xl font-bold serif text-gold-gradient mt-1" id="res-name-title">洪 吉 洞 (홍길동)</h3>
-                        <p class="text-xs text-purple-200/70 mt-1" id="res-name-subtitle">총 획수: 20획 · 음양 배합: 양 음 양 (조화로움)</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs">
-                        <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40">
-                            <span class="text-purple-300 block mb-1">81수리 총운 점수</span>
-                            <strong class="text-xl text-amber-300 block" id="res-score-81">92점 (대길)</strong>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40">
-                            <span class="text-purple-300 block mb-1">발음오행 소리 흐름</span>
-                            <strong class="text-sm text-emerald-300 block mt-1" id="res-sound-flow">土 ➔ 木 ➔ 火 (상생)</strong>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40">
-                            <span class="text-purple-300 block mb-1">음양(陰陽) 조화도</span>
-                            <strong class="text-sm text-rose-300 block mt-1" id="res-yinyang-eval">음양 완벽 배합</strong>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 pt-2">
-                        <span class="text-xs font-semibold text-purple-200 block">수리성명학 4격(四格) 인생 단계별 길흉</span>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                            
-                            <div class="p-3.5 rounded-xl bg-[#140b28] border border-purple-900/40 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <strong class="text-amber-300 font-semibold">초년운 (원격 元格: 1~20세)</strong>
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-900 text-amber-200" id="res-won-badge">-</span>
-                                </div>
-                                <div class="text-[11px] text-purple-300/80 font-serif" id="res-won-math">이름 합산: -획</div>
-                                <p class="text-slate-300 font-light leading-relaxed pt-1" id="res-won-desc">-</p>
-                            </div>
-
-                            <div class="p-3.5 rounded-xl bg-[#140b28] border border-purple-900/40 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <strong class="text-amber-300 font-semibold">청년/중년운 (형격 亨格: 20~40세)</strong>
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-900 text-amber-200" id="res-hyeong-badge">-</span>
-                                </div>
-                                <div class="text-[11px] text-purple-300/80 font-serif" id="res-hyeong-math">성+이름상: -획</div>
-                                <p class="text-slate-300 font-light leading-relaxed pt-1" id="res-hyeong-desc">-</p>
-                            </div>
-
-                            <div class="p-3.5 rounded-xl bg-[#140b28] border border-purple-900/40 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <strong class="text-amber-300 font-semibold">장년/환경운 (이격 利格: 40~55세)</strong>
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-900 text-amber-200" id="res-lee-badge">-</span>
-                                </div>
-                                <div class="text-[11px] text-purple-300/80 font-serif" id="res-lee-math">성+이름하: -획</div>
-                                <p class="text-slate-300 font-light leading-relaxed pt-1" id="res-lee-desc">-</p>
-                            </div>
-
-                            <div class="p-3.5 rounded-xl bg-[#140b28] border border-purple-900/40 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <strong class="text-amber-300 font-semibold">말년/총운 (정격 貞格: 55세 이후)</strong>
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-900 text-amber-200" id="res-jeong-badge">-</span>
-                                </div>
-                                <div class="text-[11px] text-purple-300/80 font-serif" id="res-jeong-math">총합: -획</div>
-                                <p class="text-slate-300 font-light leading-relaxed pt-1" id="res-jeong-desc">-</p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/60 to-emerald-950/40 border border-emerald-500/30 text-xs md:text-sm text-slate-200 leading-relaxed font-light space-y-2">
-                        <strong class="text-emerald-300 block text-sm"><i class="fa-solid fa-scroll mr-1.5"></i> 성명학 총평 및 이름 조화도</strong>
-                        <p id="res-total-verdict">-</p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -362,8 +236,10 @@
             <!-- Manse-ryeok Result Workspace -->
             <div id="manse-result-area" class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in">
                 
+                <!-- 1. Authentic Manse-ryeok Table Frame -->
                 <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-5">
                     
+                    <!-- Header Bar -->
                     <div class="bg-[#1b1233] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/50 text-xs md:text-sm">
                         <div class="flex items-center gap-2.5">
                             <span class="px-2.5 py-1 rounded bg-amber-400 text-slate-950 font-bold" id="res-gender-badge">남자 (乾命)</span>
@@ -375,6 +251,7 @@
                         </div>
                     </div>
 
+                    <!-- 4 Pillars 8 Characters Table -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden shadow-2xl text-xs md:text-sm">
                             <thead>
@@ -420,6 +297,7 @@
                         </table>
                     </div>
 
+                    <!-- Five Elements -->
                     <div class="p-3.5 bg-[#140c28] rounded-xl border border-purple-900/60 flex flex-wrap items-center justify-between text-xs gap-2">
                         <span class="text-amber-300 font-bold flex items-center gap-1.5">
                             <i class="fa-solid fa-shapes"></i> 오행 분포 (五行):
@@ -427,6 +305,7 @@
                         <div class="flex flex-wrap gap-1.5 font-semibold text-[11px]" id="ohaeng-badges"></div>
                     </div>
 
+                    <!-- 10-Year Daewoon Table -->
                     <div class="space-y-2 pt-2">
                         <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
                             <span>10년 주기 대운 흐름 (大運表)</span>
@@ -445,6 +324,7 @@
                         </div>
                     </div>
 
+                    <!-- 10-Year Seun -->
                     <div class="space-y-2 pt-3">
                         <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
                             <span>연운 흐름 (歲運表 - 10개년)</span>
@@ -463,6 +343,7 @@
                         </div>
                     </div>
 
+                    <!-- 12-Month Monthly Matrix -->
                     <div class="space-y-2 pt-3">
                         <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
                             <span>2026년 12개월 월운 흐름 (月運表)</span>
@@ -483,6 +364,7 @@
 
                 </div>
 
+                <!-- 2. Detailed Reading Sections -->
                 <div class="space-y-6">
                     <div class="glass-card rounded-2xl p-6 md:p-8 border-purple-500/30 space-y-5">
                         <div class="border-b border-purple-900/60 pb-3">
@@ -595,131 +477,6 @@
             </div>
         </section>
 
-        <!-- ==================== GUNGHAP TAB ==================== -->
-        <section id="tab-gunghap" class="hidden space-y-8 animate-fade-in">
-            <div class="text-center space-y-2">
-                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">인연 궁합 & 그룹 시너지 분석</h2>
-                <p class="text-sm text-purple-200/70">주인공의 사주를 기준으로 최대 5명까지 대상을 추가하여 1:1 심층 궁합과 집단 전체의 오행 조화를 분석합니다.</p>
-            </div>
-
-            <!-- Setup Form -->
-            <div class="glass-card max-w-3xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-6">
-                
-                <!-- Main Subject (주인공) -->
-                <div class="p-4 rounded-xl bg-[#140b2a] border border-amber-400/40 space-y-3">
-                    <div class="flex items-center justify-between border-b border-purple-900/60 pb-2">
-                        <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
-                            <i class="fa-solid fa-crown text-amber-400"></i> 기준 사주 (주인공)
-                        </span>
-                        <span class="text-[11px] text-purple-300/80">궁합 분석의 중심 인물</span>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
-                        <div>
-                            <label class="block text-purple-300 mb-1">호칭 / 이름</label>
-                            <input type="text" id="gh-main-name" placeholder="예: 나 / 주인공" value="" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-400">
-                        </div>
-                        <div>
-                            <label class="block text-purple-300 mb-1">생년월일 (8자리)</label>
-                            <input type="text" id="gh-main-birth" placeholder="예: 19880808" value="19880808" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-400">
-                        </div>
-                        <div>
-                            <label class="block text-purple-300 mb-1">양/음력</label>
-                            <select id="gh-main-cal" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-amber-400">
-                                <option value="solar" selected>양력</option>
-                                <option value="lunar">음력</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-purple-300 mb-1">태어난 시간</label>
-                            <select id="gh-main-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-amber-400">
-                                <option value="0" selected>자시 (23:30~01:29)</option>
-                                <option value="1">축시 (01:30~03:29)</option>
-                                <option value="2">인시 (03:30~05:29)</option>
-                                <option value="3">묘시 (05:30~07:29)</option>
-                                <option value="4">진시 (07:30~09:29)</option>
-                                <option value="5">사시 (09:30~11:29)</option>
-                                <option value="6">오시 (11:30~13:29)</option>
-                                <option value="7">미시 (13:30~15:29)</option>
-                                <option value="8">신시 (15:30~17:29)</option>
-                                <option value="9">유시 (17:30~19:29)</option>
-                                <option value="10">술시 (19:30~21:29)</option>
-                                <option value="11">해시 (21:30~23:29)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional Members Container -->
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-purple-200">
-                            궁합 분석 대상 멤버 (<span id="member-count-label">1</span>/5명)
-                        </span>
-                        <button type="button" onclick="addGunghapMember()" id="btn-add-member" class="px-3 py-1 rounded-lg bg-purple-900/60 border border-purple-400/40 text-xs font-medium text-amber-300 hover:bg-purple-800 transition flex items-center gap-1">
-                            <i class="fa-solid fa-plus text-xs"></i> 멤버 추가 (최대 5명)
-                        </button>
-                    </div>
-                    <div id="members-form-list" class="space-y-3"></div>
-                </div>
-
-                <button onclick="runGunghapAnalysis()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-500 via-amber-500 to-amber-400 hover:from-rose-400 hover:to-amber-300 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-rose-950/40 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-people-arrows"></i> 주인공과의 1:1 궁합 및 그룹 시너지 종합 분석
-                </button>
-            </div>
-
-            <!-- Gunghap Results Workspace -->
-            <div id="gunghap-results-area" class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in">
-                <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 space-y-6">
-                    <div class="border-b border-purple-900/60 pb-4 text-center">
-                        <span class="text-xs text-amber-300 uppercase tracking-widest font-semibold">Group Chemistry & Harmony</span>
-                        <h3 class="text-2xl font-bold serif text-gold-gradient mt-1">집단 전체 오행 밸런스 & 팀 시너지 분석</h3>
-                        <p class="text-xs text-purple-200/70 mt-1">주인공을 포함한 전체 구성원들이 형성하는 집단 에너지 조화도입니다.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
-                            <span class="text-xs text-purple-300 block mb-1">그룹 종합 케미 점수</span>
-                            <div class="text-2xl font-bold text-amber-400" id="group-score-num">88점</div>
-                            <span class="text-[11px] text-emerald-300 font-light" id="group-score-eval">최상급 상생 시너지</span>
-                        </div>
-                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
-                            <span class="text-xs text-purple-300 block mb-1">최고의 환상 콤비 조합</span>
-                            <div class="text-base font-bold text-white mt-1" id="group-best-duo">-</div>
-                            <span class="text-[11px] text-amber-300/80 font-light">천간합·지지합 상생</span>
-                        </div>
-                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
-                            <span class="text-xs text-purple-300 block mb-1">주의 및 완충 필요 조합</span>
-                            <div class="text-base font-bold text-white mt-1" id="group-caution-duo">-</div>
-                            <span class="text-[11px] text-rose-300/80 font-light">역할 분담과 소통 권장</span>
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-[#120a24] border border-purple-900/50 space-y-2">
-                        <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
-                            <span>집단 전체 오행(五行) 에너지 분포도</span>
-                            <span class="text-amber-300 text-[11px]" id="group-dominant-elem">주요 기운: -</span>
-                        </div>
-                        <div class="grid grid-cols-5 gap-2 text-center text-xs font-medium pt-1" id="group-ohaeng-grid"></div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/60 to-slate-900/60 border border-amber-400/30 text-xs md:text-sm text-slate-200 leading-relaxed font-light space-y-2">
-                        <strong class="text-amber-300 block text-sm"><i class="fa-solid fa-users-gear text-amber-400 mr-1.5"></i> 팀 / 그룹 조화 및 리더십 가이드</strong>
-                        <p id="group-guide-text">...</p>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between px-2">
-                        <h3 class="text-lg font-bold serif text-white flex items-center gap-2">
-                            <i class="fa-solid fa-user-group text-rose-400"></i> 주인공과의 1:1 개별 심층 궁합 풀이
-                        </h3>
-                        <span class="text-xs text-purple-300">일간합충 · 일지육합/삼합 · 오행보완도 분석</span>
-                    </div>
-                    <div id="individual-matches-container" class="space-y-4"></div>
-                </div>
-            </div>
-        </section>
-
         <!-- ==================== ZODIAC TAB ==================== -->
         <section id="tab-zodiac" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
@@ -825,16 +582,153 @@
             </div>
         </section>
 
+        <!-- ==================== GUNGHAP TAB (NEW COMPATIBILITY & GROUP ENGINE) ==================== -->
+        <section id="tab-gunghap" class="hidden space-y-8 animate-fade-in">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">인연 궁합 & 그룹 시너지 분석</h2>
+                <p class="text-sm text-purple-200/70">주인공의 사주를 기준으로 최대 5명까지 대상을 추가하여 1:1 심층 궁합과 집단 전체의 오행 조화를 분석합니다.</p>
+            </div>
+
+            <!-- Setup Form -->
+            <div class="glass-card max-w-3xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-6">
+                
+                <!-- Main Subject (주인공) -->
+                <div class="p-4 rounded-xl bg-[#140b2a] border border-amber-400/40 space-y-3">
+                    <div class="flex items-center justify-between border-b border-purple-900/60 pb-2">
+                        <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-crown text-amber-400"></i> 기준 사주 (주인공)
+                        </span>
+                        <span class="text-[11px] text-purple-300/80">궁합 분석의 중심 인물</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                        <div>
+                            <label class="block text-purple-300 mb-1">호칭 / 이름</label>
+                            <input type="text" id="gh-main-name" placeholder="예: 나 / 주인공" value="" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-purple-300 mb-1">생년월일 (8자리)</label>
+                            <input type="text" id="gh-main-birth" placeholder="예: 19880808" value="19880808" maxlength="8" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-purple-300 mb-1">양/음력</label>
+                            <select id="gh-main-cal" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-amber-400">
+                                <option value="solar" selected>양력</option>
+                                <option value="lunar">음력</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-purple-300 mb-1">태어난 시간</label>
+                            <select id="gh-main-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-amber-400">
+                                <option value="0" selected>자시 (23:30~01:29)</option>
+                                <option value="1">축시 (01:30~03:29)</option>
+                                <option value="2">인시 (03:30~05:29)</option>
+                                <option value="3">묘시 (05:30~07:29)</option>
+                                <option value="4">진시 (07:30~09:29)</option>
+                                <option value="5">사시 (09:30~11:29)</option>
+                                <option value="6">오시 (11:30~13:29)</option>
+                                <option value="7">미시 (13:30~15:29)</option>
+                                <option value="8">신시 (15:30~17:29)</option>
+                                <option value="9">유시 (17:30~19:29)</option>
+                                <option value="10">술시 (19:30~21:29)</option>
+                                <option value="11">해시 (21:30~23:29)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Members Container (up to 5) -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold text-purple-200">
+                            궁합 분석 대상 멤버 (<span id="member-count-label">1</span>/5명)
+                        </span>
+                        <button type="button" onclick="addGunghapMember()" id="btn-add-member" class="px-3 py-1 rounded-lg bg-purple-900/60 border border-purple-400/40 text-xs font-medium text-amber-300 hover:bg-purple-800 transition flex items-center gap-1">
+                            <i class="fa-solid fa-plus text-xs"></i> 멤버 추가 (최대 5명)
+                        </button>
+                    </div>
+                    <div id="members-form-list" class="space-y-3">
+                        <!-- Dynamic member rows inserted by JS -->
+                    </div>
+                </div>
+
+                <button onclick="runGunghapAnalysis()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-500 via-amber-500 to-amber-400 hover:from-rose-400 hover:to-amber-300 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-rose-950/40 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-people-arrows"></i> 주인공과의 1:1 궁합 및 그룹 시너지 종합 분석
+                </button>
+            </div>
+
+            <!-- Gunghap Results Workspace -->
+            <div id="gunghap-results-area" class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in">
+                
+                <!-- 1. Group Synergy Overview (집단 종합 궁합) -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 space-y-6">
+                    <div class="border-b border-purple-900/60 pb-4 text-center">
+                        <span class="text-xs text-amber-300 uppercase tracking-widest font-semibold">Group Chemistry & Harmony</span>
+                        <h3 class="text-2xl font-bold serif text-gold-gradient mt-1">집단 전체 오행 밸런스 & 팀 시너지 분석</h3>
+                        <p class="text-xs text-purple-200/70 mt-1">주인공을 포함한 전체 구성원들이 형성하는 집단 에너지 조화도입니다.</p>
+                    </div>
+
+                    <!-- Group Score & Stats -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
+                            <span class="text-xs text-purple-300 block mb-1">그룹 종합 케미 점수</span>
+                            <div class="text-2xl font-bold text-amber-400" id="group-score-num">88점</div>
+                            <span class="text-[11px] text-emerald-300 font-light" id="group-score-eval">최상급 상생 시너지</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
+                            <span class="text-xs text-purple-300 block mb-1">최고의 환상 콤비 조합</span>
+                            <div class="text-base font-bold text-white mt-1" id="group-best-duo">-</div>
+                            <span class="text-[11px] text-amber-300/80 font-light">천간합·지지합 상생</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
+                            <span class="text-xs text-purple-300 block mb-1">주의 및 완충 필요 조합</span>
+                            <div class="text-base font-bold text-white mt-1" id="group-caution-duo">-</div>
+                            <span class="text-[11px] text-rose-300/80 font-light">역할 분담과 소통 권장</span>
+                        </div>
+                    </div>
+
+                    <!-- Group 5 Elements Balance Chart -->
+                    <div class="p-4 rounded-xl bg-[#120a24] border border-purple-900/50 space-y-2">
+                        <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
+                            <span>집단 전체 오행(五行) 에너지 분포도</span>
+                            <span class="text-amber-300 text-[11px]" id="group-dominant-elem">주요 기운: -</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2 text-center text-xs font-medium pt-1" id="group-ohaeng-grid"></div>
+                    </div>
+
+                    <!-- Group Leadership & Operation Guide -->
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/60 to-slate-900/60 border border-amber-400/30 text-xs md:text-sm text-slate-200 leading-relaxed font-light space-y-2">
+                        <strong class="text-amber-300 block text-sm"><i class="fa-solid fa-users-gear text-amber-400 mr-1.5"></i> 팀 / 그룹 조화 및 리더십 가이드</strong>
+                        <p id="group-guide-text">...</p>
+                    </div>
+                </div>
+
+                <!-- 2. Individual 1:1 Match Reports with Main Subject -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between px-2">
+                        <h3 class="text-lg font-bold serif text-white flex items-center gap-2">
+                            <i class="fa-solid fa-user-group text-rose-400"></i> 주인공과의 1:1 개별 심층 궁합 풀이
+                        </h3>
+                        <span class="text-xs text-purple-300">일간합충 · 일지육합/삼합 · 오행보완도 분석</span>
+                    </div>
+
+                    <div id="individual-matches-container" class="space-y-4">
+                        <!-- Dynamic Match Cards -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <footer class="border-t border-purple-900/30 py-6 text-center text-xs text-purple-300/40 mt-12">
-        <p>© 2026 Gabriel's Message · Wonkwang Manse-ryeok & Seongmyeong-hak Compliant</p>
+        <p>© 2026 Mystic Oracle Platform · Wonkwang Manse-ryeok Compliant</p>
     </footer>
 
-    <!-- ==================== JAVASCRIPT ENGINE ==================== -->
+    <!-- ==================== COMPLETE LOGIC ENGINE ==================== -->
     <script>
         function switchTab(tabId) {
-            ['home', 'saju', 'name', 'tarot', 'gunghap', 'zodiac'].forEach(id => {
+            ['home', 'saju', 'tarot', 'zodiac', 'gunghap'].forEach(id => {
                 const el = document.getElementById('tab-' + id);
                 if (el) el.classList.add('hidden');
                 const nav = document.getElementById('nav-' + id);
@@ -852,309 +746,6 @@
                 activeNav.classList.remove('text-purple-200');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        /* -------------------------------------------------------------
-           HANJA DICTIONARY FOR SEONGMYEONG-HAK (자원오행 & 원획수 DB)
-        ------------------------------------------------------------- */
-        const HANJA_DB = {
-            "김": [{ h: "金", s: 8, m: "쇠/성 김", o: "金" }],
-            "이": [{ h: "李", s: 7, m: "오얏 리", o: "木" }],
-            "박": [{ h: "朴", s: 6, m: "순박할 박", o: "木" }],
-            "최": [{ h: "崔", s: 11, m: "높을 최", o: "土" }],
-            "정": [
-                { h: "鄭", s: 19, m: "나라 정", o: "火" },
-                { h: "丁", s: 2, m: "넷째천간 정", o: "火" },
-                { h: "正", s: 5, m: "바를 정", o: "金" },
-                { h: "廷", s: 7, m: "조정 정", o: "土" },
-                { h: "庭", s: 10, m: "뜰 정", o: "土" },
-                { h: "貞", s: 9, m: "곧을 정", o: "金" }
-            ],
-            "강": [
-                { h: "姜", s: 9, m: "성씨 강", o: "木" },
-                { h: "康", s: 11, m: "편안할 강", o: "木" },
-                { h: "剛", s: 10, m: "굳셀 강", o: "金" },
-                { h: "江", s: 7, m: "강 강", o: "水" }
-            ],
-            "조": [
-                { h: "趙", s: 14, m: "나라 조", o: "火" },
-                { h: "曺", s: 10, m: "마을 조", o: "火" },
-                { h: "照", s: 13, m: "비칠 조", o: "火" },
-                { h: "祚", s: 10, m: "복 조", o: "木" }
-            ],
-            "윤": [
-                { h: "尹", s: 4, m: "다스릴 윤", o: "土" },
-                { h: "潤", s: 16, m: "윤택할 윤", o: "水" },
-                { h: "胤", s: 11, m: "자손 윤", o: "木" }
-            ],
-            "장": [
-                { h: "張", s: 11, m: "베풀 장", o: "火" },
-                { h: "章", s: 11, m: "글월 장", o: "火" },
-                { h: "壯", s: 7, m: "장할 장", o: "金" }
-            ],
-            "임": [
-                { h: "林", s: 8, m: "수풀 림", o: "木" },
-                { h: "任", s: 6, m: "맡길 임", o: "木" },
-                { h: "壬", s: 4, m: "아홉째천간 임", o: "水" }
-            ],
-            "한": [
-                { h: "韓", s: 17, m: "나라 한", o: "木" },
-                { h: "漢", s: 15, m: "한수 한", o: "水" },
-                { h: "翰", s: 16, m: "붓 한", o: "木" }
-            ],
-            "오": [
-                { h: "吳", s: 7, m: "나라 오", o: "木" },
-                { h: "悟", s: 11, m: "깨달을 오", o: "木" }
-            ],
-            "신": [
-                { h: "申", s: 5, m: "펼 신", o: "金" },
-                { h: "辛", s: 7, m: "매울 신", o: "金" },
-                { h: "愼", s: 14, m: "삼갈 신", o: "金" },
-                { h: "信", s: 9, m: "믿을 신", o: "金" },
-                { h: "晨", s: 11, m: "새벽 신", o: "火" }
-            ],
-            "서": [
-                { h: "徐", s: 10, m: "천천히할 서", o: "金" },
-                { h: "瑞", s: 14, m: "상서로울 서", o: "金" },
-                { h: "書", s: 10, m: "글 서", o: "木" },
-                { h: "序", s: 7, m: "차례 서", o: "金" },
-                { h: "舒", s: 12, m: "펼 서", o: "金" }
-            ],
-            "홍": [
-                { h: "洪", s: 10, m: "넓을 홍", o: "水" },
-                { h: "弘", s: 5, m: "넓힐 홍", o: "木" },
-                { h: "鴻", s: 17, m: "큰기러기 홍", o: "水" },
-                { h: "紅", s: 9, m: "붉을 홍", o: "火" }
-            ],
-            "길": [
-                { h: "吉", s: 6, m: "길할 길", o: "木" },
-                { h: "佶", s: 8, m: "바르고건장할 길", o: "木" }
-            ],
-            "동": [
-                { h: "東", s: 8, m: "동녘 동", o: "木" },
-                { h: "棟", s: 12, m: "용마루 동", o: "木" },
-                { h: "洞", s: 10, m: "골 동", o: "水" },
-                { h: "童", s: 12, m: "아이 동", o: "水" }
-            ],
-            "민": [
-                { h: "旼", s: 8, m: "화할 민", o: "火" },
-                { h: "玟", s: 9, m: "옥돌 민", o: "金" },
-                { h: "敏", s: 11, m: "민첩할 민", o: "金" },
-                { h: "旻", s: 8, m: "하늘 민", o: "火" },
-                { h: "民", s: 5, m: "백성 민", o: "水" }
-            ],
-            "준": [
-                { h: "俊", s: 9, m: "준걸 준", o: "火" },
-                { h: "準", s: 14, m: "기준 준", o: "水" },
-                { h: "浚", s: 11, m: "깊을 준", o: "水" },
-                { h: "畯", s: 12, m: "농부 준", o: "土" }
-            ],
-            "연": [
-                { h: "然", s: 12, m: "그럴 연", o: "火" },
-                { h: "延", s: 7, m: "끌 연", o: "土" },
-                { h: "娟", s: 10, m: "예쁠 연", o: "木" },
-                { h: "淵", s: 12, m: "못 연", o: "水" }
-            ],
-            "우": [
-                { h: "宇", s: 6, m: "집 우", o: "土" },
-                { h: "佑", s: 7, m: "도울 우", o: "土" },
-                { h: "雨", s: 8, m: "비 우", o: "水" },
-                { h: "友", s: 4, m: "벗 우", o: "土" },
-                { h: "優", s: 17, m: "넉넉할 우", o: "土" }
-            ],
-            "진": [
-                { h: "眞", s: 10, m: "참 진", o: "金" },
-                { h: "鎭", s: 18, m: "진정할 진", o: "金" },
-                { h: "珍", s: 10, m: "보배 진", o: "金" },
-                { h: "振", s: 11, m: "떨칠 진", o: "木" }
-            ],
-            "현": [
-                { h: "炫", s: 9, m: "빛날 현", o: "火" },
-                { h: "賢", s: 15, m: "어질 현", o: "木" },
-                { h: "絃", s: 11, m: "악기줄 현", o: "木" },
-                { h: "顯", s: 23, m: "나타날 현", o: "火" }
-            ],
-            "하": [
-                { h: "夏", s: 10, m: "여름 하", o: "火" },
-                { h: "河", s: 9, m: "물 하", o: "水" },
-                { h: "荷", s: 13, m: "연꽃 하", o: "木" }
-            ],
-            "은": [
-                { h: "恩", s: 10, m: "은혜 은", o: "土" },
-                { h: "銀", s: 14, m: "은 은", o: "金" },
-                { h: "慇", s: 14, m: "괴로워할 은", o: "土" }
-            ]
-        };
-
-        const SURI_81 = {
-            1: { luck: "대길", title: "태초격(太初格)", desc: "천지가 개벽하고 만물이 소생하는 길수. 부귀영화와 건강을 누립니다." },
-            2: { luck: "흉", title: "분리격(分離格)", desc: "고립과 분리의 기운. 인내와 협력이 필요합니다." },
-            3: { luck: "대길", title: "발전격(發展格)", desc: "음양의 조화로 번영과 성공을 이루며 지혜가 뛰어납니다." },
-            5: { luck: "대길", title: "복덕격(福德格)", desc: "부귀쌍전하고 만사가 순조로우며 주변의 신망을 얻습니다." },
-            6: { luck: "대길", title: "계승격(繼承格)", desc: "선대의 덕을 이어받아 부귀와 번영을 누립니다." },
-            7: { luck: "길", title: "독립격(獨立格)", desc: "의지가 강하고 자립심이 강해 자수성가합니다." },
-            8: { luck: "길", title: "발달격(發達格)", desc: "성실함과 끈기로 꾸준히 자산을 축적하고 인정받습니다." },
-            11: { luck: "대길", title: "신성격(新成格)", desc: "봄풀이 싹을 틔우듯 번영의 기운이 솟구치는 길수입니다." },
-            13: { luck: "대길", title: "총명격(聰明格)", desc: "두뇌가 명석하고 재주가 출중하여 명성을 떨칩니다." },
-            15: { luck: "대길", title: "통솔격(統率格)", desc: "덕망과 리더십을 갖추어 만인의 존경과 재물을 얻습니다." },
-            16: { luck: "대길", title: "덕망격(德望格)", desc: "온후한 성품으로 귀인의 도움을 받아 대성합니다." },
-            17: { luck: "길", title: "건창격(健暢格)", desc: "강한 신념과 돌파력으로 모든 난관을 극복합니다." },
-            18: { luck: "길", title: "발전격(發展格)", desc: "포부가 원대하고 지모가 뛰어나 성공의 길을 걷습니다." },
-            21: { luck: "대길", title: "두령격(頭領格)", desc: "지도자의 자질을 갖추어 조직의 수장이 되는 최고 길수." },
-            23: { luck: "대길", title: "공명격(功名格)", desc: "태양이 중천에 뜬 듯 권세와 명예를 한 손에 쥡니다." },
-            24: { luck: "대길", title: "입신격(立身格)", desc: "자수성가하여 큰 재물을 모으고 가문을 번창시킵니다." },
-            25: { luck: "길", title: "안전격(安全格)", desc: "지혜와 재주로 안정을 굳건히 다져나갑니다." },
-            31: { luck: "대길", title: "융창격(隆昌格)", desc: "지혜와 인덕으로 명예와 번영을 한 몸에 누립니다." },
-            32: { luck: "대길", title: "순풍격(順風格)", desc: "뜻밖의 행운과 귀인의 조력으로 승승장구합니다." },
-            33: { luck: "대길", title: "왕성격(旺盛格)", desc: "재능과 명예가 만개하여 큰 업적을 남깁니다." },
-            35: { luck: "대길", title: "태평격(泰平格)", desc: "학예와 문예에 뛰어나 평안하고 풍요로운 삶을 누립니다." },
-            37: { luck: "대길", title: "유덕격(有德格)", desc: "충의와 신의가 깊어 만인의 신뢰를 받습니다." },
-            38: { luck: "길", title: "문예격(文藝格)", desc: "예술과 문학적 재능이 빛나며 전문 분야에서 성공합니다." },
-            41: { luck: "대길", title: "고명격(高名格)", desc: "덕망이 높아 만인의 사표가 되며 부귀를 누립니다." }
-        };
-
-        function getHangulInitialConsonant(ch) {
-            const code = ch.charCodeAt(0) - 0xAC00;
-            if (code < 0 || code > 11171) return "";
-            const initialList = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
-            return initialList[Math.floor(code / 588)];
-        }
-
-        function getPronounceOhaeng(hangulChar) {
-            const ini = getHangulInitialConsonant(hangulChar);
-            if (["ㄱ","ㅋ"].includes(ini)) return "木";
-            if (["ㄴ","ㄷ","ㄹ","ㅌ"].includes(ini)) return "火";
-            if (["ㅇ","ㅎ"].includes(ini)) return "土";
-            if (["ㅅ","ㅈ","ㅊ"].includes(ini)) return "金";
-            if (["ㅁ","ㅂ","ㅍ"].includes(ini)) return "水";
-            return "土";
-        }
-
-        function onHangulNameChange() {
-            const kor = document.getElementById('name-kor-input').value.trim();
-            const container = document.getElementById('hanja-cols-container');
-            container.innerHTML = '';
-
-            if (!kor) {
-                container.innerHTML = `
-                    <div class="text-xs text-purple-300/50 col-span-3 text-center py-4 bg-[#120a24]/50 rounded-xl border border-purple-900/40">
-                        한글 이름을 입력하시면 한자 선택 목록이 여기에 나타납니다.
-                    </div>
-                `;
-                return;
-            }
-
-            const chars = kor.split('');
-            chars.forEach((c, idx) => {
-                const col = document.createElement('div');
-                col.className = "p-3 rounded-xl bg-[#120a24] border border-purple-800/50 space-y-1.5";
-                
-                const candidates = HANJA_DB[c] || [
-                    { h: c, s: 8 + (idx * 2), m: "인명자", o: "木" },
-                    { h: c + "(異)", s: 10 + idx, m: "음운 매핑", o: "金" }
-                ];
-
-                let optionsHtml = candidates.map((cand, cIdx) => 
-                    `<option value="${cand.h}|${cand.s}|${cand.m}|${cand.o}">${cand.h} (${cand.m}, ${cand.s}획 / ${cand.o})</option>`
-                ).join('');
-
-                col.innerHTML = `
-                    <div class="flex items-center justify-between text-xs font-semibold text-amber-300">
-                        <span>${idx === 0 ? '성씨 (姓)' : (idx === 1 ? '이름 상자 (上)' : '이름 하자 (下)')} [${c}]</span>
-                        <span class="text-[11px] text-purple-300">발음: ${getPronounceOhaeng(c)}</span>
-                    </div>
-                    <select id="hanja-select-${idx}" class="w-full bg-[#0a0516] border border-purple-700/60 rounded-lg px-2.5 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
-                        ${optionsHtml}
-                    </select>
-                `;
-                container.appendChild(col);
-            });
-        }
-
-        function analyzeNameSeongmyeong() {
-            const kor = document.getElementById('name-kor-input').value.trim();
-            if (!kor) {
-                alert("한글 이름을 입력해주세요.");
-                return;
-            }
-
-            const chars = kor.split('');
-            const selectedHanja = [];
-
-            for (let i = 0; i < chars.length; i++) {
-                const sel = document.getElementById(`hanja-select-${i}`);
-                if (sel) {
-                    const parts = sel.value.split('|');
-                    selectedHanja.push({
-                        charKor: chars[i],
-                        hanja: parts[0],
-                        strokes: parseInt(parts[1]),
-                        meaning: parts[2],
-                        ohaeng: parts[3]
-                    });
-                }
-            }
-
-            if (selectedHanja.length < 2) {
-                alert("성명학 분석을 위해 최소 2자(외자 성명 또는 일반 성명)를 입력해주세요.");
-                return;
-            }
-
-            const s1 = selectedHanja[0].strokes;
-            const s2 = selectedHanja[1].strokes;
-            const s3 = selectedHanja.length >= 3 ? selectedHanja[2].strokes : 0;
-
-            const wonStrokes = s3 > 0 ? (s2 + s3) : (s2 + 1);
-            const hyeongStrokes = s1 + s2;
-            const leeStrokes = s3 > 0 ? (s1 + s3) : (s1 + 1);
-            const jeongStrokes = s1 + s2 + s3;
-
-            function getSuriInfo(num) {
-                const baseNum = (num % 81 === 0) ? 81 : (num % 81);
-                return SURI_81[baseNum] || { luck: "길", title: "순성격(順成格)", desc: "순조로운 발전과 안정을 도모하는 원만한 수리입니다." };
-            }
-
-            const wonInfo = getSuriInfo(wonStrokes);
-            const hyeongInfo = getSuriInfo(hyeongStrokes);
-            const leeInfo = getSuriInfo(leeStrokes);
-            const jeongInfo = getSuriInfo(jeongStrokes);
-
-            const yinyangArr = selectedHanja.map(h => (h.strokes % 2 === 1 ? "양(陽)" : "음(陰)"));
-            const isAllSame = yinyangArr.every(v => v === yinyangArr[0]);
-            const yinyangEval = isAllSame ? "순음/순양으로 불균형 (음양 보완 필요)" : "음양이 고르게 배합되어 매우 길함";
-
-            const soundFlow = chars.map(c => getPronounceOhaeng(c)).join(" ➔ ");
-
-            document.getElementById('res-name-title').textContent = `${selectedHanja.map(h => h.hanja).join(' ')} (${kor})`;
-            document.getElementById('res-name-subtitle').textContent = `총 획수: ${jeongStrokes}획 · 음양 배합: ${yinyangArr.join(' ')} (${isAllSame ? '편중' : '조화'})`;
-
-            document.getElementById('res-score-81').textContent = `${jeongInfo.luck === '대길' ? '95점 (대길)' : (jeongInfo.luck === '길' ? '85점 (길)' : '75점 (보통)')}`;
-            document.getElementById('res-sound-flow').textContent = soundFlow;
-            document.getElementById('res-yinyang-eval').textContent = yinyangEval;
-
-            document.getElementById('res-won-badge').textContent = `${wonInfo.luck} (${wonStrokes}획)`;
-            document.getElementById('res-won-math').textContent = `이름 획수 합: ${wonStrokes}획 [${wonInfo.title}]`;
-            document.getElementById('res-won-desc').textContent = wonInfo.desc;
-
-            document.getElementById('res-hyeong-badge').textContent = `${hyeongInfo.luck} (${hyeongStrokes}획)`;
-            document.getElementById('res-hyeong-math').textContent = `성씨 + 이름상 획수 합: ${hyeongStrokes}획 [${hyeongInfo.title}]`;
-            document.getElementById('res-hyeong-desc').textContent = hyeongInfo.desc;
-
-            document.getElementById('res-lee-badge').textContent = `${leeInfo.luck} (${leeStrokes}획)`;
-            document.getElementById('res-lee-math').textContent = `성씨 + 이름하 획수 합: ${leeStrokes}획 [${leeInfo.title}]`;
-            document.getElementById('res-lee-desc').textContent = leeInfo.desc;
-
-            document.getElementById('res-jeong-badge').textContent = `${jeongInfo.luck} (${jeongStrokes}획)`;
-            document.getElementById('res-jeong-math').textContent = `성명 전체 총획수: ${jeongStrokes}획 [${jeongInfo.title}]`;
-            document.getElementById('res-jeong-desc').textContent = jeongInfo.desc;
-
-            document.getElementById('res-total-verdict').innerHTML = `
-                이름 <strong>${kor}</strong>는 81수리 총운에서 <strong>[${jeongInfo.title} - ${jeongInfo.luck}]</strong>을 형성하여, ${jeongInfo.desc} 
-                발음 소리 또한 <strong>[${soundFlow}]</strong>으로 흘러 대인관계와 사회적 처세에 원만한 에너지를 부여하고 있습니다.
-            `;
-
-            document.getElementById('name-results-area').classList.remove('hidden');
-            document.getElementById('name-results-area').scrollIntoView({ behavior: 'smooth' });
         }
 
         /* -------------------------------------------------------------
@@ -1361,6 +952,7 @@
             }).join('');
             document.getElementById('ohaeng-badges').innerHTML = oBadgeHtml;
 
+            // Daewoon calc
             const isYearYang = CG_YINYANG[s.yearCg] === 1;
             const isForward = (gender === 'male' && isYearYang) || (gender === 'female' && !isYearYang);
             
@@ -1406,6 +998,7 @@
                 jjRow.innerHTML += `<td class="py-2 ${cellBg}">${dw.jj}</td>`;
             });
 
+            // Daewoon text descriptions
             const detailsContainer = document.getElementById('daewoon-details-list');
             detailsContainer.innerHTML = '';
             daewoonList.forEach(dw => {
@@ -1563,7 +1156,7 @@
         }
 
         /* -------------------------------------------------------------
-           GUNGHAP & GROUP ANALYSIS ENGINE
+           GUNGHAP & GROUP ANALYSIS ENGINE (NEW)
         ------------------------------------------------------------- */
         let memberCount = 0;
 
@@ -1642,10 +1235,13 @@
             document.getElementById('member-count-label').textContent = memberCount;
         }
 
+        // Initialize 1 default member row on load
         window.addEventListener('DOMContentLoaded', () => {
             addGunghapMember("", "", "solar", "0");
         });
 
+        // Harmony & Clash Tables
+        // Cheongan Hap (천간합: 甲己, 乙庚, 丙辛, 丁壬, 戊癸)
         function isCgHap(cg1, cg2) {
             return (cg1 === 0 && cg2 === 5) || (cg1 === 5 && cg2 === 0) ||
                    (cg1 === 1 && cg2 === 6) || (cg1 === 6 && cg2 === 1) ||
@@ -1653,7 +1249,7 @@
                    (cg1 === 3 && cg2 === 8) || (cg1 === 8 && cg2 === 3) ||
                    (cg1 === 4 && cg2 === 9) || (cg1 === 9 && cg2 === 4);
         }
-
+        // Jiji Yukhap (지지육합: 子丑, 寅亥, 卯戌, 辰酉, 巳申, 午未)
         function isJjYukhap(j1, j2) {
             return (j1 === 0 && j2 === 1) || (j1 === 1 && j2 === 0) ||
                    (j1 === 2 && j2 === 11) || (j1 === 11 && j2 === 2) ||
@@ -1662,20 +1258,22 @@
                    (j1 === 5 && j2 === 8) || (j1 === 8 && j2 === 5) ||
                    (j1 === 6 && j2 === 7) || (j1 === 7 && j2 === 6);
         }
-
+        // Jiji Samhap (지지삼합: 申子辰, 巳酉丑, 寅午戌, 亥卯未)
         function isJjSamhap(j1, j2) {
             const pairs = [[8,0],[0,4],[8,4],[5,9],[9,1],[5,1],[2,6],[6,10],[2,10],[11,3],[3,7],[11,7]];
             return pairs.some(p => (p[0]===j1 && p[1]===j2) || (p[0]===j2 && p[1]===j1));
         }
-
+        // Jiji Chung (지지충: 子午, 丑未, 寅申, 卯酉, 辰戌, 巳亥)
         function isJjChung(j1, j2) {
             return Math.abs(j1 - j2) === 6;
         }
 
         function calculatePairMatch(p1, p2) {
-            let score = 75;
+            let score = 75; // base score
             let chemistryTags = [];
+            let advice = "";
 
+            // 1. DayMaster (일간) Compatibility
             if (isCgHap(p1.dayCg, p2.dayCg)) {
                 score += 15;
                 chemistryTags.push("천간 육합(天干合) - 강한 정신적 끌림");
@@ -1690,6 +1288,7 @@
                 chemistryTags.push("천간 상충(相沖) - 의견 대립 주의");
             }
 
+            // 2. Day Branch (일지) Compatibility
             if (isJjYukhap(p1.dayJj, p2.dayJj)) {
                 score += 12;
                 chemistryTags.push("일지 육합(六合) - 탄탄한 현실적 유대감");
@@ -1701,6 +1300,7 @@
                 chemistryTags.push("일지 상충(相沖) - 생활 습관/가치관 차이");
             }
 
+            // 3. Ohaeng Complementarity (부족한 오행 보완)
             let complementCount = 0;
             for (let i = 0; i < 5; i++) {
                 if (p1.oCounts[i] === 0 && p2.oCounts[i] >= 2) complementCount++;
@@ -1736,6 +1336,7 @@
             const mainSaju = calculateSajuCore(mainBirth, mainCal, mainTime);
             mainSaju.name = mainName;
 
+            // Collect Members
             const memberElements = document.getElementById('members-form-list').children;
             const members = [];
 
@@ -1760,17 +1361,20 @@
                 return;
             }
 
+            // 1. Calculate Individual Matches with Main
             const matches = members.map(m => {
                 const res = calculatePairMatch(mainSaju, m);
                 return { member: m, result: res };
             });
 
+            // Render Individual Match Cards
             const indContainer = document.getElementById('individual-matches-container');
             indContainer.innerHTML = '';
 
             matches.forEach((mObj, idx) => {
                 const m = mObj.member;
                 const r = mObj.result;
+                const oNames = ["木", "火", "土", "金", "水"];
 
                 const card = document.createElement('div');
                 card.className = "glass-card p-5 rounded-2xl border-purple-800/40 space-y-4";
@@ -1792,10 +1396,12 @@
                         </div>
                     </div>
 
+                    <!-- Chemistry Badges -->
                     <div class="flex flex-wrap gap-1.5">
                         ${r.chemistryTags.map(t => `<span class="px-2.5 py-0.5 rounded-full bg-purple-950/60 text-amber-200 border border-purple-500/30 text-[11px] font-medium">${t}</span>`).join('')}
                     </div>
 
+                    <!-- Detail Explanation -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                         <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-900/30 space-y-1">
                             <strong class="text-amber-300 block">✨ 시너지 핵심 포인트</strong>
@@ -1814,12 +1420,14 @@
                 indContainer.appendChild(card);
             });
 
+            // 2. Group Synergy Calculation
             const allMembers = [mainSaju, ...members];
             const groupOhaeng = [0, 0, 0, 0, 0];
             allMembers.forEach(person => {
                 for (let i = 0; i < 5; i++) groupOhaeng[i] += person.oCounts[i];
             });
 
+            // Find Best & Worst Duo in Group
             let bestScore = -1, bestPair = "";
             let worstScore = 999, worstPair = "";
             let totalPairScore = 0, pairCount = 0;
@@ -1846,6 +1454,7 @@
             document.getElementById('group-best-duo').textContent = bestPair || "-";
             document.getElementById('group-caution-duo').textContent = (worstScore < 75) ? worstPair : "특별한 불화 요소 없음 (양호)";
 
+            // Render Group Ohaeng Grid
             const oNames = ["木 (추진·성장)", "火 (열정·확장)", "土 (중재·신뢰)", "金 (결단·원칙)", "水 (지혜·유연)"];
             const oColors = ['bg-emerald-950/60 text-emerald-300 border-emerald-500/40',
                              'bg-rose-950/60 text-rose-300 border-rose-500/40',
@@ -1871,6 +1480,7 @@
                 ohaengContainer.appendChild(box);
             });
 
+            // Group Advice Text
             document.getElementById('group-guide-text').innerHTML = `
                 전체 구성원 ${allMembers.length}명의 에너지를 종합하면 <strong>[${oNames[maxElemIdx]}]</strong>의 에너지가 팀의 핵심 원동력으로 작용하고 있습니다. 
                 ${bestPair ? `팀 내에서는 <strong>${bestPair}</strong> 조합이 프로젝트의 선봉에서 활력을 불어넣기에 가장 적합하며, ` : ''}
