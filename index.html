@@ -444,6 +444,7 @@
                     <div>
                         <label class="block text-xs font-medium text-purple-200 mb-1.5">태어난 시간 (한국시 기준)</label>
                         <select id="saju-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="-1">시간 모름 (三柱 분석)</option>
                             <option value="0" selected>자시 (23:30 ~ 01:29)</option>
                             <option value="1">축시 (01:30 ~ 03:29)</option>
                             <option value="2">인시 (03:30 ~ 05:29)</option>
@@ -504,7 +505,7 @@
                                 </tr>
                                 <tr class="font-serif font-bold text-3xl md:text-5xl border-b border-slate-300">
                                     <td class="py-3.5 border-r border-slate-300" id="char-hour-ji">戌</td>
-                                    <td class="py-3.5 border-r border-slate-300" id="char-day-ji">亥</td>
+                                    <td class="py-3.5 border-r border-slate-300 text-rose-600 bg-rose-50/50" id="char-day-ji">亥</td>
                                     <td class="py-3.5 border-r border-slate-300" id="char-month-ji">戌</td>
                                     <td class="py-3.5" id="char-year-ji">酉</td>
                                 </tr>
@@ -734,6 +735,7 @@
                         <div>
                             <label class="block text-purple-300 mb-1">태어난 시간</label>
                             <select id="gh-main-time" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-amber-400">
+                                <option value="-1">시간 모름 (三柱)</option>
                                 <option value="0" selected>자시 (23:30~01:29)</option>
                                 <option value="1">축시 (01:30~03:29)</option>
                                 <option value="2">인시 (03:30~05:29)</option>
@@ -1465,7 +1467,7 @@
                 { h: "慈", s: 14, m: "사랑할 자", o: "火" }
             ],
             "재": [
-                { h: "在", s: 6, m: "있을 재", o: "土" },
+                { h: "재", s: 6, m: "있을 재", o: "土" },
                 { h: "載", s: 13, m: "실을 재", o: "金" },
                 { h: "宰", s: 10, m: "재상 재", o: "金" },
                 { h: "栽", s: 10, m: "심을 재", o: "木" }
@@ -1812,7 +1814,7 @@
         }
 
         /* -------------------------------------------------------------
-           SAJU DATA & FUNCTIONS
+           SAJU DATA & CORRECTED MANSE-RYEOK ENGINE
         ------------------------------------------------------------- */
         const LUNAR_INFO = [
             0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
@@ -1889,6 +1891,7 @@
         ];
 
         function getTenGod(dayMasterIdx, targetCgIdx) {
+            if (targetCgIdx === -1 || targetCgIdx === undefined) return "-";
             if (dayMasterIdx === targetCgIdx) return "비견";
             const dmElem = CG_ELEMENT[dayMasterIdx];
             const tgElem = CG_ELEMENT[targetCgIdx];
@@ -1904,6 +1907,7 @@
             return "";
         }
 
+        // 절기 시작일 기준 (입춘, 경칩, 청명, 입하, 망종, 소서, 입추, 백로, 한로, 입동, 대설, 소한)
         const JEOLGI_DAY = [0, 6, 4, 6, 5, 6, 6, 7, 8, 8, 8, 7, 7];
 
         function calculateSajuCore(birthStr, calType, hourIdx) {
@@ -1918,19 +1922,24 @@
                 y = converted.year; m = converted.month; d = converted.day;
             }
 
+            // 입춘(2월 4일경) 기준 년주(年柱) 산출
             let sYear = y;
             if (m < 2 || (m === 2 && d < 4)) sYear = y - 1;
             const yearCg = (sYear - 4) % 10;
             const yearJj = (sYear - 4) % 12;
 
-            let sMonthIdx = m;
+            // 절기 기준 월 산출 (0=寅월(1월 절기:입춘), 1=卯월, ..., 11=丑월)
+            let sMonthIdx = m - 2;
             if (d < JEOLGI_DAY[m]) {
-                sMonthIdx = m - 1;
-                if (sMonthIdx === 0) sMonthIdx = 12;
+                sMonthIdx = m - 3;
             }
-            const monthJj = (sMonthIdx + 1) % 12;
-            const monthCg = ((yearCg % 5) * 2 + (sMonthIdx >= 2 ? sMonthIdx - 2 : sMonthIdx + 10)) % 10;
+            if (sMonthIdx < 0) sMonthIdx += 12;
 
+            // 정통 월주 산출 (년두법: 甲己년=丙寅, 乙庚년=戊寅, 丙辛년=庚寅, 丁壬년=壬寅, 戊癸년=甲寅)
+            const monthJj = (sMonthIdx + 2) % 12;
+            const monthCg = ((yearCg % 5) * 2 + 2 + sMonthIdx) % 10;
+
+            // 일주(日柱) 산출 (율리우스 적일 공식)
             let jy = y, jm = m;
             if (jm <= 2) { jy -= 1; jm += 12; }
             const a = Math.floor(jy / 100);
@@ -1940,17 +1949,27 @@
             const dayCg = dayGanjiIdx % 10;
             const dayJj = dayGanjiIdx % 12;
 
-            const hourJj = hourIdx;
-            const hourCg = ((dayCg % 5) * 2 + hourJj) % 10;
+            // 시주(時柱) 산출 (시두법: hourIdx = -1인 경우 미상)
+            let hourJj = -1;
+            let hourCg = -1;
+            if (hourIdx !== -1 && hourIdx !== undefined && !isNaN(hourIdx)) {
+                hourJj = hourIdx;
+                hourCg = ((dayCg % 5) * 2 + hourJj) % 10;
+            }
 
+            // 오행 분포 카운트
             const oCounts = [0, 0, 0, 0, 0];
-            [hourCg, dayCg, monthCg, yearCg].forEach(c => oCounts[CG_ELEMENT[c]]++);
-            [JJ_MAIN_CG[hourJj], JJ_MAIN_CG[dayJj], JJ_MAIN_CG[monthJj], JJ_MAIN_CG[yearJj]].forEach(c => oCounts[CG_ELEMENT[c]]++);
+            [dayCg, monthCg, yearCg].forEach(c => oCounts[CG_ELEMENT[c]]++);
+            [JJ_MAIN_CG[dayJj], JJ_MAIN_CG[monthJj], JJ_MAIN_CG[yearJj]].forEach(c => oCounts[CG_ELEMENT[c]]++);
+            if (hourCg !== -1) {
+                oCounts[CG_ELEMENT[hourCg]]++;
+                oCounts[CG_ELEMENT[JJ_MAIN_CG[hourJj]]]++;
+            }
 
             return {
                 solarYear: y, solarMonth: m, solarDay: d,
                 yearCg, yearJj, monthCg, monthJj, dayCg, dayJj, hourCg, hourJj,
-                oCounts
+                sMonthIdx, oCounts
             };
         }
 
@@ -1976,27 +1995,37 @@
             document.getElementById('res-person-title').textContent = `${name} (${age}세)`;
             document.getElementById('res-meta-date').textContent = `(양) ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일 · 대한민국 (-30분 보정)`;
 
-            document.getElementById('char-hour-gan').textContent = CHEONGAN[s.hourCg];
+            // 4주 테이블 렌더링
+            if (s.hourCg !== -1) {
+                document.getElementById('char-hour-gan').textContent = CHEONGAN[s.hourCg];
+                document.getElementById('char-hour-ji').textContent = JIJI[s.hourJj];
+                document.getElementById('god-hour-gan').textContent = getTenGod(s.dayCg, s.hourCg);
+                document.getElementById('god-hour-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.hourJj]);
+                document.getElementById('jijang-hour-txt').textContent = JIJANG_GAN[s.hourJj];
+            } else {
+                document.getElementById('char-hour-gan').textContent = "未";
+                document.getElementById('char-hour-ji').textContent = "詳";
+                document.getElementById('god-hour-gan').textContent = "미상";
+                document.getElementById('god-hour-ji').textContent = "미상";
+                document.getElementById('jijang-hour-txt').textContent = "-";
+            }
+
             document.getElementById('char-day-gan').textContent = CHEONGAN[s.dayCg];
             document.getElementById('char-month-gan').textContent = CHEONGAN[s.monthCg];
             document.getElementById('char-year-gan').textContent = CHEONGAN[s.yearCg];
 
-            document.getElementById('char-hour-ji').textContent = JIJI[s.hourJj];
             document.getElementById('char-day-ji').textContent = JIJI[s.dayJj];
             document.getElementById('char-month-ji').textContent = JIJI[s.monthJj];
             document.getElementById('char-year-ji').textContent = JIJI[s.yearJj];
 
-            document.getElementById('god-hour-gan').textContent = getTenGod(s.dayCg, s.hourCg);
             document.getElementById('god-day-gan').textContent = "일원 (본인)";
             document.getElementById('god-month-gan').textContent = getTenGod(s.dayCg, s.monthCg);
             document.getElementById('god-year-gan').textContent = getTenGod(s.dayCg, s.yearCg);
 
-            document.getElementById('god-hour-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.hourJj]);
             document.getElementById('god-day-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.dayJj]);
             document.getElementById('god-month-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.monthJj]);
             document.getElementById('god-year-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.yearJj]);
 
-            document.getElementById('jijang-hour-txt').textContent = JIJANG_GAN[s.hourJj];
             document.getElementById('jijang-day-txt').textContent = JIJANG_GAN[s.dayJj];
             document.getElementById('jijang-month-txt').textContent = JIJANG_GAN[s.monthJj];
             document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[s.yearJj];
@@ -2012,6 +2041,7 @@
             }).join('');
             document.getElementById('ohaeng-badges').innerHTML = oBadgeHtml;
 
+            // 대운수 산출
             const isYearYang = CG_YINYANG[s.yearCg] === 1;
             const isForward = (gender === 'male' && isYearYang) || (gender === 'female' && !isYearYang);
             
@@ -2171,7 +2201,7 @@
             const wolunData = [];
 
             for (let wm = 0; wm < 12; wm++) {
-                const wCg = (2 * (seun2026Cg % 5) + wm) % 10;
+                const wCg = ((seun2026Cg % 5) * 2 + 2 + wm) % 10;
                 const wJj = (wm + 2) % 12;
                 const mGodCg = getTenGod(s.dayCg, wCg);
                 const mGodJj = getTenGod(s.dayCg, JJ_MAIN_CG[wJj]);
@@ -2264,6 +2294,7 @@
                     <div>
                         <label class="block text-purple-300/80 mb-1">태어난 시간</label>
                         <select id="gh-m-time-${memberCount}" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2 py-1.5 text-white focus:outline-none focus:border-amber-400">
+                            <option value="-1" ${timeVal==='-1'?'selected':''}>시간 모름 (三柱)</option>
                             <option value="0" ${timeVal==='0'?'selected':''}>자시 (23:30~01:29)</option>
                             <option value="1" ${timeVal==='1'?'selected':''}>축시 (01:30~03:29)</option>
                             <option value="2" ${timeVal==='2'?'selected':''}>인시 (03:30~05:29)</option>
@@ -2495,7 +2526,7 @@
             document.getElementById('group-best-duo').textContent = bestPair || "-";
             document.getElementById('group-caution-duo').textContent = (worstScore < 75) ? worstPair : "특별한 불화 요소 없음 (양호)";
 
-            const oNames = ["木 (추진·성장)", "火 (열정·확장)", "土 (중재·신뢰)", "金 (결단·원칙)", "수 (지혜·유연)"];
+            const oNames = ["木 (추진·성장)", "火 (열정·확장)", "土 (중재·신뢰)", "金 (결단·원칙)", "水 (지혜·유연)"];
             const oColors = ['bg-emerald-950/60 text-emerald-300 border-emerald-500/40',
                              'bg-rose-950/60 text-rose-300 border-rose-500/40',
                              'bg-amber-950/60 text-amber-300 border-amber-500/40',
@@ -2649,7 +2680,7 @@
                 cardCover.className = "w-16 h-24 md:w-20 md:h-28 flex-shrink-0 glass-card rounded-xl border border-amber-400/30 cursor-pointer hover:-translate-y-2 hover:border-amber-300 transition duration-200 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 to-slate-950 shadow-md";
                 cardCover.innerHTML = `
                     <i class="fa-solid fa-sun text-amber-300/70 text-base mb-1"></i>
-                    <span class="text-[9px] text-purple-300/50 font-serif">GABRIEL</span>
+                    <span class="text-[9px] text-purple-300/50 font-serif">ORACLE</span>
                 `;
                 cardCover.onclick = function() {
                     if (chosenCards.length < selectedSpreadCount && !this.classList.contains('opacity-30')) {
