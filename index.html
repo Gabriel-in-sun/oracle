@@ -124,13 +124,12 @@
         <!-- ==================== HOME TAB ==================== -->
         <section id="tab-home" class="space-y-10 animate-fade-in">
             
-            <!-- Hero Artwork Banner (100% full uncropped image) -->
+            <!-- Hero Artwork Banner -->
             <div class="flex flex-col items-center justify-center text-center pt-2">
                 <div class="relative w-full max-w-md md:max-w-lg mx-auto rounded-3xl overflow-hidden shadow-2xl border border-amber-300/40 p-2 bg-[#090514]/90 group">
                     <img src="Gabriel_Stick_3.png" onerror="this.onerror=null; this.src='Gabriel_Stick_2.png'; this.onerror=function(){this.src='Gabriel_Stick.png';};" alt="Gabriel with Lantern and Lily" class="w-full h-auto max-h-[520px] object-contain rounded-2xl mx-auto transform group-hover:scale-102 transition duration-700 shadow-inner">
                 </div>
                 
-                <!-- Updated Title with git_12.png Style -->
                 <div class="mt-6 space-y-3">
                     <span class="px-4 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/30 rounded-full inline-block font-bold">
                         DESTINY &amp; WISDOM PLATFORM
@@ -142,9 +141,8 @@
                 </div>
             </div>
 
-            <!-- Quick Access 6 Pillars with [기도 지향] as #1 -->
+            <!-- Quick Access 6 Pillars -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
-                <!-- 1. PRAYER (FIRST) -->
                 <div onclick="switchTab('prayer')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden bg-gradient-to-br from-[#1f103d] to-[#0c051a]">
                     <div class="w-11 h-11 rounded-xl bg-amber-500/20 flex items-center justify-center mb-3 border border-amber-400/40 group-hover:scale-110 transition">
                         <i class="fa-solid fa-hands-praying text-amber-300 text-lg"></i>
@@ -157,7 +155,6 @@
                     </p>
                 </div>
 
-                <!-- 2. SAJU -->
                 <div onclick="switchTab('saju')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-amber-950/40 flex items-center justify-center mb-3 border border-amber-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-yin-yang text-amber-300 text-lg"></i>
@@ -170,7 +167,6 @@
                     </p>
                 </div>
 
-                <!-- 3. NAME -->
                 <div onclick="switchTab('name')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-emerald-950/40 flex items-center justify-center mb-3 border border-emerald-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-signature text-emerald-300 text-lg"></i>
@@ -183,7 +179,6 @@
                     </p>
                 </div>
 
-                <!-- 4. GUNGHAP -->
                 <div onclick="switchTab('gunghap')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-rose-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-rose-950/40 flex items-center justify-center mb-3 border border-rose-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-heart-pulse text-rose-300 text-lg"></i>
@@ -196,7 +191,6 @@
                     </p>
                 </div>
 
-                <!-- 5. TAROT -->
                 <div onclick="switchTab('tarot')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-purple-800/40 flex items-center justify-center mb-3 border border-purple-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-lg"></i>
@@ -209,7 +203,6 @@
                     </p>
                 </div>
 
-                <!-- 6. ZODIAC -->
                 <div onclick="switchTab('zodiac')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-amber-400/50 transition duration-300 transform hover:-translate-y-1.5 group relative overflow-hidden">
                     <div class="w-11 h-11 rounded-xl bg-indigo-900/40 flex items-center justify-center mb-3 border border-indigo-500/30 group-hover:scale-110 transition">
                         <i class="fa-solid fa-sparkles text-amber-300 text-lg"></i>
@@ -231,7 +224,6 @@
                 <p class="text-sm text-purple-200/70">건강, 가족, 시험, 진로, 마음의 평안 등 마음에 품은 지향을 적어 등불을 밝히시면 은총의 성경 말씀과 축복을 전해드립니다.</p>
             </div>
 
-            <!-- Prayer Input Box -->
             <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/40 space-y-5 bg-gradient-to-b from-[#1b0e35] to-[#0c061a]">
                 <div>
                     <label class="block text-xs font-medium text-amber-200 mb-1.5">
@@ -263,7 +255,6 @@
                 </button>
             </div>
 
-            <!-- Prayer Result Card -->
             <div id="prayer-result-box" class="hidden max-w-2xl mx-auto glass-card p-6 md:p-8 rounded-2xl border-amber-300/50 space-y-6 animate-fade-in bg-gradient-to-b from-[#1f103d] to-[#0c051a]">
                 <div class="border-b border-amber-400/30 pb-4 text-center space-y-1">
                     <span class="text-xs text-amber-300 font-semibold uppercase tracking-widest flex items-center justify-center gap-1.5">
@@ -272,7 +263,6 @@
                     <h3 class="text-xl md:text-2xl font-bold serif text-gold-gradient" id="prayer-res-verse-ref">성경 구절 장·절</h3>
                 </div>
 
-                <!-- Scripture Quote Display -->
                 <div class="p-5 rounded-xl bg-black/40 border border-amber-400/30 text-center space-y-3 relative overflow-hidden">
                     <i class="fa-solid fa-quote-left text-amber-300/20 text-3xl absolute top-2 left-3"></i>
                     <p class="text-base md:text-lg serif font-medium text-amber-100 leading-relaxed relative z-10 px-4" id="prayer-res-scripture">
@@ -281,7 +271,6 @@
                     <i class="fa-solid fa-quote-right text-amber-300/20 text-3xl absolute bottom-2 right-3"></i>
                 </div>
 
-                <!-- Meditation & Intention Response -->
                 <div class="space-y-3 text-xs md:text-sm text-slate-200 leading-relaxed font-light">
                     <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1.5">
                         <strong class="text-amber-300 block font-semibold text-xs"><i class="fa-solid fa-feather-pointed mr-1 text-amber-400"></i> 기도 지향에 대한 영적 묵상과 조언</strong>
@@ -309,7 +298,6 @@
                 <p class="text-sm text-purple-200/70">한글 이름을 입력하면 한자가 자동 검색·변환되며, 81수리 4격(초년·청년·중년·말년), 발음오행, 음양조화를 정밀 감정합니다.</p>
             </div>
 
-            <!-- Input & Hanja Converter Form -->
             <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
                 <div>
                     <label class="block text-xs font-medium text-amber-200 mb-1.5">한글 성명 입력</label>
@@ -321,7 +309,6 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Hanja Selector Columns -->
                 <div id="hanja-selector-area" class="space-y-3 pt-2">
                     <span class="text-xs text-purple-300 font-semibold block">각 글자별 한자 선택 (원획수 및 자원오행 매핑)</span>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="hanja-cols-container"></div>
@@ -332,7 +319,6 @@
                 </button>
             </div>
 
-            <!-- Name Reading Results Area -->
             <div id="name-results-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
                 <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 bg-[#0c081c] space-y-6">
                     <div class="border-b border-purple-900/60 pb-4 text-center">
@@ -405,14 +391,13 @@
             </div>
         </section>
 
-        <!-- ==================== SAJU TAB (MANSE-RYEOK & COMPLETE READING) ==================== -->
+        <!-- ==================== SAJU TAB (MANSE-RYEOK) ==================== -->
         <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 & 심층 사주 풀이</h2>
                 <p class="text-sm text-purple-200/70">생년월일시와 절기(節氣) 계산으로 맞춤 대운수를 산출하고, 10년 대운 · 연운 · 월운을 입체 분석합니다.</p>
             </div>
 
-            <!-- Saju Input Form -->
             <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
@@ -466,7 +451,6 @@
                 </button>
             </div>
 
-            <!-- Manse-ryeok Result Workspace -->
             <div id="manse-result-area" class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in">
                 <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-5">
                     <div class="bg-[#1b1233] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/50 text-xs md:text-sm">
@@ -1197,6 +1181,20 @@
             "라": [
                 { h: "羅", s: 19, m: "비단 라", o: "火" }
             ],
+            "람": [
+                { h: "嵐", s: 12, m: "남기/바람 람", o: "土" },
+                { h: "藍", s: 18, m: "쪽 람", o: "木" },
+                { h: "覽", s: 21, m: "볼 람", o: "火" },
+                { h: "攬", s: 24, m: "잡을 람", o: "木" }
+            ],
+            "남": [
+                { h: "南", s: 9, m: "남녘 남", o: "火" },
+                { h: "男", s: 7, m: "사내 남", o: "火" },
+                { h: "楠", s: 13, m: "남우 남", o: "木" },
+                { h: "嵐", s: 12, m: "바람/남기 남/람", o: "土" },
+                { h: "藍", s: 18, m: "쪽 남/람", o: "木" },
+                { h: "覽", s: 21, m: "볼 남/람", o: "火" }
+            ],
             "류": [
                 { h: "柳", s: 9, m: "버들 류", o: "木" },
                 { h: "劉", s: 15, m: "죽일 류", o: "金" }
@@ -1351,6 +1349,14 @@
                 { h: "沈", s: 8, m: "성씨 심", o: "水" },
                 { h: "心", s: 4, m: "마음 심", o: "火" }
             ],
+            "아": [
+                { h: "娥", s: 10, m: "아름다울 아", o: "土" },
+                { h: "雅", s: 12, m: "우아할/맑을 아", o: "木" },
+                { h: "兒", s: 8, m: "아이 아", o: "金" },
+                { h: "亞", s: 8, m: "버금 아", o: "土" },
+                { h: "芽", s: 10, m: "싹 아", o: "木" },
+                { h: "俄", s: 9, m: "갑자기 아", o: "土" }
+            ],
             "안": [
                 { h: "安", s: 6, m: "편안할 안", o: "土" },
                 { h: "顔", s: 18, m: "얼굴 안", o: "木" }
@@ -1467,7 +1473,7 @@
                 { h: "慈", s: 14, m: "사랑할 자", o: "火" }
             ],
             "재": [
-                { h: "재", s: 6, m: "있을 재", o: "土" },
+                { h: "在", s: 6, m: "있을 재", o: "土" },
                 { h: "載", s: 13, m: "실을 재", o: "金" },
                 { h: "宰", s: 10, m: "재상 재", o: "金" },
                 { h: "栽", s: 10, m: "심을 재", o: "木" }
