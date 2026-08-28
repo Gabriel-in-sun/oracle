@@ -71,6 +71,76 @@
             animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        /* ==================== 캔들 점화 시뮬레이션 ==================== */
+        .candle-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .candle-base-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+        }
+
+        /* 불꽃 가림 마스크 (점화 전 상태) */
+        .flame-cover-mask {
+            position: absolute;
+            top: 10%;
+            left: 44%;
+            width: 12%;
+            height: 22%;
+            background: radial-gradient(circle, #251c17 0%, #3a2a22 65%, transparent 100%);
+            border-radius: 50%;
+            opacity: 1;
+            transition: opacity 1.2s ease-in-out;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+
+        /* 꺼진 심지 */
+        .unlit-wick {
+            position: absolute;
+            top: 25%;
+            left: 49.5%;
+            width: 3px;
+            height: 12px;
+            background: #1c1512;
+            border-radius: 2px;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        /* 촛불 점화 글로우 오버레이 */
+        .candle-light-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            background: radial-gradient(circle at 50% 22%, rgba(255, 200, 80, 0.45) 0%, rgba(255, 120, 20, 0.15) 45%, transparent 70%);
+            opacity: 0;
+            mix-blend-mode: screen;
+            transition: opacity 1.8s ease-in;
+            pointer-events: none;
+        }
+
+        /* 점화 완료 상태 */
+        .ignited .flame-cover-mask {
+            opacity: 0;
+        }
+        .ignited .unlit-wick {
+            opacity: 0;
+        }
+        .ignited .candle-light-glow {
+            opacity: 1;
+            animation: flameBreathe 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes flameBreathe {
+            0% { opacity: 0.75; filter: drop-shadow(0 0 15px rgba(255, 180, 60, 0.6)); }
+            100% { opacity: 1; filter: drop-shadow(0 0 30px rgba(255, 210, 90, 0.9)); }
+        }
+
         .deck-scroll::-webkit-scrollbar {
             height: 6px;
         }
@@ -215,13 +285,14 @@
             </div>
         </section>
 
-        <!-- ==================== PRAYER TAB ==================== -->
+        <!-- ==================== PRAYER (기도 지향) TAB ==================== -->
         <section id="tab-prayer" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">기도 지향 봉헌 & 은총의 성경 말씀</h2>
                 <p class="text-sm text-purple-200/70">건강, 가족, 시험, 진로, 마음의 평안 등 마음에 품은 지향을 적어 등불을 밝히시면 은총의 성경 말씀과 축복을 전해드립니다.</p>
             </div>
 
+            <!-- Prayer Input Box -->
             <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/40 space-y-5 bg-gradient-to-b from-[#1b0e35] to-[#0c061a]">
                 <div>
                     <label class="block text-xs font-medium text-amber-200 mb-1.5">
@@ -253,7 +324,9 @@
                 </button>
             </div>
 
-            <div id="prayer-result-box" class="hidden max-w-2xl mx-auto glass-card p-6 md:p-8 rounded-2xl border-amber-300/50 space-y-6 animate-fade-in bg-gradient-to-b from-[#1f103d] to-[#0c051a]">
+            <!-- Prayer Result Card (좌측 촛불 점화 애니메이션 + 우측 말씀 카드) -->
+            <div id="prayer-result-box" class="hidden max-w-4xl mx-auto glass-card p-6 md:p-8 rounded-2xl border-amber-300/50 space-y-6 animate-fade-in bg-gradient-to-b from-[#1f103d] to-[#0c051a]">
+                
                 <div class="border-b border-amber-400/30 pb-4 text-center space-y-1">
                     <span class="text-xs text-amber-300 font-semibold uppercase tracking-widest flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-cross text-amber-400"></i> Gabriel's Scripture Message
@@ -261,27 +334,58 @@
                     <h3 class="text-xl md:text-2xl font-bold serif text-gold-gradient" id="prayer-res-verse-ref">성경 구절 장·절</h3>
                 </div>
 
-                <div class="p-5 rounded-xl bg-black/40 border border-amber-400/30 text-center space-y-3 relative overflow-hidden">
-                    <i class="fa-solid fa-quote-left text-amber-300/20 text-3xl absolute top-2 left-3"></i>
-                    <p class="text-base md:text-lg serif font-medium text-amber-100 leading-relaxed relative z-10 px-4" id="prayer-res-scripture">
-                        "..."
-                    </p>
-                    <i class="fa-solid fa-quote-right text-amber-300/20 text-3xl absolute bottom-2 right-3"></i>
-                </div>
+                <!-- 2-Column Responsive Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Left: Ora Pro Nobis Candle Container -->
+                    <div class="md:col-span-5 flex flex-col items-center justify-center">
+                        <div id="candle-anim-wrapper" class="candle-container w-full max-w-[260px] md:max-w-[280px] p-2 bg-black/40 border border-amber-400/40 rounded-2xl shadow-2xl">
+                            <!-- Base Candle Image -->
+                            <img src="ora pro nobis.png" onerror="this.onerror=null; this.src='ora_pro_nobis.png';" alt="Ora Pro Nobis Candle" class="candle-base-img">
+                            
+                            <!-- Unlit Wick & Flame Cover Mask (꺼진 상태 연출) -->
+                            <div class="flame-cover-mask"></div>
+                            <div class="unlit-wick"></div>
+                            
+                            <!-- Ignited Light & Flame Glow -->
+                            <div class="candle-light-glow"></div>
 
-                <div class="space-y-3 text-xs md:text-sm text-slate-200 leading-relaxed font-light">
-                    <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1.5">
-                        <strong class="text-amber-300 block font-semibold text-xs"><i class="fa-solid fa-feather-pointed mr-1 text-amber-400"></i> 기도 지향에 대한 영적 묵상과 조언</strong>
-                        <p id="prayer-res-meditation">...</p>
+                            <div class="text-center mt-2.5">
+                                <span class="text-[11px] text-amber-300/80 font-serif tracking-widest flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-fire-flame-curved text-amber-400 animate-pulse"></i> Ora pro nobis (우리를 위하여 빌으소서)
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="p-4 rounded-xl bg-gradient-to-r from-amber-950/40 to-purple-950/40 border border-amber-400/30 space-y-1.5">
-                        <strong class="text-amber-300 block font-semibold text-xs"><i class="fa-solid fa-dove mr-1 text-amber-400"></i> 대천사 가브리엘의 축복 기도</strong>
-                        <p id="prayer-res-blessing" class="serif italic text-amber-100/90">...</p>
+                    <!-- Right: Scripture Quote & Meditations -->
+                    <div class="md:col-span-7 space-y-4">
+                        
+                        <!-- Scripture Verse Display -->
+                        <div class="p-4 md:p-5 rounded-xl bg-black/50 border border-amber-400/30 text-center space-y-2 relative overflow-hidden">
+                            <i class="fa-solid fa-quote-left text-amber-300/20 text-2xl absolute top-2 left-3"></i>
+                            <p class="text-sm md:text-base serif font-medium text-amber-100 leading-relaxed relative z-10 px-3" id="prayer-res-scripture">
+                                "..."
+                            </p>
+                            <i class="fa-solid fa-quote-right text-amber-300/20 text-2xl absolute bottom-2 right-3"></i>
+                        </div>
+
+                        <!-- Meditation on intention -->
+                        <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/40 space-y-1 text-xs md:text-sm text-slate-200 leading-relaxed font-light">
+                            <strong class="text-amber-300 block font-semibold text-xs"><i class="fa-solid fa-feather-pointed mr-1 text-amber-400"></i> 기도 지향에 대한 영적 묵상과 조언</strong>
+                            <p id="prayer-res-meditation">...</p>
+                        </div>
+
+                        <!-- Gabriel's Blessing -->
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/40 to-purple-950/40 border border-amber-400/30 space-y-1 text-xs md:text-sm text-slate-200 leading-relaxed">
+                            <strong class="text-amber-300 block font-semibold text-xs"><i class="fa-solid fa-dove mr-1 text-amber-400"></i> 대천사 가브리엘의 축복 기도</strong>
+                            <p id="prayer-res-blessing" class="serif italic text-amber-100/90">...</p>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="text-center pt-2">
+                <div class="text-center pt-2 border-t border-purple-900/40">
                     <button onclick="resetPrayerForm()" class="px-5 py-2 rounded-xl bg-purple-900/60 border border-purple-400/40 text-xs font-semibold text-purple-200 hover:bg-purple-800 hover:text-white transition">
                         <i class="fa-solid fa-rotate-right mr-1.5"></i> 새로운 기도 지향 봉헌하기
                     </button>
@@ -343,6 +447,7 @@
                 </button>
             </div>
 
+            <!-- Name Reading Results Area -->
             <div id="name-results-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
                 <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 bg-[#0c081c] space-y-6">
                     <div class="border-b border-purple-900/60 pb-4 text-center">
@@ -415,7 +520,7 @@
             </div>
         </section>
 
-        <!-- ==================== SAJU TAB ==================== -->
+        <!-- ==================== SAJU TAB (MANSE-RYEOK) ==================== -->
         <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 & 심층 사주 풀이</h2>
@@ -976,7 +1081,7 @@
         }
 
         /* -------------------------------------------------------------
-           PRAYER INTENTION & SCRIPTURE ORACLE ENGINE
+           PRAYER INTENTION & SCRIPTURE ORACLE ENGINE (WITH CANDLE IGNITION)
         ------------------------------------------------------------- */
         const SCRIPTURE_DB = [
             {
@@ -1063,6 +1168,16 @@
                 `봉헌하신 지향("${input}")에 비추어 볼 때, ${picked.meditation}` : picked.meditation;
             document.getElementById('prayer-res-blessing').textContent = picked.blessing;
 
+            const candleWrapper = document.getElementById('candle-anim-wrapper');
+            if (candleWrapper) {
+                // 점화 전 상태로 초기화 후 점화 애니메이션 실행
+                candleWrapper.classList.remove('ignited');
+                void candleWrapper.offsetWidth; // Force Reflow
+                setTimeout(() => {
+                    candleWrapper.classList.add('ignited');
+                }, 100);
+            }
+
             document.getElementById('prayer-result-box').classList.remove('hidden');
             document.getElementById('prayer-result-box').scrollIntoView({ behavior: 'smooth' });
         }
@@ -1070,6 +1185,12 @@
         function resetPrayerForm() {
             document.getElementById('prayer-intention-input').value = '';
             document.getElementById('prayer-result-box').classList.add('hidden');
+            
+            const candleWrapper = document.getElementById('candle-anim-wrapper');
+            if (candleWrapper) {
+                candleWrapper.classList.remove('ignited');
+            }
+
             selectedPrayerTheme = "";
             document.querySelectorAll('.prayer-theme-btn').forEach(b => {
                 b.classList.remove('border-amber-400', 'text-amber-300', 'bg-purple-900/80');
@@ -1694,7 +1815,6 @@
             41: { luck: "대길", title: "고명격(高名格)", desc: "덕망이 높아 만인의 사표가 되며 부귀를 누립니다." }
         };
 
-        // 훈민정음 자·모음 획수 계산 테이블
         const HANGUL_STROKES = {
             cho: [1, 2, 1, 2, 4, 3, 3, 4, 8, 2, 4, 1, 2, 4, 3, 2, 3, 4, 3],
             jung: [2, 3, 3, 4, 2, 3, 3, 4, 2, 4, 5, 3, 3, 5, 4, 5, 2, 4, 5, 1, 1],
@@ -1927,7 +2047,6 @@
 
         /* -------------------------------------------------------------
            SAJU DATA & CORRECTED MANSE-RYEOK ENGINE
-           [일주/시주 원광만세력 공식 완전 일치 보정]
         ------------------------------------------------------------- */
         const LUNAR_INFO = [
             0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
@@ -2034,13 +2153,11 @@
                 y = converted.year; m = converted.month; d = converted.day;
             }
 
-            // 1. 년주(年柱) 산출
             let sYear = y;
             if (m < 2 || (m === 2 && d < 4)) sYear = y - 1;
             const yearCg = (sYear - 4 + 6000) % 10;
             const yearJj = (sYear - 4 + 6000) % 12;
 
-            // 2. 월주(月柱) 산출
             let sMonthIdx = m - 2;
             if (d < JEOLGI_DAY[m]) {
                 sMonthIdx = m - 3;
@@ -2050,8 +2167,6 @@
             const monthJj = (sMonthIdx + 2) % 12;
             const monthCg = ((yearCg % 5) * 2 + 2 + sMonthIdx) % 10;
 
-            // 3. 일주(日柱) 산출 (원광만세력 절대 일진 공식 일치 보정)
-            // 기준일: 2000년 1월 1일 = 戊午일 (60갑자 인덱스 54)
             const baseUtc = Date.UTC(2000, 0, 1);
             const targetUtc = Date.UTC(y, m - 1, d);
             const diffDays = Math.round((targetUtc - baseUtc) / 86400000);
@@ -2060,7 +2175,6 @@
             const dayCg = dayGanjiIdx % 10;
             const dayJj = dayGanjiIdx % 12;
 
-            // 4. 시주(時柱) 산출 (시두법: 甲己일=甲子시, 乙庚일=丙子시, 丙辛일=戊子시, 丁壬일=庚子시, 戊癸일=壬子시)
             let hourJj = -1;
             let hourCg = -1;
             if (hourIdx !== -1 && hourIdx !== undefined && !isNaN(hourIdx)) {
@@ -2068,7 +2182,6 @@
                 hourCg = ((dayCg % 5) * 2 + hourJj) % 10;
             }
 
-            // 5. 오행 분포
             const oCounts = [0, 0, 0, 0, 0];
             [dayCg, monthCg, yearCg].forEach(c => oCounts[CG_ELEMENT[c]]++);
             [JJ_MAIN_CG[dayJj], JJ_MAIN_CG[monthJj], JJ_MAIN_CG[yearJj]].forEach(c => oCounts[CG_ELEMENT[c]]++);
