@@ -71,50 +71,43 @@
             animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* ==================== 리얼 캔들 점화 시뮬레이션 ==================== */
-        .candle-glass {
-            background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(240,230,210,0.1) 40%, rgba(255,245,225,0.2) 100%);
-            border: 2px solid rgba(255, 230, 180, 0.35);
-            box-shadow: inset 0 0 20px rgba(255, 220, 150, 0.2), 0 10px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(8px);
+        /* Candle Lighting Glow Animation */
+        @keyframes candleLightUp {
+            0% {
+                filter: brightness(0.35) saturate(0.6) drop-shadow(0 0 0px rgba(255, 180, 50, 0));
+                opacity: 0.6;
+                transform: scale(0.97);
+            }
+            40% {
+                filter: brightness(0.65) saturate(0.85) drop-shadow(0 0 12px rgba(255, 160, 40, 0.4));
+                opacity: 0.85;
+            }
+            75% {
+                filter: brightness(1.2) saturate(1.25) drop-shadow(0 0 40px rgba(255, 200, 70, 0.85));
+                opacity: 1;
+                transform: scale(1.02);
+            }
+            100% {
+                filter: brightness(1.0) saturate(1.05) drop-shadow(0 0 28px rgba(255, 185, 60, 0.7));
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .candle-flame {
-            width: 22px;
-            height: 48px;
-            background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffe600 35%, #ff5e00 75%, transparent 100%);
-            border-radius: 50% 50% 35% 35% / 70% 70% 30% 30%;
-            filter: drop-shadow(0 0 12px #ff9d00) drop-shadow(0 0 25px #ff5100);
-            opacity: 0;
-            transform: scale(0.1) translateY(20px);
-            transition: all 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .ignited .candle-flame {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            animation: flameFlicker 1.8s ease-in-out infinite alternate;
+        .candle-ignited {
+            animation: candleLightUp 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         @keyframes flameFlicker {
-            0% { transform: scale(1) rotate(-1.5deg); filter: drop-shadow(0 0 12px #ff9d00) drop-shadow(0 0 25px #ff5100); }
-            50% { transform: scale(1.06, 0.96) rotate(1.5deg); filter: drop-shadow(0 0 16px #ffb300) drop-shadow(0 0 32px #ff6600); }
-            100% { transform: scale(0.97, 1.04) rotate(-0.5deg); filter: drop-shadow(0 0 14px #ffa200) drop-shadow(0 0 28px #ff4800); }
+            0%, 100% {
+                filter: drop-shadow(0 0 22px rgba(255, 190, 70, 0.65));
+            }
+            50% {
+                filter: drop-shadow(0 0 35px rgba(255, 215, 90, 0.9));
+            }
         }
-
-        .candle-wax-glow {
-            opacity: 0.15;
-            transition: opacity 2s ease-in-out;
-        }
-
-        .ignited .candle-wax-glow {
-            opacity: 0.85;
-            animation: waxGlowPulse 2.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes waxGlowPulse {
-            0% { opacity: 0.75; }
-            100% { opacity: 0.95; }
+        .flame-breathing {
+            animation: flameFlicker 3.5s ease-in-out infinite alternate;
         }
 
         .deck-scroll::-webkit-scrollbar {
@@ -310,44 +303,17 @@
                     <h3 class="text-xl md:text-2xl font-bold serif text-gold-gradient" id="prayer-res-verse-ref">성경 구절 장·절</h3>
                 </div>
 
-                <!-- 2-Column Responsive Layout -->
+                <!-- Main Content Row: Left Candle & Right Message -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                     
-                    <!-- Left: Ora Pro Nobis Candle (하이브리드 렌더러: 이미지 또는 내장 캔들 렌더링) -->
+                    <!-- Left: Ora Pro Nobis Candle Image with Lighting Animation -->
                     <div class="md:col-span-5 flex flex-col items-center justify-center">
-                        <div id="candle-anim-wrapper" class="relative w-full max-w-[240px] md:max-w-[270px] p-4 rounded-3xl candle-glass flex flex-col items-center justify-center overflow-hidden">
-                            
-                            <!-- 촛불 심지 및 불꽃 -->
-                            <div class="relative w-full flex flex-col items-center h-20 justify-end z-20">
-                                <div class="candle-flame"></div>
-                                <div class="w-1.5 h-3.5 bg-neutral-900 rounded-sm mt-0.5"></div>
-                            </div>
-
-                            <!-- 캔들 본체 (왁스 & 성스러운 십자가 문양) -->
-                            <div class="relative w-full h-44 rounded-2xl bg-gradient-to-b from-[#fbf4e2] to-[#dfceaa] p-4 flex flex-col items-center justify-between text-slate-800 shadow-inner z-10 border border-amber-200/50">
-                                
-                                <!-- 왁스 웜 글로우 -->
-                                <div class="candle-wax-glow absolute inset-0 rounded-2xl bg-gradient-to-b from-amber-300/40 via-amber-400/20 to-transparent pointer-events-none"></div>
-
-                                <!-- 방사형 성스러운 십자가 문양 -->
-                                <div class="my-auto text-center relative z-10 text-amber-800">
-                                    <i class="fa-solid fa-cross text-4xl drop-shadow filter"></i>
-                                    <div class="w-16 h-0.5 bg-amber-700/40 mx-auto my-1 rounded-full"></div>
-                                </div>
-
-                                <!-- Ora pro nobis 타이포그래피 -->
-                                <div class="text-center relative z-10">
-                                    <span class="text-xs md:text-sm font-bold brand-font text-amber-900 tracking-wider block">Ora pro nobis</span>
-                                    <span class="text-[9px] text-amber-950/70 font-serif">우리를 위하여 빌으소서</span>
-                                </div>
-                            </div>
-
-                            <!-- 바닥 반사 그림자 -->
-                            <div class="w-3/4 h-3 bg-black/40 rounded-full blur-sm mt-2"></div>
+                        <div class="relative w-full max-w-[260px] md:max-w-[290px] rounded-2xl overflow-hidden p-2 bg-black/40 border border-amber-400/40 shadow-2xl group flex flex-col items-center">
+                            <img id="prayer-candle-img" src="ora pro nobis.png" onerror="this.onerror=null; this.src='ora_pro_nobis.png';" alt="Ora Pro Nobis Candle" class="w-full h-auto object-contain rounded-xl transition duration-1000">
                         </div>
                     </div>
 
-                    <!-- Right: Scripture Quote & Meditations -->
+                    <!-- Right: Scripture Quote & Spiritual Meditations -->
                     <div class="md:col-span-7 space-y-4">
                         
                         <!-- Scripture Verse Display -->
@@ -436,7 +402,6 @@
                 </button>
             </div>
 
-            <!-- Name Reading Results Area -->
             <div id="name-results-area" class="hidden max-w-3xl mx-auto space-y-8 animate-fade-in">
                 <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 bg-[#0c081c] space-y-6">
                     <div class="border-b border-purple-900/60 pb-4 text-center">
@@ -1070,7 +1035,7 @@
         }
 
         /* -------------------------------------------------------------
-           PRAYER INTENTION & SCRIPTURE ORACLE ENGINE (WITH REALISTIC FLAME IGNITION)
+           PRAYER INTENTION & SCRIPTURE ORACLE ENGINE (WITH CANDLE LIGHTING)
         ------------------------------------------------------------- */
         const SCRIPTURE_DB = [
             {
@@ -1157,13 +1122,15 @@
                 `봉헌하신 지향("${input}")에 비추어 볼 때, ${picked.meditation}` : picked.meditation;
             document.getElementById('prayer-res-blessing').textContent = picked.blessing;
 
-            const candleWrapper = document.getElementById('candle-anim-wrapper');
-            if (candleWrapper) {
-                candleWrapper.classList.remove('ignited');
-                void candleWrapper.offsetWidth; // Force Reflow
+            const candleImg = document.getElementById('prayer-candle-img');
+            if (candleImg) {
+                // 점화 애니메이션 클래스 초기화 후 발동
+                candleImg.classList.remove('candle-ignited', 'flame-breathing');
+                void candleImg.offsetWidth; // Force Reflow
+                candleImg.classList.add('candle-ignited');
                 setTimeout(() => {
-                    candleWrapper.classList.add('ignited');
-                }, 150);
+                    candleImg.classList.add('flame-breathing');
+                }, 2200);
             }
 
             document.getElementById('prayer-result-box').classList.remove('hidden');
@@ -1173,12 +1140,6 @@
         function resetPrayerForm() {
             document.getElementById('prayer-intention-input').value = '';
             document.getElementById('prayer-result-box').classList.add('hidden');
-            
-            const candleWrapper = document.getElementById('candle-anim-wrapper');
-            if (candleWrapper) {
-                candleWrapper.classList.remove('ignited');
-            }
-
             selectedPrayerTheme = "";
             document.querySelectorAll('.prayer-theme-btn').forEach(b => {
                 b.classList.remove('border-amber-400', 'text-amber-300', 'bg-purple-900/80');
@@ -1275,10 +1236,7 @@
             "남": [
                 { h: "南", s: 9, m: "남녘 남", o: "火" },
                 { h: "男", s: 7, m: "사내 남", o: "火" },
-                { h: "楠", s: 13, m: "남우 남", o: "木" },
-                { h: "嵐", s: 12, m: "바람/남기 남/람", o: "土" },
-                { h: "藍", s: 18, m: "쪽 남/람", o: "木" },
-                { h: "覽", s: 21, m: "볼 남/람", o: "火" }
+                { h: "楠", s: 13, m: "남우 남", o: "木" }
             ],
             "노": [
                 { h: "盧", s: 16, m: "성씨 로/노", o: "火" },
@@ -1299,7 +1257,7 @@
             "도": [
                 { h: "道", s: 16, m: "길 도", o: "火" },
                 { h: "度", s: 9, m: "법도 도", o: "土" },
-                { h: "都", s: 16, m: "도읍 도", o: "土" },
+                { h: "도", s: 16, m: "도읍 도", o: "土" },
                 { h: "導", s: 16, m: "이끌 도", o: "火" },
                 { h: "挑", s: 10, m: "돋울 도", o: "火" }
             ],
@@ -2035,7 +1993,7 @@
 
         /* -------------------------------------------------------------
            SAJU DATA & CORRECTED MANSE-RYEOK ENGINE
-           [일주/시주 원광만세력 공식 1:1 완벽 일치]
+           [일주/시주 원광만세력 공식 1:1 완벽 일치 보정]
         ------------------------------------------------------------- */
         const LUNAR_INFO = [
             0x04bd8,0x04ae0,0x0a570,0x054d5,0x0d260,0x0d950,0x16554,0x056a0,0x09ad0,0x055d2,
@@ -2158,7 +2116,7 @@
             const monthJj = (sMonthIdx + 2) % 12;
             const monthCg = ((yearCg % 5) * 2 + 2 + sMonthIdx) % 10;
 
-            // 3. 일주(日柱) 산출
+            // 3. 일주(日柱) 산출 (원광만세력 기준일 2000-01-01 = 戊午일/인덱스 54 동기화)
             const baseUtc = Date.UTC(2000, 0, 1);
             const targetUtc = Date.UTC(y, m - 1, d);
             const diffDays = Math.round((targetUtc - baseUtc) / 86400000);
@@ -2167,7 +2125,7 @@
             const dayCg = dayGanjiIdx % 10;
             const dayJj = dayGanjiIdx % 12;
 
-            // 4. 시주(時柱) 산출 (시두법: 甲己일=甲子시 시작, 乙庚일=丙子시 시작, 丙辛일=戊子시 시작, 丁壬일=庚子시 시작, 戊癸일=壬子시 시작)
+            // 4. 시주(時柱) 산출 (시두법: 甲己일=甲子시, 乙庚일=丙子시, 丙辛일=戊子시, 丁壬일=庚子시, 戊癸일=壬子시)
             let hourJj = -1;
             let hourCg = -1;
             if (hourIdx !== -1 && hourIdx !== undefined && !isNaN(hourIdx)) {
