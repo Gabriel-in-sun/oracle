@@ -330,9 +330,22 @@
         <section id="tab-name" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 수리 성명학 이름풀이</h2>
-                <p class="text-sm text-purple-200/70">한글 이름을 입력하면 한자가 자동 검색·변환되며, 81수리 4격(초년·청년·중년·말년), 발음오행, 음양조화를 정밀 감정합니다.</p>
+                <p class="text-sm text-purple-200/70">한자 성명은 81수리 4격·발음오행·음양조화를, 순한글 이름은 초성·중성·종성의 자모 구조와 발음오행·음양 균형을 별도로 정밀 감정합니다.</p>
             </div>
 
+            <!-- Name analysis mode selector -->
+            <div class="max-w-2xl mx-auto grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-[#0b0717] border border-purple-800/50">
+                <button id="name-mode-hanja-btn" type="button" onclick="switchNameAnalysisMode('hanja')"
+                    class="py-3 rounded-xl bg-gradient-to-r from-emerald-500/90 to-teal-500/90 text-slate-950 font-bold text-sm transition">
+                    <i class="fa-solid fa-language mr-1.5"></i> 한자 성명 풀이
+                </button>
+                <button id="name-mode-pure-btn" type="button" onclick="switchNameAnalysisMode('pure')"
+                    class="py-3 rounded-xl text-purple-200 hover:text-amber-200 hover:bg-purple-900/40 font-bold text-sm transition">
+                    <i class="fa-solid fa-feather-pointed mr-1.5"></i> 순한글 이름 풀이
+                </button>
+            </div>
+
+            <div id="name-hanja-panel">
             <!-- Input & Hanja Converter Form -->
             <div class="glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-purple-500/30 space-y-5">
                 <div>
@@ -425,6 +438,99 @@
                         <strong class="text-emerald-300 block text-sm"><i class="fa-solid fa-scroll mr-1.5"></i> 성명학 총평 및 이름 조화도</strong>
                         <p id="res-total-verdict">-</p>
                     </div>
+                </div>
+            </div>
+            </div><!-- /name-hanja-panel -->
+
+            <!-- Pure Hangul Name Analysis -->
+            <div id="name-pure-panel" class="hidden max-w-3xl mx-auto space-y-6 animate-fade-in">
+                <div class="glass-card p-6 md:p-8 rounded-2xl border-amber-400/30 space-y-5">
+                    <div class="text-center space-y-1">
+                        <span class="text-xs text-amber-300 font-semibold uppercase tracking-widest">Pure Hangul Name Analysis</span>
+                        <h3 class="text-xl md:text-2xl font-bold serif text-gold-gradient">순한글 이름 풀이</h3>
+                        <p class="text-xs text-purple-200/70 leading-relaxed">
+                            한자 원획수를 적용하지 않고, 한글 자모의 소리와 구조를 기준으로 발음오행·음양·상생 흐름을 분석합니다.
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">순한글 이름 입력</label>
+                        <input type="text" id="pure-name-input" placeholder="예: 하늘 / 가람 / 다온 / 한별"
+                            class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400"
+                            onkeydown="if(event.key==='Enter'){analyzePureHangulName();}">
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-center">
+                        <div class="rounded-xl border border-purple-800/40 bg-purple-950/30 p-3">
+                            <span class="block text-purple-300 mb-1">초성</span>
+                            <strong class="text-amber-200">발음오행의 중심</strong>
+                        </div>
+                        <div class="rounded-xl border border-purple-800/40 bg-purple-950/30 p-3">
+                            <span class="block text-purple-300 mb-1">중성</span>
+                            <strong class="text-amber-200">음양·소리의 방향</strong>
+                        </div>
+                        <div class="rounded-xl border border-purple-800/40 bg-purple-950/30 p-3">
+                            <span class="block text-purple-300 mb-1">종성</span>
+                            <strong class="text-amber-200">마무리 기운</strong>
+                        </div>
+                        <div class="rounded-xl border border-purple-800/40 bg-purple-950/30 p-3">
+                            <span class="block text-purple-300 mb-1">전체 흐름</span>
+                            <strong class="text-amber-200">상생·상극 조화</strong>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="analyzePureHangulName()"
+                        class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 hover:from-amber-300 hover:to-rose-300 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-950/30">
+                        <i class="fa-solid fa-feather-pointed mr-1.5"></i> 순한글 이름 정밀 풀이 보기
+                    </button>
+                </div>
+
+                <div id="pure-name-results" class="hidden glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 bg-[#0c081c] space-y-6">
+                    <div class="text-center border-b border-purple-900/60 pb-4">
+                        <span class="text-xs text-amber-300 font-semibold uppercase tracking-widest">Hangul Sound & Element Reading</span>
+                        <h3 id="pure-name-title" class="text-2xl md:text-3xl font-bold serif text-gold-gradient mt-1">-</h3>
+                        <p id="pure-name-summary" class="text-xs text-purple-200/70 mt-2">-</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
+                            <span class="text-purple-300 text-xs block mb-1">발음오행 흐름</span>
+                            <strong id="pure-ohaeng-flow" class="text-emerald-300 text-sm">-</strong>
+                        </div>
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
+                            <span class="text-purple-300 text-xs block mb-1">음양 조화도</span>
+                            <strong id="pure-yinyang-score" class="text-rose-300 text-sm">-</strong>
+                        </div>
+                        <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-800/40">
+                            <span class="text-purple-300 text-xs block mb-1">종합 조화 점수</span>
+                            <strong id="pure-total-score" class="text-amber-300 text-xl">-</strong>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-xs font-semibold text-purple-200 block mb-2">글자별 자모·오행 분석</span>
+                        <div id="pure-char-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="p-4 rounded-xl bg-[#140b28] border border-purple-900/40">
+                            <strong class="text-amber-300 text-sm block mb-2"><i class="fa-solid fa-wave-square mr-1.5"></i> 이름의 소리 흐름</strong>
+                            <p id="pure-flow-reading" class="text-xs text-slate-300 leading-relaxed">-</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-[#140b28] border border-purple-900/40">
+                            <strong class="text-amber-300 text-sm block mb-2"><i class="fa-solid fa-scale-balanced mr-1.5"></i> 음양·자모 균형</strong>
+                            <p id="pure-balance-reading" class="text-xs text-slate-300 leading-relaxed">-</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/60 to-amber-950/30 border border-amber-500/30">
+                        <strong class="text-amber-300 text-sm block mb-2"><i class="fa-solid fa-scroll mr-1.5"></i> 순한글 이름 종합 풀이</strong>
+                        <p id="pure-total-reading" class="text-xs md:text-sm text-slate-200 leading-relaxed">-</p>
+                    </div>
+
+                    <p class="text-[10px] text-purple-300/60 leading-relaxed">
+                        ※ 순한글 이름은 한자 원획수에 기반한 81수리 성명학의 적용 대상이 아니므로, 본 항목은 한글 발음오행과 자모 구조를 중심으로 해석합니다.
+                    </p>
                 </div>
             </div>
         </section>
@@ -1717,6 +1823,193 @@
             if (["ㅅ","ㅈ","ㅊ"].includes(ini)) return "金";
             if (["ㅁ","ㅂ","ㅍ"].includes(ini)) return "水";
             return "土";
+        }
+
+
+        function switchNameAnalysisMode(mode) {
+            const hanjaPanel = document.getElementById('name-hanja-panel');
+            const purePanel = document.getElementById('name-pure-panel');
+            const hanjaBtn = document.getElementById('name-mode-hanja-btn');
+            const pureBtn = document.getElementById('name-mode-pure-btn');
+
+            if (mode === 'pure') {
+                hanjaPanel.classList.add('hidden');
+                purePanel.classList.remove('hidden');
+                pureBtn.className = "py-3 rounded-xl bg-gradient-to-r from-amber-400/95 to-orange-400/95 text-slate-950 font-bold text-sm transition";
+                hanjaBtn.className = "py-3 rounded-xl text-purple-200 hover:text-amber-200 hover:bg-purple-900/40 font-bold text-sm transition";
+                setTimeout(() => document.getElementById('pure-name-input')?.focus(), 50);
+            } else {
+                purePanel.classList.add('hidden');
+                hanjaPanel.classList.remove('hidden');
+                hanjaBtn.className = "py-3 rounded-xl bg-gradient-to-r from-emerald-500/90 to-teal-500/90 text-slate-950 font-bold text-sm transition";
+                pureBtn.className = "py-3 rounded-xl text-purple-200 hover:text-amber-200 hover:bg-purple-900/40 font-bold text-sm transition";
+            }
+        }
+
+        function decomposeHangulSyllable(ch) {
+            const initials = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+            const medials = ["ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"];
+            const finals = ["","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+            const code = ch.charCodeAt(0) - 0xAC00;
+            if (code < 0 || code > 11171) return null;
+            const initialIndex = Math.floor(code / 588);
+            const medialIndex = Math.floor((code % 588) / 28);
+            const finalIndex = code % 28;
+            return {
+                initial: initials[initialIndex],
+                medial: medials[medialIndex],
+                final: finals[finalIndex]
+            };
+        }
+
+        function getHangulVowelYinYang(vowel) {
+            // 전통적인 모음의 양성/음성/중성 분류를 간명하게 적용
+            const yang = ["ㅏ","ㅑ","ㅗ","ㅛ","ㅘ","ㅙ","ㅚ"];
+            const yin = ["ㅓ","ㅕ","ㅜ","ㅠ","ㅝ","ㅞ","ㅟ"];
+            if (yang.includes(vowel)) return "양(陽)";
+            if (yin.includes(vowel)) return "음(陰)";
+            return "중성";
+        }
+
+        function getElementName(el) {
+            return { "木":"목(木)", "火":"화(火)", "土":"토(土)", "金":"금(金)", "水":"수(水)" }[el] || el;
+        }
+
+        function elementRelation(a, b) {
+            if (!a || !b) return { type:"중립", score:0, text:"기운을 이어 봅니다." };
+            if (a === b) return { type:"비화", score:1, text:"같은 오행이 이어져 성향과 추진력이 선명해집니다." };
+            const generating = { "木":"火", "火":"土", "土":"金", "金":"水", "水":"木" };
+            const controlling = { "木":"土", "土":"水", "水":"火", "火":"金", "金":"木" };
+            if (generating[a] === b) return { type:"상생", score:3, text:`${getElementName(a)}이 ${getElementName(b)}을 생하여 흐름이 자연스럽습니다.` };
+            if (generating[b] === a) return { type:"역상생", score:2, text:`${getElementName(b)}이 ${getElementName(a)}을 돕는 보완 흐름입니다.` };
+            if (controlling[a] === b) return { type:"상극", score:-2, text:`${getElementName(a)}과 ${getElementName(b)} 사이에 긴장감이 있어 조율이 중요합니다.` };
+            if (controlling[b] === a) return { type:"역상극", score:-1, text:`서로 다른 성향이 부딪힐 수 있으나 균형을 잡으면 개성이 됩니다.` };
+            return { type:"중립", score:0, text:"서로 다른 기운이 혼합됩니다." };
+        }
+
+        function analyzePureHangulName() {
+            const input = document.getElementById('pure-name-input');
+            const raw = (input?.value || "").trim().replace(/\s+/g, "");
+            if (!raw) {
+                alert("순한글 이름을 입력해주세요.");
+                return;
+            }
+            const chars = [...raw];
+            if (chars.some(ch => !decomposeHangulSyllable(ch))) {
+                alert("순한글 음절만 입력해주세요. 숫자·영문·특수문자는 제외해주세요.");
+                return;
+            }
+            if (chars.length < 2 || chars.length > 5) {
+                alert("2자 이상 5자 이하의 이름을 입력해주세요.");
+                return;
+            }
+
+            const analyzed = chars.map(ch => {
+                const d = decomposeHangulSyllable(ch);
+                const element = getPronounceOhaeng(ch);
+                const yy = getHangulVowelYinYang(d.medial);
+                return { ch, ...d, element, yy };
+            });
+
+            let relationScore = 0;
+            const relations = [];
+            for (let i = 0; i < analyzed.length - 1; i++) {
+                const r = elementRelation(analyzed[i].element, analyzed[i+1].element);
+                relationScore += r.score;
+                relations.push(r);
+            }
+
+            const yyValues = analyzed.map(x => x.yy).filter(v => v !== "중성");
+            const hasYang = yyValues.includes("양(陽)");
+            const hasYin = yyValues.includes("음(陰)");
+            const neutralCount = analyzed.filter(x => x.yy === "중성").length;
+            let yyScore = 0;
+            let yyLabel = "";
+            let balanceText = "";
+            if (hasYang && hasYin) {
+                yyScore = 20;
+                yyLabel = "양·음 조화";
+                balanceText = "양성 모음과 음성 모음이 함께 있어 소리의 밝음과 깊이가 균형을 이룹니다.";
+            } else if ((hasYang || hasYin) && neutralCount > 0) {
+                yyScore = 15;
+                yyLabel = "한쪽 기운 + 중성 보완";
+                balanceText = "한쪽 음양 성향이 중심을 이루지만 중성 모음이 완충 역할을 해 편향을 줄입니다.";
+            } else if (neutralCount === analyzed.length) {
+                yyScore = 14;
+                yyLabel = "중성 중심";
+                balanceText = "중성 모음이 중심이어서 차분하고 담백한 소리 인상을 줍니다.";
+            } else {
+                yyScore = 9;
+                yyLabel = hasYang ? "양성 편중" : "음성 편중";
+                balanceText = "한쪽 음양 기운이 강하게 나타나 이름의 개성은 선명하지만 균형감은 다소 약할 수 있습니다.";
+            }
+
+            const uniqueElements = new Set(analyzed.map(x => x.element)).size;
+            const finalCount = analyzed.filter(x => x.final).length;
+            const structureScore = Math.min(20, 10 + uniqueElements * 2 + Math.min(4, finalCount));
+            const relationBase = Math.max(0, Math.min(40, 25 + relationScore * 4));
+            const total = Math.max(55, Math.min(98, Math.round(25 + relationBase + yyScore + structureScore * 0.5)));
+
+            let grade = total >= 90 ? "매우 조화로움" :
+                        total >= 80 ? "조화로움" :
+                        total >= 70 ? "무난한 조화" : "개성이 강한 구성";
+
+            document.getElementById('pure-name-title').textContent = raw;
+            document.getElementById('pure-name-summary').textContent =
+                `${chars.length}음절 · ${grade} · 초성 발음오행과 모음 음양을 중심으로 분석`;
+            document.getElementById('pure-ohaeng-flow').textContent =
+                analyzed.map(x => getElementName(x.element)).join(" → ");
+            document.getElementById('pure-yinyang-score').textContent = yyLabel;
+            document.getElementById('pure-total-score').textContent = `${total}점`;
+
+            const grid = document.getElementById('pure-char-grid');
+            grid.innerHTML = analyzed.map((x, idx) => `
+                <div class="p-4 rounded-xl bg-[#140b28] border border-purple-900/40">
+                    <div class="flex items-center justify-between mb-2">
+                        <strong class="serif text-2xl text-amber-300">${x.ch}</strong>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-900/70 text-purple-200">${getElementName(x.element)}</span>
+                    </div>
+                    <div class="space-y-1.5 text-[11px] text-slate-300">
+                        <div class="flex justify-between"><span class="text-purple-300">초성</span><strong>${x.initial}</strong></div>
+                        <div class="flex justify-between"><span class="text-purple-300">중성</span><strong>${x.medial} · ${x.yy}</strong></div>
+                        <div class="flex justify-between"><span class="text-purple-300">종성</span><strong>${x.final || "없음"}</strong></div>
+                        <div class="pt-1 text-purple-200/70">발음의 중심 기운: ${getElementName(x.element)}</div>
+                    </div>
+                </div>
+            `).join("");
+
+            let flowText;
+            if (relations.length === 0) {
+                flowText = "한 음절의 발음 기운을 중심으로 해석합니다.";
+            } else {
+                const good = relations.filter(r => r.type === "상생" || r.type === "역상생" || r.type === "비화").length;
+                const tense = relations.filter(r => r.type === "상극" || r.type === "역상극").length;
+                flowText = relations.map((r,i) => `${analyzed[i].ch}→${analyzed[i+1].ch}: ${r.type} — ${r.text}`).join(" ");
+                if (good > tense) flowText += " 전체적으로 기운이 다음 음절로 자연스럽게 이어지는 편입니다.";
+                else if (tense > good) flowText += " 상극 구간이 있어 소리의 대비와 개성이 강하며, 부드러운 호칭·성씨와의 조화를 함께 보는 것이 좋습니다.";
+                else flowText += " 상생과 긴장이 함께 있어 균형형에 가깝습니다.";
+            }
+
+            document.getElementById('pure-flow-reading').textContent = flowText;
+            document.getElementById('pure-balance-reading').textContent =
+                `${balanceText} 받침이 있는 음절은 ${finalCount}개이며, 오행은 ${uniqueElements}종이 사용되어 자모 구조의 다양성도 함께 나타납니다.`;
+
+            const dominant = [...new Set(analyzed.map(x => x.element))];
+            const personalityMap = {
+                "木":"성장·창의·확장",
+                "火":"표현·열정·활동성",
+                "土":"안정·신뢰·포용",
+                "金":"판단·결단·정돈",
+                "水":"지혜·유연·소통"
+            };
+            const keywords = dominant.map(e => personalityMap[e]).join(" / ");
+            document.getElementById('pure-total-reading').textContent =
+                `${raw}은(는) 발음오행상 ${analyzed.map(x=>x.element).join("→")}의 흐름을 보입니다. ${grade}으로 평가되며, 이름에서 두드러지는 기운은 ${keywords}입니다. ` +
+                `순한글 이름은 한자 획수보다 실제 발음의 리듬과 자모의 균형이 중요하므로, 성씨와 함께 불렀을 때의 자연스러움과 의미·정서적 인상을 최종적으로 함께 고려하는 것이 좋습니다.`;
+
+            const results = document.getElementById('pure-name-results');
+            results.classList.remove('hidden');
+            results.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function onHangulNameChange() {
