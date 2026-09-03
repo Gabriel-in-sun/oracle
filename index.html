@@ -212,6 +212,56 @@
             .candle-ignite .candle-warmth { opacity:.08; animation:none !important; }
             .candle-ignite .candle-bg-shimmer { opacity:.08; animation:none !important; }
         }
+    
+        /* Celtic Cross spread */
+        .celtic-cross-board {
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            overflow-x: auto;
+            padding: .5rem 0 1rem;
+        }
+        .celtic-cross-grid {
+            min-width: 760px;
+            display: grid;
+            grid-template-columns: 110px 110px 110px 110px 110px 32px 110px;
+            grid-template-rows: repeat(5, 168px);
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+        .celtic-slot {
+            width: 110px;
+            text-align: center;
+        }
+        .celtic-slot-card {
+            width: 92px;
+            height: 138px;
+            margin: 0 auto;
+        }
+        .celtic-slot-label {
+            font-size: 9px;
+            line-height: 1.25;
+            color: rgba(216,180,254,.8);
+            margin-bottom: 4px;
+            min-height: 22px;
+        }
+        .celtic-p1 { grid-column: 3; grid-row: 3; z-index: 2; }
+        .celtic-p2 { grid-column: 3; grid-row: 3; z-index: 5; transform: rotate(90deg) scale(.84); }
+        .celtic-p2 .celtic-slot-label { transform: rotate(-90deg); }
+        .celtic-p2 .celtic-slot-card { transform: rotate(-90deg); }
+        .celtic-p3 { grid-column: 3; grid-row: 1; }
+        .celtic-p4 { grid-column: 3; grid-row: 5; }
+        .celtic-p5 { grid-column: 1; grid-row: 3; }
+        .celtic-p6 { grid-column: 5; grid-row: 3; }
+        .celtic-p7 { grid-column: 7; grid-row: 5; }
+        .celtic-p8 { grid-column: 7; grid-row: 4; }
+        .celtic-p9 { grid-column: 7; grid-row: 2; }
+        .celtic-p10 { grid-column: 7; grid-row: 1; }
+        @media (max-width: 767px) {
+            .celtic-cross-board { margin-left: -4px; margin-right: -4px; }
+        }
+
     </style>
 </head>
 <body class="selection:bg-purple-900 selection:text-amber-200 flex flex-col justify-between">
@@ -865,19 +915,26 @@
 
                 <div>
                     <label class="block text-xs font-medium text-purple-200 mb-2">스프레드(배열법) 선택</label>
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <label class="flex items-center p-3 rounded-xl border border-purple-800/60 bg-[#0d071a]/60 cursor-pointer hover:border-amber-400 transition" onclick="setSpread(1)">
                             <input type="radio" name="spread-type" value="1" class="text-amber-400 focus:ring-amber-400 mr-2.5" checked>
                             <div>
-                                <div class="text-xs font-bold text-white">1장 스프레드 (원카드)</div>
+                                <div class="text-xs font-bold text-white">1장 스프레드</div>
                                 <div class="text-[11px] text-purple-300/60">핵심 조언 & 즉각적인 해답</div>
                             </div>
                         </label>
                         <label class="flex items-center p-3 rounded-xl border border-purple-800/60 bg-[#0d071a]/60 cursor-pointer hover:border-amber-400 transition" onclick="setSpread(3)">
                             <input type="radio" name="spread-type" value="3" class="text-amber-400 focus:ring-amber-400 mr-2.5">
                             <div>
-                                <div class="text-xs font-bold text-white">3장 스프레드 (과거·현재·미래)</div>
-                                <div class="text-[11px] text-purple-300/60">원인 분석과 향후 흐름 심층 해석</div>
+                                <div class="text-xs font-bold text-white">3장 스프레드</div>
+                                <div class="text-[11px] text-purple-300/60">과거 · 현재 · 미래</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 rounded-xl border border-indigo-700/60 bg-indigo-950/20 cursor-pointer hover:border-amber-400 transition" onclick="setSpread(10)">
+                            <input type="radio" name="spread-type" value="10" class="text-amber-400 focus:ring-amber-400 mr-2.5">
+                            <div>
+                                <div class="text-xs font-bold text-white">켈틱 크로스 10장</div>
+                                <div class="text-[11px] text-indigo-300/70">근본 원인부터 최종 결과까지</div>
                             </div>
                         </label>
                     </div>
@@ -4227,8 +4284,52 @@
             const container = document.getElementById('spread-slots-container');
             container.innerHTML = '';
 
-            const stepLabels = selectedSpreadCount === 1 
-                ? [{ title: "오늘의 핵심 조언", sub: "Core Advice" }] 
+            if (selectedSpreadCount === 10) {
+                container.className = "celtic-cross-board";
+                const grid = document.createElement('div');
+                grid.className = "celtic-cross-grid";
+
+                const positions = [
+                    ["현재 상황", "Present"],
+                    ["장애물 / 도전", "Challenge"],
+                    ["의식 / 목표", "Crown"],
+                    ["무의식 / 근간", "Root"],
+                    ["과거의 원인", "Past"],
+                    ["가까운 미래", "Near Future"],
+                    ["질문자의 태도", "Self"],
+                    ["주변 환경", "Environment"],
+                    ["희망과 두려움", "Hopes & Fears"],
+                    ["최종 결과", "Outcome"]
+                ];
+
+                positions.forEach((p, idx) => {
+                    const slot = document.createElement('div');
+                    slot.className = `celtic-slot celtic-p${idx + 1}`;
+                    slot.innerHTML = `
+                        <div class="celtic-slot-label"><strong>${idx + 1}. ${p[0]}</strong><br>${p[1]}</div>
+                        <div id="slot-card-${idx}" class="celtic-slot-card perspective">
+                            <div class="card-inner w-full h-full border-2 border-dashed border-purple-500/40 rounded-xl flex flex-col items-center justify-center p-2 text-center bg-purple-950/20">
+                                <i class="fa-solid fa-star text-amber-300/30 text-lg mb-1"></i>
+                                <span class="text-[9px] text-purple-300/50">${idx + 1}번</span>
+                            </div>
+                        </div>`;
+                    grid.appendChild(slot);
+                });
+                container.appendChild(grid);
+
+                const hint = document.createElement('div');
+                hint.className = "mt-3 grid grid-cols-1 md:grid-cols-3 gap-2 text-[10px] text-purple-300/60";
+                hint.innerHTML = `
+                    <div class="p-2 rounded-lg border border-purple-800/30 bg-purple-950/20 text-center">1↔2 중심 십자가<br><strong class="text-amber-200/80">현재와 도전</strong></div>
+                    <div class="p-2 rounded-lg border border-purple-800/30 bg-purple-950/20 text-center">3↔4 / 5→6 큰 십자가<br><strong class="text-amber-200/80">의식·무의식 / 과거·미래</strong></div>
+                    <div class="p-2 rounded-lg border border-purple-800/30 bg-purple-950/20 text-center">7→10 우측 기둥<br><strong class="text-amber-200/80">자아·환경·희망·결과</strong></div>`;
+                container.appendChild(hint);
+                return;
+            }
+
+            container.className = "flex flex-wrap justify-center gap-4 md:gap-6 pt-2";
+            const stepLabels = selectedSpreadCount === 1
+                ? [{ title: "오늘의 핵심 조언", sub: "Core Advice" }]
                 : [
                     { title: "1단계: 과거 및 원인", sub: "Past & Root" },
                     { title: "2단계: 현재 상황 및 장애", sub: "Present & Focus" },
@@ -4399,6 +4500,20 @@
                 lens:"지금 질문의 본질을 압축해서 보여주는 카드",
                 question:"지금 내가 가장 먼저 알아차리거나 행동해야 할 것은 무엇인가?"
             };
+            if (selectedSpreadCount === 10) {
+                return [
+                    {title:"1. 현재 상황", lens:"질문자가 당면한 중심 상태와 핵심 테마", question:"지금 이 문제에서 가장 강하게 작동하는 것은 무엇인가?"},
+                    {title:"2. 장애물 / 도전 과제", lens:"진전을 방해하거나 성장을 요구하는 즉각적인 마찰력", question:"무엇이 이 상황을 어렵게 하거나 시험하는가?"},
+                    {title:"3. 의식 / 목표", lens:"머리로 인지하는 이상·의도·최선이라 생각하는 방향", question:"나는 무엇을 원하고 무엇이 최선이라고 생각하는가?"},
+                    {title:"4. 무의식 / 근간", lens:"행동을 지배하는 잠재의식·본능적 욕구·문제의 뿌리", question:"말로 표현하지 못했지만 실제로 나를 움직이는 것은 무엇인가?"},
+                    {title:"5. 과거의 원인", lens:"현재 상황을 유발한 직접적인 과거 사건·태도·패턴", question:"무엇이 현재 상황을 만들었는가?"},
+                    {title:"6. 가까운 미래", lens:"현재 흐름을 유지할 때 수주일~수개월 내의 전개", question:"지금의 선택을 이어가면 가까운 미래에 무엇이 나타나는가?"},
+                    {title:"7. 질문자의 태도", lens:"문제에 임하는 질문자 자신의 관점·자아상·심리적 태도", question:"나는 이 문제를 어떤 자세로 대하고 있는가?"},
+                    {title:"8. 주변 환경", lens:"타인의 시선·직장/가정 환경·통제하기 어려운 외부 영향", question:"내 밖에서 어떤 힘이 영향을 주고 있는가?"},
+                    {title:"9. 희망과 두려움", lens:"은밀한 기대와 가장 불안해하는 공포", question:"나는 무엇을 가장 바라며 동시에 무엇을 두려워하는가?"},
+                    {title:"10. 최종 결과", lens:"현재의 심리와 환경을 유지했을 때의 장기적 귀결", question:"현재 흐름을 유지하면 어디에 도달할 가능성이 높은가?"}
+                ][index];
+            }
             return [
                 {title:"과거·근본 원인", lens:"현재 상황을 만든 배경과 반복 패턴", question:"무엇이 지금의 상황을 만들었는가?"},
                 {title:"현재·핵심 과제", lens:"지금 가장 크게 작동하는 에너지와 장애물", question:"지금 무엇을 직시하고 다뤄야 하는가?"},
@@ -4480,11 +4595,66 @@
             return `${map[key] || "두 카드의 에너지가 서로 다른 관점을 제시합니다. 한쪽만 선택하기보다 공통되는 메시지를 찾아보세요."} ${orientationNote}`;
         }
 
+
+        function celticCrossStepAnalysis(cards, questionTheme) {
+            if (cards.length !== 10) return [];
+            const c = cards;
+            return [
+                `<strong class="text-amber-200">1단계 · 중심 십자가 (1↔2)</strong><br>
+                 1번 ${c[0].name}은 현재 상황의 핵심을, 2번 ${c[1].name}은 즉각적인 장애물·도전을 보여줍니다.
+                 ${getPairInteraction(c[0], c[1])}
+                 2번이 긍정적인 카드여도 이 위치에서는 ‘과제’로 작용하므로 장점의 과잉, 낙관, 부담 또는 성장을 요구하는 시험으로 읽습니다.`,
+                `<strong class="text-amber-200">2단계 · 큰 십자가 (3↔4 / 5→6)</strong><br>
+                 <strong class="text-purple-200">의식 ↔ 무의식:</strong> 3번 ${c[2].name}은 머리로 원하는 방향, 4번 ${c[3].name}은 실제 행동을 움직이는 깊은 욕구입니다.
+                 ${getPairInteraction(c[2], c[3])}
+                 두 카드가 크게 충돌하면 의식적인 목표와 내면의 욕구 사이의 괴리가 의사결정을 흔들 수 있습니다.<br><br>
+                 <strong class="text-purple-200">과거 → 가까운 미래:</strong> 5번 ${c[4].name}의 패턴이 6번 ${c[5].name}으로 어떻게 변형되는지를 봅니다.
+                 ${getPairInteraction(c[4], c[5])}`,
+                `<strong class="text-amber-200">3단계 · 우측 기둥 (7→9)</strong><br>
+                 7번 ${c[6].name}은 질문자의 태도, 8번 ${c[7].name}은 외부 환경입니다.
+                 ${getPairInteraction(c[6], c[7])}
+                 9번 ${c[8].name}은 희망과 두려움이 섞인 심리적 필터입니다.
+                 따라서 7번 태도와 8번 현실이 어긋나거나 9번의 기대·불안이 과도하면 상황을 실제보다 더 낙관적 또는 비관적으로 해석할 수 있습니다.`,
+                `<strong class="text-amber-200">4단계 · 최종 결과와 조언</strong><br>
+                 10번 ${c[9].name}은 정해진 운명이 아니라 1~9번의 심리·환경·태도를 유지했을 때의 가능성 높은 궤적입니다.
+                 ${getTarotContextText(c[9], c[9].isReversed, questionTheme)}
+                 결과가 마음에 들지 않는다면 2번(장애물), 4번(무의식), 7번(태도)을 우선적인 개입 지점으로 봅니다.`
+            ];
+        }
+
+        function celticCrossIntervention(cards, questionTheme) {
+            if (cards.length !== 10) return "";
+            const candidates = [
+                {pos:"2번 장애물", card:cards[1]},
+                {pos:"4번 무의식", card:cards[3]},
+                {pos:"7번 태도", card:cards[6]}
+            ];
+            const reversed = candidates.filter(x => x.card.isReversed);
+            const priority = (reversed.length ? reversed : candidates)
+                .map(x => `${x.pos} ${x.card.name}`).join(" → ");
+            return `<strong class="text-emerald-200">우선 개입 순서:</strong> ${priority}<br>
+                장애물은 제거할 대상이라기보다 조정할 조건으로 보고, 무의식의 반복 패턴을 인식한 뒤 실제로 바꿀 수 있는 7번 태도에서 행동을 수정하세요.
+                그렇게 하면 10번 ${cards[9].name}이 보여주는 결과 궤적도 달라질 수 있습니다.<br>
+                <span class="text-purple-200/80">${getTarotPracticalAdvice(cards[9], cards[9].isReversed, questionTheme)}</span>`;
+        }
+
         function buildDeepTarotSynthesis(cards, questionTheme) {
             if (cards.length === 1) {
                 const c = cards[0];
                 return `${c.isReversed ? "역방향" : "정방향"}으로 나온 ${c.name}은(는) 질문의 표면적 사건보다 ‘${c.keyword}’라는 핵심 주제를 먼저 보라고 말합니다. ` +
                     `${getTarotContextText(c, c.isReversed, questionTheme)} ${getTarotPracticalAdvice(c, c.isReversed, questionTheme)}`;
+            }
+            if (cards.length === 10) {
+                const c = cards;
+                const reversals = c.filter(x => x.isReversed).length;
+                const majors = c.filter(x => (x.arcana || "").includes("Major")).length;
+                return `켈틱 크로스 전체 흐름에서 1번 ${c[0].name}과 2번 ${c[1].name}이 문제의 핵심 축을 만들고, ` +
+                    `3번 ${c[2].name}과 4번 ${c[3].name}은 의식과 무의식의 관계를 보여줍니다. ` +
+                    `5번 ${c[4].name}의 과거 패턴은 6번 ${c[5].name}으로 이어지며, ` +
+                    `7번 ${c[6].name}의 태도가 8번 ${c[7].name}의 환경과 상호작용하고 9번 ${c[8].name}의 희망·두려움이 판단에 영향을 줍니다. ` +
+                    `현재 흐름이 유지될 경우 10번 ${c[9].name}이 결과 가능성을 보여줍니다. ` +
+                    `${reversals >= 5 ? "역방향이 절반 이상이므로 외부 사건보다 내면의 저항·지연·미해결 감정을 먼저 조정하는 것이 중요합니다." : "정·역방향의 분포를 보면 바깥 현실과 내면의 반응을 함께 조정해야 합니다."} ` +
+                    `${majors >= 4 ? "메이저 아르카나 비중이 높아 단기적 사건보다 가치관과 삶의 방향에 의미가 큰 질문입니다." : "마이너 카드 비중이 높아 실제 습관·관계·실무적 선택의 변화가 결과에 직접 영향을 줄 수 있습니다."}`;
             }
             const [p,n,f] = cards;
             const reversalCount = cards.filter(c => c.isReversed).length;
@@ -4495,7 +4665,6 @@
                     ? "한 장의 역방향 카드는 흐름 전체를 막는 ‘병목’처럼 작동할 수 있으니 그 카드의 위치를 특히 주의해서 보세요."
                     : "세 카드가 모두 정방향이므로 흐름이 비교적 명확하게 이어지며 행동에 대한 피드백도 빠른 편입니다.";
             if (majors >= 2) meta += " 메이저 아르카나가 두 장 이상이라 이번 질문은 단기적인 사건보다 가치관이나 삶의 방향에 더 큰 의미가 있습니다.";
-
             return `과거의 ${p.name}에서 시작된 패턴이 현재의 ${n.name}에서 구체적인 과제로 드러나고, 미래의 ${f.name}은 현재의 대응 방식이 어디로 이어질지를 보여줍니다. ` +
                 `${getPairInteraction(p,n)} 이어서 ${getPairInteraction(n,f)} ${meta} ` +
                 `최종적으로는 ${getTarotPracticalAdvice(f, f.isReversed, questionTheme)}`;
@@ -4555,7 +4724,7 @@
             const themeHeader = document.createElement('div');
             themeHeader.className = "p-3 rounded-xl border border-amber-400/20 bg-amber-950/15 text-xs text-slate-300 leading-relaxed";
             themeHeader.innerHTML = `<strong class="text-amber-300">질문 맥락:</strong> ${themeNames[questionTheme]} &nbsp;/&nbsp;
-                <strong class="text-amber-300">해석 방식:</strong> 정·역방향 + 스프레드 위치 + 질문 맥락 + 카드 간 상호작용`;
+                <strong class="text-amber-300">해석 방식:</strong> 정·역방향 + 위치별 의미 + 질문 맥락 + 카드 간 상호작용 + 4단계 통합 분석`;
             reportContainer.appendChild(themeHeader);
 
             chosenCards.forEach((card, idx) => {
@@ -4565,9 +4734,11 @@
                 const rotateClass = card.isReversed ? "rotate-180" : "";
                 const positionalBase = selectedSpreadCount === 1
                     ? getTarotOrientationText(card, card.isReversed)
-                    : (card.isReversed
-                        ? getTarotOrientationText(card, true)
-                        : (idx === 0 ? card.past : (idx === 1 ? card.present : card.future)));
+                    : selectedSpreadCount === 10
+                        ? getTarotOrientationText(card, card.isReversed)
+                        : (card.isReversed
+                            ? getTarotOrientationText(card, true)
+                            : (idx === 0 ? card.past : (idx === 1 ? card.present : card.future)));
 
                 const contextual = getTarotContextText(card, card.isReversed, questionTheme);
                 const practical = getTarotPracticalAdvice(card, card.isReversed, questionTheme);
@@ -4623,6 +4794,27 @@
                     </p>
                 `;
                 reportContainer.appendChild(interaction);
+            }
+
+            if (chosenCards.length === 10) {
+                const steps = celticCrossStepAnalysis(chosenCards, questionTheme);
+                const wrap = document.createElement('div');
+                wrap.className = "space-y-3";
+                wrap.innerHTML = `
+                    <div class="text-center pt-2">
+                        <span class="text-xs uppercase tracking-widest text-indigo-300 font-bold">Celtic Cross Four-Step Analysis</span>
+                        <h4 class="serif text-lg text-amber-200 mt-1">켈틱 크로스 4단계 통합 분석</h4>
+                    </div>
+                    ${steps.map((text, i) => `
+                        <div class="p-4 md:p-5 rounded-xl bg-gradient-to-r ${i % 2 === 0 ? 'from-indigo-950/40 to-purple-950/30' : 'from-purple-950/35 to-amber-950/20'} border border-indigo-400/20">
+                            <p class="text-xs md:text-sm text-slate-300 leading-relaxed">${text}</p>
+                        </div>
+                    `).join('')}
+                    <div class="p-4 md:p-5 rounded-xl bg-emerald-950/20 border border-emerald-400/25">
+                        <div class="text-xs font-bold text-emerald-300 mb-2"><i class="fa-solid fa-route mr-1.5"></i> 결과를 바꾸기 위한 개입 포인트</div>
+                        <p class="text-xs md:text-sm text-slate-300 leading-relaxed">${celticCrossIntervention(chosenCards, questionTheme)}</p>
+                    </div>`;
+                reportContainer.appendChild(wrap);
             }
 
             const summaryText = buildDeepTarotSynthesis(chosenCards, questionTheme);
