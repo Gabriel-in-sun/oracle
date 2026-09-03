@@ -240,7 +240,7 @@
                     <i class="fa-solid fa-heart-pulse text-xs"></i> <span>궁합 & 그룹 분석</span>
                 </button>
                 <button onclick="switchTab('zodiac')" id="nav-zodiac" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-sparkles text-xs"></i> <span>별자리 운세</span>
+                    <i class="fa-solid fa-sun text-xs"></i> <span>오늘의 운세</span>
                 </button>
             </nav>
         </div>
@@ -408,8 +408,8 @@
                         <img src="data:image/png;base64,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" alt="별자리 운세" class="w-full h-full object-cover">
                     </div>
                     <div class="p-3">
-                        <h3 class="serif text-sm sm:text-base font-bold text-white">별자리 운세</h3>
-                        <p class="mt-1 text-[10px] sm:text-[11px] leading-relaxed text-slate-400">오늘의 총운과 행운의 컬러·숫자·시간을 확인하세요.</p>
+                        <h3 class="serif text-sm sm:text-base font-bold text-white">오늘의 운세</h3>
+                        <p class="mt-1 text-[10px] sm:text-[11px] leading-relaxed text-slate-400">생년월일을 바탕으로 사주·점성학·타로를 종합해 오늘의 흐름을 확인하세요.</p>
                         <div class="mt-2 text-right text-amber-300 text-xs">→</div>
                     </div>
                 </button>
@@ -1048,112 +1048,155 @@
             </div>
         </section>
 
-        <!-- ==================== ZODIAC TAB ==================== -->
+        <!-- ==================== TODAY'S FORTUNE TAB ==================== -->
         <section id="tab-zodiac" class="hidden space-y-8 animate-fade-in">
             <div class="text-center space-y-2">
-                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">12 별자리 운세</h2>
-                <p class="text-sm text-purple-200/70">당신의 별자리를 선택하여 오늘의 행운 지수와 세부 조언을 확인하세요.</p>
+                <span class="inline-flex items-center gap-2 px-3 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/25 rounded-full font-semibold">
+                    <i class="fa-solid fa-sun"></i> Daily Fortune
+                </span>
+                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">오늘의 운세</h2>
+                <p class="text-sm text-purple-200/70">생년월일을 기준으로 사주팔자 · 서양 점성학 · 타로카드를 함께 살펴 오늘의 흐름을 종합합니다.</p>
             </div>
 
-            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
-                <button onclick="selectZodiac(0)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♈</div>
-                    <div class="text-xs font-bold text-white">양자리</div>
-                    <div class="text-[10px] text-purple-300/60">3.21~4.19</div>
-                </button>
-                <button onclick="selectZodiac(1)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♉</div>
-                    <div class="text-xs font-bold text-white">황소자리</div>
-                    <div class="text-[10px] text-purple-300/60">4.20~5.20</div>
-                </button>
-                <button onclick="selectZodiac(2)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♊</div>
-                    <div class="text-xs font-bold text-white">쌍둥이자리</div>
-                    <div class="text-[10px] text-purple-300/60">5.21~6.21</div>
-                </button>
-                <button onclick="selectZodiac(3)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♋</div>
-                    <div class="text-xs font-bold text-white">게자리</div>
-                    <div class="text-[10px] text-purple-300/60">6.22~7.22</div>
-                </button>
-                <button onclick="selectZodiac(4)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♌</div>
-                    <div class="text-xs font-bold text-white">사자자리</div>
-                    <div class="text-[10px] text-purple-300/60">7.23~8.22</div>
-                </button>
-                <button onclick="selectZodiac(5)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♍</div>
-                    <div class="text-xs font-bold text-white">처녀자리</div>
-                    <div class="text-[10px] text-purple-300/60">8.23~9.22</div>
-                </button>
-                <button onclick="selectZodiac(6)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♎</div>
-                    <div class="text-xs font-bold text-white">천칭자리</div>
-                    <div class="text-[10px] text-purple-300/60">9.23~10.22</div>
-                </button>
-                <button onclick="selectZodiac(7)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♏</div>
-                    <div class="text-xs font-bold text-white">전갈자리</div>
-                    <div class="text-[10px] text-purple-300/60">10.23~11.22</div>
-                </button>
-                <button onclick="selectZodiac(8)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♐</div>
-                    <div class="text-xs font-bold text-white">사수자리</div>
-                    <div class="text-[10px] text-purple-300/60">11.23~12.21</div>
-                </button>
-                <button onclick="selectZodiac(9)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♑</div>
-                    <div class="text-xs font-bold text-white">염소자리</div>
-                    <div class="text-[10px] text-purple-300/60">12.22~1.19</div>
-                </button>
-                <button onclick="selectZodiac(10)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♒</div>
-                    <div class="text-xs font-bold text-white">물병자리</div>
-                    <div class="text-[10px] text-purple-300/60">1.20~2.18</div>
-                </button>
-                <button onclick="selectZodiac(11)" class="zodiac-btn glass-card p-3 rounded-xl text-center hover:border-amber-400 transition hover:bg-purple-900/30 group">
-                    <div class="text-2xl mb-1 group-hover:scale-110 transition">♓</div>
-                    <div class="text-xs font-bold text-white">물고기자리</div>
-                    <div class="text-[10px] text-purple-300/60">2.19~3.20</div>
-                </button>
-            </div>
-
-            <div id="zodiac-result" class="hidden glass-card max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/30 space-y-5 animate-fade-in">
-                <div class="flex items-center justify-between border-b border-purple-900/50 pb-4">
-                    <div>
-                        <span id="zodiac-symbol" class="text-3xl mr-2">♈</span>
-                        <h3 id="zodiac-name" class="text-2xl font-bold serif text-white inline-block">양자리 운세</h3>
+            <!-- Input -->
+            <div class="glass-card max-w-3xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/25 space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">생년월일 <span class="text-purple-300/60">(양력)</span></label>
+                        <input type="date" id="today-fortune-birthdate"
+                            class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
                     </div>
-                    <div class="text-right">
-                        <span class="text-xs text-amber-300 font-semibold block">총운 지수</span>
-                        <div id="zodiac-score" class="text-lg font-bold text-amber-400">★★★★☆ (85점)</div>
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">출생시간 <span class="text-purple-300/60">(선택)</span></label>
+                        <select id="today-fortune-hour"
+                            class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="">시간 모름</option>
+                            <option value="0">00시</option><option value="1">01시</option><option value="2">02시</option>
+                            <option value="3">03시</option><option value="4">04시</option><option value="5">05시</option>
+                            <option value="6">06시</option><option value="7">07시</option><option value="8">08시</option>
+                            <option value="9">09시</option><option value="10">10시</option><option value="11">11시</option>
+                            <option value="12">12시</option><option value="13">13시</option><option value="14">14시</option>
+                            <option value="15">15시</option><option value="16">16시</option><option value="17">17시</option>
+                            <option value="18">18시</option><option value="19">19시</option><option value="20">20시</option>
+                            <option value="21">21시</option><option value="22">22시</option><option value="23">23시</option>
+                        </select>
                     </div>
                 </div>
 
-                <p id="zodiac-desc" class="text-sm text-slate-200 leading-relaxed font-light">...</p>
+                <div class="grid grid-cols-3 gap-2 text-center text-[10px] md:text-xs">
+                    <div class="rounded-xl bg-red-950/25 border border-red-500/20 p-3">
+                        <i class="fa-solid fa-yin-yang text-red-300 block text-lg mb-1"></i>
+                        <strong class="text-red-200">사주팔자</strong>
+                        <span class="block text-slate-400 mt-1">일간과 오늘의 일진</span>
+                    </div>
+                    <div class="rounded-xl bg-indigo-950/30 border border-indigo-500/20 p-3">
+                        <i class="fa-solid fa-star-and-crescent text-indigo-300 block text-lg mb-1"></i>
+                        <strong class="text-indigo-200">점성학</strong>
+                        <span class="block text-slate-400 mt-1">태양 별자리와 오늘의 행성</span>
+                    </div>
+                    <div class="rounded-xl bg-purple-950/30 border border-purple-500/20 p-3">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-300 block text-lg mb-1"></i>
+                        <strong class="text-purple-200">타로카드</strong>
+                        <span class="block text-slate-400 mt-1">오늘의 메시지 1장</span>
+                    </div>
+                </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-xs">
-                    <div class="p-3 rounded-xl bg-purple-950/40 text-center border border-purple-800/30">
-                        <span class="text-purple-300 block mb-1">❤️ 애정운</span>
-                        <span id="zodiac-love" class="text-white font-semibold">...</span>
+                <button type="button" onclick="calculateTodayFortune()"
+                    class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 hover:from-amber-300 hover:to-rose-300 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-950/30">
+                    <i class="fa-solid fa-sun mr-1.5"></i> 오늘의 운세 보기
+                </button>
+                <p class="text-[10px] text-purple-300/50 text-center">
+                    출생시간을 모르면 정오 기준으로 사주 요소를 보조 계산합니다. 운세 해석은 참고용입니다.
+                </p>
+            </div>
+
+            <!-- Results -->
+            <div id="today-fortune-result" class="hidden max-w-4xl mx-auto space-y-5 animate-fade-in">
+                <div class="glass-card p-6 md:p-8 rounded-2xl border-amber-400/35">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-purple-900/50 pb-5">
+                        <div>
+                            <span id="today-fortune-date-label" class="text-xs text-purple-300 block mb-1">-</span>
+                            <h3 class="text-2xl md:text-3xl font-bold serif text-white">오늘의 종합 운세</h3>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="text-xs text-amber-300 font-semibold block">종합 지수</span>
+                            <div id="today-fortune-score" class="text-3xl font-bold text-amber-300">--점</div>
+                        </div>
                     </div>
-                    <div class="p-3 rounded-xl bg-purple-950/40 text-center border border-purple-800/30">
-                        <span class="text-purple-300 block mb-1">💰 재물운</span>
-                        <span id="zodiac-money" class="text-white font-semibold">...</span>
+                    <p id="today-fortune-headline" class="mt-5 text-base md:text-lg serif text-amber-100 leading-relaxed">-</p>
+                    <p id="today-fortune-summary" class="mt-3 text-sm text-slate-300 leading-relaxed">-</p>
+                </div>
+
+                <!-- 3 systems -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="glass-card p-5 rounded-2xl border-red-500/25 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <strong class="text-red-200"><i class="fa-solid fa-yin-yang mr-1.5"></i> 사주팔자</strong>
+                            <span id="today-saju-score" class="text-xs font-bold text-red-300">--점</span>
+                        </div>
+                        <div id="today-saju-pillars" class="text-xs text-amber-200 font-semibold">-</div>
+                        <p id="today-saju-reading" class="text-xs text-slate-300 leading-relaxed">-</p>
                     </div>
-                    <div class="p-3 rounded-xl bg-purple-950/40 text-center border border-purple-800/30">
-                        <span class="text-purple-300 block mb-1">🎨 행운 색상</span>
-                        <span id="zodiac-color" class="text-amber-300 font-semibold">...</span>
+
+                    <div class="glass-card p-5 rounded-2xl border-indigo-500/25 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <strong class="text-indigo-200"><i class="fa-solid fa-star-and-crescent mr-1.5"></i> 점성학</strong>
+                            <span id="today-astro-score" class="text-xs font-bold text-indigo-300">--점</span>
+                        </div>
+                        <div id="today-astro-sign" class="text-xs text-amber-200 font-semibold">-</div>
+                        <p id="today-astro-reading" class="text-xs text-slate-300 leading-relaxed">-</p>
                     </div>
-                    <div class="p-3 rounded-xl bg-purple-950/40 text-center border border-purple-800/30">
-                        <span class="text-purple-300 block mb-1">🔢 행운 숫자</span>
-                        <span id="zodiac-num" class="text-amber-300 font-semibold">...</span>
+
+                    <div class="glass-card p-5 rounded-2xl border-purple-500/25 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <strong class="text-purple-200"><i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i> 오늘의 타로</strong>
+                            <span id="today-tarot-score" class="text-xs font-bold text-purple-300">--점</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div id="today-tarot-icon" class="w-11 h-14 rounded-lg bg-gradient-to-br from-purple-900 to-amber-900/50 border border-amber-400/30 flex items-center justify-center text-amber-300">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <div>
+                                <div id="today-tarot-name" class="text-xs text-amber-200 font-semibold">-</div>
+                                <div id="today-tarot-keyword" class="text-[10px] text-purple-300 mt-1">-</div>
+                            </div>
+                        </div>
+                        <p id="today-tarot-reading" class="text-xs text-slate-300 leading-relaxed">-</p>
                     </div>
+                </div>
+
+                <!-- Life areas -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="glass-card rounded-xl p-4 text-center border-rose-500/20">
+                        <span class="text-xs text-rose-300 block mb-1">❤️ 애정운</span>
+                        <strong id="today-love-score" class="text-lg text-white">--</strong>
+                        <p id="today-love-text" class="text-[10px] text-slate-400 mt-1 leading-relaxed">-</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 text-center border-amber-500/20">
+                        <span class="text-xs text-amber-300 block mb-1">💰 재물·직업운</span>
+                        <strong id="today-money-score" class="text-lg text-white">--</strong>
+                        <p id="today-money-text" class="text-[10px] text-slate-400 mt-1 leading-relaxed">-</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 text-center border-emerald-500/20">
+                        <span class="text-xs text-emerald-300 block mb-1">🌿 건강·컨디션</span>
+                        <strong id="today-health-score" class="text-lg text-white">--</strong>
+                        <p id="today-health-text" class="text-[10px] text-slate-400 mt-1 leading-relaxed">-</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 text-center border-sky-500/20">
+                        <span class="text-xs text-sky-300 block mb-1">✨ 행운 포인트</span>
+                        <strong id="today-lucky-color" class="text-sm text-amber-200">-</strong>
+                        <p id="today-lucky-num" class="text-[10px] text-slate-400 mt-1">-</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 md:p-6 rounded-2xl border-amber-400/30 bg-gradient-to-r from-purple-950/40 to-amber-950/20">
+                    <strong class="text-amber-300 block mb-2"><i class="fa-solid fa-compass mr-1.5"></i> 오늘의 행동 가이드</strong>
+                    <p id="today-action-guide" class="text-sm text-slate-200 leading-relaxed">-</p>
                 </div>
             </div>
         </section>
 
-    </main>
+</main>
 
     <footer class="border-t border-purple-900/30 py-6 text-center text-xs text-purple-300/40 mt-12">
         <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -3507,34 +3550,217 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        const zodiacData = [
-            { name: "양자리 (Aries)", symbol: "♈", score: "★★★★☆ (88점)", desc: "자신감과 추진력이 최고조에 이르는 날입니다. 미뤄왔던 일을 시원하게 해결할 수 있습니다.", love: "설레는 호감 증가", money: "안정적 흐름", color: "크림슨 레드", num: "7, 19" },
-            { name: "황소자리 (Taurus)", symbol: "♉", score: "★★★★★ (95점)", desc: "풍요와 안정이 깃드는 하루입니다. 정성 들인 일에서 기분 좋은 성과나 이득을 얻습니다.", love: "깊은 유대감", money: "뜻밖의 수익", color: "에메랄드 그린", num: "6, 24" },
-            { name: "쌍둥이자리 (Gemini)", symbol: "♊", score: "★★★★☆ (82점)", desc: "유익한 정보와 아이디어가 풍부한 날입니다. 가벼운 대화 속에서 귀중한 힌트를 얻습니다.", love: "경쾌한 대화", money: "합리적 소비", color: "스카이 블루", num: "3, 15" },
-            { name: "게자리 (Cancer)", symbol: "♋", score: "★★★☆☆ (78점)", desc: "내면의 감수성이 깊어집니다. 편안하고 익숙한 공간에서 재충전할 때 행운이 따릅니다.", love: "따뜻한 공감", money: "현상 유지", color: "실버 화이트", num: "2, 20" },
-            { name: "사자자리 (Leo)", symbol: "♌", score: "★★★★★ (92점)", desc: "당신의 존재감이 환하게 돋보입니다. 당당한 태도로 나아가면 주변의 전폭적인 지지를 받습니다.", love: "매력 발산", money: "재물운 상승", color: "골드 옐로우", num: "1, 10" },
-            { name: "처녀자리 (Virgo)", symbol: "♍", score: "★★★★☆ (86점)", desc: "디테일한 관찰력과 정리 능력이 빛납니다. 복잡한 문제를 깔끔하게 정리할 수 있습니다.", love: "성실한 신뢰", money: "알뜰한 절약", color: "네이비", num: "5, 14" },
-            { name: "천칭자리 (Libra)", symbol: "♎", score: "★★★★☆ (87점)", desc: "대인관계가 원만하고 화기애애합니다. 서로에게 이익이 되는 좋은 협의점을 찾게 됩니다.", love: "로맨틱한 기류", money: "균형 유지", color: "파스텔 핑크", num: "9, 27" },
-            { name: "전갈자리 (Scorpio)", symbol: "♏", score: "★★★★☆ (89점)", desc: "직관력과 집중력이 매우 뛰어납니다. 본인의 느낌을 믿고 깊이 파고들면 답을 얻습니다.", love: "강한 이끌림", money: "숨은 자금 관리", color: "딥 버건디", num: "8, 18" },
-            { name: "사수자리 (Sagittarius)", symbol: "♐", score: "★★★★☆ (84점)", desc: "새로운 분야에 대한 모험심이 행운을 가져옵니다. 가벼운 산책이나 이동이 길합니다.", love: "자유로운 소통", money: "지식에 투자", color: "바이올렛", num: "4, 21" },
-            { name: "염소자리 (Capricorn)", symbol: "♑", score: "★★★★★ (91점)", desc: "성실하게 쌓아온 노력이 신뢰로 보상받는 날입니다. 장기적인 계획이 탄탄해집니다.", love: "든든한 믿음", money: "안정적 결실", color: "차콜 그레이", num: "11, 28" },
-            { name: "물병자리 (Aquarius)", symbol: "♒", score: "★★★★☆ (87점)", desc: "남다른 개성과 창의적인 아이디어가 주목받습니다. 틀에 얽매이지 않는 시도가 유리합니다.", love: "편안한 친구 느낌", money: "스마트한 지출", color: "일렉트릭 블루", num: "17, 31" },
-            { name: "물고기자리 (Pisces)", symbol: "♓", score: "★★★★☆ (80점)", desc: "예술적 감수성과 따뜻한 배려심이 돋보입니다. 음악이나 마음을 다독이는 활동을 추천합니다.", love: "감성적 교감", money: "지출 절제 권장", color: "라벤더", num: "12, 23" }
+        // ==================== TODAY'S FORTUNE ENGINE ====================
+        const TODAY_ZODIAC_SIGNS = [
+            {name:"염소자리", en:"Capricorn", symbol:"♑", element:"土", start:[12,22], end:[1,19], tone:"현실적인 계획과 꾸준함"},
+            {name:"물병자리", en:"Aquarius", symbol:"♒", element:"風", start:[1,20], end:[2,18], tone:"독창성과 새로운 관점"},
+            {name:"물고기자리", en:"Pisces", symbol:"♓", element:"水", start:[2,19], end:[3,20], tone:"직관과 공감"},
+            {name:"양자리", en:"Aries", symbol:"♈", element:"火", start:[3,21], end:[4,19], tone:"추진력과 결단"},
+            {name:"황소자리", en:"Taurus", symbol:"♉", element:"土", start:[4,20], end:[5,20], tone:"안정과 실질적인 성과"},
+            {name:"쌍둥이자리", en:"Gemini", symbol:"♊", element:"風", start:[5,21], end:[6,21], tone:"소통과 정보"},
+            {name:"게자리", en:"Cancer", symbol:"♋", element:"水", start:[6,22], end:[7,22], tone:"관계와 정서적 안정"},
+            {name:"사자자리", en:"Leo", symbol:"♌", element:"火", start:[7,23], end:[8,22], tone:"표현력과 자신감"},
+            {name:"처녀자리", en:"Virgo", symbol:"♍", element:"土", start:[8,23], end:[9,22], tone:"정리와 세밀함"},
+            {name:"천칭자리", en:"Libra", symbol:"♎", element:"風", start:[9,23], end:[10,23], tone:"균형과 협업"},
+            {name:"전갈자리", en:"Scorpio", symbol:"♏", element:"水", start:[10,24], end:[11,22], tone:"집중력과 깊은 통찰"},
+            {name:"사수자리", en:"Sagittarius", symbol:"♐", element:"火", start:[11,23], end:[12,21], tone:"확장과 도전"}
         ];
 
-        function selectZodiac(index) {
-            const data = zodiacData[index];
-            document.getElementById('zodiac-symbol').textContent = data.symbol;
-            document.getElementById('zodiac-name').textContent = data.name;
-            document.getElementById('zodiac-score').textContent = data.score;
-            document.getElementById('zodiac-desc').textContent = data.desc;
-            document.getElementById('zodiac-love').textContent = data.love;
-            document.getElementById('zodiac-money').textContent = data.money;
-            document.getElementById('zodiac-color').textContent = data.color;
-            document.getElementById('zodiac-num').textContent = data.num;
+        const TODAY_WEEKDAY_PLANETS = [
+            {name:"태양", element:"火", theme:"자기표현·리더십"},
+            {name:"달", element:"水", theme:"감정·관계·회복"},
+            {name:"화성", element:"火", theme:"행동·경쟁·추진"},
+            {name:"수성", element:"風", theme:"소통·분석·계약"},
+            {name:"목성", element:"火", theme:"성장·기회·학습"},
+            {name:"금성", element:"土", theme:"관계·미감·재정"},
+            {name:"토성", element:"土", theme:"책임·정리·장기계획"}
+        ];
 
-            document.getElementById('zodiac-result').classList.remove('hidden');
+        const TODAY_TENGOD_GUIDE = {
+            "비견": {score:78, text:"자기주도성이 강해지는 날입니다. 스스로 결정하고 움직일수록 속도가 붙지만, 고집보다는 협업의 여지를 남겨두세요."},
+            "겁재": {score:69, text:"경쟁과 예상 밖 지출이 생기기 쉬운 날입니다. 사람과 돈의 경계를 명확히 하고 충동적인 선택은 한 번 더 점검하세요."},
+            "식신": {score:88, text:"표현력과 생산성이 살아납니다. 꾸준히 해온 일을 결과물로 보여주거나 편안한 관계를 만드는 데 유리합니다."},
+            "상관": {score:75, text:"아이디어와 말의 힘이 강합니다. 창의적인 시도에는 좋지만 직설적인 표현이 갈등을 만들지 않도록 톤을 조절하세요."},
+            "편재": {score:84, text:"외부 활동과 새로운 기회에 민감해집니다. 사람을 만나고 정보를 넓히되, 수익 가능성과 위험을 함께 계산하세요."},
+            "정재": {score:86, text:"재정·업무의 안정성과 실질적인 성과가 돋보입니다. 계획한 일을 차근차근 마무리하기 좋은 흐름입니다."},
+            "편관": {score:67, text:"압박과 책임이 커질 수 있지만 집중력도 함께 올라갑니다. 무리하게 맞서기보다 우선순위를 정해 하나씩 처리하세요."},
+            "정관": {score:89, text:"공적인 평가와 신뢰를 얻기 좋은 날입니다. 약속·규칙·기본을 지킬수록 결과가 안정적으로 따라옵니다."},
+            "편인": {score:73, text:"직관과 탐구심이 강해집니다. 혼자 생각할 시간이 도움이 되지만 지나친 의심이나 생각의 과잉은 경계하세요."},
+            "정인": {score:90, text:"배움·지원·회복의 기운이 좋습니다. 조언을 구하거나 중요한 정보를 정리하고 재충전하기에 유리합니다."}
+        };
+
+        function getTodaySunSign(month, day) {
+            const md = month * 100 + day;
+            if (md >= 1222 || md <= 119) return TODAY_ZODIAC_SIGNS[0];
+            if (md <= 218) return TODAY_ZODIAC_SIGNS[1];
+            if (md <= 320) return TODAY_ZODIAC_SIGNS[2];
+            if (md <= 419) return TODAY_ZODIAC_SIGNS[3];
+            if (md <= 520) return TODAY_ZODIAC_SIGNS[4];
+            if (md <= 621) return TODAY_ZODIAC_SIGNS[5];
+            if (md <= 722) return TODAY_ZODIAC_SIGNS[6];
+            if (md <= 822) return TODAY_ZODIAC_SIGNS[7];
+            if (md <= 922) return TODAY_ZODIAC_SIGNS[8];
+            if (md <= 1023) return TODAY_ZODIAC_SIGNS[9];
+            if (md <= 1122) return TODAY_ZODIAC_SIGNS[10];
+            return TODAY_ZODIAC_SIGNS[11];
         }
+
+        function todayAstroCompatibility(signElement, planetElement) {
+            if (signElement === planetElement) return 90;
+            const goodPairs = new Set(["火風","風火","土水","水土"]);
+            if (goodPairs.has(signElement + planetElement)) return 86;
+            const neutralPairs = new Set(["火土","土火","風水","水風"]);
+            if (neutralPairs.has(signElement + planetElement)) return 77;
+            return 70;
+        }
+
+        function seededTodayNumber(seedText) {
+            let h = 2166136261;
+            for (let i = 0; i < seedText.length; i++) {
+                h ^= seedText.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+            }
+            return h >>> 0;
+        }
+
+        function scoreStars(score) {
+            const full = Math.max(1, Math.min(5, Math.round(score / 20)));
+            return "★".repeat(full) + "☆".repeat(5 - full);
+        }
+
+        function calculateTodayFortune() {
+            const birthEl = document.getElementById("today-fortune-birthdate");
+            const birthValue = birthEl?.value || "";
+            if (!birthValue) {
+                alert("생년월일을 입력해주세요.");
+                return;
+            }
+
+            const parts = birthValue.split("-").map(Number);
+            if (parts.length !== 3 || parts.some(v => !Number.isFinite(v))) {
+                alert("생년월일을 확인해주세요.");
+                return;
+            }
+            const [by, bm, bd] = parts;
+
+            const hourValue = document.getElementById("today-fortune-hour")?.value ?? "";
+            const hourIdx = hourValue === "" ? 6 : Math.floor((Number(hourValue) + 1) / 2) % 12;
+            const birthStr = `${by}${String(bm).padStart(2,"0")}${String(bd).padStart(2,"0")}`;
+            const natal = calculateSajuCore(birthStr, "solar", hourIdx);
+            if (!natal) {
+                alert("입력한 생년월일을 계산할 수 없습니다.");
+                return;
+            }
+
+            const now = new Date();
+            const ty = now.getFullYear(), tm = now.getMonth() + 1, td = now.getDate();
+            const todayIdx = getSexagenaryDayIndex(ty, tm, td);
+            const todayCg = todayIdx % 10;
+            const todayJj = todayIdx % 12;
+            const tenGod = getTenGod(natal.dayCg, todayCg);
+            const tg = TODAY_TENGOD_GUIDE[tenGod] || {score:76, text:"오늘의 흐름은 균형을 유지하는 것이 중요합니다."};
+
+            // Saju component: day-master relation + branch relation nuance
+            let branchBonus = 0;
+            const natalDayBranch = natal.dayJj;
+            const sixHapPairs = new Set(["01","10","2b","b2","3a","a3","49","94","58","85","67","76"]);
+            const clashPairs = new Set(["06","60","17","71","28","82","39","93","4a","a4","5b","b5"]);
+            const pairKey = natalDayBranch.toString(12) + todayJj.toString(12);
+            if (sixHapPairs.has(pairKey)) branchBonus += 5;
+            if (clashPairs.has(pairKey)) branchBonus -= 6;
+            const sajuScore = Math.max(58, Math.min(96, tg.score + branchBonus));
+
+            // Astrology component
+            const sunSign = getTodaySunSign(bm, bd);
+            const weekdayPlanet = TODAY_WEEKDAY_PLANETS[now.getDay()];
+            const astroScore = todayAstroCompatibility(sunSign.element, weekdayPlanet.element);
+            const astroReading = `${sunSign.symbol} ${sunSign.name}의 기본 기질인 ‘${sunSign.tone}’에 오늘의 ${weekdayPlanet.name}이 강조하는 ${weekdayPlanet.theme} 테마가 더해집니다. ` +
+                (astroScore >= 85 ? "평소 강점을 밖으로 드러내기 좋은 흐름입니다." :
+                 astroScore >= 76 ? "속도를 조절하면서 상황에 맞게 유연하게 움직이면 안정적인 하루가 됩니다." :
+                 "무리하게 결과를 밀어붙이기보다 컨디션과 주변 반응을 살피는 편이 좋습니다.");
+
+            // Tarot component: deterministic daily card
+            const dateKey = `${ty}-${String(tm).padStart(2,"0")}-${String(td).padStart(2,"0")}`;
+            const seed = seededTodayNumber(`${birthValue}|${dateKey}`);
+            const tarot = tarotDatabase[seed % tarotDatabase.length];
+            const tarotScore = 72 + (seed % 21); // 72-92
+            const tarotReading = `${tarot.present} ${tarot.advice}`;
+
+            // Composite
+            const totalScore = Math.round(sajuScore * 0.45 + astroScore * 0.30 + tarotScore * 0.25);
+            const luckSeed = seededTodayNumber(`${dateKey}|${birthValue}|luck`);
+            const colorList = ["골드","딥 블루","에메랄드","아이보리","버건디","라벤더","네이비","코랄"];
+            const luckyColor = colorList[luckSeed % colorList.length];
+            const luckyNum1 = (luckSeed % 9) + 1;
+            const luckyNum2 = ((Math.floor(luckSeed / 11)) % 22) + 1;
+
+            const loveScore = Math.max(55, Math.min(98, Math.round(totalScore + ((luckSeed % 11) - 5))));
+            const moneyScore = Math.max(55, Math.min(98, Math.round(sajuScore * .55 + astroScore * .25 + tarotScore * .20)));
+            const healthScore = Math.max(55, Math.min(98, Math.round(astroScore * .45 + totalScore * .35 + 12)));
+
+            const headline =
+                totalScore >= 90 ? "세 흐름이 함께 상승하는 날 — 중요한 일을 앞으로 밀어도 좋습니다." :
+                totalScore >= 82 ? "기회와 안정이 함께 들어오는 날 — 준비한 것을 차분히 실행하세요." :
+                totalScore >= 74 ? "균형이 핵심인 날 — 한 가지 우선순위에 힘을 모으세요." :
+                totalScore >= 66 ? "속도보다 방향을 확인할 날 — 무리한 결정은 잠시 보류하세요." :
+                "에너지를 아껴야 하는 날 — 정리와 회복을 우선하면 흐름이 좋아집니다.";
+
+            const summary = `사주에서는 오늘의 ${CHEONGAN[todayCg]}${JIJI[todayJj]} 일진이 당신의 일간 ${CHEONGAN[natal.dayCg]}과 만나 ‘${tenGod}’의 흐름을 만듭니다. ` +
+                `점성학에서는 ${sunSign.name}에 ${weekdayPlanet.name}의 테마가 강조되고, 타로는 「${tarot.name}」을 오늘의 카드로 보여줍니다. ` +
+                `세 체계를 함께 보면 ${totalScore >= 80 ? "행동과 관계를 적극적으로 연결하는 쪽" : "과도한 확장보다 선택과 집중을 하는 쪽"}이 오늘의 핵심입니다.`;
+
+            const loveText = loveScore >= 84 ? "솔직하고 따뜻한 표현이 관계를 진전시킵니다." :
+                             loveScore >= 72 ? "상대의 말을 먼저 듣고 천천히 호흡을 맞추세요." :
+                             "감정적인 결론보다 시간을 두고 바라보는 편이 좋습니다.";
+            const moneyText = moneyScore >= 84 ? "실질적인 성과와 협상에 유리합니다. 계획된 실행이 좋습니다." :
+                              moneyScore >= 72 ? "새 지출보다 기존 계획과 예산 점검에 유리합니다." :
+                              "충동적 투자·소비보다 현금흐름과 리스크 관리가 우선입니다.";
+            const healthText = healthScore >= 84 ? "활동성이 좋은 편입니다. 가벼운 운동이 컨디션을 더 끌어올립니다." :
+                               healthScore >= 72 ? "리듬을 일정하게 유지하고 수면·수분을 챙기세요." :
+                               "과로를 피하고 휴식과 회복 시간을 의도적으로 확보하세요.";
+
+            const actionGuide =
+                `${tg.text} ${astroReading.split(" ").slice(-11).join(" ")} ` +
+                `타로의 조언은 “${tarot.advice}”입니다. 오늘은 ${luckyColor} 계열 색상을 작은 포인트로 활용하고, 중요한 선택은 숫자 ${luckyNum1}·${luckyNum2}를 행운의 상징처럼 가볍게 참고해보세요.`;
+
+            // Render
+            document.getElementById("today-fortune-date-label").textContent =
+                `${ty}년 ${tm}월 ${td}일 · ${CHEONGAN[todayCg]}${JIJI[todayJj]}일`;
+            document.getElementById("today-fortune-score").textContent = `${totalScore}점`;
+            document.getElementById("today-fortune-headline").textContent = headline;
+            document.getElementById("today-fortune-summary").textContent = summary;
+
+            document.getElementById("today-saju-score").textContent = `${sajuScore}점`;
+            document.getElementById("today-saju-pillars").textContent =
+                `일간 ${CHEONGAN[natal.dayCg]} · 오늘 ${CHEONGAN[todayCg]}${JIJI[todayJj]} · ${tenGod}`;
+            document.getElementById("today-saju-reading").textContent = tg.text;
+
+            document.getElementById("today-astro-score").textContent = `${astroScore}점`;
+            document.getElementById("today-astro-sign").textContent =
+                `${sunSign.symbol} ${sunSign.name} (${sunSign.en}) · 오늘의 행성 ${weekdayPlanet.name}`;
+            document.getElementById("today-astro-reading").textContent = astroReading;
+
+            document.getElementById("today-tarot-score").textContent = `${tarotScore}점`;
+            document.getElementById("today-tarot-name").textContent = tarot.name;
+            document.getElementById("today-tarot-keyword").textContent = tarot.keyword;
+            document.getElementById("today-tarot-reading").textContent = tarotReading;
+            document.getElementById("today-tarot-icon").innerHTML = `<i class="${tarot.icon || 'fa-solid fa-star'}"></i>`;
+
+            document.getElementById("today-love-score").textContent = `${loveScore}점 ${scoreStars(loveScore)}`;
+            document.getElementById("today-love-text").textContent = loveText;
+            document.getElementById("today-money-score").textContent = `${moneyScore}점 ${scoreStars(moneyScore)}`;
+            document.getElementById("today-money-text").textContent = moneyText;
+            document.getElementById("today-health-score").textContent = `${healthScore}점 ${scoreStars(healthScore)}`;
+            document.getElementById("today-health-text").textContent = healthText;
+            document.getElementById("today-lucky-color").textContent = luckyColor;
+            document.getElementById("today-lucky-num").textContent = `행운 숫자 ${luckyNum1} · ${luckyNum2}`;
+            document.getElementById("today-action-guide").textContent = actionGuide;
+
+            const result = document.getElementById("today-fortune-result");
+            result.classList.remove("hidden");
+            result.scrollIntoView({behavior:"smooth", block:"start"});
+        }
+
     </script>
 </body>
 </html>
