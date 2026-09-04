@@ -733,7 +733,9 @@
                 </div>
 
                 <div class="text-[11px] text-purple-300/70 leading-relaxed rounded-xl border border-purple-900/40 bg-[#10081f]/70 px-3 py-2.5">
-                    명식은 양력 환산 후 입춘과 월별 절입 시점을 기준으로 계산합니다. 절기 당일 출생은 선택한 시진의 대표 시각을 적용하므로, 경계 시각에서는 전문 만세력과 수 분~수 시간 차이가 날 수 있습니다.
+                    <strong class="text-amber-200">계산 기준:</strong> 양력 환산 → 입춘 기준 년주 → 12절(節) 기준 월주 → 오호둔(月干) → 60갑자 일주 → 오서둔(時干) 순으로 계산합니다.
+                    대운은 년간 음양과 성별로 순·역행을 정하고, 진행 방향의 다음/이전 절(節)까지 시간차를 3일=1년으로 환산합니다.
+                    <br><span class="text-purple-300/55">※ 현재 입력은 정확한 시·분이 아니라 2시간 시진의 대표 시각을 사용하므로 절입 직전·직후 및 자시 경계 출생은 전문 만세력과 차이가 날 수 있습니다. 출생지 경도·진태양시 보정은 적용하지 않습니다.</span>
                 </div>
 
                 <button onclick="calculateWonkwangSajuFull()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm tracking-wide transition shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2">
@@ -827,8 +829,8 @@
 
                     <div class="space-y-2 pt-3">
                         <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
-                            <span>연운 흐름 (歲運表 - 10개년)</span>
-                            <span class="text-emerald-300 text-[11px] font-normal">* 초록색 블록: 2026년 현재</span>
+                            <span>연운 흐름 (歲運表 - 전후 14개년)</span>
+                            <span id="seun-current-note" class="text-emerald-300 text-[11px] font-normal">* 초록색 블록: 현재 절기연도</span>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden text-xs">
@@ -845,8 +847,8 @@
 
                     <div class="space-y-2 pt-3">
                         <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
-                            <span>2026년 12개월 월운 흐름 (月運表)</span>
-                            <span class="text-purple-300 text-[11px] font-normal">절기 기준 1월~12월</span>
+                            <span id="wolun-table-title">절기연도 12개월 월운 흐름 (月運表)</span>
+                            <span class="text-purple-300 text-[11px] font-normal">입춘(寅月) → 다음해 입춘 전(丑月)</span>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-center border-collapse border border-slate-700 bg-white text-slate-900 rounded-xl overflow-hidden text-xs">
@@ -876,7 +878,7 @@
                     <div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 space-y-4">
                         <div class="border-b border-purple-900/60 pb-3 flex items-center justify-between">
                             <h3 class="text-lg md:text-xl font-bold serif text-white flex items-center gap-2">
-                                <i class="fa-solid fa-calendar-check text-amber-400"></i> 2026년 (丙午년) 연운(세운) 심층 리딩
+                                <i class="fa-solid fa-calendar-check text-amber-400"></i> <span id="seun-reading-title">연운(세운) 심층 리딩</span>
                             </h3>
                             <span class="px-2.5 py-0.5 rounded bg-amber-400 text-slate-950 font-bold text-xs" id="seun-badge-title">병오년(丙午年)</span>
                         </div>
@@ -890,7 +892,7 @@
                             </h3>
                             <p class="text-xs text-purple-200/70 mt-1">해당 월의 주요 십신 기운과 집중해야 할 행동 요령입니다.</p>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs" id="wolun-reading-grid"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs" id="wolun-reading-grid"></div>
                     </div>
                 </div>
 
@@ -2819,6 +2821,151 @@
             return getJieTermMs(py,pm);
         }
 
+
+        // ==================== SAJU DEEP LUCK READING HELPERS ====================
+        const TEN_GOD_DEEP = {
+            "비견": {
+                core:"자기주도·동료·독립성", career:"주도권과 협업이 함께 커집니다. 역할과 책임의 경계를 분명히 하면 리더십이 살아납니다.",
+                money:"수입 확대보다 분배·공동비용·경쟁지출 관리가 중요합니다.", relation:"비슷한 성향의 사람과 연대가 강해지지만 고집 대결은 피하세요.",
+                study:"혼자 계획을 세우고 반복 학습하는 방식이 효과적입니다.", risk:"독단, 경쟁심, 손익분배의 불명확성", action:"내가 직접 결정할 것과 타인에게 맡길 것을 구분하세요."
+            },
+            "겁재": {
+                core:"경쟁·변동·인맥·자원 재배치", career:"경쟁 환경과 빠른 역할 변화가 생기기 쉽습니다. 협상력과 대응속도가 중요합니다.",
+                money:"예상 밖 지출과 자금 이동이 커질 수 있어 현금흐름 방어가 우선입니다.", relation:"친밀한 관계일수록 금전·책임의 경계를 명확히 해야 합니다.",
+                study:"단기 집중과 실전형 학습에 강점이 있습니다.", risk:"충동적 결정, 과도한 경쟁, 공동자금 문제", action:"중요한 계약·지출은 하루 이상 숙려하고 조건을 문서화하세요."
+            },
+            "식신": {
+                core:"생산·표현·꾸준함·생활 안정", career:"기술과 경험을 결과물로 만들기 좋은 흐름입니다. 지속적인 생산성이 평가로 연결됩니다.",
+                money:"본업·전문성에서 안정적인 수익을 만들기 좋습니다.", relation:"부드러운 표현과 배려가 관계를 편안하게 만듭니다.",
+                study:"배운 것을 직접 설명하거나 만들어보는 방식이 좋습니다.", risk:"안일함, 속도 저하, 편안함에 머무름", action:"완벽함보다 꾸준한 산출물을 일정에 맞춰 내세요."
+            },
+            "상관": {
+                core:"창의·표현·개혁·규칙 재검토", career:"기획·발표·혁신에 강하지만 조직 규칙과 충돌하지 않도록 표현 방식을 조절해야 합니다.",
+                money:"아이디어·콘텐츠·전문지식의 수익화 기회가 생길 수 있습니다.", relation:"솔직함이 장점이지만 직설적인 말은 갈등을 만들 수 있습니다.",
+                study:"비판적 사고와 새로운 관점에서 강점이 큽니다.", risk:"말실수, 규정 충돌, 성급한 이탈", action:"의견을 내기 전에 사실·근거·대안을 한 세트로 준비하세요."
+            },
+            "편재": {
+                core:"시장·기회·확장·대외활동", career:"외부 고객, 사업기회, 네트워크 확장에 유리합니다. 여러 기회를 동시에 다루는 능력이 중요합니다.",
+                money:"거래와 투자 기회가 늘지만 변동성도 커질 수 있습니다.", relation:"사교성이 높아지고 새로운 인연이 늘기 쉽습니다.",
+                study:"현장 경험과 실무 사례를 통한 학습이 효과적입니다.", risk:"과도한 확장, 분산투자, 일정 과밀", action:"기회마다 기대수익·최악의 경우·회수기간을 숫자로 적으세요."
+            },
+            "정재": {
+                core:"안정·현금흐름·실무·책임", career:"정확성과 꾸준함이 성과로 연결됩니다. 안정적 직무와 운영 개선에 강합니다.",
+                money:"예산·저축·장기 자산관리에 유리한 흐름입니다.", relation:"말보다 책임 있는 행동과 생활 안정이 신뢰를 만듭니다.",
+                study:"계획표와 정해진 루틴을 따르는 공부에 유리합니다.", risk:"보수성, 기회 회피, 지나친 계산", action:"고정비·저축·투자 비중을 먼저 정하고 남는 자원을 활용하세요."
+            },
+            "편관": {
+                core:"압박·도전·책임·결단", career:"난도가 높은 업무와 경쟁에서 집중력이 올라갑니다. 권한과 책임을 명확히 해야 합니다.",
+                money:"공격적인 수익 추구보다 손실 제한과 리스크 관리가 중요합니다.", relation:"통제하려는 태도보다 명확한 경계와 존중이 필요합니다.",
+                study:"시험·평가처럼 마감과 기준이 분명한 목표에 집중하기 좋습니다.", risk:"과로, 충돌, 지나친 긴장", action:"가장 큰 리스크 세 가지를 먼저 적고 대응책을 준비하세요."
+            },
+            "정관": {
+                core:"규칙·평판·조직·공적 성취", career:"승진·평가·공식 책임·조직 내 신뢰를 쌓기 좋습니다.", money:"안정적인 소득과 신용 관리에 유리합니다.",
+                relation:"약속과 책임감이 관계의 신뢰를 높입니다.", study:"자격증·공식 시험·정규 교육 과정에 유리합니다.", risk:"융통성 부족, 타인의 평가에 대한 과민함", action:"규정·일정·약속을 먼저 지키고 그 안에서 확장하세요."
+            },
+            "편인": {
+                core:"직관·전문성·탐구·변화된 학습", career:"전문 연구, 분석, 새로운 분야 탐색에 강합니다. 혼자 깊게 파는 시간이 필요합니다.",
+                money:"단기 수익보다 정보 우위와 전문지식의 가치를 키우는 편이 좋습니다.", relation:"혼자 생각하는 시간이 늘어 오해가 생기지 않도록 설명이 필요합니다.",
+                study:"비정형적 주제, 심층 연구, 독학에 강합니다.", risk:"생각 과잉, 실행 지연, 고립", action:"조사 시간을 제한하고 정한 시점에 반드시 결론을 내리세요."
+            },
+            "정인": {
+                core:"지원·학습·문서·회복·기반", career:"멘토·조직 지원·문서·자격과 관련된 도움이 들어오기 쉽습니다.", money:"장기적이고 안정적인 기반을 만드는 데 유리합니다.",
+                relation:"돌봄과 이해가 관계를 안정시키지만 의존은 경계하세요.", study:"학습·자격·연구·문서정리에 특히 유리합니다.", risk:"수동성, 준비만 하고 실행하지 않음", action:"배운 것을 실제 결과물·신청·계약·실행으로 연결하세요."
+            }
+        };
+
+        const JIE_NAMES = ["立春","驚蟄","清明","立夏","芒種","小暑","立秋","白露","寒露","立冬","大雪","小寒"];
+        const JIE_NAMES_KO = ["입춘","경칩","청명","입하","망종","소서","입추","백로","한로","입동","대설","소한"];
+
+        const LIU_HE_PAIRS = new Set(["01","10","2b","b2","39","93","48","84","57","75","6a","a6"]);
+        const LIU_CHONG_PAIRS = new Set(["06","60","17","71","28","82","39","93","4a","a4","5b","b5"]);
+        const STEM_HE_PAIRS = new Set(["05","50","16","61","27","72","38","83","49","94"]);
+
+        function branchRel(a, b) {
+            const key = a.toString(12) + b.toString(12);
+            if (LIU_CHONG_PAIRS.has(key)) return "충(沖)";
+            if (LIU_HE_PAIRS.has(key)) return "합(合)";
+            return "";
+        }
+
+        function stemRel(a, b) {
+            const key = `${a}${b}`;
+            return STEM_HE_PAIRS.has(key) ? "합(合)" : "";
+        }
+
+        function describePillarInteractions(s, cgIdx, jjIdx) {
+            const parts = [];
+            const stemTargets = [
+                ["일간", s.dayCg], ["월간", s.monthCg], ["년간", s.yearCg], ["시간", s.hourCg]
+            ];
+            const branchTargets = [
+                ["일지", s.dayJj], ["월지", s.monthJj], ["년지", s.yearJj], ["시지", s.hourJj]
+            ];
+
+            stemTargets.forEach(([label, idx]) => {
+                const r = stemRel(cgIdx, idx);
+                if (r) parts.push(`${label}과 천간 ${r}`);
+            });
+            branchTargets.forEach(([label, idx]) => {
+                const r = branchRel(jjIdx, idx);
+                if (r) parts.push(`${label}와 지지 ${r}`);
+            });
+            return parts.length ? parts.join(" / ") : "원국과 강한 합·충 신호는 두드러지지 않음";
+        }
+
+        function formatKSTDate(ms) {
+            const d = new Date(ms + 9 * 3600000);
+            return `${d.getUTCFullYear()}.${String(d.getUTCMonth()+1).padStart(2,"0")}.${String(d.getUTCDate()).padStart(2,"0")}`;
+        }
+
+        function ageYearsAt(nowMs, birthMs) {
+            return (nowMs - birthMs) / (365.2425 * 86400000);
+        }
+
+        function addYearsMs(baseMs, years) {
+            return baseMs + years * 365.2425 * 86400000;
+        }
+
+        function formatDaewoonAge(age) {
+            let y = Math.floor(age);
+            let m = Math.round((age - y) * 12);
+            if (m === 12) { y += 1; m = 0; }
+            return m ? `${y}년 ${m}개월` : `${y}년`;
+        }
+
+        function currentPillarYearKST() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const nowMs = now.getTime();
+            return nowMs < getJieTermMs(y, 2) ? y - 1 : y;
+        }
+
+        function getMonthlyPeriod(year, idx) {
+            // idx 0=寅月(입춘~경칩), ... 10=子月(대설~소한), 11=丑月(소한~입춘)
+            const startCivilMonth = idx <= 9 ? idx + 2 : (idx === 10 ? 12 : 1);
+            const startYear = idx <= 10 ? year : year + 1;
+            const endIdx = (idx + 1) % 12;
+            const endCivilMonth = endIdx <= 9 ? endIdx + 2 : (endIdx === 10 ? 12 : 1);
+            const endYear = endIdx === 11 ? year + 1 : (idx === 11 ? year + 1 : year);
+            const startMs = getJieTermMs(startYear, startCivilMonth);
+            const endMs = idx === 11 ? getJieTermMs(year + 1, 2) : getJieTermMs(endYear, endCivilMonth);
+            return {startMs, endMs};
+        }
+
+        function getCombinedGodNarrative(g1, g2) {
+            const p1 = TEN_GOD_DEEP[g1] || TEN_GOD_DEEP["비견"];
+            const p2 = TEN_GOD_DEEP[g2] || p1;
+            return {
+                core: g1 === g2 ? p1.core : `${p1.core} + ${p2.core}`,
+                career: `${p1.career} ${g1 === g2 ? "" : p2.career}`,
+                money: `${p1.money} ${g1 === g2 ? "" : p2.money}`,
+                relation: `${p1.relation} ${g1 === g2 ? "" : p2.relation}`,
+                study: `${p1.study} ${g1 === g2 ? "" : p2.study}`,
+                risk: g1 === g2 ? p1.risk : `${p1.risk} / ${p2.risk}`,
+                action: g1 === g2 ? p1.action : `${p1.action} ${p2.action}`
+            };
+        }
+
         function calculateWonkwangSajuFull() {
             const birthInput = document.getElementById('saju-birth').value.trim();
             const nameInput = document.getElementById('saju-name').value.trim();
@@ -2837,22 +2984,25 @@
                 alert('입력한 날짜를 확인해주세요. 윤달은 실제 윤달이 존재하는 달만 선택할 수 있습니다.');
                 return;
             }
+
             const y = s.solarYear, m = s.solarMonth, d = s.solarDay;
+            const nowMs = Date.now();
+            const exactAge = Math.max(0, ageYearsAt(nowMs, s.birthMs));
+            const ageDisplay = Math.floor(exactAge);
 
             document.getElementById('res-gender-badge').textContent = gender === 'male' ? '남자 (乾命)' : '여자 (坤命)';
-            const currentYear = new Date().getFullYear();
-            const age = currentYear - y + 1;
-            document.getElementById('res-person-title').textContent = `${name} (${age}세)`;
+            document.getElementById('res-person-title').textContent = `${name} (만 ${ageDisplay}세)`;
+
             const lunarTxt = s.lunar
                 ? `${s.lunar.isLeap ? '윤' : ''}음력 ${s.lunar.year}년 ${String(s.lunar.month).padStart(2,'0')}월 ${String(s.lunar.day).padStart(2,'0')}일`
                 : '음력 변환 범위 밖';
-            document.getElementById('res-meta-date').textContent = `양력 ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일 / ${lunarTxt}`;
+            document.getElementById('res-meta-date').textContent =
+                `양력 ${y}년 ${String(m).padStart(2,'0')}월 ${String(d).padStart(2,'0')}일 / ${lunarTxt}`;
 
             document.getElementById('char-hour-gan').textContent = CHEONGAN[s.hourCg];
             document.getElementById('char-day-gan').textContent = CHEONGAN[s.dayCg];
             document.getElementById('char-month-gan').textContent = CHEONGAN[s.monthCg];
             document.getElementById('char-year-gan').textContent = CHEONGAN[s.yearCg];
-
             document.getElementById('char-hour-ji').textContent = JIJI[s.hourJj];
             document.getElementById('char-day-ji').textContent = JIJI[s.dayJj];
             document.getElementById('char-month-ji').textContent = JIJI[s.monthJj];
@@ -2862,7 +3012,6 @@
             document.getElementById('god-day-gan').textContent = "일원 (본인)";
             document.getElementById('god-month-gan').textContent = getTenGod(s.dayCg, s.monthCg);
             document.getElementById('god-year-gan').textContent = getTenGod(s.dayCg, s.yearCg);
-
             document.getElementById('god-hour-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.hourJj]);
             document.getElementById('god-day-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.dayJj]);
             document.getElementById('god-month-ji').textContent = getTenGod(s.dayCg, JJ_MAIN_CG[s.monthJj]);
@@ -2884,13 +3033,14 @@
             }).join('');
             document.getElementById('ohaeng-badges').innerHTML = oBadgeHtml;
 
+            // ---------- 大運 ----------
             const isYearYang = CG_YINYANG[s.yearCg] === 1;
             const isForward = (gender === 'male' && isYearYang) || (gender === 'female' && !isYearYang);
             const targetJieMs = getAdjacentJieMs(s, isForward);
             const diffDays = Math.abs(targetJieMs - s.birthMs) / 86400000;
-            const baseDaewoonNum = Math.max(0.1, Math.min(10.0, diffDays / 3));
-            const daewoonDisplay = baseDaewoonNum.toFixed(1).replace(/\.0$/, '');
-            document.getElementById('res-daewoon-badge').textContent = `대운수: ${daewoonDisplay} (${isForward ? '순행' : '역행'})`;
+            const baseDaewoonNum = Math.max(0.01, Math.min(10.0, diffDays / 3));
+            document.getElementById('res-daewoon-badge').textContent =
+                `대운 시작: ${formatDaewoonAge(baseDaewoonNum)} (${isForward ? '순행' : '역행'})`;
 
             const daewoonList = [];
             for (let k = 1; k <= 9; k++) {
@@ -2898,11 +3048,15 @@
                 const dwCg = (s.monthCg + step + 60) % 10;
                 const dwJj = (s.monthJj + step + 60) % 12;
                 const startAge = baseDaewoonNum + (k - 1) * 10;
+                const startMs = addYearsMs(s.birthMs, startAge);
+                const endMs = addYearsMs(s.birthMs, startAge + 10);
                 daewoonList.push({
-                    startAge: startAge,
-                    displayAge: startAge.toFixed(1).replace(/\.0$/, ''),
+                    startAge, startMs, endMs,
+                    displayAge: formatDaewoonAge(startAge),
                     cg: CHEONGAN[dwCg], jj: JIJI[dwJj], cgIdx: dwCg, jjIdx: dwJj,
-                    godCg: getTenGod(s.dayCg, dwCg), godJj: getTenGod(s.dayCg, JJ_MAIN_CG[dwJj])
+                    godCg: getTenGod(s.dayCg, dwCg),
+                    godJj: getTenGod(s.dayCg, JJ_MAIN_CG[dwJj]),
+                    interaction: describePillarInteractions(s, dwCg, dwJj)
                 });
             }
 
@@ -2912,11 +3066,10 @@
             numsRow.innerHTML = ''; cgRow.innerHTML = ''; jjRow.innerHTML = '';
 
             [...daewoonList].reverse().forEach(dw => {
-                const isCurrent = age >= dw.startAge && age < (dw.startAge + 10);
+                const isCurrent = nowMs >= dw.startMs && nowMs < dw.endMs;
                 const highlightBg = isCurrent ? 'bg-amber-500 text-slate-950' : 'border-r border-slate-300';
                 const cellBg = isCurrent ? 'bg-amber-100 text-amber-950' : 'border-r border-slate-200';
-
-                numsRow.innerHTML += `<th class="py-1.5 ${highlightBg}">${dw.displayAge}</th>`;
+                numsRow.innerHTML += `<th class="py-1.5 ${highlightBg}" title="${formatKSTDate(dw.startMs)} 시작">${dw.displayAge.replace("년 ","y").replace("개월","m")}</th>`;
                 cgRow.innerHTML += `<td class="py-2 ${cellBg}">${dw.cg}</td>`;
                 jjRow.innerHTML += `<td class="py-2 ${cellBg}">${dw.jj}</td>`;
             });
@@ -2924,150 +3077,188 @@
             const detailsContainer = document.getElementById('daewoon-details-list');
             detailsContainer.innerHTML = '';
             daewoonList.forEach(dw => {
-                const isCurrent = age >= dw.startAge && age < (dw.startAge + 10);
+                const isCurrent = nowMs >= dw.startMs && nowMs < dw.endMs;
+                const profile = getCombinedGodNarrative(dw.godCg, dw.godJj);
+                const elemName = oNames[CG_ELEMENT[dw.cgIdx]];
                 const itemDiv = document.createElement('div');
                 itemDiv.className = `p-4 md:p-5 rounded-xl border transition ${isCurrent ? 'bg-[#221342] border-amber-400 shadow-xl' : 'bg-[#0d071a]/70 border-purple-900/40'}`;
-                
-                const godDesc = `${dw.godCg}·${dw.godJj}의 기운`;
-                const elemName = oNames[CG_ELEMENT[dw.cgIdx]];
-
-                let careerAdvice = "", moneyAdvice = "", generalTip = "";
-                if (dw.godCg.includes("재") || dw.godJj.includes("재")) {
-                    careerAdvice = "사업적 수완과 시장 흐름을 읽는 감각이 극대화되는 시기. 실질적인 성과와 프로젝트 수주에 유리합니다.";
-                    moneyAdvice = "현금 유동성과 투자 수익 기회가 대폭 늘어납니다. 안정적인 자산 배분이 부를 지켜줍니다.";
-                    generalTip = "조급함을 버리고 신뢰 관계를 다져두면 지속 가능한 큰 부를 축적할 수 있습니다.";
-                } else if (dw.godCg.includes("관") || dw.godJj.includes("관")) {
-                    careerAdvice = "조직 내 승진, 명예 획득, 공적 타이틀과 라이선스 취득에 매우 유리한 시기입니다.";
-                    moneyAdvice = "고정 수익과 연봉 인상, 신용도 상승으로 자산의 안정성이 탄탄해집니다.";
-                    generalTip = "원칙과 규율을 준수하며 평판을 관리하는 것이 큰 성장의 열쇠가 됩니다.";
-                } else if (dw.godCg.includes("식") || dw.godCg.includes("상") || dw.godJj.includes("식") || dw.godJj.includes("상")) {
-                    careerAdvice = "본인의 창의력과 기획, 전문 기술이 만개하는 시기. 새로운 시도와 독립에 길합니다.";
-                    moneyAdvice = "자신의 재능과 아이디어가 직접적인 수익으로 전환되는 실속 있는 결실기입니다.";
-                    generalTip = "언행의 신중함과 동료들과의 조화를 신경 쓸 때 성과의 크기가 배가됩니다.";
-                } else if (dw.godCg.includes("인") || dw.godJj.includes("인")) {
-                    careerAdvice = "학문, 연구, 자격 취득, 문서 계약 및 귀인의 도움이 따르는 배움과 안정의 시기입니다.";
-                    moneyAdvice = "부동산, 문서 자산, 장기 보유 가치 자산에 유리한 운이 작용합니다.";
-                    generalTip = "내실을 다지고 전문가로서의 입지를 확고히 하는 데 집중하세요.";
-                } else {
-                    careerAdvice = "자신의 주관과 리더십이 강해지며 동료, 파트너와의 협업이 활발해지는 시기입니다.";
-                    moneyAdvice = "공동 투자나 동업의 기회가 발생하나 손익 분배 원칙을 명확히 해야 합니다.";
-                    generalTip = "독단적인 판단을 피하고 경청과 배려를 실천하면 강력한 아군을 얻게 됩니다.";
-                }
 
                 itemDiv.innerHTML = `
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-purple-900/40 pb-2.5">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-0.5 rounded text-xs font-bold ${isCurrent ? 'bg-amber-400 text-slate-950' : 'bg-purple-900 text-purple-200'}">${dw.startAge.toFixed(1).replace(/\.0$/, '')}세 ~ ${(dw.startAge + 9.9).toFixed(1).replace(/\.0$/, '')}세 대운</span>
-                            <span class="text-sm md:text-base font-bold text-white serif">${dw.cg}${dw.jj} (${godDesc}, ${elemName} 기운)</span>
+                        <div class="space-y-1">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded text-xs font-bold ${isCurrent ? 'bg-amber-400 text-slate-950' : 'bg-purple-900 text-purple-200'}">${formatDaewoonAge(dw.startAge)} ~ ${formatDaewoonAge(dw.startAge+10)} 대운</span>
+                                <span class="text-sm md:text-base font-bold text-white serif">${dw.cg}${dw.jj} (${dw.godCg}·${dw.godJj} / ${elemName})</span>
+                            </div>
+                            <div class="text-[10px] text-purple-300/65">${formatKSTDate(dw.startMs)} ~ ${formatKSTDate(dw.endMs)} / ${dw.interaction}</div>
                         </div>
-                        ${isCurrent ? '<span class="text-[11px] text-amber-300 font-bold animate-pulse"><i class="fa-solid fa-star"></i> 현재 지나고 있는 10년 대운</span>' : ''}
+                        ${isCurrent ? '<span class="text-[11px] text-amber-300 font-bold animate-pulse"><i class="fa-solid fa-star"></i> 현재 대운</span>' : ''}
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 text-xs md:text-sm">
-                        <div class="p-2.5 rounded-lg bg-purple-950/30">
-                            <span class="text-purple-300 font-semibold block mb-1">💼 직업 & 커리어 흐름</span>
-                            <p class="text-slate-300 font-light leading-relaxed">${careerAdvice}</p>
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-purple-950/30">
-                            <span class="text-purple-300 font-semibold block mb-1">💰 재물 & 자산 운</span>
-                            <p class="text-slate-300 font-light leading-relaxed">${moneyAdvice}</p>
-                        </div>
-                        <div class="p-2.5 rounded-lg bg-purple-950/30">
-                            <span class="text-purple-300 font-semibold block mb-1">💡 10년 개운 조언</span>
-                            <p class="text-slate-300 font-light leading-relaxed">${generalTip}</p>
-                        </div>
+
+                    <div class="mt-3 p-3 rounded-lg bg-amber-950/15 border border-amber-500/15">
+                        <span class="text-amber-300 text-xs font-semibold">핵심 테마</span>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">${profile.core}. 천간과 지지의 십신이 함께 작용하는 10년이므로 한 가지 사건보다 삶의 운영방식이 바뀌는 장기 흐름으로 보세요.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 text-xs">
+                        <div class="p-3 rounded-lg bg-purple-950/30"><strong class="text-purple-300 block mb-1">💼 직업·커리어</strong><p class="text-slate-300 leading-relaxed">${profile.career}</p></div>
+                        <div class="p-3 rounded-lg bg-purple-950/30"><strong class="text-purple-300 block mb-1">💰 재물·자산</strong><p class="text-slate-300 leading-relaxed">${profile.money}</p></div>
+                        <div class="p-3 rounded-lg bg-purple-950/30"><strong class="text-purple-300 block mb-1">🤝 관계·협업</strong><p class="text-slate-300 leading-relaxed">${profile.relation}</p></div>
+                        <div class="p-3 rounded-lg bg-purple-950/30"><strong class="text-purple-300 block mb-1">📚 학습·자격·문서</strong><p class="text-slate-300 leading-relaxed">${profile.study}</p></div>
+                        <div class="p-3 rounded-lg bg-rose-950/15 border border-rose-500/10"><strong class="text-rose-300 block mb-1">⚠️ 리스크 포인트</strong><p class="text-slate-300 leading-relaxed">${profile.risk}</p></div>
+                        <div class="p-3 rounded-lg bg-emerald-950/15 border border-emerald-500/10"><strong class="text-emerald-300 block mb-1">🧭 10년 행동 가이드</strong><p class="text-slate-300 leading-relaxed">${profile.action}</p></div>
                     </div>
                 `;
                 detailsContainer.appendChild(itemDiv);
             });
 
+            const currentDw = daewoonList.find(dw => nowMs >= dw.startMs && nowMs < dw.endMs) || daewoonList[0];
+
+            // ---------- 歲運: current solar-term year dynamically ----------
+            const seunYear = currentPillarYearKST();
             const seunYearsRow = document.getElementById('seun-years-row');
             const seunCgRow = document.getElementById('seun-cg-row');
             const seunJjRow = document.getElementById('seun-jj-row');
             seunYearsRow.innerHTML = ''; seunCgRow.innerHTML = ''; seunJjRow.innerHTML = '';
 
             const seunList = [];
-            for (let yr = 2020; yr <= 2033; yr++) {
-                seunList.push({ year: yr, cg: CHEONGAN[(yr - 4) % 10], jj: JIJI[(yr - 4) % 12] });
+            for (let yr = seunYear - 6; yr <= seunYear + 7; yr++) {
+                const cgIdx = ((yr - 4) % 10 + 10) % 10;
+                const jjIdx = ((yr - 4) % 12 + 12) % 12;
+                seunList.push({year:yr, cgIdx, jjIdx, cg:CHEONGAN[cgIdx], jj:JIJI[jjIdx]});
             }
 
             [...seunList].reverse().forEach(sv => {
-                const is2026 = sv.year === 2026;
-                const highlightBg = is2026 ? 'bg-emerald-500 text-slate-950' : 'border-r border-slate-300';
-                const cellBg = is2026 ? 'bg-emerald-100 text-emerald-950' : 'border-r border-slate-200';
-
+                const isCurrent = sv.year === seunYear;
+                const highlightBg = isCurrent ? 'bg-emerald-500 text-slate-950' : 'border-r border-slate-300';
+                const cellBg = isCurrent ? 'bg-emerald-100 text-emerald-950' : 'border-r border-slate-200';
                 seunYearsRow.innerHTML += `<th class="py-1.5 ${highlightBg}">${sv.year}</th>`;
                 seunCgRow.innerHTML += `<td class="py-2 ${cellBg}">${sv.cg}</td>`;
                 seunJjRow.innerHTML += `<td class="py-2 ${cellBg}">${sv.jj}</td>`;
             });
 
-            const seun2026Cg = (2026 - 4) % 10;
-            const seun2026Jj = (2026 - 4) % 12;
-            const seunTenGodCg = getTenGod(s.dayCg, seun2026Cg);
-            const seunTenGodJj = getTenGod(s.dayCg, JJ_MAIN_CG[seun2026Jj]);
-            
-            document.getElementById('seun-badge-title').textContent = `2026년 丙午年 (${seunTenGodCg}·${seunTenGodJj})`;
+            const seunCg = ((seunYear - 4) % 10 + 10) % 10;
+            const seunJj = ((seunYear - 4) % 12 + 12) % 12;
+            const seunTenGodCg = getTenGod(s.dayCg, seunCg);
+            const seunTenGodJj = getTenGod(s.dayCg, JJ_MAIN_CG[seunJj]);
+            const seunProfile = getCombinedGodNarrative(seunTenGodCg, seunTenGodJj);
+            const seunInteraction = describePillarInteractions(s, seunCg, seunJj);
+            const dwSeunBranchRel = branchRel(currentDw.jjIdx, seunJj);
+            const dwSeunStemRel = stemRel(currentDw.cgIdx, seunCg);
+            const crossText = (dwSeunBranchRel || dwSeunStemRel)
+                ? `현재 대운 ${currentDw.cg}${currentDw.jj}과 세운 사이에 ${[dwSeunStemRel && `천간 ${dwSeunStemRel}`, dwSeunBranchRel && `지지 ${dwSeunBranchRel}`].filter(Boolean).join(" / ")}이 형성됩니다. 장기 흐름과 올해의 사건성이 강하게 맞물리는 해로 해석할 수 있습니다.`
+                : `현재 대운 ${currentDw.cg}${currentDw.jj}과 세운 사이에 직접적인 합·충은 두드러지지 않아, 대운의 장기 테마 위에 올해 십신의 성격이 점진적으로 더해지는 흐름입니다.`;
+
+            document.getElementById('seun-current-note').textContent = `* 초록색 블록: ${seunYear} 절기연도`;
+            document.getElementById('seun-reading-title').textContent = `${seunYear}년 (${CHEONGAN[seunCg]}${JIJI[seunJj]}년) 연운(세운) 심층 리딩`;
+            document.getElementById('seun-badge-title').textContent = `${seunYear} ${CHEONGAN[seunCg]}${JIJI[seunJj]}年 (${seunTenGodCg}·${seunTenGodJj})`;
+
             document.getElementById('seun-reading-content').innerHTML = `
                 <div class="flex items-center gap-2 text-amber-300 font-semibold text-sm">
-                    <i class="fa-solid fa-fire"></i> 2026년 병오(丙午)년의 총평: ${seunTenGodCg}과 ${seunTenGodJj}의 강력한 에너지
+                    <i class="fa-solid fa-compass"></i> 올해 핵심 테마: ${seunProfile.core}
                 </div>
                 <p>
-                    올해 2026년은 하늘과 땅이 모두 강렬한 화(火)의 기운으로 가득 찬 <strong>병오(丙午)년</strong>입니다. 일간(日干) <strong>${CHEONGAN[s.dayCg]}</strong>을 기준으로 <strong>${seunTenGodCg}</strong>의 천간과 <strong>${seunTenGodJj}</strong>의 지지가 작동하여, 그동안 준비해 온 계획들이 세상 밖으로 밝고 선명하게 드러나는 역동적인 해입니다.
+                    일간 <strong>${CHEONGAN[s.dayCg]}</strong>을 기준으로 천간은 <strong>${seunTenGodCg}</strong>, 지지의 본기는 <strong>${seunTenGodJj}</strong>로 작용합니다.
+                    원국과의 관계는 <strong>${seunInteraction}</strong>입니다. 연운은 단독으로 보기보다 현재 대운과 겹쳐 해석하는 것이 중요합니다.
                 </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-                    <div class="p-3 rounded-lg bg-black/40 border border-purple-900/40">
-                        <strong class="text-amber-300 block mb-1">🔥 주요 기회</strong>
-                        <span>적극적인 대외 활동, 제안, 기획 발표에서 큰 주목을 받고 주도권을 쥐게 됩니다.</span>
-                    </div>
-                    <div class="p-3 rounded-lg bg-black/40 border border-purple-900/40">
-                        <strong class="text-rose-300 block mb-1">⚠️ 주의사항</strong>
-                        <span>에너지가 과열되어 조급해질 수 있으니 문서 검토와 건강(혈압·수면) 관리에 유의하세요.</span>
-                    </div>
+
+                <div class="p-3 rounded-lg bg-indigo-950/25 border border-indigo-500/20">
+                    <strong class="text-indigo-300 block mb-1">🔗 대운 × 세운 교차 해석</strong>
+                    <span>${crossText}</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
+                    <div class="p-3 rounded-lg bg-black/35 border border-purple-900/40"><strong class="text-amber-300 block mb-1">💼 직업·커리어</strong><span>${seunProfile.career}</span></div>
+                    <div class="p-3 rounded-lg bg-black/35 border border-purple-900/40"><strong class="text-amber-300 block mb-1">💰 재물·자산</strong><span>${seunProfile.money}</span></div>
+                    <div class="p-3 rounded-lg bg-black/35 border border-purple-900/40"><strong class="text-amber-300 block mb-1">🤝 관계·협업</strong><span>${seunProfile.relation}</span></div>
+                    <div class="p-3 rounded-lg bg-black/35 border border-purple-900/40"><strong class="text-amber-300 block mb-1">📚 학습·문서·자격</strong><span>${seunProfile.study}</span></div>
+                    <div class="p-3 rounded-lg bg-rose-950/15 border border-rose-500/20"><strong class="text-rose-300 block mb-1">⚠️ 주의 포인트</strong><span>${seunProfile.risk}</span></div>
+                    <div class="p-3 rounded-lg bg-emerald-950/15 border border-emerald-500/20"><strong class="text-emerald-300 block mb-1">🧭 올해 행동 가이드</strong><span>${seunProfile.action}</span></div>
                 </div>
             `;
 
+            // ---------- 月運: Li Chun -> next Li Chun, Five Tigers corrected ----------
             const wolunMonthsRow = document.getElementById('wolun-months-row');
             const wolunCgRow = document.getElementById('wolun-cg-row');
             const wolunJjRow = document.getElementById('wolun-jj-row');
             const wolunGrid = document.getElementById('wolun-reading-grid');
             wolunMonthsRow.innerHTML = ''; wolunCgRow.innerHTML = ''; wolunJjRow.innerHTML = ''; wolunGrid.innerHTML = '';
 
-            const monthNames = ["1월(입춘)", "2월(경칩)", "3월(청명)", "4월(입하)", "5월(망종)", "6월(소서)", "7월(입추)", "8월(백로)", "9월(한로)", "10월(입동)", "11월(대설)", "12월(소한)"];
-            const wolunData = [];
+            document.getElementById('wolun-table-title').textContent = `${seunYear} 절기연도 12개월 월운 흐름 (月運表)`;
 
+            const wolunData = [];
             for (let wm = 0; wm < 12; wm++) {
-                const wCg = (2 * (seun2026Cg % 5) + wm) % 10;
+                // 五虎遁: 寅月 stem = ((yearStem % 5) * 2 + 2), then advance one stem per month
+                const wCg = ((seunCg % 5) * 2 + 2 + wm) % 10;
                 const wJj = (wm + 2) % 12;
                 const mGodCg = getTenGod(s.dayCg, wCg);
                 const mGodJj = getTenGod(s.dayCg, JJ_MAIN_CG[wJj]);
+                const period = getMonthlyPeriod(seunYear, wm);
+                const profile = getCombinedGodNarrative(mGodCg, mGodJj);
+                const interaction = describePillarInteractions(s, wCg, wJj);
+                const isCurrentMonth = nowMs >= period.startMs && nowMs < period.endMs;
+
                 wolunData.push({
-                    monthNum: wm + 1, title: monthNames[wm],
-                    cg: CHEONGAN[wCg], jj: JIJI[wJj], god: `${mGodCg}·${mGodJj}`
+                    idx:wm, cgIdx:wCg, jjIdx:wJj,
+                    cg:CHEONGAN[wCg], jj:JIJI[wJj],
+                    godCg:mGodCg, godJj:mGodJj,
+                    profile, interaction, isCurrentMonth,
+                    title:`${JIJI[wJj]}月 · ${JIE_NAMES_KO[wm]}~${JIE_NAMES_KO[(wm+1)%12]}`,
+                    dates:`${formatKSTDate(period.startMs)} ~ ${formatKSTDate(period.endMs)}`,
+                    period
                 });
             }
 
             [...wolunData].reverse().forEach(w => {
-                wolunMonthsRow.innerHTML += `<th class="py-1.5 border-r border-slate-300 text-[10px]">${w.monthNum}월</th>`;
-                wolunCgRow.innerHTML += `<td class="py-1.5 border-r border-slate-200">${w.cg}</td>`;
-                wolunJjRow.innerHTML += `<td class="py-1.5 border-r border-slate-200">${w.jj}</td>`;
+                const h = w.isCurrentMonth ? 'bg-purple-500 text-white' : 'border-r border-slate-300';
+                const c = w.isCurrentMonth ? 'bg-purple-100 text-purple-950' : 'border-r border-slate-200';
+                wolunMonthsRow.innerHTML += `<th class="py-1.5 ${h} text-[10px]">${JIE_NAMES_KO[w.idx]}</th>`;
+                wolunCgRow.innerHTML += `<td class="py-1.5 ${c}">${w.cg}</td>`;
+                wolunJjRow.innerHTML += `<td class="py-1.5 ${c}">${w.jj}</td>`;
             });
 
             wolunData.forEach(w => {
-                const mCard = document.createElement('div');
-                mCard.className = "p-3 rounded-xl bg-[#140c28] border border-purple-900/40 space-y-1.5";
-                mCard.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <strong class="text-amber-300">${w.title}</strong>
-                        <span class="text-[11px] font-serif px-2 py-0.5 rounded bg-purple-900/60 text-purple-200 border border-purple-500/20">${w.cg}${w.jj} (${w.god})</span>
+                const dwRelBranch = branchRel(currentDw.jjIdx, w.jjIdx);
+                const monthCross = dwRelBranch
+                    ? `현재 대운 ${currentDw.cg}${currentDw.jj}의 지지와 ${dwRelBranch}이 있어 월의 사건성이 평소보다 크게 체감될 수 있습니다.`
+                    : `현재 대운 ${currentDw.cg}${currentDw.jj}의 장기 흐름 속에서 ${w.godCg}·${w.godJj}의 월 기운이 단기적으로 작동합니다.`;
+
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-xl border space-y-3 ${w.isCurrentMonth ? 'bg-[#221342] border-amber-400 shadow-lg' : 'bg-[#140c28] border-purple-900/40'}`;
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-start justify-between gap-2">
+                        <div>
+                            <strong class="text-amber-300">${w.title}</strong>
+                            <div class="text-[10px] text-purple-300/60 mt-0.5">${w.dates}</div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[11px] font-serif px-2 py-0.5 rounded bg-purple-900/60 text-purple-200 border border-purple-500/20">${w.cg}${w.jj} (${w.godCg}·${w.godJj})</span>
+                            ${w.isCurrentMonth ? '<div class="text-[10px] text-amber-300 mt-1 font-bold">현재 월운</div>' : ''}
+                        </div>
                     </div>
-                    <p class="text-[11px] text-slate-300 font-light leading-snug">
-                        ${w.god.includes("재") ? "재물 흐름과 실질적 성과가 활발한 달입니다." :
-                          w.god.includes("관") ? "조직 내 신뢰와 공적인 업무 평가가 상승하는 달입니다." :
-                          w.god.includes("식") || w.god.includes("상") ? "창의적인 아이디어와 새로운 시도가 빛을 발합니다." :
-                          w.god.includes("인") ? "문서 계약 및 학습, 재충전에 최적의 시기입니다." :
-                          "동료들과의 협업 및 네트워킹 확장에 집중하세요."}
-                    </p>
+
+                    <div class="p-2.5 rounded-lg bg-amber-950/15 border border-amber-500/10">
+                        <strong class="text-amber-200 block mb-1">핵심 흐름</strong>
+                        <p class="text-slate-300 leading-relaxed">${w.profile.core}. ${w.interaction}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="p-2.5 rounded-lg bg-black/25"><strong class="text-purple-300 block mb-1">💼 직업</strong><span class="text-slate-300 leading-relaxed">${w.profile.career}</span></div>
+                        <div class="p-2.5 rounded-lg bg-black/25"><strong class="text-purple-300 block mb-1">💰 재물</strong><span class="text-slate-300 leading-relaxed">${w.profile.money}</span></div>
+                        <div class="p-2.5 rounded-lg bg-black/25"><strong class="text-purple-300 block mb-1">🤝 관계</strong><span class="text-slate-300 leading-relaxed">${w.profile.relation}</span></div>
+                        <div class="p-2.5 rounded-lg bg-black/25"><strong class="text-purple-300 block mb-1">📚 문서·학습</strong><span class="text-slate-300 leading-relaxed">${w.profile.study}</span></div>
+                    </div>
+
+                    <div class="text-[11px] leading-relaxed p-2.5 rounded-lg bg-indigo-950/20 border border-indigo-500/10">
+                        <strong class="text-indigo-300">대운×월운:</strong> <span class="text-slate-300">${monthCross}</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="text-[11px] leading-relaxed p-2.5 rounded-lg bg-rose-950/15 border border-rose-500/10"><strong class="text-rose-300">주의:</strong> <span class="text-slate-300">${w.profile.risk}</span></div>
+                        <div class="text-[11px] leading-relaxed p-2.5 rounded-lg bg-emerald-950/15 border border-emerald-500/10"><strong class="text-emerald-300">행동 가이드:</strong> <span class="text-slate-300">${w.profile.action}</span></div>
+                    </div>
                 `;
-                wolunGrid.appendChild(mCard);
+                wolunGrid.appendChild(card);
             });
 
             document.getElementById('manse-result-area').classList.remove('hidden');
