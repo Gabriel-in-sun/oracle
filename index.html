@@ -3113,7 +3113,18 @@
             document.getElementById('jijang-hour-txt').textContent = JIJANG_GAN[s.hourJj];
             document.getElementById('jijang-day-txt').textContent = JIJANG_GAN[s.dayJj];
             document.getElementById('jijang-month-txt').textContent = JIJANG_GAN[s.monthJj];
-            document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[s.yearJj];\n\n            // 일주 기반 타고난 본질과 성향\n            const innate = getInnateProfile(s);\n            document.getElementById('innate-daypillar-badge').textContent = `${innate.pillar}日柱 · ${innate.god}`;\n            document.getElementById('innate-profile-summary').innerHTML = `<strong class="text-amber-200">${innate.pillar}일주</strong> — ${innate.summary}`;\n            document.getElementById('innate-core').textContent = innate.core;\n            document.getElementById('innate-workstyle').textContent = innate.work;\n            document.getElementById('innate-relationship').textContent = innate.relationship;\n            document.getElementById('innate-inner').textContent = innate.inner;\n            document.getElementById('innate-strength').textContent = innate.strength;\n            document.getElementById('innate-risk').textContent = innate.risk;
+            document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[s.yearJj];
+
+            // 일주 기반 타고난 본질과 성향
+            const innate = getInnateProfile(s);
+            document.getElementById('innate-daypillar-badge').textContent = `${innate.pillar}日柱 · ${innate.god}`;
+            document.getElementById('innate-profile-summary').innerHTML = `<strong class="text-amber-200">${innate.pillar}일주</strong> — ${innate.summary}`;
+            document.getElementById('innate-core').textContent = innate.core;
+            document.getElementById('innate-workstyle').textContent = innate.work;
+            document.getElementById('innate-relationship').textContent = innate.relationship;
+            document.getElementById('innate-inner').textContent = innate.inner;
+            document.getElementById('innate-strength').textContent = innate.strength;
+            document.getElementById('innate-risk').textContent = innate.risk;
 
             const oNames = ["木", "火", "土", "金", "水"];
             const oBadgeHtml = oNames.map((oName, i) => {
