@@ -277,6 +277,9 @@
                 <button onclick="switchTab('prayer')" id="nav-prayer" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-hands-praying text-xs text-amber-300"></i> <span>기도지향</span>
                 </button>
+                <button onclick="switchTab('essence')" id="nav-essence" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-fingerprint text-xs text-amber-300"></i> <span>나의 본질</span>
+                </button>
                 <button onclick="switchTab('saju')" id="nav-saju" class="px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition text-purple-200 hover:text-white hover:bg-purple-950/60 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-yin-yang text-xs"></i> <span>만세력 & 대운</span>
                 </button>
@@ -393,7 +396,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2.5 md:gap-3 pt-3">
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-2.5 md:gap-3 pt-3">
                 <button onclick="switchTab('prayer')" class="group overflow-hidden rounded-xl border border-amber-500/35 bg-[#07101d] text-left hover:-translate-y-1 hover:border-amber-300/70 transition duration-300 shadow-lg">
                     <div class="h-24 sm:h-28 bg-gradient-to-br from-amber-950/80 via-[#15131b] to-[#08111f] flex items-center justify-center relative overflow-hidden">
                         <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_50%_70%,rgba(251,191,36,.35),transparent_38%)]"></div>
@@ -402,6 +405,19 @@
                     <div class="p-3">
                         <h3 class="serif text-sm sm:text-base font-bold text-white">기도 지향</h3>
                         <p class="mt-1 text-[10px] sm:text-[11px] leading-relaxed text-slate-400">마음에 품은 기도 지향을 봉헌하고 축복의 응답을 받아보세요.</p>
+                        <div class="mt-2 text-right text-amber-300 text-xs">→</div>
+                    </div>
+                </button>
+
+                <button onclick="switchTab('essence')" class="group overflow-hidden rounded-xl border border-amber-500/35 bg-[#07101d] text-left hover:-translate-y-1 hover:border-amber-300/70 transition duration-300 shadow-lg">
+                    <div class="h-24 sm:h-28 bg-gradient-to-br from-indigo-950/80 via-purple-950/60 to-[#07101d] flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute w-20 h-20 rounded-full border border-amber-400/20"></div>
+                        <div class="absolute w-12 h-12 rounded-full border border-purple-300/20"></div>
+                        <i class="fa-solid fa-fingerprint text-4xl text-amber-300"></i>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="serif text-sm sm:text-base font-bold text-white">나의 본질</h3>
+                        <p class="mt-1 text-[10px] sm:text-[11px] leading-relaxed text-slate-400">일주와 Natal Chart를 함께 읽어 타고난 기질과 내면의 성향을 살펴봅니다.</p>
                         <div class="mt-2 text-right text-amber-300 text-xs">→</div>
                     </div>
                 </button>
@@ -677,38 +693,127 @@
             </div>
         </section>
 
-        <!-- ==================== SAJU TAB (MANSE-RYEOK & COMPLETE READING) ==================== -->
-        <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
-            
-            <!-- ==================== INNATE DAY-PILLAR PROFILE ==================== -->
-            <div id="innate-profile-section" class="glass-card rounded-2xl border border-amber-500/20 p-5 md:p-6 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                        <div class="text-[11px] uppercase tracking-[0.18em] text-amber-300/70">Day Pillar · Innate Disposition</div>
-                        <h3 class="serif text-xl md:text-2xl text-amber-200 font-bold mt-1">
-                            <i class="fa-solid fa-compass mr-2 text-amber-400"></i>
-                            <span id="innate-profile-title">타고난 본질과 성향</span>
-                        </h3>
-                    </div>
-                    <span id="innate-daypillar-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-950/40 text-amber-200 border border-amber-500/25">일주</span>
-                </div>
-                <div id="innate-profile-summary" class="p-4 rounded-xl bg-gradient-to-r from-amber-950/20 to-purple-950/25 border border-amber-500/15 text-sm text-slate-200 leading-relaxed"></div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-purple-300 mb-2">🧬 본질적 성향</div><p id="innate-core" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
-                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-sky-300 mb-2">🛠 일하는 방식</div><p id="innate-workstyle" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
-                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-rose-300 mb-2">🤝 관계와 감정 패턴</div><p id="innate-relationship" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
-                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-indigo-300 mb-2">🌙 내면의 욕구</div><p id="innate-inner" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="p-4 rounded-xl bg-emerald-950/15 border border-emerald-500/15"><div class="text-xs font-bold text-emerald-300 mb-2">✨ 타고난 강점</div><p id="innate-strength" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
-                    <div class="p-4 rounded-xl bg-rose-950/15 border border-rose-500/15"><div class="text-xs font-bold text-rose-300 mb-2">⚠️ 반복되기 쉬운 패턴</div><p id="innate-risk" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
-                </div>
-                <div class="p-3 rounded-xl bg-purple-950/20 border border-purple-800/30 text-[11px] text-purple-200/65 leading-relaxed">
-                    ※ 일주는 ‘나’를 보는 가장 중요한 기준점이지만, 성향을 일주 하나로 단정하지는 않습니다. 아래 해석은 일간·일지·일지 본기 십신을 중심으로 읽고, 월령과 원국 오행 분포를 보정값으로 함께 반영합니다.
-                </div>
+                <!-- ==================== ESSENCE TAB ==================== -->
+        <section id="tab-essence" class="hidden space-y-8 animate-fade-in">
+            <div class="text-center space-y-2">
+                <span class="inline-flex items-center gap-2 px-3 py-1 text-xs tracking-widest text-amber-300 uppercase bg-amber-400/10 border border-amber-400/25 rounded-full font-semibold">
+                    <i class="fa-solid fa-fingerprint"></i> Essence Profile
+                </span>
+                <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">나의 본질</h2>
+                <p class="text-sm text-purple-200/70">동양의 일주와 서양의 Natal Chart를 함께 읽어 타고난 성향을 두 관점에서 살펴봅니다.</p>
             </div>
 
-<div class="text-center space-y-2">
+            <div class="glass-card max-w-3xl mx-auto p-6 md:p-8 rounded-2xl border-amber-400/25 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">이름 또는 호칭</label>
+                        <input id="essence-name" type="text" placeholder="예: Gabriel" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">생년월일 (8자리)</label>
+                        <input id="essence-birth" type="text" maxlength="8" placeholder="예: 19880808" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-amber-200 mb-1.5">양력 / 음력</label>
+                        <select id="essence-calendar" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="solar" selected>양력 (Solar)</option>
+                            <option value="lunar">음력 (Lunar)</option>
+                            <option value="lunar-leap">음력 윤달</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">출생 시각</label>
+                        <input id="essence-time" type="time" value="12:00" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">출생지</label>
+                        <select id="essence-location" onchange="toggleEssenceCustomLocation()" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="seoul" selected>서울</option>
+                            <option value="busan">부산</option>
+                            <option value="incheon">인천</option>
+                            <option value="daegu">대구</option>
+                            <option value="daejeon">대전</option>
+                            <option value="gwangju">광주</option>
+                            <option value="jeju">제주</option>
+                            <option value="custom">직접 입력</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-purple-200 mb-1.5">시간대</label>
+                        <div id="essence-location-note" class="h-[42px] flex items-center px-4 rounded-xl bg-purple-950/20 border border-purple-800/40 text-xs text-purple-200/70">대한민국 KST (UTC+9)</div>
+                    </div>
+                </div>
+
+                <div id="essence-custom-location" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-purple-950/20 border border-purple-800/30">
+                    <div><label class="text-[10px] text-purple-300">위도</label><input id="essence-lat" type="number" step="0.0001" value="37.5665" class="mt-1 w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-xs text-white"></div>
+                    <div><label class="text-[10px] text-purple-300">경도 (동경 +)</label><input id="essence-lon" type="number" step="0.0001" value="126.9780" class="mt-1 w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-xs text-white"></div>
+                    <div><label class="text-[10px] text-purple-300">UTC 오프셋</label><input id="essence-tz" type="number" step="0.5" value="9" class="mt-1 w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-3 py-2 text-xs text-white"></div>
+                </div>
+
+                <div class="text-[11px] text-purple-300/65 leading-relaxed rounded-xl border border-purple-900/40 bg-[#10081f]/70 px-3 py-2.5">
+                    <strong class="text-amber-200">일주 분석</strong>은 양력 환산 후 절기 기준 명식을 계산하고, <strong class="text-amber-200">Natal Chart</strong>는 출생 날짜·정확한 시각·출생지로 태양·달·상승궁을 계산합니다. 역사적 서머타임이나 절기/별자리 경계에 매우 가까운 출생은 전문 천문·만세력 프로그램과 소폭 차이가 날 수 있습니다.
+                </div>
+
+                <button type="button" onclick="calculateEssenceProfile()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-400 text-white font-bold text-sm tracking-wide hover:brightness-110 transition shadow-lg shadow-purple-950/30">
+                    <i class="fa-solid fa-stars mr-1.5"></i> 나의 본질 분석하기
+                </button>
+            </div>
+
+            <div id="essence-result" class="hidden max-w-4xl mx-auto space-y-6 animate-fade-in">
+                <div class="glass-card rounded-2xl border border-amber-500/20 p-5 md:p-6 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <div class="text-[11px] uppercase tracking-[0.18em] text-amber-300/70">Day Pillar · Innate Disposition</div>
+                            <h3 class="serif text-xl md:text-2xl text-amber-200 font-bold mt-1"><i class="fa-solid fa-yin-yang mr-2 text-amber-400"></i>일주로 보는 본질과 성향</h3>
+                        </div>
+                        <span id="essence-daypillar-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-950/40 text-amber-200 border border-amber-500/25">일주</span>
+                    </div>
+                    <div id="essence-day-summary" class="p-4 rounded-xl bg-gradient-to-r from-amber-950/20 to-purple-950/25 border border-amber-500/15 text-sm text-slate-200 leading-relaxed"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-purple-300 mb-2">🧬 본질적 성향</div><p id="essence-day-core" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-sky-300 mb-2">🛠 일하는 방식</div><p id="essence-day-work" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-rose-300 mb-2">🤝 관계와 감정 패턴</div><p id="essence-day-rel" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-indigo-300 mb-2">🌙 내면의 욕구</div><p id="essence-day-inner" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="p-4 rounded-xl bg-emerald-950/15 border border-emerald-500/15"><div class="text-xs font-bold text-emerald-300 mb-2">✨ 타고난 강점</div><p id="essence-day-strength" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-rose-950/15 border border-rose-500/15"><div class="text-xs font-bold text-rose-300 mb-2">⚠️ 반복되기 쉬운 패턴</div><p id="essence-day-risk" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-purple-950/20 border border-purple-800/30 text-[11px] text-purple-200/65 leading-relaxed">※ 일주는 중요한 기준점이지만 단독으로 성격을 확정하지 않습니다. 일간·일지·일지 본기 십신과 월령/원국 오행을 함께 반영합니다.</div>
+                </div>
+
+                <div class="glass-card rounded-2xl border border-indigo-500/25 p-5 md:p-6 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <div class="text-[11px] uppercase tracking-[0.18em] text-indigo-300/70">Western Astrology · Big Three</div>
+                            <h3 class="serif text-xl md:text-2xl text-indigo-200 font-bold mt-1"><i class="fa-solid fa-star-and-crescent mr-2 text-indigo-300"></i>Natal Chart로 보는 본질과 성향</h3>
+                        </div>
+                        <span id="natal-big3-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-950/50 text-indigo-200 border border-indigo-500/25">Sun · Moon · Asc</span>
+                    </div>
+                    <div id="natal-summary" class="p-4 rounded-xl bg-gradient-to-r from-indigo-950/35 to-purple-950/25 border border-indigo-500/15 text-sm text-slate-200 leading-relaxed"></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="p-4 rounded-xl bg-amber-950/15 border border-amber-500/20 text-center"><div class="text-[10px] text-amber-300 uppercase">Sun · 핵심 자아</div><div id="natal-sun" class="serif text-lg text-white font-bold mt-1">-</div><p id="natal-sun-text" class="text-[11px] text-slate-300 leading-relaxed mt-2"></p></div>
+                        <div class="p-4 rounded-xl bg-blue-950/20 border border-blue-500/20 text-center"><div class="text-[10px] text-blue-300 uppercase">Moon · 감정 본능</div><div id="natal-moon" class="serif text-lg text-white font-bold mt-1">-</div><p id="natal-moon-text" class="text-[11px] text-slate-300 leading-relaxed mt-2"></p></div>
+                        <div class="p-4 rounded-xl bg-purple-950/25 border border-purple-500/20 text-center"><div class="text-[10px] text-purple-300 uppercase">Ascendant · 외적 태도</div><div id="natal-asc" class="serif text-lg text-white font-bold mt-1">-</div><p id="natal-asc-text" class="text-[11px] text-slate-300 leading-relaxed mt-2"></p></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-indigo-300 mb-2">🧭 통합 성향</div><p id="natal-integrated" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-sky-300 mb-2">💗 감정과 관계 욕구</div><p id="natal-emotion" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-emerald-950/15 border border-emerald-500/15"><div class="text-xs font-bold text-emerald-300 mb-2">✨ 강점</div><p id="natal-strength" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                        <div class="p-4 rounded-xl bg-rose-950/15 border border-rose-500/15"><div class="text-xs font-bold text-rose-300 mb-2">⚠️ 성장 포인트</div><p id="natal-growth" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-indigo-950/20 border border-indigo-800/30 text-[11px] text-indigo-200/65 leading-relaxed">※ 본 항목은 태양·달·상승궁(Big Three)을 중심으로 한 성향 리딩입니다. 상승궁은 출생 시각과 출생지에 매우 민감하므로 정확한 시각 입력을 권장합니다.</div>
+                </div>
+            </div>
+        </section>
+
+<!-- ==================== SAJU TAB (MANSE-RYEOK & COMPLETE READING) ==================== -->
+        <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
+            
+            <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 & 심층 사주 풀이</h2>
                 <p class="text-sm text-purple-200/70">생년월일시와 절기(節氣) 계산으로 맞춤 대운수를 산출하고, 10년 대운 · 연운 · 월운을 입체 분석합니다.</p>
             </div>
@@ -1298,7 +1403,7 @@
     <!-- ==================== JAVASCRIPT ENGINE ==================== -->
     <script>
         function switchTab(tabId) {
-            ['prayer', 'home', 'saju', 'name', 'tarot', 'gunghap', 'zodiac'].forEach(id => {
+            ['prayer', 'home', 'essence', 'saju', 'name', 'tarot', 'gunghap', 'zodiac'].forEach(id => {
                 const el = document.getElementById('tab-' + id);
                 if (el) el.classList.add('hidden');
                 const nav = document.getElementById('nav-' + id);
@@ -3059,6 +3164,168 @@
             };
         }
 
+
+        // ==================== ESSENCE / NATAL CHART ENGINE ====================
+        const ESSENCE_LOCATIONS = {
+            seoul:{name:"서울", lat:37.5665, lon:126.9780, tz:9},
+            busan:{name:"부산", lat:35.1796, lon:129.0756, tz:9},
+            incheon:{name:"인천", lat:37.4563, lon:126.7052, tz:9},
+            daegu:{name:"대구", lat:35.8714, lon:128.6014, tz:9},
+            daejeon:{name:"대전", lat:36.3504, lon:127.3845, tz:9},
+            gwangju:{name:"광주", lat:35.1595, lon:126.8526, tz:9},
+            jeju:{name:"제주", lat:33.4996, lon:126.5312, tz:9}
+        };
+
+        const NATAL_SIGNS = [
+            {name:"양자리", en:"Aries", symbol:"♈", element:"火", mode:"Cardinal", core:"스스로 시작하고 부딪치며 길을 만드는 직접적이고 개척적인 자아", moon:"감정을 즉각적으로 느끼고 빠르게 반응하며 솔직한 정서 표현을 필요로 합니다.", asc:"첫인상은 빠르고 적극적이며 스스로 상황을 주도하려는 사람으로 보이기 쉽습니다.", strength:"용기, 시작하는 힘, 결단력", growth:"조급함을 줄이고 타인의 속도와 후속 관리까지 고려하는 것"},
+            {name:"황소자리", en:"Taurus", symbol:"♉", element:"土", mode:"Fixed", core:"안정과 지속 가능성을 중시하며 자신의 감각과 가치를 현실에 뿌리내리는 자아", moon:"익숙함, 신뢰, 신체적 편안함과 예측 가능한 관계에서 정서적 안정감을 얻습니다.", asc:"차분하고 안정적이며 쉽게 흔들리지 않는 사람이라는 인상을 줍니다.", strength:"꾸준함, 현실감각, 신뢰성", growth:"변화가 필요할 때 익숙함을 지나치게 붙잡지 않는 것"},
+            {name:"쌍둥이자리", en:"Gemini", symbol:"♊", element:"風", mode:"Mutable", core:"정보와 사람을 연결하며 질문하고 배우는 과정에서 자신을 확장하는 지적 자아", moon:"대화와 정보 교환을 통해 감정을 정리하며 답답할 때 생각을 말로 풀어내야 편해집니다.", asc:"호기심 많고 영리하며 대화가 빠른 사람으로 보이기 쉽습니다.", strength:"소통, 학습, 적응력", growth:"가능성을 넓히는 것과 한 방향에 깊게 머무는 것의 균형"},
+            {name:"게자리", en:"Cancer", symbol:"♋", element:"水", mode:"Cardinal", core:"사람과 공간을 보호하고 정서적 안전망을 만드는 과정에서 정체성을 형성하는 자아", moon:"신뢰할 수 있는 가족적 관계와 정서적 공감이 가장 중요한 내면의 연료입니다.", asc:"부드럽고 배려심 있으며 주변 분위기를 세심하게 살피는 사람으로 비칩니다.", strength:"공감, 보호본능, 기억력", growth:"타인의 감정과 자신의 감정을 구분하고 과거의 상처를 현재에 투영하지 않는 것"},
+            {name:"사자자리", en:"Leo", symbol:"♌", element:"火", mode:"Fixed", core:"자신의 존재감과 창조성을 표현하고 의미 있는 영향력을 남기려는 자아", moon:"사랑받고 인정받고 있다는 확신이 감정적 안정에 중요하며 따뜻한 표현을 필요로 합니다.", asc:"자신감 있고 존재감이 분명하며 당당한 사람이라는 인상을 줍니다.", strength:"창조성, 표현력, 리더십", growth:"인정받지 못하는 순간에도 자기 가치를 안정적으로 유지하는 것"},
+            {name:"처녀자리", en:"Virgo", symbol:"♍", element:"土", mode:"Mutable", core:"관찰하고 분석해 더 나은 방식으로 개선하며 쓸모 있는 결과를 만드는 자아", moon:"질서와 일상 루틴이 안정감을 주며 문제를 정리하고 도움을 주는 과정에서 감정을 처리합니다.", asc:"신중하고 정확하며 세부적인 것을 잘 보는 사람으로 인식됩니다.", strength:"분석, 실무, 개선 능력", growth:"완벽하지 않아도 충분히 좋은 상태를 받아들이는 것"},
+            {name:"천칭자리", en:"Libra", symbol:"♎", element:"風", mode:"Cardinal", core:"관계 속에서 균형과 공정함을 만들고 서로 다른 입장을 조율하는 자아", moon:"평화로운 관계와 정서적 교감이 필요하며 갈등보다 대화를 통해 마음을 정리하려 합니다.", asc:"세련되고 친화적이며 타인의 입장을 고려하는 사람으로 보입니다.", strength:"조율, 미감, 관계 감각", growth:"모두를 만족시키려다 자신의 결정을 늦추지 않는 것"},
+            {name:"전갈자리", en:"Scorpio", symbol:"♏", element:"水", mode:"Fixed", core:"표면보다 본질을 파고들고 위기를 통과하며 깊이 변형되는 강한 집중의 자아", moon:"얕은 관계보다 깊은 신뢰를 원하며 감정을 쉽게 드러내지 않아도 내면에서는 매우 강하게 느낍니다.", asc:"신중하고 집중력이 강하며 쉽게 속을 드러내지 않는 사람으로 보이기 쉽습니다.", strength:"집중력, 통찰, 회복력", growth:"통제와 경계심을 내려놓고 신뢰를 단계적으로 허용하는 것"},
+            {name:"사수자리", en:"Sagittarius", symbol:"♐", element:"火", mode:"Mutable", core:"경험과 지식을 넓히며 더 큰 의미와 가능성을 찾아가는 자유로운 자아", moon:"움직임, 배움, 새로운 관점이 감정적 활력을 주며 지나친 제한을 답답해합니다.", asc:"낙관적이고 개방적이며 솔직한 사람이라는 인상을 줍니다.", strength:"확장성, 낙관, 큰 그림", growth:"큰 비전뿐 아니라 세부 실행과 약속의 지속성을 챙기는 것"},
+            {name:"염소자리", en:"Capricorn", symbol:"♑", element:"土", mode:"Cardinal", core:"시간을 들여 구조와 성취를 쌓고 책임을 현실적인 결과로 증명하려는 자아", moon:"자기 통제와 안정적인 계획이 마음을 편하게 하며 신뢰는 행동과 책임으로 확인하려 합니다.", asc:"성숙하고 책임감 있으며 쉽게 흐트러지지 않는 사람으로 보입니다.", strength:"책임감, 장기계획, 인내", growth:"성과와 역할 외에도 자신의 감정과 휴식에 가치를 부여하는 것"},
+            {name:"물병자리", en:"Aquarius", symbol:"♒", element:"風", mode:"Fixed", core:"기존 틀에서 거리를 두고 독창적인 관점과 미래 지향적 가치를 추구하는 자아", moon:"정서적 독립성과 정신적 교감이 중요하며 감정을 한 걸음 떨어져 이해하려는 편입니다.", asc:"독특하고 객관적이며 자기 방식이 분명한 사람으로 보이기 쉽습니다.", strength:"독창성, 객관성, 미래지향성", growth:"생각으로 감정을 분석하는 데 그치지 않고 친밀함을 직접 경험하는 것"},
+            {name:"물고기자리", en:"Pisces", symbol:"♓", element:"水", mode:"Mutable", core:"경계 너머의 감정과 의미를 감지하며 상상력과 공감으로 세상을 이해하는 자아", moon:"혼자 회복할 시간, 정서적 공감, 음악·예술·영적 의미가 마음의 안정에 중요합니다.", asc:"부드럽고 직관적이며 상대의 분위기를 자연스럽게 받아들이는 사람처럼 보입니다.", strength:"공감, 상상력, 직관", growth:"타인의 감정에 휩쓸리지 않도록 현실적인 경계와 루틴을 세우는 것"}
+        ];
+
+        function normDeg(x) { return ((x % 360) + 360) % 360; }
+        function d2r(x) { return x * Math.PI / 180; }
+        function r2d(x) { return x * 180 / Math.PI; }
+        function signFromLongitude(lon) { return NATAL_SIGNS[Math.floor(normDeg(lon) / 30)]; }
+
+        function julianDayFromUTC(y, m, d, hourUTC) {
+            return Date.UTC(y, m - 1, d, 0, 0, 0) / 86400000 + 2440587.5 + hourUTC / 24;
+        }
+
+        function natalSunLongitude(jd) {
+            const n = jd - 2451545.0;
+            const L = normDeg(280.460 + 0.9856474 * n);
+            const g = d2r(normDeg(357.528 + 0.9856003 * n));
+            return normDeg(L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g));
+        }
+
+        function natalMoonLongitude(jd) {
+            const n = jd - 2451545.0;
+            const L0 = normDeg(218.316 + 13.176396 * n);
+            const Mm = d2r(normDeg(134.963 + 13.064993 * n));
+            const Ms = d2r(normDeg(357.529 + 0.98560028 * n));
+            const D  = d2r(normDeg(297.850 + 12.190749 * n));
+            const F  = d2r(normDeg(93.272 + 13.229350 * n));
+            let lon = L0
+                + 6.289 * Math.sin(Mm)
+                + 1.274 * Math.sin(2 * D - Mm)
+                + 0.658 * Math.sin(2 * D)
+                + 0.214 * Math.sin(2 * Mm)
+                - 0.186 * Math.sin(Ms)
+                - 0.059 * Math.sin(2 * D - 2 * Mm)
+                - 0.057 * Math.sin(2 * D - Ms - Mm)
+                + 0.053 * Math.sin(2 * D + Mm)
+                + 0.046 * Math.sin(2 * D - Ms)
+                + 0.041 * Math.sin(Ms - Mm)
+                - 0.035 * Math.sin(D)
+                - 0.031 * Math.sin(Ms + Mm)
+                - 0.015 * Math.sin(2 * F - 2 * D)
+                + 0.011 * Math.sin(2 * D - 4 * Mm);
+            return normDeg(lon);
+        }
+
+        function natalAscendantLongitude(jd, latDeg, lonDeg) {
+            const T = (jd - 2451545.0) / 36525;
+            const gmst = normDeg(280.46061837 + 360.98564736629 * (jd - 2451545.0) + 0.000387933 * T * T - T * T * T / 38710000);
+            const theta = d2r(normDeg(gmst + lonDeg));
+            const phi = d2r(Math.max(-89.5, Math.min(89.5, latDeg)));
+            const eps = d2r(23.439291 - 0.0130042 * T);
+            const y = -Math.cos(theta);
+            const x = Math.sin(theta) * Math.cos(eps) + Math.tan(phi) * Math.sin(eps);
+            return normDeg(r2d(Math.atan2(y, x)));
+        }
+
+        function getEssenceLocation() {
+            const key = document.getElementById('essence-location').value;
+            if (key !== 'custom') return ESSENCE_LOCATIONS[key] || ESSENCE_LOCATIONS.seoul;
+            const lat = Number(document.getElementById('essence-lat').value);
+            const lon = Number(document.getElementById('essence-lon').value);
+            const tz = Number(document.getElementById('essence-tz').value);
+            if (![lat, lon, tz].every(Number.isFinite) || Math.abs(lat) > 90 || Math.abs(lon) > 180 || Math.abs(tz) > 14) return null;
+            return {name:"직접 입력", lat, lon, tz};
+        }
+
+        function toggleEssenceCustomLocation() {
+            const custom = document.getElementById('essence-location').value === 'custom';
+            document.getElementById('essence-custom-location').classList.toggle('hidden', !custom);
+            const loc = custom ? null : getEssenceLocation();
+            document.getElementById('essence-location-note').textContent = custom ? '좌표·UTC 오프셋 직접 입력' : `${loc.name} / UTC${loc.tz >= 0 ? '+' : ''}${loc.tz}`;
+        }
+
+        function natalElementSynthesis(sun, moon, asc) {
+            const arr = [sun, moon, asc];
+            const counts = {"火":0,"土":0,"風":0,"水":0};
+            arr.forEach(s => counts[s.element]++);
+            const dominant = Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+            const elementText = {
+                "火":"행동·열정·직관적인 추진력", "土":"현실성·안정·지속력", "風":"사고·소통·객관성", "水":"감정·공감·직관"
+            }[dominant[0]];
+            const same = dominant[1] >= 2;
+            return same
+                ? `Big Three 중 ${dominant[1]}개가 ${dominant[0]} 원소에 모여 있어 ${elementText}이 성향의 중심축으로 반복됩니다.`
+                : `Big Three의 원소가 분산되어 있어 상황에 따라 행동·현실·사고·감정을 비교적 다르게 전환하는 복합적인 성향입니다.`;
+        }
+
+        function calculateEssenceProfile() {
+            const birth = document.getElementById('essence-birth').value.trim();
+            const calendarType = document.getElementById('essence-calendar').value;
+            const timeText = document.getElementById('essence-time').value || '12:00';
+            const name = document.getElementById('essence-name').value.trim() || '당신';
+            if (!/^\d{8}$/.test(birth)) { alert('생년월일 8자리를 입력해주세요.'); return; }
+            const [hh, mm] = timeText.split(':').map(Number);
+            if (![hh,mm].every(Number.isFinite)) { alert('출생 시각을 확인해주세요.'); return; }
+            const hourIdx = Math.floor(((hh + (mm >= 30 ? 0.5 : 0)) + 1) / 2) % 12;
+            const s = calculateSajuCore(birth, calendarType, hourIdx);
+            if (!s) { alert('입력한 생년월일을 계산할 수 없습니다.'); return; }
+            const loc = getEssenceLocation();
+            if (!loc) { alert('출생지 좌표와 UTC 오프셋을 확인해주세요.'); return; }
+
+            // Day Pillar profile
+            const innate = getInnateProfile(s);
+            document.getElementById('essence-daypillar-badge').textContent = `${innate.pillar}日柱 · ${innate.god}`;
+            document.getElementById('essence-day-summary').innerHTML = `<strong class="text-amber-200">${name} · ${innate.pillar}일주</strong><br>${innate.summary}`;
+            document.getElementById('essence-day-core').textContent = innate.core;
+            document.getElementById('essence-day-work').textContent = innate.work;
+            document.getElementById('essence-day-rel').textContent = innate.relationship;
+            document.getElementById('essence-day-inner').textContent = innate.inner;
+            document.getElementById('essence-day-strength').textContent = innate.strength;
+            document.getElementById('essence-day-risk').textContent = innate.risk;
+
+            // Natal Big Three
+            const localHour = hh + mm / 60;
+            const utcHour = localHour - loc.tz;
+            const jd = julianDayFromUTC(s.solarYear, s.solarMonth, s.solarDay, utcHour);
+            const sun = signFromLongitude(natalSunLongitude(jd));
+            const moon = signFromLongitude(natalMoonLongitude(jd));
+            const asc = signFromLongitude(natalAscendantLongitude(jd, loc.lat, loc.lon));
+
+            document.getElementById('natal-big3-badge').textContent = `${sun.symbol} ${sun.name} / ${moon.symbol} ${moon.name} / ASC ${asc.name}`;
+            document.getElementById('natal-sun').textContent = `${sun.symbol} ${sun.name}`;
+            document.getElementById('natal-moon').textContent = `${moon.symbol} ${moon.name}`;
+            document.getElementById('natal-asc').textContent = `${asc.symbol} ${asc.name}`;
+            document.getElementById('natal-sun-text').textContent = sun.core;
+            document.getElementById('natal-moon-text').textContent = moon.moon;
+            document.getElementById('natal-asc-text').textContent = asc.asc;
+
+            const elementSummary = natalElementSynthesis(sun, moon, asc);
+            document.getElementById('natal-summary').innerHTML = `<strong class="text-indigo-200">${name}의 Big Three</strong>는 태양 ${sun.name}, 달 ${moon.name}, 상승궁 ${asc.name}입니다. 태양은 핵심 자아, 달은 감정적 본능과 안전 욕구, 상승궁은 세상과 처음 만나는 방식과 외적 태도를 보여줍니다. ${elementSummary}`;
+            document.getElementById('natal-integrated').textContent = `본질적으로는 ${sun.core}. 그러나 감정적으로는 ${moon.moon} 세상에서는 ${asc.asc} 따라서 ‘내가 원하는 모습’과 ‘감정이 필요로 하는 것’, ‘타인이 처음 보는 모습’이 서로 다를 경우 상황에 따라 성격이 달라 보일 수 있습니다.`;
+            document.getElementById('natal-emotion').textContent = `${moon.name} 달은 ${moon.moon} 관계에서는 ${sun.name} 태양의 핵심 가치와 ${asc.name} 상승궁의 표현 방식을 함께 고려할 때 감정 소통이 더 자연스러워집니다.`;
+            document.getElementById('natal-strength').textContent = `${sun.strength} / ${moon.strength} / ${asc.strength}. 특히 ${elementSummary}`;
+            document.getElementById('natal-growth').textContent = `태양: ${sun.growth}. 달: ${moon.growth}. 상승궁: ${asc.growth}. 세 요소가 요구하는 방향이 다를수록 한쪽을 없애기보다 상황에 맞게 역할을 나누는 것이 성장의 핵심입니다.`;
+
+            document.getElementById('essence-result').classList.remove('hidden');
+            document.getElementById('essence-result').scrollIntoView({behavior:'smooth', block:'start'});
+        }
+
         function calculateWonkwangSajuFull() {
             const birthInput = document.getElementById('saju-birth').value.trim();
             const nameInput = document.getElementById('saju-name').value.trim();
@@ -3114,17 +3381,6 @@
             document.getElementById('jijang-day-txt').textContent = JIJANG_GAN[s.dayJj];
             document.getElementById('jijang-month-txt').textContent = JIJANG_GAN[s.monthJj];
             document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[s.yearJj];
-
-            // 일주 기반 타고난 본질과 성향
-            const innate = getInnateProfile(s);
-            document.getElementById('innate-daypillar-badge').textContent = `${innate.pillar}日柱 · ${innate.god}`;
-            document.getElementById('innate-profile-summary').innerHTML = `<strong class="text-amber-200">${innate.pillar}일주</strong> — ${innate.summary}`;
-            document.getElementById('innate-core').textContent = innate.core;
-            document.getElementById('innate-workstyle').textContent = innate.work;
-            document.getElementById('innate-relationship').textContent = innate.relationship;
-            document.getElementById('innate-inner').textContent = innate.inner;
-            document.getElementById('innate-strength').textContent = innate.strength;
-            document.getElementById('innate-risk').textContent = innate.risk;
 
             const oNames = ["木", "火", "土", "金", "水"];
             const oBadgeHtml = oNames.map((oName, i) => {
