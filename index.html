@@ -679,7 +679,36 @@
 
         <!-- ==================== SAJU TAB (MANSE-RYEOK & COMPLETE READING) ==================== -->
         <section id="tab-saju" class="hidden space-y-8 animate-fade-in">
-            <div class="text-center space-y-2">
+            
+            <!-- ==================== INNATE DAY-PILLAR PROFILE ==================== -->
+            <div id="innate-profile-section" class="glass-card rounded-2xl border border-amber-500/20 p-5 md:p-6 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-[0.18em] text-amber-300/70">Day Pillar · Innate Disposition</div>
+                        <h3 class="serif text-xl md:text-2xl text-amber-200 font-bold mt-1">
+                            <i class="fa-solid fa-compass mr-2 text-amber-400"></i>
+                            <span id="innate-profile-title">타고난 본질과 성향</span>
+                        </h3>
+                    </div>
+                    <span id="innate-daypillar-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-950/40 text-amber-200 border border-amber-500/25">일주</span>
+                </div>
+                <div id="innate-profile-summary" class="p-4 rounded-xl bg-gradient-to-r from-amber-950/20 to-purple-950/25 border border-amber-500/15 text-sm text-slate-200 leading-relaxed"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-purple-300 mb-2">🧬 본질적 성향</div><p id="innate-core" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-sky-300 mb-2">🛠 일하는 방식</div><p id="innate-workstyle" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-rose-300 mb-2">🤝 관계와 감정 패턴</div><p id="innate-relationship" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    <div class="p-4 rounded-xl bg-[#0d071a]/65 border border-purple-900/40"><div class="text-xs font-bold text-indigo-300 mb-2">🌙 내면의 욕구</div><p id="innate-inner" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="p-4 rounded-xl bg-emerald-950/15 border border-emerald-500/15"><div class="text-xs font-bold text-emerald-300 mb-2">✨ 타고난 강점</div><p id="innate-strength" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                    <div class="p-4 rounded-xl bg-rose-950/15 border border-rose-500/15"><div class="text-xs font-bold text-rose-300 mb-2">⚠️ 반복되기 쉬운 패턴</div><p id="innate-risk" class="text-xs md:text-sm text-slate-300 leading-relaxed"></p></div>
+                </div>
+                <div class="p-3 rounded-xl bg-purple-950/20 border border-purple-800/30 text-[11px] text-purple-200/65 leading-relaxed">
+                    ※ 일주는 ‘나’를 보는 가장 중요한 기준점이지만, 성향을 일주 하나로 단정하지는 않습니다. 아래 해석은 일간·일지·일지 본기 십신을 중심으로 읽고, 월령과 원국 오행 분포를 보정값으로 함께 반영합니다.
+                </div>
+            </div>
+
+<div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold serif text-gold-gradient">정통 만세력 & 심층 사주 풀이</h2>
                 <p class="text-sm text-purple-200/70">생년월일시와 절기(節氣) 계산으로 맞춤 대운수를 산출하고, 10년 대운 · 연운 · 월운을 입체 분석합니다.</p>
             </div>
@@ -2966,6 +2995,70 @@
             };
         }
 
+
+        // ==================== DAY-PILLAR INNATE PROFILE ====================
+        const DAYMASTER_PROFILE = {
+            0:{name:"갑목(甲木)", image:"큰 나무", core:"곧게 성장하려는 힘이 강하고 스스로 기준과 방향을 세우려는 기질", work:"장기 목표를 세우고 조직이나 프로젝트를 앞으로 밀어가는 역할", rel:"관계에서 의리와 원칙을 중시하지만 자신의 기준을 쉽게 굽히지 않는 편", inner:"성장하고 인정받으며 자신이 세운 방향대로 확장하고 싶은 욕구", strength:"추진력, 책임감, 버티는 힘, 리더십", risk:"완고함, 지나친 책임감, 방향이 틀려도 끝까지 밀어붙이는 경향"},
+            1:{name:"을목(乙木)", image:"덩굴과 풀", core:"환경을 읽고 유연하게 연결되며 세밀하게 성장하는 기질", work:"사람과 상황을 조율하고 빈틈을 메우며 관계 속에서 성과를 만드는 역할", rel:"상대의 감정과 분위기에 민감하며 관계를 깨기보다 조정하려는 편", inner:"안정적인 관계와 자신만의 성장 공간을 동시에 확보하고 싶은 욕구", strength:"유연함, 조정력, 섬세함, 적응력", risk:"눈치 과다, 결정을 미룸, 상대에게 맞추다 자신의 욕구를 놓침"},
+            2:{name:"병화(丙火)", image:"태양", core:"밖으로 빛을 발하고 분위기와 사람을 움직이려는 개방적 기질", work:"사람 앞에 서거나 방향을 제시하고 에너지를 확산시키는 역할", rel:"감정을 비교적 솔직하게 표현하며 따뜻한 반응과 인정에 민감한 편", inner:"자신의 존재감과 영향력이 분명하게 드러나길 바라는 욕구", strength:"표현력, 낙관성, 존재감, 추진 에너지", risk:"과열, 성급함, 관심이 분산되거나 인정 욕구가 커짐"},
+            3:{name:"정화(丁火)", image:"촛불과 등불", core:"섬세한 감각과 집중력으로 필요한 곳을 정확히 비추는 기질", work:"전문성·완성도·감각이 필요한 일에서 깊이 파고드는 방식", rel:"겉보다 속이 깊고 가까운 관계에서 세심하게 배려하는 편", inner:"자신의 가치를 알아주는 사람과 환경 속에서 의미 있게 쓰이고 싶은 욕구", strength:"집중력, 감각, 전문성, 세심함", risk:"예민함, 소진, 완벽주의, 속마음을 오래 쌓아둠"},
+            4:{name:"무토(戊土)", image:"산과 대지", core:"쉽게 흔들리지 않고 중심을 잡으며 책임을 떠받치려는 기질", work:"조직의 기반을 만들고 큰 흐름을 안정적으로 운영하는 역할", rel:"신뢰와 책임을 중시하고 한 번 맺은 관계를 오래 지키는 편", inner:"내가 지켜야 할 사람과 영역을 안정적으로 유지하고 싶은 욕구", strength:"신뢰감, 인내, 책임감, 안정성", risk:"변화 저항, 고집, 혼자 너무 많은 부담을 떠안음"},
+            5:{name:"기토(己土)", image:"논밭과 흙", core:"상황을 세밀하게 관리하고 필요한 것을 길러내는 현실적 기질", work:"운영·관리·조정·지원처럼 지속적으로 돌보는 역할", rel:"상대의 필요를 잘 알아차리고 실질적인 도움으로 애정을 표현하는 편", inner:"질서 있고 예측 가능한 생활 속에서 꾸준히 성과를 쌓고 싶은 욕구", strength:"관리력, 현실감각, 배려, 꾸준함", risk:"걱정 과다, 사소한 문제에 매임, 타인의 몫까지 챙김"},
+            6:{name:"경금(庚金)", image:"강철과 칼", core:"기준이 분명하고 문제를 빠르게 잘라내며 결론을 내리려는 기질", work:"판단·경쟁·실행·위기대응처럼 명확한 결단이 필요한 역할", rel:"의리와 신뢰를 중시하지만 감정보다 사실과 원칙을 앞세우는 편", inner:"실력과 결과로 인정받고 불확실한 상황을 명확하게 정리하고 싶은 욕구", strength:"결단력, 실행력, 의리, 위기대응", risk:"직선적 표현, 강압적으로 보임, 흑백논리"},
+            7:{name:"신금(辛金)", image:"보석과 정밀한 금속", core:"정교함과 완성도를 중시하며 차이를 세밀하게 구별하는 기질", work:"분석·품질·기획·전문기술처럼 정확도가 중요한 역할", rel:"쉽게 마음을 열지는 않지만 신뢰가 생기면 관계의 질을 매우 중시하는 편", inner:"자신의 기준에 맞는 높은 완성도와 품격을 인정받고 싶은 욕구", strength:"정밀함, 미감, 분석력, 완성도", risk:"완벽주의, 비판적 시선, 사소한 흠에 과민함"},
+            8:{name:"임수(壬水)", image:"큰 강과 바다", core:"넓게 보고 흐름을 읽으며 여러 가능성을 연결하는 전략적 기질", work:"정보·사람·시장을 연결하고 큰 방향을 설계하는 역할", rel:"자유로운 관계를 선호하지만 마음속으로는 깊은 정서적 연결을 원함", inner:"한곳에 갇히기보다 더 넓은 세계와 가능성을 경험하고 싶은 욕구", strength:"전략적 사고, 확장성, 적응력, 통찰", risk:"방향 분산, 결정 지연, 지나치게 많은 가능성을 열어둠"},
+            9:{name:"계수(癸水)", image:"비와 이슬", core:"미세한 변화와 정보를 빠르게 감지하고 안쪽으로 깊이 생각하는 기질", work:"자료·분석·연구·기획처럼 정보를 축적하고 정교하게 다루는 역할", rel:"상대의 말보다 분위기와 뉘앙스를 읽는 편이며 감정의 여운이 오래 남음", inner:"안전한 환경에서 충분히 생각하고 자신만의 답을 찾고 싶은 욕구", strength:"관찰력, 정보력, 직관, 섬세함", risk:"생각 과잉, 불안, 결정을 안에서만 반복함"}
+        };
+
+        const DAYBRANCH_TEN_GOD_PROFILE = {
+            "비견": {tone:"독립성과 자기 기준", relation:"가까운 관계에서도 동등함과 자율성을 중요하게 여깁니다.", inner:"타인의 지시보다 스스로 결정하고 움직일 때 안정감을 느낍니다.", plus:"자기확신과 버티는 힘", minus:"고집과 경쟁심"},
+            "겁재": {tone:"경쟁과 생존 감각", relation:"관계에서 친밀함과 경쟁심이 동시에 작동할 수 있습니다.", inner:"내 몫을 지키고 주도권을 잃지 않으려는 욕구가 강합니다.", plus:"순간 대응력과 돌파력", minus:"손익·경계 문제"},
+            "식신": {tone:"편안함과 생산성", relation:"따뜻하고 자연스러운 교류를 선호하며 돌봄을 행동으로 표현합니다.", inner:"무리하지 않고 내 리듬대로 꾸준히 만들어내고 싶은 욕구가 큽니다.", plus:"꾸준함과 생활력", minus:"안일함과 속도 저하"},
+            "상관": {tone:"표현과 자유", relation:"관계에서 솔직함과 정신적 자극을 중요하게 여깁니다.", inner:"답답한 규칙에서 벗어나 내 생각을 표현하고 싶은 욕구가 강합니다.", plus:"창의성과 표현력", minus:"말의 날카로움과 권위 충돌"},
+            "편재": {tone:"현실 감각과 기회 포착", relation:"사람과 상황의 흐름을 빠르게 읽고 관계를 현실적으로 운영합니다.", inner:"움직이면서 기회를 만들고 성과를 확인하고 싶은 욕구가 큽니다.", plus:"사업감각과 대외활동", minus:"분산과 과도한 확장"},
+            "정재": {tone:"안정과 책임", relation:"신뢰와 생활의 안정, 약속을 중요하게 여깁니다.", inner:"예측 가능한 기반과 꾸준한 결과를 만들고 싶은 욕구가 강합니다.", plus:"성실함과 관리력", minus:"보수성과 걱정"},
+            "편관": {tone:"긴장과 도전", relation:"관계에서도 기준과 경계를 명확히 하며 강한 사람에게 끌리거나 압박을 느끼기 쉽습니다.", inner:"어려운 상황을 이겨내며 자신의 힘을 확인하고 싶은 욕구가 있습니다.", plus:"집중력과 위기대응", minus:"과도한 긴장과 통제"},
+            "정관": {tone:"질서와 책임", relation:"신뢰·예의·역할이 분명한 관계에서 편안함을 느낍니다.", inner:"사회적으로 인정받는 안정적인 위치를 만들고 싶은 욕구가 큽니다.", plus:"신뢰성과 책임감", minus:"경직성과 평가 민감성"},
+            "편인": {tone:"직관과 탐구", relation:"혼자 생각할 시간이 필요하며 깊이 있는 사람과의 연결을 선호합니다.", inner:"남들이 보지 못한 의미를 찾고 자신만의 관점을 만들고 싶은 욕구가 강합니다.", plus:"통찰과 전문성", minus:"고립과 생각 과잉"},
+            "정인": {tone:"학습과 보호", relation:"이해받고 돌봄을 주고받는 안정적인 관계를 선호합니다.", inner:"충분한 준비와 지식을 통해 안전감을 확보하고 싶은 욕구가 큽니다.", plus:"학습력과 회복력", minus:"수동성과 준비 과잉"}
+        };
+
+        function dayStemBranchRelation(dayCg, dayJj) {
+            const stemElem = CG_ELEMENT[dayCg];
+            const branchElem = CG_ELEMENT[JJ_MAIN_CG[dayJj]];
+            if (stemElem === branchElem) return {label:"동기(同氣)", text:"일간과 일지가 같은 오행 계열이라 겉과 속의 방향이 비교적 일치합니다. 자기 기준이 분명하고 한 번 마음먹은 방향을 오래 유지하는 편입니다."};
+            if ((stemElem + 1) % 5 === branchElem) return {label:"내가 기운을 쓰는 구조", text:"일간의 기운이 일지 쪽으로 흘러가므로 자신의 에너지를 사람·일·성과에 적극적으로 사용하는 편입니다. 생산성과 표현력이 장점이지만 소진 관리가 중요합니다."};
+            if ((branchElem + 1) % 5 === stemElem) return {label:"일지가 나를 돕는 구조", text:"일지의 기운이 일간을 받쳐주는 형태라 내면의 회복력과 버티는 힘이 비교적 좋습니다. 익숙한 환경이나 신뢰하는 관계에서 실력이 더 안정적으로 나옵니다."};
+            if ((stemElem + 2) % 5 === branchElem) return {label:"내가 현실을 통제하려는 구조", text:"현실을 관리하고 결과를 손에 잡히게 만들려는 욕구가 강합니다. 성과와 책임을 중시하지만 지나친 통제나 부담으로 이어지지 않도록 조절이 필요합니다."};
+            return {label:"외부 압력을 체감하는 구조", text:"일지의 기운이 일간에 압박으로 작용하기 쉬워 스스로에게 기준이 높거나 환경의 요구를 크게 느낄 수 있습니다. 압박을 집중력으로 바꾸는 능력이 핵심 강점이 됩니다."};
+        }
+
+        function getInnateProfile(s) {
+            const dm = DAYMASTER_PROFILE[s.dayCg];
+            const dayBranchMainStem = JJ_MAIN_CG[s.dayJj];
+            const dayBranchGod = getTenGod(s.dayCg, dayBranchMainStem);
+            const bg = DAYBRANCH_TEN_GOD_PROFILE[dayBranchGod] || DAYBRANCH_TEN_GOD_PROFILE["비견"];
+            const rel = dayStemBranchRelation(s.dayCg, s.dayJj);
+            const monthElem = CG_ELEMENT[JJ_MAIN_CG[s.monthJj]], dmElem = CG_ELEMENT[s.dayCg];
+            let monthCorrection = "";
+            if (monthElem === dmElem) monthCorrection = "월령도 일간과 같은 오행 계열이라 본래 성향이 사회생활에서도 비교적 그대로 드러나는 편입니다.";
+            else if ((monthElem + 1) % 5 === dmElem) monthCorrection = "월령이 일간을 생조하는 계열이라 환경의 지원을 받을 때 본래 강점이 더 안정적으로 발휘됩니다.";
+            else if ((dmElem + 1) % 5 === monthElem) monthCorrection = "월령으로 에너지가 빠져나가는 구조가 있어 사회생활에서는 본래보다 더 활동적이고 결과 지향적으로 보일 수 있습니다.";
+            else monthCorrection = "월령과 일간의 성질이 달라 사적인 나와 사회생활에서 보이는 모습 사이에 온도차가 생길 수 있습니다.";
+            const oNames=["木","火","土","金","水"], maxCount=Math.max(...s.oCounts), minCount=Math.min(...s.oCounts);
+            const maxElem=oNames[s.oCounts.indexOf(maxCount)], minElem=oNames[s.oCounts.indexOf(minCount)];
+            return {
+                pillar:`${CHEONGAN[s.dayCg]}${JIJI[s.dayJj]}`, god:dayBranchGod,
+                summary:`${dm.name} 일간의 ‘${dm.image}’ 같은 기질 위에, 일지의 본기 십신인 ${dayBranchGod}이 만드는 ‘${bg.tone}’이 가장 가까운 생활 습관으로 깔려 있습니다. ${rel.text} ${monthCorrection}`,
+                core:`${dm.core}. 일지에서는 ${bg.tone}의 성향이 반복적으로 작동합니다. 그래서 겉으로 드러나는 성격보다 실제 생활에서는 ${bg.inner}`,
+                work:`${dm.work}. ${bg.plus}이 실무 강점으로 이어질 수 있습니다. 특히 본인이 납득할 수 있는 기준과 역할이 주어질 때 성과가 안정적으로 나오는 편입니다.`,
+                relationship:`${dm.rel}. 일지 성향상 ${bg.relation} 관계가 흔들릴 때는 감정보다 ‘내가 무엇을 지키려 하는가’를 확인하는 것이 중요합니다.`,
+                inner:`${dm.inner}. 동시에 일지는 ${bg.inner} 원국에서는 ${maxElem} 기운이 상대적으로 두드러지고 ${minElem} 기운이 약하므로, 실제 성향은 이 오행 균형에 의해 강약이 조정됩니다.`,
+                strength:`${dm.strength}. 여기에 ${bg.plus}이 더해져, 익숙해진 분야에서는 꾸준히 자기 방식과 경쟁력을 구축하는 힘이 있습니다.`,
+                risk:`${dm.risk}. 일지에서는 특히 ${bg.minus}이 반복 패턴으로 나타날 수 있습니다. 이것은 결함이라기보다 스트레스가 높을 때 과해지기 쉬운 반응으로 보는 편이 좋습니다.`
+            };
+        }
+
         function calculateWonkwangSajuFull() {
             const birthInput = document.getElementById('saju-birth').value.trim();
             const nameInput = document.getElementById('saju-name').value.trim();
@@ -3020,7 +3113,7 @@
             document.getElementById('jijang-hour-txt').textContent = JIJANG_GAN[s.hourJj];
             document.getElementById('jijang-day-txt').textContent = JIJANG_GAN[s.dayJj];
             document.getElementById('jijang-month-txt').textContent = JIJANG_GAN[s.monthJj];
-            document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[s.yearJj];
+            document.getElementById('jijang-year-txt').textContent = JIJANG_GAN[s.yearJj];\n\n            // 일주 기반 타고난 본질과 성향\n            const innate = getInnateProfile(s);\n            document.getElementById('innate-daypillar-badge').textContent = `${innate.pillar}日柱 · ${innate.god}`;\n            document.getElementById('innate-profile-summary').innerHTML = `<strong class="text-amber-200">${innate.pillar}일주</strong> — ${innate.summary}`;\n            document.getElementById('innate-core').textContent = innate.core;\n            document.getElementById('innate-workstyle').textContent = innate.work;\n            document.getElementById('innate-relationship').textContent = innate.relationship;\n            document.getElementById('innate-inner').textContent = innate.inner;\n            document.getElementById('innate-strength').textContent = innate.strength;\n            document.getElementById('innate-risk').textContent = innate.risk;
 
             const oNames = ["木", "火", "土", "金", "水"];
             const oBadgeHtml = oNames.map((oName, i) => {
