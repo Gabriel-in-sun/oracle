@@ -1286,7 +1286,7 @@
 <h3 class="text-lg font-bold serif text-white flex items-center gap-2">
 <i class="fa-solid fa-user-group text-rose-400"></i> 주인공과의 1:1 개별 심층 궁합 풀이
                         </h3>
-<span class="text-xs text-purple-300">일간합충 · 일지육합/삼합 · 오행보완도 분석</span>
+<span class="text-xs text-purple-300">관계유형별 가중치 · 일간합충 · 일지육합/삼합 · 오행보완도 분석</span>
 </div>
 <div class="space-y-4" id="individual-matches-container"></div>
 </div>
@@ -4139,33 +4139,113 @@
             return Math.abs(j1 - j2) === 6;
         }
 
-        function calculatePairMatch(p1, p2) {
-            let score = 75;
+        const GUNGHAP_RELATION_PROFILES = {
+            "연인/배우자": {
+                label:"연인 · 배우자",
+                icon:"fa-heart",
+                focus:"정서적 끌림 · 생활 궁합 · 장기 유대",
+                base:72,
+                weights:{stemHap:15, sameElem:3, sangsaeng:8, stemClash:-7, yukhap:18, samhap:13, branchClash:-16, complement:7},
+                high:"서로에게 정서적 안정감과 현실적인 유대가 함께 형성되는 관계입니다. 감정 표현과 생활 리듬이 자연스럽게 맞아 장기 관계로 발전하기 좋은 조합입니다.",
+                mid:"끌림과 배울 점이 분명한 관계입니다. 차이를 없애려 하기보다 서로의 감정 표현 방식과 생활 패턴을 이해할수록 관계가 안정됩니다.",
+                low:"끌림과 긴장감이 함께 존재할 수 있습니다. 감정이 격해질 때 결론부터 내리지 말고, 기대·경계·생활 기준을 구체적으로 합의하는 과정이 중요합니다.",
+                tipHigh:"장기 계획, 재정·생활 역할, 서로의 개인 시간을 미리 합의하면 좋은 궁합이 더욱 안정적으로 이어집니다.",
+                tipMid:"서운함을 추측으로 키우지 말고 원하는 애정 표현과 관계 기준을 구체적인 말로 확인하세요.",
+                scoreNames:["천생연분형 연애 궁합","서로를 키우는 동반자형","조율하며 깊어지는 관계","감정·생활 조율이 필요한 관계"]
+            },
+            "비즈니스/동료": {
+                label:"비즈니스 · 동료",
+                icon:"fa-briefcase",
+                focus:"역할 보완 · 실행력 · 의사결정 시너지",
+                base:74,
+                weights:{stemHap:9, sameElem:5, sangsaeng:14, stemClash:-5, yukhap:8, samhap:14, branchClash:-8, complement:15},
+                high:"업무 방식과 강점이 상호보완되어 함께할수록 결과가 커지는 조합입니다. 역할만 명확하면 프로젝트·사업·조직 운영에서 높은 생산성을 기대할 수 있습니다.",
+                mid:"협업 잠재력은 충분하지만 의사결정 방식이나 속도에 차이가 있을 수 있습니다. 각자의 강점이 필요한 영역을 분리하면 효율이 크게 올라갑니다.",
+                low:"업무 철학과 의사결정 속도의 차이가 반복적인 마찰로 이어질 수 있습니다. 권한·책임·최종 결정권을 사전에 구체화하는 것이 중요합니다.",
+                tipHigh:"공동 목표와 KPI를 분명히 하고 서로의 전문영역을 존중하면 장기적인 파트너십으로 발전하기 좋습니다.",
+                tipMid:"역할·마감·최종 결정권을 문서화하고 감정이 아니라 업무 기준으로 피드백하세요.",
+                scoreNames:["최상급 비즈니스 파트너","강한 상호보완형 협업","역할분담형 실무 궁합","업무 규칙이 필요한 조합"]
+            },
+            "친구": {
+                label:"친구 · 지인",
+                icon:"fa-user-group",
+                focus:"편안함 · 공감 · 상호 성장",
+                base:76,
+                weights:{stemHap:9, sameElem:12, sangsaeng:11, stemClash:-4, yukhap:10, samhap:14, branchClash:-7, complement:8},
+                high:"서로의 개성을 편안하게 받아들이면서 함께 있을 때 에너지가 살아나는 친구 궁합입니다. 관심사와 가치관을 공유할수록 오래 이어지기 좋습니다.",
+                mid:"성향은 다르더라도 서로에게 새로운 관점을 주는 관계입니다. 자주 만나지 않아도 필요할 때 믿고 의지할 수 있는 우정으로 발전할 수 있습니다.",
+                low:"친밀해질수록 말투·약속·거리감에서 차이가 느껴질 수 있습니다. 서로의 생활 방식과 관계의 빈도를 존중하면 불필요한 오해를 줄일 수 있습니다.",
+                tipHigh:"함께 배우거나 여행·취미·프로젝트를 공유하면 관계의 장점이 더욱 잘 살아납니다.",
+                tipMid:"연락 빈도나 표현 방식이 다르다는 이유로 마음을 단정하지 말고 서로에게 편안한 거리감을 존중하세요.",
+                scoreNames:["오래 가는 소울프렌드형","서로를 넓혀주는 우정","편안한 성장형 친구","거리 조절이 필요한 우정"]
+            },
+            "가족": {
+                label:"가족 · 형제",
+                icon:"fa-house-user",
+                focus:"정서적 안정 · 생활 조율 · 책임과 경계",
+                base:75,
+                weights:{stemHap:8, sameElem:9, sangsaeng:10, stemClash:-5, yukhap:14, samhap:11, branchClash:-12, complement:10},
+                high:"정서적 기반과 현실적인 도움을 자연스럽게 주고받는 가족 궁합입니다. 서로의 역할을 인정할수록 안정감과 신뢰가 크게 형성됩니다.",
+                mid:"가족이라는 가까움 때문에 차이가 더 크게 느껴질 수 있지만, 실제로는 서로의 부족한 부분을 보완하는 힘이 있습니다. 역할과 경계를 명확히 하면 관계가 편안해집니다.",
+                low:"가까운 관계일수록 기대와 간섭이 커지며 반복적인 패턴이 생길 수 있습니다. 옳고 그름을 가르기보다 각자의 생활 영역과 책임 범위를 분리하는 것이 중요합니다.",
+                tipHigh:"도움을 주고받더라도 상대가 스스로 결정할 영역을 존중하면 가족 관계의 장점이 오래 유지됩니다.",
+                tipMid:"가족이라는 이유로 당연하게 기대하지 말고 부탁·거절·재정·돌봄의 기준을 말로 확인하세요.",
+                scoreNames:["든든한 가족 동반자","상호보완형 가족 관계","역할 조율형 가족 궁합","경계 설정이 필요한 관계"]
+            }
+        };
+
+        function normalizeGunghapRelation(rel) {
+            if (GUNGHAP_RELATION_PROFILES[rel]) return rel;
+            if ((rel || '').includes('연인') || (rel || '').includes('배우자')) return '연인/배우자';
+            if ((rel || '').includes('비즈니스') || (rel || '').includes('동료')) return '비즈니스/동료';
+            if ((rel || '').includes('가족') || (rel || '').includes('형제')) return '가족';
+            return '친구';
+        }
+
+        function getGunghapRelationNarrative(rel, score) {
+            const key = normalizeGunghapRelation(rel);
+            const p = GUNGHAP_RELATION_PROFILES[key];
+            const idx = score >= 90 ? 0 : score >= 80 ? 1 : score >= 70 ? 2 : 3;
+            return {
+                key,
+                profile:p,
+                relationType:`${idx===0?'🌟':idx===1?'💎':idx===2?'🤝':'⚖️'} ${p.scoreNames[idx]}`,
+                synergy: score >= 85 ? p.high : score >= 72 ? p.mid : p.low,
+                tip: score >= 85 ? p.tipHigh : p.tipMid
+            };
+        }
+
+        function calculatePairMatch(p1, p2, relationType = "비즈니스/동료") {
+            const relationKey = normalizeGunghapRelation(relationType);
+            const profile = GUNGHAP_RELATION_PROFILES[relationKey];
+            const w = profile.weights;
+            let score = profile.base;
             let chemistryTags = [];
+            const diagnostics = {stemHap:false, sameElem:false, sangsaeng:false, stemClash:false, yukhap:false, samhap:false, branchClash:false, complementCount:0};
 
             if (isCgHap(p1.dayCg, p2.dayCg)) {
-                score += 15;
-                chemistryTags.push("천간 육합(天干合) - 강한 정신적 끌림");
+                score += w.stemHap; diagnostics.stemHap=true;
+                chemistryTags.push(relationKey === '연인/배우자' ? "천간합 - 마음과 의사표현의 끌림" : "천간합 - 사고방식·의사소통 호흡");
             } else if (CG_ELEMENT[p1.dayCg] === CG_ELEMENT[p2.dayCg]) {
-                score += 5;
-                chemistryTags.push("동일 오행 - 친구 같은 편안함");
+                score += w.sameElem; diagnostics.sameElem=true;
+                chemistryTags.push(relationKey === '친구' ? "동일 오행 - 편안한 공감대" : "동일 오행 - 익숙한 사고방식");
             } else if ((CG_ELEMENT[p1.dayCg] + 1) % 5 === CG_ELEMENT[p2.dayCg] || (CG_ELEMENT[p2.dayCg] + 1) % 5 === CG_ELEMENT[p1.dayCg]) {
-                score += 10;
-                chemistryTags.push("오행 상생(相生) - 서로를 돕는 기운");
+                score += w.sangsaeng; diagnostics.sangsaeng=true;
+                chemistryTags.push(relationKey === '비즈니스/동료' ? "오행 상생 - 업무 강점의 연쇄 시너지" : "오행 상생 - 서로를 돕고 성장시키는 흐름");
             } else if (Math.abs(p1.dayCg - p2.dayCg) === 6) {
-                score -= 8;
-                chemistryTags.push("천간 상충(相沖) - 의견 대립 주의");
+                score += w.stemClash; diagnostics.stemClash=true;
+                chemistryTags.push("천간 긴장 - 판단·표현 방식의 차이");
             }
 
             if (isJjYukhap(p1.dayJj, p2.dayJj)) {
-                score += 12;
-                chemistryTags.push("일지 육합(六合) - 탄탄한 현실적 유대감");
+                score += w.yukhap; diagnostics.yukhap=true;
+                chemistryTags.push(relationKey === '연인/배우자' ? "일지 육합 - 생활·정서적 유대가 강함" : relationKey === '가족' ? "일지 육합 - 생활 리듬과 정서적 안정" : "일지 육합 - 현실적인 호흡이 좋음");
             } else if (isJjSamhap(p1.dayJj, p2.dayJj)) {
-                score += 10;
-                chemistryTags.push("일지 삼합(三合) - 같은 목표와 지향점");
+                score += w.samhap; diagnostics.samhap=true;
+                chemistryTags.push(relationKey === '비즈니스/동료' ? "일지 삼합 - 공동 목표 추진력" : "일지 삼합 - 가치관과 방향의 공감대");
             } else if (isJjChung(p1.dayJj, p2.dayJj)) {
-                score -= 10;
-                chemistryTags.push("일지 상충(相沖) - 생활 습관/가치관 차이");
+                score += w.branchClash; diagnostics.branchClash=true;
+                chemistryTags.push(relationKey === '연인/배우자' ? "일지 충 - 생활 습관·애정 방식 조율 필요" : relationKey === '가족' ? "일지 충 - 가까운 만큼 생활 경계 충돌 가능" : "일지 충 - 실행·생활 방식 차이");
             }
 
             let complementCount = 0;
@@ -4173,20 +4253,30 @@
                 if (p1.oCounts[i] === 0 && p2.oCounts[i] >= 2) complementCount++;
                 if (p2.oCounts[i] === 0 && p1.oCounts[i] >= 2) complementCount++;
             }
+            diagnostics.complementCount = complementCount;
             if (complementCount >= 2) {
-                score += 8;
-                chemistryTags.push("오행 상호보완 - 결핍을 채워주는 귀인");
+                score += w.complement;
+                chemistryTags.push(relationKey === '비즈니스/동료' ? "오행 상호보완 - 역할 분담 시 성과 확대" : "오행 상호보완 - 서로의 부족한 부분을 채움");
             }
 
-            score = Math.min(99, Math.max(55, score));
+            // 관계별 리스크/보너스의 성격을 추가 반영
+            if (relationKey === '연인/배우자') {
+                if (diagnostics.yukhap && diagnostics.stemHap) score += 3;
+                if (diagnostics.branchClash) score -= 3;
+            } else if (relationKey === '비즈니스/동료') {
+                if (diagnostics.complementCount >= 2 && diagnostics.sangsaeng) score += 3;
+                if (diagnostics.sameElem && !diagnostics.complementCount) score -= 2; // 비슷하기만 하고 보완성이 낮은 조합
+            } else if (relationKey === '친구') {
+                if (diagnostics.sameElem || diagnostics.samhap) score += 2;
+                if (diagnostics.stemClash && !diagnostics.branchClash) score += 1; // 논쟁이 자극이 될 수 있음
+            } else if (relationKey === '가족') {
+                if (diagnostics.yukhap || diagnostics.complementCount >= 2) score += 2;
+                if (diagnostics.branchClash) score -= 2;
+            }
 
-            let relationType = "";
-            if (score >= 90) relationType = "🌟 천생연분 / 환상의 파트너";
-            else if (score >= 80) relationType = "💎 상호 발전형 찰떡 호흡";
-            else if (score >= 70) relationType = "🤝 무난하고 안정적인 협력 관계";
-            else relationType = "⚖️ 완충과 배려가 필요한 성장형 관계";
-
-            return { score, chemistryTags, relationType };
+            score = Math.min(99, Math.max(50, Math.round(score)));
+            const narrative = getGunghapRelationNarrative(relationKey, score);
+            return { score, chemistryTags, relationType:narrative.relationType, relationKey, relationLabel:profile.label, relationFocus:profile.focus, synergyText:narrative.synergy, tipText:narrative.tip, diagnostics };
         }
 
         function runGunghapAnalysis() {
@@ -4228,7 +4318,7 @@
             }
 
             const matches = members.map(m => {
-                const res = calculatePairMatch(mainSaju, m);
+                const res = calculatePairMatch(mainSaju, m, m.rel);
                 return { member: m, result: res };
             });
 
@@ -4263,18 +4353,22 @@
                         ${r.chemistryTags.map(t => `<span class="px-2.5 py-0.5 rounded-full bg-purple-950/60 text-amber-200 border border-purple-500/30 text-[11px] font-medium">${t}</span>`).join('')}
                     </div>
 
+                    <div class="p-3 rounded-xl bg-amber-950/15 border border-amber-500/20 text-xs">
+                        <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                            <strong class="text-amber-300">관계별 분석 초점</strong>
+                            <span class="px-2 py-0.5 rounded-full bg-purple-950/60 border border-purple-500/20 text-purple-200">${r.relationLabel}</span>
+                        </div>
+                        <p class="text-slate-300 leading-relaxed">${r.relationFocus}</p>
+                    </div>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                         <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-900/30 space-y-1">
-                            <strong class="text-amber-300 block">✨ 시너지 핵심 포인트</strong>
-                            <p class="text-slate-300 font-light leading-relaxed">
-                                두 사람은 ${r.score >= 80 ? '서로의 부족한 에너지를 자연스럽게 채워주며, 대화와 협업에서 막힘없이 합이 맞는 조합입니다.' : '서로 다른 개성과 시각을 가지고 있어, 역할을 명확히 분담할 때 상호 보완적인 큰 성과를 창출할 수 있습니다.'}
-                            </p>
+                            <strong class="text-amber-300 block">✨ ${r.relationLabel} 시너지 해석</strong>
+                            <p class="text-slate-300 font-light leading-relaxed">${r.synergyText}</p>
                         </div>
                         <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-900/30 space-y-1">
-                            <strong class="text-rose-300 block">💡 관계 조율 팁</strong>
-                            <p class="text-slate-300 font-light leading-relaxed">
-                                ${r.score >= 85 ? '신뢰를 바탕으로 공동 프로젝트나 장기 계획을 함께 추진하기에 최적입니다.' : '서로의 고유한 업무 방식이나 생활 패턴을 존중하며 감정적 충돌 시 완충 시간을 갖는 것이 좋습니다.'}
-                            </p>
+                            <strong class="text-rose-300 block">💡 ${r.relationLabel} 맞춤 조율 팁</strong>
+                            <p class="text-slate-300 font-light leading-relaxed">${r.tipText}</p>
                         </div>
                     </div>
                 `;
@@ -4293,7 +4387,7 @@
 
             for (let i = 0; i < allMembers.length; i++) {
                 for (let j = i + 1; j < allMembers.length; j++) {
-                    const match = calculatePairMatch(allMembers[i], allMembers[j]);
+                    const match = calculatePairMatch(allMembers[i], allMembers[j], "비즈니스/동료");
                     totalPairScore += match.score;
                     pairCount++;
                     if (match.score > bestScore) {
