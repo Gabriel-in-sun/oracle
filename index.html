@@ -6110,11 +6110,223 @@ function buildSajuOverallAssessment(s) {
             King:  {ko:"왕", up:"해당 기운을 현실에서 책임 있게 통솔하고 완성하는 단계", rev:"통제 욕구, 경직성 또는 책임 사용 방식에 대한 재점검이 필요한 단계"}
         };
 
+
+        // ==================== TAROT DIRECT ANSWER / YES-NO CONTEXT ENGINE ====================
+        function detectTarotQuestionType(q) {
+            const s = (q || "").toLowerCase();
+            if (/로또|복권|당첨|번호|lotto|lottery|jackpot|추첨|경품/.test(s)) return "randomChance";
+            if (/가능할까|될까|될까요|나올까|나올 수|성공할까|합격할까|붙을까|성사될까|재회할까|연락.*올까|yes|no|가능성/.test(s)) return "yesNo";
+            if (/언제|시기|몇월|몇 년|timing|when/.test(s)) return "timing";
+            if (/선택|어느|A와 B|둘 중|결정|고를까|choose|decision/.test(s)) return "decision";
+            return "open";
+        }
+
+        const TAROT_DIRECT_POLARITY = {
+            "00_00_fool.webp": 0.20, "01_01_magician.webp": 0.65, "02_02_high_priestess.webp": 0.05,
+            "03_03_empress.webp": 0.65, "04_04_emperor.webp": 0.45, "05_05_hierophant.webp": 0.25,
+            "06_06_lovers.webp": 0.55, "07_07_chariot.webp": 0.65, "08_08_strength.webp": 0.55,
+            "09_09_hermit.webp": -0.10, "10_10_wheel_of_fortune.webp": 0.85, "11_11_justice.webp": 0.05,
+            "12_12_hanged_man.webp": -0.45, "13_13_death.webp": -0.20, "14_14_temperance.webp": 0.35,
+            "15_15_devil.webp": -0.45, "16_16_tower.webp": -0.85, "17_17_star.webp": 0.80,
+            "18_18_moon.webp": -0.40, "19_19_sun.webp": 0.90, "20_20_judgement.webp": 0.55,
+            "21_21_world.webp": 0.85
+        };
+
+        function tarotCardPolarity(card) {
+            const f = (card.image || '').split('/').pop();
+            let score = TAROT_DIRECT_POLARITY[f];
+            if (typeof score !== 'number') {
+                const st = getTarotCardStructure(card);
+                const rank = inferMinorRank(card);
+                const baseBySuit = {Wands:0.20, Cups:0.25, Swords:-0.05, Pentacles:0.25};
+                const rankAdj = {Ace:0.40, Two:0.05, Three:0.20, Four:0.05, Five:-0.35, Six:0.25, Seven:-0.05, Eight:0.10, Nine:0.20, Ten:0.20, Page:0.10, Knight:0.10, Queen:0.20, King:0.25};
+                score = (baseBySuit[st.suit] || 0) + (rankAdj[rank] || 0);
+                // Swords are not automatically negative: Ace = clarity/verdict, Six = transition, etc.
+                if (st.suit === 'Swords' && rank === 'Ace') score = 0.15;
+                if (st.suit === 'Swords' && ['Three','Five','Seven','Nine','Ten'].includes(rank)) score -= 0.35;
+                if (st.suit === 'Pentacles' && ['Nine','Ten','Ace'].includes(rank)) score += 0.25;
+                if (st.suit === 'Cups' && ['Nine','Ten','Ace'].includes(rank)) score += 0.25;
+            }
+            if (card.isReversed) score *= -0.65;
+            return Math.max(-1, Math.min(1, score));
+        }
+
+        function getTarotDirectAnswer(cards, questionTheme, questionType) {
+            if (!cards || !cards.length) return null;
+
+            let weights;
+            if (cards.length === 1) {
+                weights = [1];
+            } else if (cards.length === 3) {
+                weights = [0.22, 0.33, 0.45];
+            } else if (cards.length === 10) {
+                // Celtic Cross: current/challenge/near future/outcome receive the largest weight,
+                // while conscious/unconscious/self/environment/hopes are used as supporting evidence.
+                weights = [0.16, 0.14, 0.06, 0.08, 0.06, 0.12, 0.08, 0.08, 0.06, 0.16];
+            } else {
+                weights = cards.map(() => 1 / cards.length);
+            }
+
+            let raw = 0;
+            cards.forEach((c,i)=> raw += tarotCardPolarity(c) * (weights[i] || 0));
+
+            // Random/chance questions are deliberately capped: tarot cannot establish
+            // the probability or outcome of a genuinely random draw.
+            let adjusted = raw;
+            if (questionType === 'randomChance') {
+                const cap = cards.length === 1 ? 0.38 : cards.length === 10 ? 0.44 : 0.48;
+                adjusted = Math.max(-cap, Math.min(cap, raw));
+            }
+
+            let verdict, toneClass;
+            if (adjusted >= 0.58) { verdict='긍정 신호가 강함'; toneClass='emerald'; }
+            else if (adjusted >= 0.18) { verdict='중립 ~ 약한 긍정'; toneClass='amber'; }
+            else if (adjusted > -0.18) { verdict='판단 유보 / 중립'; toneClass='slate'; }
+            else if (adjusted > -0.58) { verdict='중립 ~ 약한 부정'; toneClass='rose'; }
+            else { verdict='부정 신호가 강함'; toneClass='rose'; }
+
+            const outcome = cards.length === 10 ? cards[9] : cards[cards.length-1];
+            const nearFuture = cards.length === 10 ? cards[5] : null;
+            const obstacle = cards.length === 10 ? cards[1] : null;
+            let direct;
+
+            if (cards.length === 1) {
+                const c = cards[0];
+                if (questionType === 'randomChance') {
+                    direct = `한 장의 ${c.name}은 이 번호나 무작위 결과가 실제로 당첨된다는 증거가 아니라, 질문을 바라보는 <strong>상징적 핵심 메시지</strong>입니다. 타로식 방향성은 <strong>${verdict}</strong>에 가깝지만 실제 추첨 결과나 확률을 예측하는 신호로 사용하면 안 됩니다.`;
+                } else if (questionType === 'yesNo') {
+                    direct = adjusted >= 0.18
+                        ? `한 장으로 압축하면 <strong>“가능성은 열려 있다”</strong> 쪽입니다. 다만 ${c.name}이 요구하는 조건을 충족할 때라는 전제가 붙습니다.`
+                        : adjusted <= -0.18
+                            ? `한 장으로 압축하면 현재 흐름은 <strong>“쉽지 않다”</strong> 쪽입니다. ${c.name}이 보여주는 막힘이나 조건을 먼저 바꾸는 것이 핵심입니다.`
+                            : `한 장으로는 <strong>YES/NO를 확정하기 어렵습니다.</strong> ${c.name}은 결과보다 지금 확인해야 할 핵심 조건을 보여줍니다.`;
+                } else {
+                    direct = `이 질문을 한 장으로 압축하면 핵심은 <strong>${c.name}</strong>입니다. 전체 방향성은 <strong>${verdict}</strong>이며, 이 카드가 말하는 행동 조건을 실제 상황에 적용하는 것이 답에 가장 가깝습니다.`;
+                }
+            } else if (cards.length === 10) {
+                if (questionType === 'randomChance') {
+                    direct = `켈틱 크로스 10장은 추첨 결과 자체를 맞히는 도구라기보다, 왜 이 선택에 기대를 두는지와 어떤 심리·판단이 작동하는지를 깊게 보여줍니다. 전체 상징적 방향성은 <strong>${verdict}</strong>이지만, 6번 ${nearFuture.name}과 10번 ${outcome.name}도 실제 당첨을 보증하지 않습니다. 특히 2번 ${obstacle.name}은 기대를 흐릴 수 있는 장애물·편향을 함께 확인하라는 신호입니다.`;
+                } else if (questionType === 'yesNo') {
+                    direct = adjusted >= 0.18
+                        ? `10장 전체를 종합하면 <strong>“가능성은 열려 있으나 조건부”</strong>에 가깝습니다. 6번 ${nearFuture.name}이 가까운 전개를, 10번 ${outcome.name}이 현재 흐름을 유지했을 때의 결과 궤적을 보여주며, 2번 ${obstacle.name}의 과제를 어떻게 다루는지가 핵심 변수입니다.`
+                        : adjusted <= -0.18
+                            ? `10장 전체를 종합하면 현재 흐름은 <strong>“그대로라면 쉽지 않다”</strong> 쪽입니다. 특히 2번 ${obstacle.name}의 장애와 10번 ${outcome.name}의 결과 방향을 연결해 보고, 7번 태도와 4번 무의식을 바꾸는 것이 필요합니다.`
+                            : `켈틱 크로스 전체에서는 <strong>YES/NO가 아직 굳어지지 않았습니다.</strong> 6번 가까운 미래와 10번 결과가 서로 얼마나 일치하는지, 그리고 2번 장애물을 조정할 수 있는지가 결정적입니다.`;
+                } else {
+                    direct = `켈틱 크로스의 직접 답변은 <strong>${verdict}</strong>입니다. 1번 현재와 2번 장애물이 문제의 핵심을 만들고, 6번 ${nearFuture.name}이 가까운 전개를 거쳐 10번 ${outcome.name}으로 수렴합니다. 따라서 결과 카드 하나만 보지 말고 <strong>2번 장애물 → 4번 무의식 → 7번 태도</strong>를 실제로 조정할 수 있는지까지 함께 봐야 합니다.`;
+                }
+            } else if (questionType === 'randomChance') {
+                direct = `이 카드 배열만으로 특정 번호나 무작위 결과가 실제로 당첨된다고 판단할 수는 없습니다. 타로 리딩 관점에서는 <strong>${verdict}</strong>에 가깝고, 후보를 완전히 버릴 정도는 아니지만 ‘강한 당첨 확정 신호’로 보기는 어렵습니다.`;
+            } else if (questionType === 'yesNo') {
+                direct = adjusted >= 0.18
+                    ? `질문에 대한 타로식 답변은 <strong>“가능성은 열려 있다”</strong> 쪽입니다. 다만 카드가 조건과 대응 방식을 함께 요구하므로 확정적 YES라기보다 ${verdict}으로 보는 편이 정확합니다.`
+                    : adjusted <= -0.18
+                        ? `질문에 대한 타로식 답변은 현재 흐름만 놓고 보면 <strong>“쉽지 않다”</strong> 쪽입니다. 다만 결과는 고정된 예언이라기보다 지금의 조건을 유지했을 때의 경향입니다.`
+                        : `질문에 대한 타로식 답변은 <strong>아직 YES/NO가 굳어지지 않은 상태</strong>입니다. 결정적인 변수나 추가 정보가 필요합니다.`;
+            } else {
+                direct = `전체 배열의 방향성은 <strong>${verdict}</strong>입니다. 마지막 ${outcome.name}은 결과 그 자체보다 현재 흐름이 어디로 수렴하는지를 보여주는 카드로 읽습니다.`;
+            }
+
+            const pct = Math.round((adjusted + 1) * 50);
+            return {raw, adjusted, verdict, toneClass, confidence:pct, direct, weights};
+        }
+
+        function getContextualCardMeaning(card, idx, questionTheme, questionType) {
+            const st = getTarotCardStructure(card);
+            const rank = inferMinorRank(card);
+            const name = card.name || '';
+            const pos = getPositionLens(idx);
+            const orientation = card.isReversed ? '역방향' : '정방향';
+
+            if (questionType === 'randomChance') {
+                const isThreeFuture = selectedSpreadCount === 3 && idx === 2;
+                const isCelticChallenge = selectedSpreadCount === 10 && idx === 1;
+                const isCelticNear = selectedSpreadCount === 10 && idx === 5;
+                const isCelticOutcome = selectedSpreadCount === 10 && idx === 9;
+                const isSingle = selectedSpreadCount === 1;
+                let positionNote = '';
+                if (isSingle) positionNote = '한 장 스프레드이므로 이 카드는 실제 당첨 여부가 아니라 질문 전체를 바라보는 핵심 태도와 상징을 압축합니다.';
+                if (isThreeFuture) positionNote = '미래 위치이므로 실제 결과가 나오며 맞고 틀림이 분명해지는 방향을 중심으로 읽습니다.';
+                if (isCelticChallenge) positionNote = '2번 장애물 위치이므로 긍정 카드라도 과한 기대·확증편향·무리한 베팅처럼 조절해야 할 요소로 읽을 수 있습니다.';
+                if (isCelticNear) positionNote = '6번 가까운 미래는 추첨 결과를 예언하는 자리가 아니라 현재 선택을 유지했을 때 곧 체감할 심리·행동 변화로 읽습니다.';
+                if (isCelticOutcome) positionNote = '10번 결과는 고정된 당첨 예언이 아니라 현재의 기대·행동·판단 구조를 유지했을 때의 귀결을 상징합니다.';
+
+                if ((card.image||'').includes('_sword_ace')) {
+                    return `${orientation}의 ${name}은 복권·추첨 질문에서 ‘당첨’ 자체보다 <strong>판정, 결과 확인, 명확한 결론</strong>을 더 강하게 뜻합니다. ${positionNote}`;
+                }
+                if ((card.image||'').includes('03_03_empress')) {
+                    return `${orientation}의 ${name}은 풍요와 결실을 상징해 금전 질문에서는 긍정적입니다. 그러나 <strong>꾸준히 자라나는 풍요</strong>에 가깝기 때문에 이것만으로 복권 1등 같은 우연한 대박을 확정하는 카드로 보기는 어렵습니다. ${positionNote}`;
+                }
+                if ((card.image||'').includes('_wand_9')) {
+                    return `${orientation}의 ${name}은 오래 버티며 마지막까지 가능성을 붙드는 모습입니다. 번호 조합에 대한 기대·집착·반복적인 검토를 보여줄 수 있지만 그 자체가 당첨 보증을 뜻하지는 않습니다. ${positionNote}`;
+                }
+                if ((card.image||'').includes('10_10_wheel') || (card.image||'').includes('19_19_sun') || (card.image||'').includes('17_17_star') || (card.image||'').includes('_pentacle_10') || (card.image||'').includes('_cup_9')) {
+                    return `${orientation}의 ${name}은 이 질문 유형에서 상대적으로 강한 긍정 상징입니다. 하지만 <strong>상징적 긍정성 ≠ 실제 추첨 확률 상승</strong>입니다. ${positionNote}`;
+                }
+                return `${getTarotContextText(card, card.isReversed, questionTheme)} ${positionNote} 무작위 추첨의 실제 확률은 카드와 별개라는 점을 유지해서 해석합니다.`;
+            }
+            return getTarotContextText(card, card.isReversed, questionTheme);
+        }
+
+
+        function buildSingleCardQuestionSynthesis(card, questionTheme, questionType, directAnswer) {
+            const orientation = card.isReversed ? '역방향' : '정방향';
+            const context = getContextualCardMeaning(card, 0, questionTheme, questionType);
+            const advice = getTarotPracticalAdvice(card, card.isReversed, questionTheme);
+            const certainty = questionType === 'randomChance'
+                ? '실제 확률·당첨 여부와 카드의 상징적 메시지는 분리해서 보세요.'
+                : '한 장은 핵심을 압축하지만 세부 원인과 변수를 모두 설명하지는 않습니다.';
+            return `<strong class="text-amber-200">한 장의 결론:</strong> ${orientation} ${card.name}이 질문의 핵심입니다.<br><br>
+                <strong class="text-sky-200">질문에 맞춘 의미:</strong> ${context}<br><br>
+                <strong class="text-emerald-200">실제로 취할 행동:</strong> ${advice}<br><br>
+                <strong class="text-purple-200">해석의 한계:</strong> ${certainty}<br><br>
+                <strong class="text-amber-200">최종 답변:</strong> ${directAnswer ? directAnswer.direct : ''}`;
+        }
+
+        function buildCelticQuestionSynthesis(cards, questionTheme, questionType, directAnswer) {
+            if (cards.length !== 10) return '';
+            const c = cards;
+            const randomNote = questionType === 'randomChance'
+                ? '<br><br><span class="text-[11px] text-slate-500">※ 복권·추첨 질문에서는 이 구조가 심리·판단·행동 패턴을 읽는 데는 유용하지만 실제 무작위 결과의 확률을 계산하지는 않습니다.</span>'
+                : '';
+            return `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="p-3 rounded-lg bg-purple-950/25 border border-purple-800/30">
+                        <div class="text-[10px] uppercase tracking-wider text-purple-300 mb-1">Core</div>
+                        <p class="text-xs text-slate-300 leading-relaxed"><strong class="text-amber-200">1 현재 ${c[0].name}</strong> + <strong class="text-amber-200">2 장애물 ${c[1].name}</strong><br>지금 질문을 실제로 움직이는 중심 에너지와 가장 먼저 풀어야 할 마찰입니다.</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-indigo-950/25 border border-indigo-800/30">
+                        <div class="text-[10px] uppercase tracking-wider text-indigo-300 mb-1">Near Future</div>
+                        <p class="text-xs text-slate-300 leading-relaxed"><strong class="text-amber-200">6 가까운 미래 ${c[5].name}</strong><br>${getContextualCardMeaning(c[5],5,questionTheme,questionType)}</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-sky-950/20 border border-sky-800/30">
+                        <div class="text-[10px] uppercase tracking-wider text-sky-300 mb-1">Change Lever</div>
+                        <p class="text-xs text-slate-300 leading-relaxed"><strong class="text-amber-200">4 무의식 ${c[3].name}</strong> → <strong class="text-amber-200">7 태도 ${c[6].name}</strong><br>결과를 바꾸고 싶다면 내면의 반복 패턴을 알아차리고 실제 행동 태도를 수정하는 지점입니다.</p>
+                    </div>
+                    <div class="p-3 rounded-lg bg-amber-950/20 border border-amber-700/30">
+                        <div class="text-[10px] uppercase tracking-wider text-amber-300 mb-1">Outcome</div>
+                        <p class="text-xs text-slate-300 leading-relaxed"><strong class="text-amber-200">10 결과 ${c[9].name}</strong><br>${getContextualCardMeaning(c[9],9,questionTheme,questionType)}</p>
+                    </div>
+                </div>
+                <div class="mt-3 p-3 rounded-lg bg-black/15 border border-amber-400/20">
+                    <p class="text-xs md:text-sm text-slate-200 leading-relaxed"><strong class="text-amber-300">질문에 대한 최종 답:</strong> ${directAnswer ? directAnswer.direct : ''}${randomNote}</p>
+                </div>`;
+        }
+
+        function buildDirectNarrative(cards, questionTheme, questionType) {
+            if (cards.length !== 3) return '';
+            const [p,n,f] = cards;
+            if (questionType === 'randomChance') {
+                return `<strong>세 장을 하나의 흐름으로 읽으면</strong>, 과거의 ${p.name}은 이 선택을 붙들고 검토해 온 배경을, 현재의 ${n.name}은 지금 느끼는 기대와 긍정적 가능성을, 미래의 ${f.name}은 실제 결과가 드러나며 판단이 명확해지는 순간을 보여줍니다. 따라서 이 배열은 “대박이 확정된다”보다 <strong>“기대는 있으나 결과 확인 전까지 확정할 수 없다”</strong>는 이야기로 읽는 편이 자연스럽습니다.`;
+            }
+            return `<strong>세 장의 흐름:</strong> ${p.name}에서 형성된 배경이 ${n.name}이라는 현재 과제로 이어지고, ${f.name}이 그 대응의 다음 결과 방향을 보여줍니다.`;
+        }
+
         function detectTarotQuestionTheme(q) {
             const s = (q || "").toLowerCase();
             if (/사랑|연애|남친|여친|그 사람|썸|결혼|재회|관계|마음|love|relationship/.test(s)) return "love";
             if (/직장|회사|취업|이직|승진|프로젝트|사업|커리어|업무|시험|합격|career|job|work/.test(s)) return "career";
-            if (/돈|재물|투자|주식|수익|매수|매도|부동산|재정|금전|finance|money/.test(s)) return "finance";
+            if (/돈|재물|투자|주식|수익|매수|매도|부동산|재정|금전|로또|복권|당첨|lotto|lottery|finance|money/.test(s)) return "finance";
             return "general";
         }
 
@@ -6251,7 +6463,7 @@ function buildSajuOverallAssessment(s) {
         }
 
 
-        function celticCrossStepAnalysis(cards, questionTheme) {
+        function celticCrossStepAnalysis(cards, questionTheme, questionType) {
             if (cards.length !== 10) return [];
             const c = cards;
             return [
@@ -6374,13 +6586,36 @@ function buildSajuOverallAssessment(s) {
             const reportContainer = document.getElementById('step-by-step-analysis');
             reportContainer.innerHTML = '';
             const questionTheme = detectTarotQuestionTheme(currentQuestion);
+            const questionType = detectTarotQuestionType(currentQuestion);
+            const directAnswer = getTarotDirectAnswer(chosenCards, questionTheme, questionType);
 
             const themeNames = {love:"사랑·관계", career:"직업·커리어", finance:"재물·재정", general:"종합"};
             const themeHeader = document.createElement('div');
             themeHeader.className = "p-3 rounded-xl border border-amber-400/20 bg-amber-950/15 text-xs text-slate-300 leading-relaxed";
+            const typeNames = {randomChance:"무작위·확률형", yesNo:"YES/NO 가능성", timing:"시기", decision:"선택", open:"개방형"};
             themeHeader.innerHTML = `<strong class="text-amber-300">질문 맥락:</strong> ${themeNames[questionTheme]} &nbsp;/&nbsp;
-                <strong class="text-amber-300">해석 방식:</strong> 정·역방향 + 위치별 의미 + 질문 맥락 + 카드 간 상호작용 + 4단계 통합 분석`;
+                <strong class="text-amber-300">질문 유형:</strong> ${typeNames[questionType]} &nbsp;/&nbsp;
+                <strong class="text-amber-300">해석 방식:</strong> 위치 + 정·역방향 + 질문 유형별 의미 + 카드 연결 + 직접 답변`;
             reportContainer.appendChild(themeHeader);
+
+            if (directAnswer) {
+                const verdictBox = document.createElement('div');
+                const tone = directAnswer.toneClass === 'emerald' ? 'border-emerald-400/30 from-emerald-950/35 to-teal-950/20' : directAnswer.toneClass === 'rose' ? 'border-rose-400/30 from-rose-950/30 to-purple-950/20' : 'border-amber-400/30 from-amber-950/25 to-purple-950/30';
+                verdictBox.className = `p-4 md:p-5 rounded-xl bg-gradient-to-r ${tone} border`;
+                verdictBox.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                        <div>
+                            <div class="text-[10px] uppercase tracking-widest text-amber-300/80 font-bold">Direct Answer</div>
+                            <h4 class="serif text-lg md:text-xl text-white font-bold mt-1">질문에 대한 직접 답변</h4>
+                        </div>
+                        <div class="px-3 py-1.5 rounded-full border border-amber-400/25 bg-black/20 text-amber-200 text-xs font-bold">${directAnswer.verdict}</div>
+                    </div>
+                    <p class="mt-3 text-sm md:text-base text-slate-200 leading-relaxed">${directAnswer.direct}</p>
+                    <p class="mt-2 text-[10px] text-purple-300/70">${selectedSpreadCount === 1 ? '1장은 질문의 핵심 메시지에 집중합니다.' : selectedSpreadCount === 10 ? '켈틱 크로스는 현재·장애물·가까운 미래·결과와 개입 포인트를 함께 종합합니다.' : '3장은 과거→현재→미래의 흐름을 중심으로 종합합니다.'}</p>
+                    ${questionType === 'randomChance' ? '<p class="mt-2 text-[10px] text-slate-500">※ 복권·추첨처럼 무작위성이 지배적인 사건은 타로로 실제 당첨 확률이나 결과를 예측할 수 없습니다. 아래 해석은 카드의 상징적 방향성을 읽는 참고용입니다.</p>' : ''}
+                `;
+                reportContainer.appendChild(verdictBox);
+            }
 
             chosenCards.forEach((card, idx) => {
                 const lens = getPositionLens(idx);
@@ -6395,7 +6630,7 @@ function buildSajuOverallAssessment(s) {
                             ? getTarotOrientationText(card, true)
                             : (idx === 0 ? card.past : (idx === 1 ? card.present : card.future)));
 
-                const contextual = getTarotContextText(card, card.isReversed, questionTheme);
+                const contextual = getContextualCardMeaning(card, idx, questionTheme, questionType);
                 const practical = getTarotPracticalAdvice(card, card.isReversed, questionTheme);
 
                 const itemDiv = document.createElement('div');
@@ -6438,6 +6673,15 @@ function buildSajuOverallAssessment(s) {
                 reportContainer.appendChild(itemDiv);
             });
 
+            if (chosenCards.length === 1) {
+                const singleWrap = document.createElement('div');
+                singleWrap.className = "p-4 md:p-5 rounded-xl bg-gradient-to-r from-amber-950/20 to-purple-950/35 border border-amber-400/25";
+                singleWrap.innerHTML = `
+                    <div class="text-xs font-bold text-amber-300 mb-2"><i class="fa-solid fa-bullseye mr-1.5"></i> 한 장으로 질문에 답하면</div>
+                    <p class="text-xs md:text-sm text-slate-300 leading-relaxed">${buildSingleCardQuestionSynthesis(chosenCards[0], questionTheme, questionType, directAnswer)}</p>`;
+                reportContainer.appendChild(singleWrap);
+            }
+
             if (chosenCards.length === 3) {
                 const interaction = document.createElement('div');
                 interaction.className = "p-4 md:p-5 rounded-xl bg-gradient-to-r from-indigo-950/45 to-purple-950/45 border border-indigo-400/25";
@@ -6449,10 +6693,25 @@ function buildSajuOverallAssessment(s) {
                     </p>
                 `;
                 reportContainer.appendChild(interaction);
+
+                const narrativeText = buildDirectNarrative(chosenCards, questionTheme, questionType);
+                if (narrativeText) {
+                    const narrative = document.createElement('div');
+                    narrative.className = "p-4 md:p-5 rounded-xl bg-[#120a1f] border border-amber-400/25";
+                    narrative.innerHTML = `<div class="text-xs font-bold text-amber-300 mb-2"><i class="fa-solid fa-book-open mr-1.5"></i> 세 장을 하나의 이야기로 읽으면</div><p class="text-xs md:text-sm text-slate-300 leading-relaxed">${narrativeText}</p>`;
+                    reportContainer.appendChild(narrative);
+                }
             }
 
             if (chosenCards.length === 10) {
-                const steps = celticCrossStepAnalysis(chosenCards, questionTheme);
+                const directCeltic = document.createElement('div');
+                directCeltic.className = "p-4 md:p-5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-amber-950/20 border border-amber-400/25";
+                directCeltic.innerHTML = `
+                    <div class="text-xs font-bold text-amber-300 mb-3"><i class="fa-solid fa-compass mr-1.5"></i> 켈틱 크로스로 질문에 직접 답하면</div>
+                    ${buildCelticQuestionSynthesis(chosenCards, questionTheme, questionType, directAnswer)}`;
+                reportContainer.appendChild(directCeltic);
+
+                const steps = celticCrossStepAnalysis(chosenCards, questionTheme, questionType);
                 const wrap = document.createElement('div');
                 wrap.className = "space-y-3";
                 wrap.innerHTML = `
@@ -6473,8 +6732,9 @@ function buildSajuOverallAssessment(s) {
             }
 
             const summaryText = buildDeepTarotSynthesis(chosenCards, questionTheme);
+            const finalDirect = directAnswer ? `<strong class="text-amber-200">결론:</strong> ${directAnswer.direct}<br><br>` : '';
             document.getElementById('final-advice-text').innerHTML =
-                `<span class="text-amber-200">질문:</span> “${currentQuestion}”<br><br>${summaryText}`;
+                `<span class="text-amber-200">질문:</span> “${currentQuestion}”<br><br>${finalDirect}${summaryText}`;
 
             document.getElementById('tarot-comprehensive-report').classList.remove('hidden');
             document.getElementById('tarot-comprehensive-report').scrollIntoView({ behavior: 'smooth' });
