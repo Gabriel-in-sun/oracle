@@ -848,18 +848,36 @@
 <div class="hidden max-w-4xl mx-auto space-y-8 animate-fade-in" id="manse-result-area"><div class="sticky top-[72px] z-30 mb-5 rounded-2xl border border-purple-800/40 bg-[#080411]/95 p-2 shadow-xl backdrop-blur" id="manse-subtabs">
 <div class="grid grid-cols-2 gap-2 md:grid-cols-4">
 <button class="manse-subtab-btn rounded-xl bg-amber-400 px-3 py-2.5 text-[11px] font-bold leading-tight text-slate-950 md:text-xs" id="manse-subtab-btn-1" onclick="switchManseSubtab(1)" type="button">
-<span class="block">1. 명식·운세표</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">사주팔자 / 대운 / 세운 / 월운</span>
+<span class="block">1. 명식·원국</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">사주 8자 / 지장간 / 오행 세력 / 신강·신약 / 십성</span>
 </button>
 <button class="manse-subtab-btn rounded-xl border border-purple-800/40 bg-purple-950/50 px-3 py-2.5 text-[11px] font-bold leading-tight text-purple-200 md:text-xs" id="manse-subtab-btn-2" onclick="switchManseSubtab(2)" type="button">
-<span class="block">2. 종합평가·신살</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">사주 종합평가 / 신살 분석</span>
+<span class="block">2. 사주 구조 분석</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">합충형파해 / 조후 / 격국 / 용희기신 / 신살</span>
 </button>
 <button class="manse-subtab-btn rounded-xl border border-purple-800/40 bg-purple-950/50 px-3 py-2.5 text-[11px] font-bold leading-tight text-purple-200 md:text-xs" id="manse-subtab-btn-3" onclick="switchManseSubtab(3)" type="button">
-<span class="block">3. 10년 대운 상세</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">대운별 직업·재물·관계 해석</span>
+<span class="block">3. 대운·세운</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">대운표 / 현재 대운 / 세운 / 원국 연동</span>
 </button>
 <button class="manse-subtab-btn rounded-xl border border-purple-800/40 bg-purple-950/50 px-3 py-2.5 text-[11px] font-bold leading-tight text-purple-200 md:text-xs" id="manse-subtab-btn-4" onclick="switchManseSubtab(4)" type="button">
-<span class="block">4. 월별 운세 가이드</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">연간 월별 상세 리딩</span>
+<span class="block">4. 종합 풀이</span><span class="block text-[9px] font-medium opacity-75 md:text-[10px]">성격 / 직업 / 재물 / 관계 / 올해 핵심운 / 월별 가이드</span>
 </button>
 </div>
+</div>
+<!-- ==================== SAJU AT A GLANCE ==================== -->
+<div id="saju-at-a-glance" class="rounded-2xl border border-amber-400/30 bg-gradient-to-r from-[#211332] via-[#120b22] to-[#0b1020] p-4 md:p-5 shadow-xl">
+    <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+            <div class="text-[10px] uppercase tracking-[0.18em] text-amber-300/70">Saju at a Glance · 一目瞭然</div>
+            <h3 class="serif mt-1 text-lg md:text-xl font-bold text-amber-100"><i class="fa-solid fa-eye mr-2 text-amber-300"></i>한눈에 보는 내 사주</h3>
+        </div>
+        <span id="overview-season" class="rounded-full border border-cyan-500/25 bg-cyan-950/20 px-2.5 py-1 text-[10px] text-cyan-200">-</span>
+    </div>
+    <div class="mt-4 grid grid-cols-2 md:grid-cols-5 gap-2.5 text-xs">
+        <div class="rounded-xl bg-black/25 p-3"><span class="block text-slate-500 mb-1">일간</span><strong id="overview-daymaster" class="text-lg serif text-white">-</strong><div id="overview-daymaster-sub" class="mt-0.5 text-[10px] text-purple-300">-</div></div>
+        <div class="rounded-xl bg-black/25 p-3"><span class="block text-slate-500 mb-1">신강도</span><strong id="overview-strength" class="text-amber-200">-</strong><div id="overview-strength-score" class="mt-0.5 text-[10px] text-slate-400">-</div></div>
+        <div class="rounded-xl bg-black/25 p-3"><span class="block text-slate-500 mb-1">용신 / 희신</span><strong id="overview-yonghee" class="text-emerald-200">-</strong></div>
+        <div class="rounded-xl bg-black/25 p-3"><span class="block text-slate-500 mb-1">현재 대운</span><strong id="overview-daewoon" class="text-indigo-200">-</strong><div id="overview-daewoon-theme" class="mt-0.5 text-[10px] text-slate-400">-</div></div>
+        <div class="rounded-xl bg-black/25 p-3"><span class="block text-slate-500 mb-1">현재 세운</span><strong id="overview-seun" class="text-cyan-200">-</strong><div id="overview-seun-theme" class="mt-0.5 text-[10px] text-slate-400">-</div></div>
+    </div>
+    <div class="mt-3 rounded-xl border border-amber-500/15 bg-amber-950/10 px-3 py-2.5 text-xs leading-relaxed text-slate-300" id="overview-one-line">계산 후 핵심 구조를 한 문장으로 정리합니다.</div>
 </div>
 <div class="glass-card rounded-2xl p-4 md:p-6 border-amber-400/40 bg-[#0c081c] space-y-5">
 <div class="bg-[#1b1233] p-3 rounded-xl flex flex-wrap items-center justify-between border border-purple-800/50 text-xs md:text-sm" data-manse-group="1">
@@ -913,6 +931,12 @@
 <td class="py-1.5 border-r border-slate-200" id="jijang-month-txt">辛 丁 戊</td>
 <td class="py-1.5" id="jijang-year-txt">庚 辛</td>
 </tr>
+<tr class="bg-indigo-50 text-[10px] md:text-xs text-indigo-700 border-t border-indigo-100 font-medium">
+<td class="py-1.5 border-r border-indigo-100"><span class="text-[9px] text-slate-400">12운성</span><br><strong id="stage-hour">-</strong></td>
+<td class="py-1.5 border-r border-indigo-100"><span class="text-[9px] text-slate-400">12운성</span><br><strong id="stage-day">-</strong></td>
+<td class="py-1.5 border-r border-indigo-100"><span class="text-[9px] text-slate-400">12운성</span><br><strong id="stage-month">-</strong></td>
+<td class="py-1.5"><span class="text-[9px] text-slate-400">12운성</span><br><strong id="stage-year">-</strong></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -922,6 +946,42 @@
                         </span>
 <div class="flex flex-wrap gap-1.5 font-semibold text-[11px]" id="ohaeng-badges"></div>
 </div>
+<!-- ==================== NATAL EXPLANATION FLOW ==================== -->
+<div id="natal-explanation-flow" data-manse-group="1" class="rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-[#0c1020] via-[#0b0917] to-[#140b19] p-5 md:p-6 space-y-5">
+    <div class="border-b border-indigo-900/40 pb-3">
+        <div class="text-[10px] uppercase tracking-[0.18em] text-indigo-300/65">Natal Chart Logic · 原局</div>
+        <h4 class="mt-1 serif text-xl font-bold text-indigo-100"><i class="fa-solid fa-layer-group mr-2 text-amber-300"></i>명식에서 근거를 따라가는 원국 분석</h4>
+        <p class="mt-1 text-[11px] text-slate-400">명식 → 지장간 → 실제 오행 세력 → 신강/신약 → 십성 순서로 읽습니다.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
+            <strong class="text-amber-200">나의 일간 · 월령</strong>
+            <div id="natal-daymaster-title" class="text-lg font-bold serif text-white">-</div>
+            <p id="natal-season-text" class="text-xs leading-relaxed text-slate-300">-</p>
+        </div>
+        <div class="rounded-xl border border-cyan-500/20 bg-cyan-950/10 p-4 space-y-2">
+            <strong class="text-cyan-200">신강 / 신약 근거</strong>
+            <div id="natal-strength-meter" class="text-lg font-bold text-white">-</div>
+            <div id="natal-strength-evidence" class="text-xs leading-relaxed text-slate-300">-</div>
+        </div>
+    </div>
+    <div class="space-y-2">
+        <div class="flex items-center justify-between gap-2"><strong class="text-indigo-200">지장간 상세</strong><span class="text-[10px] text-slate-500">지장간 → 십성 → 일간의 뿌리 여부</span></div>
+        <div id="natal-hidden-detail" class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs"></div>
+    </div>
+    <div class="space-y-2">
+        <div class="flex flex-wrap items-center justify-between gap-2"><strong class="text-emerald-200">표면 오행 개수 vs 실제 세력</strong><span class="text-[10px] text-slate-500">월령 + 통근 + 지장간 + 생조 + 합화 잠재를 반영한 비교 지수</span></div>
+        <div class="overflow-x-auto rounded-xl border border-slate-700/50">
+            <table class="w-full min-w-[520px] text-xs text-center"><thead class="bg-slate-900/80 text-slate-300"><tr><th class="p-2">오행</th><th class="p-2">표면 개수</th><th class="p-2">실제 세력지수</th><th class="p-2">판단</th><th class="p-2">근거</th></tr></thead><tbody id="natal-element-power-table" class="divide-y divide-slate-800"></tbody></table>
+        </div>
+        <p class="text-[10px] text-slate-500">※ 세력지수는 명식 내부에서 상대 비교하기 위한 0~100 지수입니다. 단순 글자 개수와 실제 작용력은 다를 수 있습니다.</p>
+    </div>
+    <div class="space-y-2">
+        <div class="flex items-center justify-between"><strong class="text-fuchsia-200">십성 지도</strong><span class="text-[10px] text-slate-500">위치와 지장간까지 포함</span></div>
+        <div id="natal-ten-god-map" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs"></div>
+        <div id="natal-ten-god-summary" class="rounded-xl bg-black/25 p-3 text-xs leading-relaxed text-slate-300">-</div>
+    </div>
+</div>
 <!-- ==================== CLASSICAL SAJU STRUCTURE ==================== -->
 <div class="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-[#07151a] via-[#0b0b17] to-[#120919] p-5 md:p-6 space-y-5" data-manse-group="2" id="classical-saju-structure">
     <div class="flex flex-wrap items-end justify-between gap-2 border-b border-cyan-900/35 pb-3">
@@ -929,7 +989,7 @@
             <div class="text-[11px] uppercase tracking-[0.18em] text-cyan-300/65">Classical Structure · 原局分析</div>
             <h4 class="serif text-xl md:text-2xl text-cyan-100 font-bold mt-1"><i class="fa-solid fa-diagram-project mr-2 text-amber-300"></i>정통 사주 구조 분석</h4>
         </div>
-        <span class="text-[10px] px-2.5 py-1 rounded-full border border-cyan-500/25 text-cyan-200 bg-cyan-950/20">월령 → 신강/신약 → 조후 → 격국 → 용희기신</span>
+        <span class="text-[10px] px-2.5 py-1 rounded-full border border-cyan-500/25 text-cyan-200 bg-cyan-950/20">합충형파해 → 조후 → 격국 → 용신 근거 → 신살</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -966,6 +1026,7 @@
             <strong class="text-violet-200">⑤ 격국(格局)</strong>
             <div id="classic-gyeok-title" class="text-sm font-bold text-white">-</div>
             <p id="classic-gyeok-text" class="text-xs text-slate-300 leading-relaxed">-</p>
+            <div class="mt-2 space-y-1 text-[11px]"><p><span class="text-violet-300">작동 구조</span> <strong id="classic-gyeok-structure" class="text-white">-</strong></p><p><span class="text-purple-300">보조 구조</span> <strong id="classic-gyeok-support" class="text-white">-</strong></p></div>
         </div>
         <div class="p-4 rounded-xl border border-emerald-500/20 bg-emerald-950/10 space-y-2">
             <strong class="text-emerald-200">⑥ 용신 / 희신 / 기신</strong>
@@ -974,13 +1035,34 @@
                 <p><span class="text-emerald-300">희신</span> <strong id="classic-heeshin" class="text-white">-</strong></p>
                 <p><span class="text-rose-300">기신</span> <strong id="classic-gishin" class="text-white">-</strong></p>
             </div>
-            <p id="classic-yongshin-reason" class="text-xs text-slate-300 leading-relaxed">-</p>
+            <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                <div class="rounded bg-black/25 p-2"><span class="text-cyan-300 block">보조</span><strong id="classic-bojo" class="text-white">-</strong></div>
+                <div class="rounded bg-black/25 p-2"><span class="text-orange-300 block">주의</span><strong id="classic-caution" class="text-white">-</strong></div>
+            </div>
+            <div class="mt-2 space-y-1.5 text-[11px] leading-relaxed">
+                <p><strong class="text-amber-300">억부:</strong> <span id="classic-yong-eokbu" class="text-slate-300">-</span></p>
+                <p><strong class="text-sky-300">조후:</strong> <span id="classic-yong-johoo" class="text-slate-300">-</span></p>
+                <p><strong class="text-violet-300">격국:</strong> <span id="classic-yong-gyeok" class="text-slate-300">-</span></p>
+            </div>
+            <p id="classic-yongshin-reason" class="mt-2 text-xs text-slate-300 leading-relaxed">-</p>
         </div>
     </div>
     <p class="text-[10px] text-slate-500 leading-relaxed">※ 본 분석은 월령·지장간·오행 세력·합충·조후를 함께 반영하는 규칙 기반 해석입니다. 격국·용신은 학파별 세부 판정법이 다르므로 단일 공식으로 절대화하지 않고, 원국 전체와 대운·세운 해석의 기준값으로 사용합니다.</p>
 </div>
+<!-- ==================== COMPREHENSIVE FINAL READING ==================== -->
+<div id="saju-final-dashboard" data-manse-group="4" class="rounded-2xl border border-amber-400/25 bg-gradient-to-br from-[#1d122b] via-[#10091b] to-[#08101c] p-5 md:p-6 space-y-4">
+    <div class="border-b border-amber-900/35 pb-3"><div class="text-[10px] uppercase tracking-[0.18em] text-amber-300/65">Comprehensive Reading</div><h4 class="mt-1 serif text-xl md:text-2xl font-bold text-amber-100"><i class="fa-solid fa-book-open mr-2 text-amber-300"></i>최종 종합 풀이</h4></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+        <div class="rounded-xl bg-purple-950/25 border border-purple-800/30 p-3"><strong class="text-purple-300 block mb-1">🧬 성격·기질</strong><p id="final-personality" class="text-slate-300 leading-relaxed">-</p></div>
+        <div class="rounded-xl bg-indigo-950/25 border border-indigo-800/30 p-3"><strong class="text-indigo-300 block mb-1">💼 직업·역할</strong><p id="final-career" class="text-slate-300 leading-relaxed">-</p></div>
+        <div class="rounded-xl bg-amber-950/20 border border-amber-800/30 p-3"><strong class="text-amber-300 block mb-1">💰 재물·자산</strong><p id="final-money" class="text-slate-300 leading-relaxed">-</p></div>
+        <div class="rounded-xl bg-rose-950/20 border border-rose-800/30 p-3"><strong class="text-rose-300 block mb-1">🤝 인간관계·배우자</strong><p id="final-relationship" class="text-slate-300 leading-relaxed">-</p></div>
+        <div class="md:col-span-2 rounded-xl bg-cyan-950/20 border border-cyan-800/30 p-3"><strong class="text-cyan-300 block mb-1">📅 올해 핵심운</strong><p id="final-current-year" class="text-slate-300 leading-relaxed">-</p></div>
+    </div>
+    <div class="rounded-xl border border-amber-400/20 bg-amber-950/10 p-3 text-center"><span class="text-[10px] text-amber-300 block mb-1">최종 한문장</span><strong id="final-one-line" class="serif text-sm md:text-base text-amber-100">-</strong></div>
+</div>
 <!-- ==================== SAJU OVERALL ASSESSMENT ==================== -->
-<div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-[#1b1026] via-[#10091c] to-[#0b0712] p-5 md:p-6 space-y-4" data-manse-group="2" id="saju-overall-assessment">
+<div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-[#1b1026] via-[#10091c] to-[#0b0712] p-5 md:p-6 space-y-4" data-manse-group="4" id="saju-overall-assessment">
 <div class="text-center space-y-1">
 <div class="text-[11px] uppercase tracking-[0.18em] text-amber-300/65">Overall Natal Assessment</div>
 <h4 class="serif text-xl md:text-2xl text-amber-200 font-bold">
@@ -1081,7 +1163,7 @@
                             ※ 12신살은 일지 삼합 기준입니다. 기타 신살은 전통적으로 널리 쓰이는 공식 중 하나를 적용했습니다. 신살은 학파별로 종류·기준이 다르므로 단독 길흉 판단이 아니라 원국의 오행·십신·합충과 대운·세운의 흐름을 보조하는 지표로 활용합니다.
                         </p>
 </div>
-<div class="space-y-2 pt-2" data-manse-group="1">
+<div class="space-y-2 pt-2" data-manse-group="3">
 <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
 <span>10년 주기 대운 흐름 (大運表)</span>
 <span class="text-amber-300 text-[11px] font-normal">* 주황색 블록: 현재 대운</span>
@@ -1098,7 +1180,7 @@
 </table>
 </div>
 </div>
-<div class="space-y-2 pt-3" data-manse-group="1">
+<div class="space-y-2 pt-3" data-manse-group="3">
 <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
 <span>연운 흐름 (歲運表 - 전후 14개년)</span>
 <span class="text-emerald-300 text-[11px] font-normal" id="seun-current-note">* 초록색 블록: 현재 절기연도</span>
@@ -1115,7 +1197,7 @@
 </table>
 </div>
 </div>
-<div class="space-y-2 pt-3" data-manse-group="1">
+<div class="space-y-2 pt-3" data-manse-group="3">
 <div class="flex items-center justify-between text-xs font-semibold text-purple-200">
 <span id="wolun-table-title">절기연도 12개월 월운 흐름 (月運表)</span>
 <span class="text-purple-300 text-[11px] font-normal">입춘(寅月) → 다음해 입춘 전(丑月)</span>
@@ -1134,6 +1216,14 @@
 </div>
 </div>
 <div class="space-y-6">
+<div id="daewoon-focus-card" data-manse-group="3" class="rounded-2xl border border-indigo-500/25 bg-gradient-to-r from-indigo-950/25 via-[#10091c] to-cyan-950/20 p-5 md:p-6 space-y-4">
+    <div><div class="text-[10px] uppercase tracking-[0.18em] text-indigo-300/65">Previous · Current · Next</div><h4 class="mt-1 serif text-xl font-bold text-white"><i class="fa-solid fa-route mr-2 text-amber-300"></i>현재 위치를 중심으로 보는 대운</h4></div>
+    <div id="daewoon-focus-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs"></div>
+</div>
+<div id="luck-relation-card" data-manse-group="3" class="rounded-2xl border border-fuchsia-500/20 bg-fuchsia-950/10 p-5 md:p-6 space-y-3">
+    <div class="flex flex-wrap items-center justify-between gap-2"><h4 class="font-bold text-fuchsia-100"><i class="fa-solid fa-link mr-2 text-fuchsia-300"></i>원국 × 대운 × 세운 연결</h4><span class="text-[10px] text-slate-500">원국 / 대운 / 세운을 구분해 표시</span></div>
+    <div id="luck-relation-visual" class="space-y-2 text-xs"></div>
+</div>
 <div class="glass-card rounded-2xl p-6 md:p-8 border-purple-500/30 space-y-5" data-manse-group="3">
 <div class="border-b border-purple-900/60 pb-3">
 <h3 class="text-xl font-bold serif text-gold-gradient flex items-center gap-2">
@@ -1143,7 +1233,7 @@
 </div>
 <div class="space-y-4" id="daewoon-details-list"></div>
 </div>
-<div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 space-y-4" data-manse-group="1">
+<div class="glass-card rounded-2xl p-6 md:p-8 border-amber-400/40 space-y-4" data-manse-group="3">
 <div class="border-b border-purple-900/60 pb-3 flex items-center justify-between">
 <h3 class="text-lg md:text-xl font-bold serif text-white flex items-center gap-2">
 <i class="fa-solid fa-calendar-check text-amber-400"></i> <span id="seun-reading-title">연운(세운) 심층 리딩</span>
@@ -3804,18 +3894,43 @@
         }
 
         function calculateSeasonWeightedElements(s) {
-            const raw=[0,0,0,0,0];
-            // 천간: 일간 포함 4간
-            [s.yearCg,s.monthCg,s.dayCg,s.hourCg].forEach(c=>raw[CG_ELEMENT[c]] += 1.0);
-            // 지장간: 월지에 가장 높은 계절 가중, 일지 다음
-            [[s.yearJj,1.0],[s.monthJj,1.70],[s.dayJj,1.25],[s.hourJj,1.0]].forEach(([jj,pw])=>{
-                getWeightedHiddenStems(jj).forEach(h=> raw[CG_ELEMENT[h.idx]] += h.weight*pw);
+            const raw=[0,0,0,0,0], rootBonus=[0,0,0,0,0], combineBonus=[0,0,0,0,0];
+            const stems=[s.yearCg,s.monthCg,s.dayCg,s.hourCg];
+            const branchInfo=[[s.yearJj,1.0],[s.monthJj,1.70],[s.dayJj,1.25],[s.hourJj,1.0]];
+            stems.forEach(c=>raw[CG_ELEMENT[c]] += 1.0);
+            branchInfo.forEach(([jj,pw])=> getWeightedHiddenStems(jj).forEach(h=>raw[CG_ELEMENT[h.idx]] += h.weight*pw));
+
+            // 통근: 천간 오행이 지장간에 뿌리를 두는 정도를 별도 가산한다.
+            stems.forEach((c,stemPos)=>{
+                const e=CG_ELEMENT[c];
+                branchInfo.forEach(([jj,pw])=>{
+                    const root=getWeightedHiddenStems(jj).reduce((a,h)=>a+(CG_ELEMENT[h.idx]===e?h.weight:0),0);
+                    rootBonus[e]+=root*pw*(stemPos===2?0.22:0.12);
+                });
             });
+
             const sm=getSeasonMultipliers(s.monthJj);
-            const weighted=raw.map((v,i)=>v*sm[i]);
+            let weighted=raw.map((v,i)=>(v+rootBonus[i])*sm[i]);
+
+            // 생조: 각 오행이 다음 오행을 생하는 흐름을 소폭 반영한다.
+            const supportBonus=[0,0,0,0,0];
+            weighted.forEach((v,i)=>supportBonus[(i+1)%5]+=v*0.07);
+
+            // 완성된 삼합/방합 및 천간합은 '합화 잠재'로만 제한 가중한다.
+            const bset=new Set([s.yearJj,s.monthJj,s.dayJj,s.hourJj]);
+            SANHE_GROUPS.forEach(g=>{if(g.b.every(x=>bset.has(x))) combineBonus[g.e]+=0.65;});
+            FANGHE_GROUPS.forEach(g=>{if(g.b.every(x=>bset.has(x))) combineBonus[g.e]+=0.45;});
+            const stemPairResult={"05":2,"50":2,"16":3,"61":3,"27":4,"72":4,"38":0,"83":0,"49":1,"94":1};
+            for(let i=0;i<stems.length;i++) for(let j=i+1;j<stems.length;j++){
+                const e=stemPairResult[`${stems[i]}${stems[j]}`]; if(e!==undefined) combineBonus[e]+=0.22;
+            }
+
+            weighted=weighted.map((v,i)=>v+supportBonus[i]+combineBonus[i]);
             const total=weighted.reduce((a,b)=>a+b,0)||1;
             const pct=weighted.map(v=>v/total*100);
-            return {raw,weighted,pct};
+            const max=Math.max(...weighted)||1;
+            const index=weighted.map(v=>Math.round(v/max*100));
+            return {raw,rootBonus,supportBonus,combineBonus,weighted,pct,index};
         }
 
         function supportElementSet(dayCg) {
@@ -3824,21 +3939,27 @@
         }
 
         function calculateDayMasterStrength(s, elemPower) {
-            const sup=supportElementSet(s.dayCg);
+            const sup=supportElementSet(s.dayCg), dm=CG_ELEMENT[s.dayCg], resource=(dm+4)%5, output=(dm+1)%5, wealth=(dm+2)%5, officer=(dm+3)%5;
             const monthMainElem=CG_ELEMENT[JJ_MAIN_CG[s.monthJj]];
-            const deukryeong = monthMainElem===CG_ELEMENT[s.dayCg] ? 30 : (sup.has(monthMainElem) ? 22 : 6);
+            const deukryeong = monthMainElem===dm ? 30 : (monthMainElem===resource ? 23 : (sup.has(monthMainElem)?20:5));
             const dayHidden=getWeightedHiddenStems(s.dayJj);
             const daySupport=dayHidden.reduce((a,h)=>a+(sup.has(CG_ELEMENT[h.idx])?h.weight:0),0);
             const deukji=Math.round(daySupport*25);
-
             let seSupport=0,seTotal=0;
             [s.yearCg,s.monthCg,s.hourCg].forEach(c=>{seTotal+=1; if(sup.has(CG_ELEMENT[c])) seSupport+=1;});
             [[s.yearJj,1],[s.monthJj,1.5],[s.hourJj,1]].forEach(([jj,w])=>getWeightedHiddenStems(jj).forEach(h=>{seTotal+=h.weight*w; if(sup.has(CG_ELEMENT[h.idx])) seSupport+=h.weight*w;}));
             const deukse=Math.round((seSupport/(seTotal||1))*45);
-            const score=Math.max(0,Math.min(100,deukryeong+deukji+deukse));
+            const supportPct=elemPower.pct[dm]+elemPower.pct[resource];
+            const drainPct=elemPower.pct[output]+elemPower.pct[wealth]+elemPower.pct[officer];
+            // 설기/극제 비중은 최종 점수의 미세 보정에만 사용하여 득령·득지·득세 체계를 유지한다.
+            const drainAdjust=Math.round((supportPct-drainPct)*0.08);
+            const score=Math.max(0,Math.min(100,deukryeong+deukji+deukse+drainAdjust));
             let label="중화";
             if(score>=67) label="신강"; else if(score>=56) label="약간 신강"; else if(score<=33) label="신약"; else if(score<=44) label="약간 신약";
-            return {score,label,deukryeong,deukji,deukse,supportPct:elemPower.pct.filter((_,i)=>sup.has(i)).reduce((a,b)=>a+b,0)};
+            let jong="해당 없음";
+            if(score>=88 && supportPct>=78) jong="종왕격 가능성 검토";
+            else if(score<=18 && drainPct>=82) jong="종격 가능성 검토";
+            return {score,label,deukryeong,deukji,deukse,supportPct,drainPct,drainAdjust,jong};
         }
 
         function pairKey(a,b){ return a.toString(12)+b.toString(12); }
@@ -3887,13 +4008,25 @@
         }
 
         function analyzeGyeokguk(s) {
-            const main=JJ_MAIN_CG[s.monthJj];
-            const god=getTenGod(s.dayCg,main);
+            const main=JJ_MAIN_CG[s.monthJj], god=getTenGod(s.dayCg,main);
             const exposed=[s.yearCg,s.monthCg,s.hourCg].includes(main);
             const map={"비견":"건록격","겁재":"월겁격","식신":"식신격","상관":"상관격","편재":"편재격","정재":"정재격","편관":"칠살격","정관":"정관격","편인":"편인격","정인":"정인격"};
             const title=map[god]||`${god} 중심 격`;
-            const text=`월지 ${JIJI[s.monthJj]}의 본기 ${CHEONGAN[main]}는 일간 기준 ${god}입니다. ${exposed?`본기가 천간에 투출되어 ${title}의 성격이 비교적 분명합니다.`:`본기가 천간에 직접 투출되지는 않아 ${title}의 성격을 기본 골격으로 보되 다른 투간 십성과 합충을 함께 봐야 합니다.`}`;
-            return {title,god,main,exposed,text};
+            const gods=[];
+            [s.yearCg,s.monthCg,s.hourCg].forEach(c=>gods.push(getTenGod(s.dayCg,c)));
+            [s.yearJj,s.monthJj,s.dayJj,s.hourJj].forEach(jj=>getWeightedHiddenStems(jj).forEach(h=>gods.push(getTenGod(s.dayCg,h.idx))));
+            const has=x=>gods.includes(x);
+            const structures=[];
+            if((has('식신')||has('상관'))&&(has('편재')||has('정재'))) structures.push('식상생재');
+            if(has('식신')&&has('편관')) structures.push('식신제살');
+            if(has('상관')&&has('편관')) structures.push('상관제살 가능');
+            if((has('정관')||has('편관'))&&(has('정인')||has('편인'))) structures.push('관인상생');
+            if((has('편재')||has('정재'))&&(has('정관')||has('편관'))) structures.push('재생관');
+            if((has('정인')||has('편인'))&&(has('비견')||has('겁재'))) structures.push('인비상생');
+            const structure=structures[0]||`${god} 중심 작동`;
+            const support=structures.slice(1).join(' / ')||'투간 십성·합충에 따라 보조 구조가 달라짐';
+            const text=`월지 ${JIJI[s.monthJj]}의 본기 ${CHEONGAN[main]}는 일간 기준 ${god}입니다. ${exposed?`본기가 천간에 투출되어 ${title}의 성격이 비교적 분명합니다.`:`본기가 천간에 직접 투출되지는 않아 ${title}을 기본 골격으로 보되 다른 투간 십성과 합충을 함께 봅니다.`}`;
+            return {title,god,main,exposed,text,structure,support};
         }
 
         function analyzeYongHeeGi(s, strength, johoo, elemPower, gyeok) {
@@ -3902,21 +4035,28 @@
             if(strength.score>=56) eokbu=[output,wealth,officer];
             else if(strength.score<=44) eokbu=[resource,dm];
             else eokbu=[johoo.primary,output,officer];
-            // 중복 제거 후, 후보 중 과다하지 않은 오행을 우선
             eokbu=[...new Set(eokbu)];
             const eokbuPrimary=[...eokbu].sort((a,b)=>elemPower.pct[a]-elemPower.pct[b])[0];
             const climateUrgent=([11,0,1,5,6,7].includes(s.monthJj) && elemPower.pct[johoo.primary]<16);
             const yong=climateUrgent?johoo.primary:eokbuPrimary;
-            let hee=(yong+4)%5; // 용신을 생하는 오행
-            if(hee===yong) hee=(yong+1)%5;
+            let hee=(yong+4)%5;
+            if(hee===yong) hee=johoo.secondary;
+            let bojo=johoo.secondary;
+            if([yong,hee].includes(bojo)) bojo=eokbu.find(x=>![yong,hee].includes(x));
+            if(bojo===undefined) bojo=(yong+1)%5;
             let gi;
             if(strength.score>=56) gi=elemPower.pct[dm]>=elemPower.pct[resource]?dm:resource;
             else if(strength.score<=44) gi=[output,wealth,officer].sort((a,b)=>elemPower.pct[b]-elemPower.pct[a])[0];
             else gi=elemPower.pct.indexOf(Math.max(...elemPower.pct));
             if(gi===yong) gi=(gi+1)%5;
+            const remaining=[0,1,2,3,4].filter(x=>![yong,hee,bojo,gi].includes(x));
+            const caution=remaining[0]!==undefined?remaining[0]:gi;
             const eokbuTxt=eokbu.map(i=>CLASSIC_ELEMENT_KO[i]).join(' / ');
-            const reason=`${strength.label}(강약 점수 ${strength.score}) 판정에서 억부 후보는 ${eokbuTxt}입니다. 조후에서는 ${CLASSIC_ELEMENT_KO[johoo.primary]}를 우선 검토하며, ${climateUrgent?'계절의 한열 조절 필요성이 커 조후를 우선해':'계절 보정과 억부를 함께 비교해'} ${CLASSIC_ELEMENT_KO[yong]}을 용신으로 제시합니다. 단순히 가장 부족한 오행을 용신으로 정하지 않습니다.`;
-            return {yong,hee,gi,eokbu,reason};
+            const eokbuReason=`${strength.label}(${strength.score}/100)이므로 ${strength.score>=56?'설기·재성·관성으로 힘을 적절히 빼고 쓰는':'인성·비겁으로 일간의 기반을 보강하는'} 방향을 먼저 봅니다. 억부 후보: ${eokbuTxt}.`;
+            const johooReason=`${johoo.title}. 조후 1순위 ${CLASSIC_ELEMENT_KO[johoo.primary]}의 세력은 ${elemPower.pct[johoo.primary].toFixed(1)}%이며 ${climateUrgent?'계절 보정의 긴급도가 높아 우선순위를 높였습니다.':'억부 판단과 함께 보조 기준으로 반영했습니다.'}`;
+            const gyeokReason=`기본격은 ${gyeok.title}, 작동 구조는 ${gyeok.structure}입니다. 격의 흐름을 막지 않고 실제 작용을 연결할 수 있는 오행을 최종 판단에 반영합니다.`;
+            const reason=`억부·조후·격국을 분리해 검토한 뒤 공통적으로 활용도가 높은 ${CLASSIC_ELEMENT_KO[yong]}을 용신으로 제시합니다. 단순히 가장 부족한 오행을 용신으로 정하지 않습니다.`;
+            return {yong,hee,bojo,caution,gi,eokbu,reason,eokbuReason,johooReason,gyeokReason};
         }
 
         function getTraditionalSajuAnalysis(s){
@@ -3931,15 +4071,104 @@
             return s._classic;
         }
 
+
+        const TWELVE_STAGE_NAMES=['장생','목욕','관대','건록','제왕','쇠','병','사','묘','절','태','양'];
+        const TWELVE_STAGE_START=[11,6,2,9,2,9,5,0,8,3];
+        function getTwelveStage(dayCg,jj){
+            const start=TWELVE_STAGE_START[dayCg], forward=CG_YINYANG[dayCg]===1;
+            const idx=forward?((jj-start+12)%12):((start-jj+12)%12);
+            return TWELVE_STAGE_NAMES[idx];
+        }
+        function elementStrengthLabel(v){ return v>=82?'매우 강함':v>=64?'강함':v>=42?'보통':v>=24?'약함':'매우 약함'; }
+        function hiddenStemMeaning(s,jj,label){
+            const dm=CG_ELEMENT[s.dayCg], sup=supportElementSet(s.dayCg);
+            const hs=getWeightedHiddenStems(jj);
+            const roots=hs.filter(h=>sup.has(CG_ELEMENT[h.idx])).map(h=>h.char);
+            const core=hs.map(h=>`${h.char}(${getTenGod(s.dayCg,h.idx)})`).join(' · ');
+            return `${label} ${JIJI[jj]}: ${core}. ${roots.length?`${roots.join('·')}이 일간 또는 인성 계열의 뿌리로 작용해 일간의 기반을 보탭니다.`:'일간을 직접 돕는 뿌리보다 설기·재·관의 현실 작용이 상대적으로 두드러집니다.'}`;
+        }
+        function tenGodWeightedMap(s){
+            const scores={}; const add=(g,w)=>scores[g]=(scores[g]||0)+w;
+            [['년간',s.yearCg],['월간',s.monthCg],['시간',s.hourCg]].forEach(([_,c])=>add(getTenGod(s.dayCg,c),1));
+            [['년지',s.yearJj,1],['월지',s.monthJj,1.5],['일지',s.dayJj,1.2],['시지',s.hourJj,1]].forEach(([_,jj,w])=>getWeightedHiddenStems(jj).forEach(h=>add(getTenGod(s.dayCg,h.idx),h.weight*w)));
+            return scores;
+        }
+        function renderNatalExplanation(s){
+            const a=getTraditionalSajuAnalysis(s), dm=CG_ELEMENT[s.dayCg];
+            document.getElementById('natal-daymaster-title').textContent=`${CHEONGAN[s.dayCg]} ${CLASSIC_ELEMENT_KO[dm]} 일간 · ${CG_YINYANG[s.dayCg]?'양':'음'}${['목','화','토','금','수'][dm]}`;
+            document.getElementById('natal-season-text').textContent=`월지 ${JIJI[s.monthJj]}는 ${seasonNameByMonthBranch(s.monthJj)}의 월령입니다. 월령은 사주의 계절 배경이므로 같은 오행 개수라도 실제 세력을 크게 바꿉니다.`;
+            document.getElementById('natal-strength-meter').textContent=`${a.strength.label} · ${a.strength.score}/100`;
+            document.getElementById('natal-strength-evidence').innerHTML=`득령 <strong>${a.strength.deukryeong}/30</strong> / 득지 <strong>${a.strength.deukji}/25</strong> / 득세 <strong>${a.strength.deukse}/45</strong> / 설기·극제 보정 <strong>${a.strength.drainAdjust>=0?'+':''}${a.strength.drainAdjust}</strong><br><span class="text-amber-200">종격 여부:</span> ${a.strength.jong}. 지지에 일간을 돕는 뿌리가 있는지와 월령의 생조 여부를 함께 보아 판정했습니다.`;
+            document.getElementById('natal-hidden-detail').innerHTML=[['년지',s.yearJj],['월지',s.monthJj],['일지',s.dayJj],['시지',s.hourJj]].map(([l,j])=>`<div class="rounded-lg border border-indigo-500/10 bg-black/20 p-2.5 text-slate-300">${hiddenStemMeaning(s,j,l)}</div>`).join('');
+            const colors=['text-emerald-300','text-rose-300','text-amber-300','text-slate-200','text-blue-300'];
+            document.getElementById('natal-element-power-table').innerHTML=a.elemPower.index.map((idx,i)=>{
+                const roots=a.elemPower.rootBonus[i].toFixed(2), comb=a.elemPower.combineBonus[i].toFixed(2);
+                return `<tr class="bg-black/10"><td class="p-2 font-bold ${colors[i]}">${CLASSIC_ELEMENT_KO[i]}</td><td class="p-2 text-slate-300">${s.oCounts[i]}</td><td class="p-2"><strong class="text-white">${idx}</strong><div class="mx-auto mt-1 h-1.5 w-24 rounded bg-slate-800"><div class="h-1.5 rounded bg-slate-400" style="width:${idx}%"></div></div></td><td class="p-2 text-slate-300">${elementStrengthLabel(idx)}</td><td class="p-2 text-left text-[10px] text-slate-400">계절 ${(getSeasonMultipliers(s.monthJj)[i]).toFixed(2)}× / 통근 +${roots} / 합화잠재 +${comb}</td></tr>`;
+            }).join('');
+            const locations=[['년간',s.yearCg],['월간',s.monthCg],['일간',s.dayCg],['시간',s.hourCg]];
+            document.getElementById('natal-ten-god-map').innerHTML=locations.map(([l,c])=>`<div class="rounded-lg bg-black/20 p-2.5"><span class="text-slate-500">${l}</span> <strong class="ml-1 text-fuchsia-200">${l==='일간'?'일원':getTenGod(s.dayCg,c)}</strong><span class="float-right serif text-white">${CHEONGAN[c]}</span></div>`).join('') + [['년지',s.yearJj],['월지',s.monthJj],['일지',s.dayJj],['시지',s.hourJj]].map(([l,j])=>`<div class="rounded-lg bg-black/20 p-2.5"><span class="text-slate-500">${l}</span> <strong class="ml-1 text-fuchsia-200">${getTenGod(s.dayCg,JJ_MAIN_CG[j])}</strong><span class="float-right serif text-white">${JIJI[j]}</span></div>`).join('');
+            const tg=tenGodWeightedMap(s), pairs=Object.entries(tg).sort((a,b)=>b[1]-a[1]);
+            const strong=pairs.slice(0,2).map(x=>x[0]).join('·'), weak=pairs.slice(-2).map(x=>x[0]).join('·');
+            document.getElementById('natal-ten-god-summary').textContent=`위치와 지장간 가중치를 함께 보면 ${strong}의 작용이 상대적으로 두드러지고, ${weak}은 약하게 드러납니다. 강한 십성은 이미 익숙한 행동 패턴으로, 약한 십성은 대운·세운에서 들어올 때 사건성이 커질 수 있습니다.`;
+            document.getElementById('stage-year').textContent=getTwelveStage(s.dayCg,s.yearJj);
+            document.getElementById('stage-month').textContent=getTwelveStage(s.dayCg,s.monthJj);
+            document.getElementById('stage-day').textContent=getTwelveStage(s.dayCg,s.dayJj);
+            document.getElementById('stage-hour').textContent=getTwelveStage(s.dayCg,s.hourJj);
+        }
+        function analyzeLuckRelationsDetailed(s,label,cg,jj){
+            const rows=[];
+            const stems=[['년간',s.yearCg],['월간',s.monthCg],['일간',s.dayCg],['시간',s.hourCg]];
+            const branches=[['년지',s.yearJj],['월지',s.monthJj],['일지',s.dayJj],['시지',s.hourJj]];
+            stems.forEach(([l,c])=>{const k=`${c}${cg}`; if(STEM_HE_PAIRS.has(k)) rows.push(`${label} 천간 ${CHEONGAN[c]}-${CHEONGAN[cg]} 합 (${l})`); if(STEM_CHONG_PAIRS.has(k)) rows.push(`${label} 천간 ${CHEONGAN[c]}-${CHEONGAN[cg]} 충 (${l})`);});
+            branches.forEach(([l,b])=>{const k=pairKey(b,jj); if(LIU_HE_PAIRS.has(k)) rows.push(`${label} ${JIJI[b]}-${JIJI[jj]} 육합 (${l})`); if(LIU_CHONG_PAIRS.has(k)) rows.push(`${label} ${JIJI[b]}-${JIJI[jj]} 충 (${l})`); if(BRANCH_XING_PAIRS.has(k)) rows.push(`${label} ${JIJI[b]}-${JIJI[jj]} 형 (${l})`); if(BRANCH_PO_PAIRS.has(k)) rows.push(`${label} ${JIJI[b]}-${JIJI[jj]} 파 (${l})`); if(BRANCH_HAI_PAIRS.has(k)) rows.push(`${label} ${JIJI[b]}-${JIJI[jj]} 해 (${l})`);});
+            return rows;
+        }
+        function renderDaewoonFocus(s,list,currentDw){
+            const idx=list.indexOf(currentDw), items=[list[idx-1],currentDw,list[idx+1]];
+            const labels=['이전','현재','다음'];
+            document.getElementById('daewoon-focus-grid').innerHTML=items.map((dw,i)=>dw?`<div class="rounded-xl border ${i===1?'border-amber-400/40 bg-amber-950/15':'border-indigo-500/15 bg-black/20'} p-3"><span class="text-[10px] ${i===1?'text-amber-300':'text-indigo-300'}">${labels[i]}</span><div class="mt-1 text-lg font-bold serif text-white">${dw.cg}${dw.jj}</div><div class="mt-1 text-[11px] text-slate-400">${formatDaewoonAge(dw.startAge)} ~ ${formatDaewoonAge(dw.startAge+10)}</div><p class="mt-2 text-xs leading-relaxed text-slate-300">${getCombinedGodNarrative(dw.godCg,dw.godJj).core} / ${luckElementRoleText(s,dw.cgIdx,dw.jjIdx)}</p></div>`:`<div class="rounded-xl border border-slate-800 p-3 text-slate-600">해당 없음</div>`).join('');
+        }
+        function renderLuckRelationVisual(s,currentDw,seunCg,seunJj,seunYear){
+            const dw=analyzeLuckRelationsDetailed(s,'대운',currentDw.cgIdx,currentDw.jjIdx), sy=analyzeLuckRelationsDetailed(s,'세운',seunCg,seunJj);
+            const cross=[]; const br=branchRel(currentDw.jjIdx,seunJj), st=stemRel(currentDw.cgIdx,seunCg); if(st) cross.push(`대운 ${currentDw.cg}${currentDw.jj} ↔ ${seunYear} ${CHEONGAN[seunCg]}${JIJI[seunJj]}: 천간 ${st}`); if(br) cross.push(`대운 ${currentDw.cg}${currentDw.jj} ↔ ${seunYear} 세운: 지지 ${br}`);
+            const row=(color,title,arr)=>`<div class="rounded-lg border ${color} bg-black/20 p-3"><strong class="block mb-1">${title}</strong>${arr.length?arr.map(x=>`<div class="mt-1 text-slate-300">${x}</div>`).join(''):'<div class="text-slate-500">직접적인 강한 합충형파해 신호가 두드러지지 않습니다.</div>'}</div>`;
+            document.getElementById('luck-relation-visual').innerHTML=row('border-indigo-500/20 text-indigo-300','원국 ↔ 현재 대운',dw)+row('border-cyan-500/20 text-cyan-300','원국 ↔ 현재 세운',sy)+row('border-amber-500/20 text-amber-300','대운 ↔ 세운',cross);
+        }
+        function renderAtAGlance(s,currentDw,seunCg,seunJj,seunYear,seunProfile){
+            const a=getTraditionalSajuAnalysis(s), dm=CG_ELEMENT[s.dayCg];
+            document.getElementById('overview-season').textContent=`${seasonNameByMonthBranch(s.monthJj)} · ${JIJI[s.monthJj]}월`;
+            document.getElementById('overview-daymaster').textContent=`${CHEONGAN[s.dayCg]} ${CLASSIC_ELEMENT_KO[dm]}`;
+            document.getElementById('overview-daymaster-sub').textContent=`${CG_YINYANG[s.dayCg]?'양':'음'}${['목','화','토','금','수'][dm]} · ${a.gyeok.title}`;
+            document.getElementById('overview-strength').textContent=a.strength.label;
+            document.getElementById('overview-strength-score').textContent=`${a.strength.score}/100 · ${a.strength.jong}`;
+            document.getElementById('overview-yonghee').textContent=`${CLASSIC_ELEMENT_KO[a.yong.yong]} / ${CLASSIC_ELEMENT_KO[a.yong.hee]}`;
+            document.getElementById('overview-daewoon').textContent=`${currentDw.cg}${currentDw.jj}`;
+            document.getElementById('overview-daewoon-theme').textContent=getCombinedGodNarrative(currentDw.godCg,currentDw.godJj).core;
+            document.getElementById('overview-seun').textContent=`${seunYear} ${CHEONGAN[seunCg]}${JIJI[seunJj]}`;
+            document.getElementById('overview-seun-theme').textContent=seunProfile.core;
+            document.getElementById('overview-one-line').textContent=`${CHEONGAN[s.dayCg]} 일간은 ${a.strength.label}이며 ${a.gyeok.title} 구조입니다. 용신 ${CLASSIC_ELEMENT_KO[a.yong.yong]}·희신 ${CLASSIC_ELEMENT_KO[a.yong.hee]}을 기준으로 현재 ${currentDw.cg}${currentDw.jj} 대운과 ${seunYear} ${CHEONGAN[seunCg]}${JIJI[seunJj]} 세운의 작용을 연결해 해석합니다.`;
+        }
+        function renderFinalReading(s,currentDw,seunCg,seunJj,seunYear,seunProfile){
+            const a=getTraditionalSajuAnalysis(s), dmGod=getTenGod(s.dayCg,JJ_MAIN_CG[s.dayJj]), monthGod=getTenGod(s.dayCg,JJ_MAIN_CG[s.monthJj]);
+            const base=TEN_GOD_DEEP[monthGod]||TEN_GOD_DEEP[dmGod];
+            const dwProfile=getCombinedGodNarrative(currentDw.godCg,currentDw.godJj);
+            document.getElementById('final-personality').textContent=`${CHEONGAN[s.dayCg]} 일간의 기본 기질에 월령 ${monthGod}, 일지 ${dmGod}가 더해집니다. ${a.strength.label}이므로 자신의 강점을 밀어붙이는 힘과 균형 조절을 함께 보는 것이 중요합니다.`;
+            document.getElementById('final-career').textContent=`원국에서는 ${a.gyeok.structure} 구조가 핵심이며, 현재 대운은 ${dwProfile.career} 용신 기준으로는 ${luckElementRoleText(s,currentDw.cgIdx,currentDw.jjIdx)}입니다.`;
+            document.getElementById('final-money').textContent=`재물은 단순 재성 유무보다 ${a.strength.label} 상태에서 재성을 감당할 수 있는지와 용신 흐름을 함께 봅니다. 현재 대운에서는 ${dwProfile.money}`;
+            document.getElementById('final-relationship').textContent=`일지는 ${dmGod}로 가까운 관계의 현실 패턴을 보여줍니다. ${base?.relation||'관계에서는 기대와 역할을 구체적으로 조율할수록 안정됩니다.'}`;
+            document.getElementById('final-current-year').textContent=`${seunYear} ${CHEONGAN[seunCg]}${JIJI[seunJj]}의 핵심 테마는 ${seunProfile.core}입니다. 원국과의 관계는 ${describePillarInteractions(s,seunCg,seunJj)}이며, 용희기신 기준에서는 ${luckElementRoleText(s,seunCg,seunJj)}으로 읽습니다.`;
+            document.getElementById('final-one-line').textContent=`${a.strength.label} ${CHEONGAN[s.dayCg]} 일간이 ${a.gyeok.structure}를 바탕으로, 용신 ${CLASSIC_ELEMENT_KO[a.yong.yong]}을 잘 쓰는 선택이 현재 대운·세운의 핵심입니다.`;
+        }
         function renderTraditionalSajuAnalysis(s){
             const a=getTraditionalSajuAnalysis(s);
+            renderNatalExplanation(s);
             document.getElementById('classic-strength-badge').textContent=`${a.strength.label} · ${a.strength.score}/100`;
             document.getElementById('classic-strength-summary').textContent=`일간 ${CHEONGAN[s.dayCg]}(${CLASSIC_ELEMENT_KO[CG_ELEMENT[s.dayCg]]})을 기준으로 월령·일지·주변 세력을 나누어 판단했습니다. 득령 ${a.strength.deukryeong}/30 + 득지 ${a.strength.deukji}/25 + 득세 ${a.strength.deukse}/45 = ${a.strength.score}점으로 ${a.strength.label} 범주입니다.`;
             document.getElementById('classic-deukryeong').textContent=`${a.strength.deukryeong}/30`;
             document.getElementById('classic-deukji').textContent=`${a.strength.deukji}/25`;
             document.getElementById('classic-deukse').textContent=`${a.strength.deukse}/45`;
             const cls=['border-emerald-500/30 text-emerald-200 bg-emerald-950/20','border-rose-500/30 text-rose-200 bg-rose-950/20','border-amber-500/30 text-amber-200 bg-amber-950/20','border-slate-500/30 text-slate-200 bg-slate-900/30','border-blue-500/30 text-blue-200 bg-blue-950/20'];
-            document.getElementById('classic-element-power').innerHTML=a.elemPower.pct.map((v,i)=>`<span class="px-2 py-1 rounded-lg border ${cls[i]}">${CLASSIC_ELEMENT_KO[i]} ${v.toFixed(1)}%</span>`).join('');
+            document.getElementById('classic-element-power').innerHTML=a.elemPower.pct.map((v,i)=>`<span class="px-2 py-1 rounded-lg border ${cls[i]}">${CLASSIC_ELEMENT_KO[i]} ${v.toFixed(1)}% · 지수 ${a.elemPower.index[i]}</span>`).join('');
 
             const pillars=[['년지',s.yearJj],['월지',s.monthJj],['일지',s.dayJj],['시지',s.hourJj]];
             document.getElementById('classic-hidden-stems').innerHTML=pillars.map(([label,jj])=>{
@@ -3948,15 +4177,22 @@
             }).join('');
 
             const rel=document.getElementById('classic-relations');
-            rel.innerHTML=a.relations.length?a.relations.map(r=>`<div class="p-2.5 rounded-lg bg-black/25 border border-fuchsia-500/10"><span class="text-fuchsia-300 font-semibold">${r.type}</span><span class="text-slate-300 ml-2">${r.text}</span></div>`).join(''):`<div class="md:col-span-2 p-3 rounded-lg bg-black/25 text-slate-400">원국 네 기둥 사이에 두드러진 합·충·형·파·해 완성 구조가 많지 않습니다. 무관계가 아니라 강한 구조 신호가 상대적으로 적다는 의미입니다.</div>`;
+            rel.innerHTML=a.relations.length?a.relations.map(r=>{const good=['천간합','육합','삼합','방합'].includes(r.type); return `<div class="p-2.5 rounded-lg bg-black/25 border ${good?'border-emerald-500/20':'border-rose-500/20'}"><span class="${good?'text-emerald-300':'text-rose-300'} font-semibold">${r.type}</span><span class="text-slate-300 ml-2">${r.text}</span></div>`;}).join(''):`<div class="md:col-span-2 p-3 rounded-lg bg-black/25 text-slate-400">원국 네 기둥 사이에 두드러진 합·충·형·파·해 완성 구조가 많지 않습니다. 무관계가 아니라 강한 구조 신호가 상대적으로 적다는 의미입니다.</div>`;
 
             document.getElementById('classic-johoo-title').textContent=a.johoo.title;
             document.getElementById('classic-johoo-text').textContent=a.johoo.text;
             document.getElementById('classic-gyeok-title').textContent=a.gyeok.title;
             document.getElementById('classic-gyeok-text').textContent=a.gyeok.text;
+            document.getElementById('classic-gyeok-structure').textContent=a.gyeok.structure;
+            document.getElementById('classic-gyeok-support').textContent=a.gyeok.support;
             document.getElementById('classic-yongshin').textContent=CLASSIC_ELEMENT_KO[a.yong.yong];
             document.getElementById('classic-heeshin').textContent=CLASSIC_ELEMENT_KO[a.yong.hee];
             document.getElementById('classic-gishin').textContent=CLASSIC_ELEMENT_KO[a.yong.gi];
+            document.getElementById('classic-bojo').textContent=CLASSIC_ELEMENT_KO[a.yong.bojo];
+            document.getElementById('classic-caution').textContent=CLASSIC_ELEMENT_KO[a.yong.caution];
+            document.getElementById('classic-yong-eokbu').textContent=a.yong.eokbuReason;
+            document.getElementById('classic-yong-johoo').textContent=a.yong.johooReason;
+            document.getElementById('classic-yong-gyeok').textContent=a.yong.gyeokReason;
             document.getElementById('classic-yongshin-reason').textContent=a.yong.reason;
         }
 
@@ -4236,6 +4472,7 @@ function buildSajuOverallAssessment(s) {
             });
 
             const currentDw = daewoonList.find(dw => nowMs >= dw.startMs && nowMs < dw.endMs) || daewoonList[0];
+            renderDaewoonFocus(s, daewoonList, currentDw);
 
             // ---------- 歲運: current solar-term year dynamically ----------
             const seunYear = currentPillarYearKST();
@@ -4303,6 +4540,10 @@ function buildSajuOverallAssessment(s) {
                     <div class="p-3 rounded-lg bg-emerald-950/15 border border-emerald-500/20"><strong class="text-emerald-300 block mb-1">🧭 올해 행동 가이드</strong><span>${seunProfile.action}</span></div>
                 </div>
             `;
+
+            renderLuckRelationVisual(s, currentDw, seunCg, seunJj, seunYear);
+            renderAtAGlance(s, currentDw, seunCg, seunJj, seunYear, seunProfile);
+            renderFinalReading(s, currentDw, seunCg, seunJj, seunYear, seunProfile);
 
             // ---------- 月運: Li Chun -> next Li Chun, Five Tigers corrected ----------
             const wolunMonthsRow = document.getElementById('wolun-months-row');
