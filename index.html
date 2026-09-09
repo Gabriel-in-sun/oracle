@@ -316,12 +316,14 @@
 <div class="flex justify-between mt-1.5 text-[11px] text-purple-300/50"><span>건강, 가족, 시험, 진로, 마음의 평안 등 자유롭게 작성</span><span id="prayer-count">0 / 1200</span></div>
 </div>
 <div>
-<span class="block text-sm font-semibold text-amber-200 mb-2">지향 주제 퀵 선택</span>
-<div class="grid grid-cols-2 gap-2">
+<span class="block text-sm font-semibold text-amber-200 mb-2">지향 주제 선택</span>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-2">
 <button class="prayer-theme-btn px-3 py-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-xs text-emerald-200 hover:border-emerald-300 transition" data-prayer-theme="healing" onclick="selectPrayerTheme('healing')" type="button">치유 / 건강</button>
 <button class="prayer-theme-btn px-3 py-2.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs text-blue-200 hover:border-blue-300 transition" data-prayer-theme="peace" onclick="selectPrayerTheme('peace')" type="button">평화 / 위로</button>
 <button class="prayer-theme-btn px-3 py-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-xs text-purple-200 hover:border-purple-300 transition" data-prayer-theme="courage" onclick="selectPrayerTheme('courage')" type="button">용기 / 인도</button>
 <button class="prayer-theme-btn px-3 py-2.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200 hover:border-amber-300 transition" data-prayer-theme="family" onclick="selectPrayerTheme('family')" type="button">가정 / 축복</button>
+<button class="prayer-theme-btn px-3 py-2.5 rounded-xl bg-yellow-950/40 border border-yellow-500/30 text-xs text-yellow-200 hover:border-yellow-300 transition" data-prayer-theme="abundance" onclick="selectPrayerTheme('abundance')" type="button">풍요 / 재물</button>
+<button class="prayer-theme-btn px-3 py-2.5 rounded-xl bg-rose-950/40 border border-rose-500/30 text-xs text-rose-200 hover:border-rose-300 transition" data-prayer-theme="forgiveness" onclick="selectPrayerTheme('forgiveness')" type="button">원수 / 용서</button>
 </div>
 </div>
 <button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 font-bold text-sm tracking-wide hover:brightness-110 transition shadow-lg shadow-amber-950/30 flex items-center justify-center gap-2" onclick="offerPrayerIntention()" type="button">
@@ -673,8 +675,11 @@
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 <div>
-<label class="block text-xs font-medium text-purple-200 mb-1.5">출생 시각</label>
+<label class="block text-xs font-medium text-purple-200 mb-1.5">출생 시간</label>
 <input class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" id="essence-time" type="time" value="12:00"/>
+<label class="mt-1.5 flex items-center gap-1.5 text-[10px] text-purple-300/70 cursor-pointer">
+<input id="essence-time-unknown" type="checkbox" class="accent-amber-400" onchange="toggleUnknownBirthTime('essence-time','essence-time-unknown')"/> 출생시 불명
+</label>
 </div>
 <div>
 <label class="block text-xs font-medium text-purple-200 mb-1.5">출생지</label>
@@ -773,7 +778,7 @@
 <div class="flex flex-wrap gap-1.5 mt-3" id="natal-career-tags"></div>
 <div class="text-[10px] text-indigo-300/55 mt-2">※ Big Three가 보여주는 성향·동기·대인 방식에 기반한 적성 참고입니다.</div>
 </div>
-<div class="p-3 rounded-xl bg-indigo-950/20 border border-indigo-800/30 text-[11px] text-indigo-200/65 leading-relaxed">※ 본 항목은 태양·달·상승궁(Big Three)을 중심으로 한 성향 리딩입니다. 상승궁은 출생 시각과 출생지에 매우 민감하므로 정확한 시각 입력을 권장합니다.</div>
+<div class="p-3 rounded-xl bg-indigo-950/20 border border-indigo-800/30 text-[11px] text-indigo-200/65 leading-relaxed">※ 본 항목은 태양·달·상승궁(Big Three)을 중심으로 한 성향 리딩입니다. 상승궁은 출생 시간과 출생지에 매우 민감하므로 정확한 시간 입력을 권장합니다.</div>
 </div>
 </div>
 </section>
@@ -812,8 +817,9 @@
 </select>
 </div>
 <div>
-<label class="block text-xs font-medium text-purple-200 mb-1.5">태어난 시간 (한국시 기준)</label>
+<label class="block text-xs font-medium text-purple-200 mb-1.5">출생 시간</label>
 <select class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" id="saju-time">
+<option value="unknown">출생시 불명</option>
 <option selected="" value="0">자시 (23:30 ~ 01:29)</option>
 <option value="1">축시 (01:30 ~ 03:29)</option>
 <option value="2">인시 (03:30 ~ 05:29)</option>
@@ -1210,8 +1216,9 @@
 </select>
 </div>
 <div>
-<label class="block text-purple-300 mb-1">태어난 시간</label>
+<label class="block text-purple-300 mb-1">출생 시간</label>
 <select class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2.5 py-2 text-white focus:outline-none focus:border-amber-400" id="gh-main-time">
+<option value="unknown">출생시 불명</option>
 <option selected="" value="0">자시 (23:30~01:29)</option>
 <option value="1">축시 (01:30~03:29)</option>
 <option value="2">인시 (03:30~05:29)</option>
@@ -1309,9 +1316,12 @@
 <input class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400" id="today-fortune-birthdate" type="date"/>
 </div>
 <div>
-<label class="block text-xs font-medium text-amber-200 mb-1.5">출생시간 <span class="text-purple-300/60">(시·분 / 선택)</span></label>
+<label class="block text-xs font-medium text-amber-200 mb-1.5">출생 시간</label>
 <input class="w-full bg-[#0d071a] border border-purple-800/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400" id="today-fortune-hour" step="60" type="time"/>
-<div class="text-[10px] text-purple-300/50 mt-1">시간을 모르면 비워두세요. 비워두면 정오 기준으로 계산합니다.</div>
+<label class="mt-1.5 flex items-center gap-1.5 text-[10px] text-purple-300/70 cursor-pointer">
+<input id="today-fortune-time-unknown" type="checkbox" class="accent-amber-400" onchange="toggleUnknownBirthTime('today-fortune-hour','today-fortune-time-unknown')"/> 출생시 불명
+</label>
+<div class="text-[10px] text-purple-300/50 mt-1">출생시 불명을 선택하면 정오 기준으로 보조 계산합니다.</div>
 </div>
 </div>
 <div class="grid grid-cols-3 gap-2 text-center text-[10px] md:text-xs">
@@ -1335,7 +1345,7 @@
 <i class="fa-solid fa-sun mr-1.5"></i> 오늘의 운세 보기
                 </button>
 <p class="text-[10px] text-purple-300/50 text-center">
-                    출생시간을 모르면 정오 기준으로 사주 요소를 보조 계산합니다. 운세 해석은 참고용입니다.
+                    출생 시간을 모르면 정오 기준으로 사주 요소를 보조 계산합니다. 운세 해석은 참고용입니다.
                 </p>
 </div>
 <!-- Results -->
@@ -1485,6 +1495,20 @@
                 verse: '여호와는 네게 복을 주시고 너를 지키시기를 원하며 여호와는 그의 얼굴을 네게 비추사 은혜 베푸시기를 원하며 여호와는 그 얼굴을 네게로 향하여 드사 평강 주시기를 원하노라.',
                 meditation: '가족을 위해 기도하는 마음 자체가 사랑의 봉헌입니다. 서로의 부족함보다 감사할 것을 하나씩 기억하고, 오늘 먼저 건넬 수 있는 따뜻한 말 한마디를 떠올려 보세요.',
                 blessing: '사랑의 주님, 가브리엘 대천사의 전구로 이 가정을 축복하소서. 가족 한 사람 한 사람을 지켜 주시고, 건강과 화목을 허락하시며, 어려운 때 서로에게 힘이 되는 사랑을 자라게 하소서. 아멘.'
+            },
+            abundance: {
+                label: '풍요 / 재물',
+                verseRef: '신명기 8장 18절',
+                verse: '네 하나님 여호와를 기억하라. 그가 네게 재물 얻을 능력을 주셨음이라.',
+                meditation: '풍요는 단지 많이 소유하는 것이 아니라, 받은 것을 지혜롭게 다루고 필요한 곳에 흘려보내는 힘이기도 합니다. 욕심보다 감사와 책임을 먼저 세우고, 오늘 할 수 있는 성실한 선택 하나를 봉헌해 보세요.',
+                blessing: '섭리하시는 주님, 가브리엘 대천사의 전구로 필요한 일용할 양식과 정당한 기회를 허락하소서. 재물을 탐욕이 아니라 선한 목적에 사용하게 하시고, 수입과 지출을 지혜롭게 다스리며 필요한 사람과 기쁨을 나누는 넉넉한 마음을 주소서. 아멘.'
+            },
+            forgiveness: {
+                label: '원수 / 용서',
+                verseRef: '마태복음 5장 44절',
+                verse: '너희 원수를 사랑하며 너희를 박해하는 자를 위하여 기도하라.',
+                meditation: '용서는 잘못을 없던 일로 만드는 것이 아니라, 그 상처가 내 마음을 계속 지배하지 못하게 하는 선택입니다. 당장 화해가 어렵더라도 미움의 무게를 조금씩 내려놓고, 나와 상대 모두가 악의에서 벗어나도록 기도해 보세요.',
+                blessing: '자비의 주님, 가브리엘 대천사의 전구로 상처 입은 마음을 치유하소서. 미움과 분노에 사로잡히지 않게 하시고, 필요한 경계는 지혜롭게 세우되 복수보다 용서를, 적대보다 평화를 선택할 힘을 허락하소서. 아멘.'
             }
         };
 
@@ -3407,14 +3431,38 @@
             el.innerHTML = careers.map(c => `<span class="px-2.5 py-1 rounded-full border text-[10px] ${cls}">${c}</span>`).join('');
         }
 
+
+        function toggleUnknownBirthTime(inputId, checkboxId) {
+            const input = document.getElementById(inputId);
+            const check = document.getElementById(checkboxId);
+            if (!input || !check) return;
+            if (check.checked) {
+                input.dataset.prevTime = input.value || '';
+                input.value = '';
+                input.disabled = true;
+                input.classList.add('opacity-50');
+            } else {
+                input.disabled = false;
+                input.classList.remove('opacity-50');
+                if (!input.value && input.dataset.prevTime) input.value = input.dataset.prevTime;
+            }
+        }
+
+        function normalizeBirthHourIndex(rawValue, fallback = 6) {
+            if (rawValue === null || rawValue === undefined || rawValue === '' || rawValue === 'unknown') return fallback;
+            const n = parseInt(rawValue, 10);
+            return Number.isFinite(n) && n >= 0 && n <= 11 ? n : fallback;
+        }
+
         function calculateEssenceProfile() {
             const birth = document.getElementById('essence-birth').value.trim();
             const calendarType = document.getElementById('essence-calendar').value;
-            const timeText = document.getElementById('essence-time').value || '12:00';
+            const timeUnknown = document.getElementById('essence-time-unknown')?.checked;
+            const timeText = timeUnknown ? '12:00' : (document.getElementById('essence-time').value || '12:00');
             const name = document.getElementById('essence-name').value.trim() || '당신';
             if (!/^\d{8}$/.test(birth)) { alert('생년월일 8자리를 입력해주세요.'); return; }
             const [hh, mm] = timeText.split(':').map(Number);
-            if (![hh,mm].every(Number.isFinite)) { alert('출생 시각을 확인해주세요.'); return; }
+            if (![hh,mm].every(Number.isFinite)) { alert('출생 시간을 확인해주세요.'); return; }
             const hourIdx = Math.floor(((hh + (mm >= 30 ? 0.5 : 0)) + 1) / 2) % 12;
             const s = calculateSajuCore(birth, calendarType, hourIdx);
             if (!s) { alert('입력한 생년월일을 계산할 수 없습니다.'); return; }
@@ -3726,7 +3774,7 @@
             const nameInput = document.getElementById('saju-name').value.trim();
             const gender = document.getElementById('saju-gender').value;
             const calendarType = document.getElementById('saju-calendar').value;
-            const hourIdx = parseInt(document.getElementById('saju-time').value);
+            const hourIdx = normalizeBirthHourIndex(document.getElementById('saju-time').value, 6);
 
             if (!birthInput || birthInput.length < 8) {
                 alert('생년월일 8자리(예: 19880808)를 입력해주세요.');
@@ -4077,8 +4125,9 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-purple-300/80 mb-1">태어난 시간</label>
+                        <label class="block text-purple-300/80 mb-1">출생 시간</label>
                         <select id="gh-m-time-${memberCount}" class="w-full bg-[#0d071a] border border-purple-800/60 rounded-lg px-2 py-1.5 text-white focus:outline-none focus:border-amber-400">
+                            <option value="unknown" ${timeVal==='unknown'?'selected':''}>출생시 불명</option>
                             <option value="0" ${timeVal==='0'?'selected':''}>자시 (23:30~01:29)</option>
                             <option value="1" ${timeVal==='1'?'selected':''}>축시 (01:30~03:29)</option>
                             <option value="2" ${timeVal==='2'?'selected':''}>인시 (03:30~05:29)</option>
@@ -4283,7 +4332,7 @@
             const mainBirth = document.getElementById('gh-main-birth').value.trim();
             const mainName = document.getElementById('gh-main-name').value.trim() || '주인공';
             const mainCal = document.getElementById('gh-main-cal').value;
-            const mainTime = parseInt(document.getElementById('gh-main-time').value);
+            const mainTime = normalizeBirthHourIndex(document.getElementById('gh-main-time').value, 6);
 
             if (!mainBirth || mainBirth.length < 8) {
                 alert("기준 사주(주인공)의 생년월일 8자리를 입력해주세요.");
@@ -4302,7 +4351,7 @@
                 const mName = document.getElementById(`gh-m-name-${rowId}`)?.value.trim() || `멤버${i+1}`;
                 const mRel = document.getElementById(`gh-m-rel-${rowId}`)?.value || '동료';
                 const mCal = document.getElementById(`gh-m-cal-${rowId}`)?.value || 'solar';
-                const mTime = parseInt(document.getElementById(`gh-m-time-${rowId}`)?.value || '0');
+                const mTime = normalizeBirthHourIndex(document.getElementById(`gh-m-time-${rowId}`)?.value, 6);
 
                 if (mBirth && mBirth.length >= 8) {
                     const mSaju = calculateSajuCore(mBirth, mCal, mTime);
@@ -5974,12 +6023,13 @@
             }
             const [by, bm, bd] = parts;
 
-            const timeValue = document.getElementById("today-fortune-hour")?.value ?? "";
+            const timeUnknown = document.getElementById("today-fortune-time-unknown")?.checked;
+            const timeValue = timeUnknown ? "" : (document.getElementById("today-fortune-hour")?.value ?? "");
             let birthHour = 12, birthMinute = 0;
             if (timeValue) {
                 const timeParts = timeValue.split(":").map(Number);
                 if (timeParts.length !== 2 || !Number.isFinite(timeParts[0]) || !Number.isFinite(timeParts[1]) || timeParts[0] < 0 || timeParts[0] > 23 || timeParts[1] < 0 || timeParts[1] > 59) {
-                    alert("출생시간을 시:분 형식으로 확인해주세요.");
+                    alert("출생 시간을 시:분 형식으로 확인해주세요.");
                     return;
                 }
                 [birthHour, birthMinute] = timeParts;
