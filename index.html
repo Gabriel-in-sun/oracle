@@ -1066,7 +1066,7 @@
 <div class="text-center space-y-1">
 
 <h4 class="serif text-xl md:text-2xl text-amber-200 font-bold">
-<i class="fa-solid fa-quote-left mr-2 text-amber-400/80"></i>사주 종합평가
+사주 종합평가
                             </h4>
 <div class="text-sm md:text-base text-amber-100 font-semibold pt-1" id="saju-overall-keyline">-</div>
 </div>
@@ -6158,77 +6158,141 @@ function buildSajuOverallAssessment(s) {
             if (cards.length === 1) {
                 weights = [1];
             } else if (cards.length === 3) {
+                // 과거보다 현재와 미래에 더 높은 비중
                 weights = [0.22, 0.33, 0.45];
             } else if (cards.length === 10) {
-                // Celtic Cross: current/challenge/near future/outcome receive the largest weight,
-                // while conscious/unconscious/self/environment/hopes are used as supporting evidence.
+                // 켈틱크로스: 현재·장애물·가까운 미래·최종 결과를 핵심축으로 사용
                 weights = [0.16, 0.14, 0.06, 0.08, 0.06, 0.12, 0.08, 0.08, 0.06, 0.16];
             } else {
                 weights = cards.map(() => 1 / cards.length);
             }
 
             let raw = 0;
-            cards.forEach((c,i)=> raw += tarotCardPolarity(c) * (weights[i] || 0));
+            cards.forEach((c,i) => raw += tarotCardPolarity(c) * (weights[i] || 0));
 
-            // Random/chance questions are deliberately capped: tarot cannot establish
-            // the probability or outcome of a genuinely random draw.
             let adjusted = raw;
+
+            // 복권/추첨 같은 순수 확률 질문은 상징 해석만 허용하고 강한 확정판정을 제한
             if (questionType === 'randomChance') {
                 const cap = cards.length === 1 ? 0.38 : cards.length === 10 ? 0.44 : 0.48;
                 adjusted = Math.max(-cap, Math.min(cap, raw));
             }
 
-            let verdict, toneClass;
-            if (adjusted >= 0.58) { verdict='긍정 신호가 강함'; toneClass='emerald'; }
-            else if (adjusted >= 0.18) { verdict='중립 ~ 약한 긍정'; toneClass='amber'; }
-            else if (adjusted > -0.18) { verdict='판단 유보 / 중립'; toneClass='slate'; }
-            else if (adjusted > -0.58) { verdict='중립 ~ 약한 부정'; toneClass='rose'; }
-            else { verdict='부정 신호가 강함'; toneClass='rose'; }
-
-            const outcome = cards.length === 10 ? cards[9] : cards[cards.length-1];
+            const outcome = cards.length === 10 ? cards[9] : cards[cards.length - 1];
             const nearFuture = cards.length === 10 ? cards[5] : null;
             const obstacle = cards.length === 10 ? cards[1] : null;
-            let direct;
 
+            // 일반 방향성
+            let verdict, toneClass;
+            if (adjusted >= 0.58) { verdict = '긍정 신호가 강함'; toneClass = 'emerald'; }
+            else if (adjusted >= 0.18) { verdict = '중립 ~ 약한 긍정'; toneClass = 'amber'; }
+            else if (adjusted > -0.18) { verdict = '판단 유보 / 중립'; toneClass = 'slate'; }
+            else if (adjusted > -0.58) { verdict = '중립 ~ 약한 부정'; toneClass = 'rose'; }
+            else { verdict = '부정 신호가 강함'; toneClass = 'rose'; }
+
+            let direct = '';
+            let binaryAnswer = null;
+            let binaryStrength = null;
+
+            // ------------------------------------------------------------
+            // YES / NO 질문은 반드시 YES 또는 NO 중 하나를 도출
+            // ------------------------------------------------------------
+            if (questionType === 'yesNo') {
+                // 점수가 거의 0이면 결과/미래 카드로 타이브레이크.
+                let binaryScore = adjusted;
+                if (Math.abs(binaryScore) < 0.06 && outcome) {
+                    const outcomeScore = tarotCardPolarity(outcome);
+                    binaryScore = outcomeScore !== 0 ? outcomeScore * 0.45 : 0.01;
+                }
+
+                binaryAnswer = binaryScore >= 0 ? 'YES' : 'NO';
+                const absScore = Math.abs(binaryScore);
+
+                if (absScore >= 0.58) binaryStrength = '강한';
+                else if (absScore >= 0.28) binaryStrength = '중간';
+                else binaryStrength = '약한';
+
+                const pct = Math.max(51, Math.min(90, Math.round(51 + absScore * 39)));
+                verdict = `${binaryAnswer} · ${binaryStrength} 신호`;
+                toneClass = binaryAnswer === 'YES' ? 'emerald' : 'rose';
+
+                if (cards.length === 1) {
+                    const c = cards[0];
+                    direct = binaryAnswer === 'YES'
+                        ? `질문에 대한 답은 <strong>YES</strong>입니다. 다만 강도는 <strong>${binaryStrength}</strong> 수준입니다. ${c.name}이 보여주는 조건과 태도를 충족할수록 긍정적인 방향이 현실화되기 쉽습니다.`
+                        : `질문에 대한 답은 <strong>NO</strong>입니다. 다만 강도는 <strong>${binaryStrength}</strong> 수준입니다. 현재 조건 그대로 진행하기보다 ${c.name}이 보여주는 장애물이나 접근 방식을 먼저 조정하는 편이 좋습니다.`;
+                } else if (cards.length === 10) {
+                    direct = binaryAnswer === 'YES'
+                        ? `켈틱 크로스 10장을 종합한 답은 <strong>YES</strong>입니다. 강도는 <strong>${binaryStrength}</strong> 수준입니다. 6번 ${nearFuture.name}의 전개와 10번 ${outcome.name}의 결과가 긍정 쪽으로 기울지만, 2번 ${obstacle.name}의 장애물을 어떻게 다루는지가 실제 결과를 좌우하는 핵심 조건입니다.`
+                        : `켈틱 크로스 10장을 종합한 답은 <strong>NO</strong>입니다. 강도는 <strong>${binaryStrength}</strong> 수준입니다. 특히 2번 ${obstacle.name}의 장애와 10번 ${outcome.name}의 결과 방향이 부정 쪽으로 기울어 있으므로, 4번 무의식과 7번 태도를 바꾸지 않으면 현재 흐름이 이어질 가능성이 큽니다.`;
+                } else {
+                    direct = binaryAnswer === 'YES'
+                        ? `세 장 전체를 종합한 답은 <strong>YES</strong>입니다. 강도는 <strong>${binaryStrength}</strong> 수준입니다. 과거보다 현재와 미래 카드의 흐름을 더 크게 반영했으며, 긍정 신호가 우세합니다.`
+                        : `세 장 전체를 종합한 답은 <strong>NO</strong>입니다. 강도는 <strong>${binaryStrength}</strong> 수준입니다. 현재와 미래 카드의 흐름을 더 크게 반영했을 때 부정 신호가 우세합니다.`;
+                }
+
+                return {
+                    raw,
+                    adjusted: binaryScore,
+                    verdict,
+                    toneClass,
+                    confidence: pct,
+                    direct,
+                    weights,
+                    binaryAnswer,
+                    binaryStrength
+                };
+            }
+
+            // ------------------------------------------------------------
+            // 복권·추첨 등 순수 확률 질문
+            // ------------------------------------------------------------
+            if (questionType === 'randomChance') {
+                if (cards.length === 1) {
+                    const c = cards[0];
+                    direct = `한 장의 ${c.name}은 이 번호나 무작위 결과가 실제로 당첨된다는 증거가 아니라, 질문을 바라보는 <strong>상징적 핵심 메시지</strong>입니다. 타로식 방향성은 <strong>${verdict}</strong>에 가깝지만 실제 추첨 확률이나 결과를 예측하는 신호로 사용하면 안 됩니다.`;
+                } else if (cards.length === 10) {
+                    direct = `켈틱 크로스 10장은 추첨 결과 자체를 맞히는 도구라기보다, 왜 이 선택에 기대를 두는지와 어떤 심리·판단이 작동하는지를 깊게 보여줍니다. 전체 상징적 방향성은 <strong>${verdict}</strong>이지만, 6번 ${nearFuture.name}과 10번 ${outcome.name}도 실제 당첨을 보증하지 않습니다. 특히 2번 ${obstacle.name}은 기대를 흐릴 수 있는 장애물·편향을 함께 확인하라는 신호입니다.`;
+                } else {
+                    direct = `이 카드 배열만으로 특정 번호나 무작위 결과가 실제로 당첨된다고 판단할 수는 없습니다. 타로 리딩 관점에서는 <strong>${verdict}</strong>에 가깝지만 ‘강한 당첨 확정 신호’로 해석하지 않습니다.`;
+                }
+
+                return {
+                    raw,
+                    adjusted,
+                    verdict,
+                    toneClass,
+                    confidence: Math.round((adjusted + 1) * 50),
+                    direct,
+                    weights,
+                    binaryAnswer: null,
+                    binaryStrength: null
+                };
+            }
+
+            // ------------------------------------------------------------
+            // 시기/선택/개방형 질문
+            // ------------------------------------------------------------
             if (cards.length === 1) {
                 const c = cards[0];
-                if (questionType === 'randomChance') {
-                    direct = `한 장의 ${c.name}은 이 번호나 무작위 결과가 실제로 당첨된다는 증거가 아니라, 질문을 바라보는 <strong>상징적 핵심 메시지</strong>입니다. 타로식 방향성은 <strong>${verdict}</strong>에 가깝지만 실제 추첨 결과나 확률을 예측하는 신호로 사용하면 안 됩니다.`;
-                } else if (questionType === 'yesNo') {
-                    direct = adjusted >= 0.18
-                        ? `한 장으로 압축하면 <strong>“가능성은 열려 있다”</strong> 쪽입니다. 다만 ${c.name}이 요구하는 조건을 충족할 때라는 전제가 붙습니다.`
-                        : adjusted <= -0.18
-                            ? `한 장으로 압축하면 현재 흐름은 <strong>“쉽지 않다”</strong> 쪽입니다. ${c.name}이 보여주는 막힘이나 조건을 먼저 바꾸는 것이 핵심입니다.`
-                            : `한 장으로는 <strong>YES/NO를 확정하기 어렵습니다.</strong> ${c.name}은 결과보다 지금 확인해야 할 핵심 조건을 보여줍니다.`;
-                } else {
-                    direct = `이 질문을 한 장으로 압축하면 핵심은 <strong>${c.name}</strong>입니다. 전체 방향성은 <strong>${verdict}</strong>이며, 이 카드가 말하는 행동 조건을 실제 상황에 적용하는 것이 답에 가장 가깝습니다.`;
-                }
+                direct = `이 질문을 한 장으로 압축하면 핵심은 <strong>${c.name}</strong>입니다. 전체 방향성은 <strong>${verdict}</strong>이며, 이 카드가 말하는 행동 조건을 실제 상황에 적용하는 것이 답에 가장 가깝습니다.`;
             } else if (cards.length === 10) {
-                if (questionType === 'randomChance') {
-                    direct = `켈틱 크로스 10장은 추첨 결과 자체를 맞히는 도구라기보다, 왜 이 선택에 기대를 두는지와 어떤 심리·판단이 작동하는지를 깊게 보여줍니다. 전체 상징적 방향성은 <strong>${verdict}</strong>이지만, 6번 ${nearFuture.name}과 10번 ${outcome.name}도 실제 당첨을 보증하지 않습니다. 특히 2번 ${obstacle.name}은 기대를 흐릴 수 있는 장애물·편향을 함께 확인하라는 신호입니다.`;
-                } else if (questionType === 'yesNo') {
-                    direct = adjusted >= 0.18
-                        ? `10장 전체를 종합하면 <strong>“가능성은 열려 있으나 조건부”</strong>에 가깝습니다. 6번 ${nearFuture.name}이 가까운 전개를, 10번 ${outcome.name}이 현재 흐름을 유지했을 때의 결과 궤적을 보여주며, 2번 ${obstacle.name}의 과제를 어떻게 다루는지가 핵심 변수입니다.`
-                        : adjusted <= -0.18
-                            ? `10장 전체를 종합하면 현재 흐름은 <strong>“그대로라면 쉽지 않다”</strong> 쪽입니다. 특히 2번 ${obstacle.name}의 장애와 10번 ${outcome.name}의 결과 방향을 연결해 보고, 7번 태도와 4번 무의식을 바꾸는 것이 필요합니다.`
-                            : `켈틱 크로스 전체에서는 <strong>YES/NO가 아직 굳어지지 않았습니다.</strong> 6번 가까운 미래와 10번 결과가 서로 얼마나 일치하는지, 그리고 2번 장애물을 조정할 수 있는지가 결정적입니다.`;
-                } else {
-                    direct = `켈틱 크로스의 직접 답변은 <strong>${verdict}</strong>입니다. 1번 현재와 2번 장애물이 문제의 핵심을 만들고, 6번 ${nearFuture.name}이 가까운 전개를 거쳐 10번 ${outcome.name}으로 수렴합니다. 따라서 결과 카드 하나만 보지 말고 <strong>2번 장애물 → 4번 무의식 → 7번 태도</strong>를 실제로 조정할 수 있는지까지 함께 봐야 합니다.`;
-                }
-            } else if (questionType === 'randomChance') {
-                direct = `이 카드 배열만으로 특정 번호나 무작위 결과가 실제로 당첨된다고 판단할 수는 없습니다. 타로 리딩 관점에서는 <strong>${verdict}</strong>에 가깝고, 후보를 완전히 버릴 정도는 아니지만 ‘강한 당첨 확정 신호’로 보기는 어렵습니다.`;
-            } else if (questionType === 'yesNo') {
-                direct = adjusted >= 0.18
-                    ? `질문에 대한 타로식 답변은 <strong>“가능성은 열려 있다”</strong> 쪽입니다. 다만 카드가 조건과 대응 방식을 함께 요구하므로 확정적 YES라기보다 ${verdict}으로 보는 편이 정확합니다.`
-                    : adjusted <= -0.18
-                        ? `질문에 대한 타로식 답변은 현재 흐름만 놓고 보면 <strong>“쉽지 않다”</strong> 쪽입니다. 다만 결과는 고정된 예언이라기보다 지금의 조건을 유지했을 때의 경향입니다.`
-                        : `질문에 대한 타로식 답변은 <strong>아직 YES/NO가 굳어지지 않은 상태</strong>입니다. 결정적인 변수나 추가 정보가 필요합니다.`;
+                direct = `켈틱 크로스의 직접 답변은 <strong>${verdict}</strong>입니다. 1번 현재와 2번 장애물이 문제의 핵심을 만들고, 6번 ${nearFuture.name}이 가까운 전개를 거쳐 10번 ${outcome.name}으로 수렴합니다. 결과 카드 하나만 보지 말고 <strong>2번 장애물 → 4번 무의식 → 7번 태도</strong>를 실제로 조정할 수 있는지까지 함께 봐야 합니다.`;
             } else {
                 direct = `전체 배열의 방향성은 <strong>${verdict}</strong>입니다. 마지막 ${outcome.name}은 결과 그 자체보다 현재 흐름이 어디로 수렴하는지를 보여주는 카드로 읽습니다.`;
             }
 
-            const pct = Math.round((adjusted + 1) * 50);
-            return {raw, adjusted, verdict, toneClass, confidence:pct, direct, weights};
+            return {
+                raw,
+                adjusted,
+                verdict,
+                toneClass,
+                confidence: Math.round((adjusted + 1) * 50),
+                direct,
+                weights,
+                binaryAnswer,
+                binaryStrength
+            };
         }
 
         function getContextualCardMeaning(card, idx, questionTheme, questionType) {
@@ -6592,7 +6656,7 @@ function buildSajuOverallAssessment(s) {
             const themeNames = {love:"사랑·관계", career:"직업·커리어", finance:"재물·재정", general:"종합"};
             const themeHeader = document.createElement('div');
             themeHeader.className = "p-3 rounded-xl border border-amber-400/20 bg-amber-950/15 text-xs text-slate-300 leading-relaxed";
-            const typeNames = {randomChance:"무작위·확률형", yesNo:"YES/NO 가능성", timing:"시기", decision:"선택", open:"개방형"};
+            const typeNames = {randomChance:"무작위·확률형", yesNo:"YES/NO 직접판정", timing:"시기", decision:"선택", open:"개방형"};
             themeHeader.innerHTML = `<strong class="text-amber-300">질문 맥락:</strong> ${themeNames[questionTheme]} &nbsp;/&nbsp;
                 <strong class="text-amber-300">질문 유형:</strong> ${typeNames[questionType]} &nbsp;/&nbsp;
                 <strong class="text-amber-300">해석 방식:</strong> 위치 + 정·역방향 + 질문 유형별 의미 + 카드 연결 + 직접 답변`;
@@ -6612,6 +6676,7 @@ function buildSajuOverallAssessment(s) {
                     </div>
                     <p class="mt-3 text-sm md:text-base text-slate-200 leading-relaxed">${directAnswer.direct}</p>
                     <p class="mt-2 text-[10px] text-purple-300/70">${selectedSpreadCount === 1 ? '1장은 질문의 핵심 메시지에 집중합니다.' : selectedSpreadCount === 10 ? '켈틱 크로스는 현재·장애물·가까운 미래·결과와 개입 포인트를 함께 종합합니다.' : '3장은 과거→현재→미래의 흐름을 중심으로 종합합니다.'}</p>
+                    ${questionType === 'yesNo' ? `<p class="mt-2 text-[10px] text-amber-200/80">YES/NO 판정 강도: ${directAnswer.confidence}% · 카드 흐름을 이분법적으로 정리한 참고 판정입니다.</p>` : ''}
                     ${questionType === 'randomChance' ? '<p class="mt-2 text-[10px] text-slate-500">※ 복권·추첨처럼 무작위성이 지배적인 사건은 타로로 실제 당첨 확률이나 결과를 예측할 수 없습니다. 아래 해석은 카드의 상징적 방향성을 읽는 참고용입니다.</p>' : ''}
                 `;
                 reportContainer.appendChild(verdictBox);
