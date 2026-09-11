@@ -712,6 +712,26 @@
                 </button>
 </div>
 <div class="hidden max-w-4xl mx-auto space-y-6 animate-fade-in" id="essence-result">
+
+<div id="essence-result-tabs" class="glass-card rounded-2xl border border-purple-500/25 p-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <button
+            type="button"
+            id="essence-tab-btn-day"
+            onclick="switchEssenceResultTab('day')"
+            class="essence-result-tab-btn px-4 py-3 rounded-xl text-xs md:text-sm font-bold transition bg-amber-400 text-slate-950 shadow-lg shadow-amber-950/20">
+            <i class="fa-solid fa-yin-yang mr-1.5"></i>일주로 보는 본질과 성향
+        </button>
+        <button
+            type="button"
+            id="essence-tab-btn-natal"
+            onclick="switchEssenceResultTab('natal')"
+            class="essence-result-tab-btn px-4 py-3 rounded-xl text-xs md:text-sm font-bold transition bg-indigo-950/35 text-indigo-200 border border-indigo-700/35 hover:border-indigo-400/60">
+            <i class="fa-solid fa-star-and-crescent mr-1.5"></i>Natal Chart로 보는 본질과 성향
+        </button>
+    </div>
+</div>
+<div id="essence-result-panel-day" class="essence-result-panel space-y-6">
 <div class="glass-card rounded-2xl border border-amber-500/20 p-5 md:p-6 space-y-4">
 <div class="flex flex-wrap items-center justify-between gap-2">
 <div>
@@ -752,6 +772,9 @@
 </div>
 <div class="p-3 rounded-xl bg-purple-950/20 border border-purple-800/30 text-[11px] text-purple-200/65 leading-relaxed">※ 일주는 중요한 기준점이지만 단독으로 성격을 확정하지 않습니다. 일간·일지·일지 본기 십신과 월령/원국 오행을 함께 반영합니다.</div>
 </div>
+
+</div>
+<div id="essence-result-panel-natal" class="essence-result-panel hidden space-y-6">
 <div class="glass-card rounded-2xl border border-indigo-500/25 p-5 md:p-6 space-y-4">
 <div class="flex flex-wrap items-center justify-between gap-2">
 <div>
@@ -779,6 +802,8 @@
 <div class="text-[10px] text-indigo-300/55 mt-2">※ Big Three가 보여주는 성향·동기·대인 방식에 기반한 적성 참고입니다.</div>
 </div>
 <div class="p-3 rounded-xl bg-indigo-950/20 border border-indigo-800/30 text-[11px] text-indigo-200/65 leading-relaxed">※ 본 항목은 태양·달·상승궁(Big Three)을 중심으로 한 성향 리딩입니다. 상승궁은 출생 시간과 출생지에 매우 민감하므로 정확한 시간 입력을 권장합니다.</div>
+</div>
+
 </div>
 </div>
 </section>
@@ -3653,6 +3678,46 @@
             return Number.isFinite(n) && n >= 0 && n <= 11 ? n : fallback;
         }
 
+
+        function switchEssenceResultTab(tab) {
+            const isDay = tab !== 'natal';
+            const dayPanel = document.getElementById('essence-result-panel-day');
+            const natalPanel = document.getElementById('essence-result-panel-natal');
+            const dayBtn = document.getElementById('essence-tab-btn-day');
+            const natalBtn = document.getElementById('essence-tab-btn-natal');
+
+            if (dayPanel) dayPanel.classList.toggle('hidden', !isDay);
+            if (natalPanel) natalPanel.classList.toggle('hidden', isDay);
+
+            if (dayBtn) {
+                dayBtn.classList.toggle('bg-amber-400', isDay);
+                dayBtn.classList.toggle('text-slate-950', isDay);
+                dayBtn.classList.toggle('shadow-lg', isDay);
+                dayBtn.classList.toggle('shadow-amber-950/20', isDay);
+                dayBtn.classList.toggle('bg-amber-950/25', !isDay);
+                dayBtn.classList.toggle('text-amber-200', !isDay);
+                dayBtn.classList.toggle('border', !isDay);
+                dayBtn.classList.toggle('border-amber-700/35', !isDay);
+            }
+
+            if (natalBtn) {
+                natalBtn.classList.toggle('bg-indigo-500', !isDay);
+                natalBtn.classList.toggle('text-white', !isDay);
+                natalBtn.classList.toggle('shadow-lg', !isDay);
+                natalBtn.classList.toggle('shadow-indigo-950/20', !isDay);
+                natalBtn.classList.toggle('bg-indigo-950/35', isDay);
+                natalBtn.classList.toggle('text-indigo-200', isDay);
+                natalBtn.classList.toggle('border', isDay);
+                natalBtn.classList.toggle('border-indigo-700/35', isDay);
+            }
+
+            const result = document.getElementById('essence-result');
+            if (result && !result.classList.contains('hidden')) {
+                const nav = document.getElementById('essence-result-tabs');
+                if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
         function calculateEssenceProfile() {
             const birth = document.getElementById('essence-birth').value.trim();
             const calendarType = document.getElementById('essence-calendar').value;
@@ -3712,6 +3777,7 @@
             renderCareerTags('natal-career-tags', natalCareer.careers, 'indigo');
 
             document.getElementById('essence-result').classList.remove('hidden');
+            switchEssenceResultTab('day');
             document.getElementById('essence-result').scrollIntoView({behavior:'smooth', block:'start'});
         }
 
